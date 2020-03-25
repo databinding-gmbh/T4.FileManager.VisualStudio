@@ -85,3 +85,7 @@ fileManager.StartNewFile(filename, projectname, subfolders, propertiesFromOldFil
 
 **Important: Optional parameters not exists in new file manager because is not working for Visual Studio 2017. Clean up optional parameters for new file manager.**
 
+```mermaid
+sequenceDiagram
+  A-->B: Works!
+```
