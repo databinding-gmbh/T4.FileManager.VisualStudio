@@ -14,7 +14,7 @@ Install the File Manager with nuget.
 Install-Package T4.FileManager.VisualStudio
 ```
 
-Build or rebuild the project where the File Manager has been added as a package. After that `FileManager.ttinclude` is automatically added to the project root.
+Build or rebuild the project where the File Manager has been added as a package. After that `T4.FileManager.VisualStudio.ttinclude` is automatically added to the project root.
 
 ### Short note on compatibility with .NET Core/.NET Standard
 
@@ -26,7 +26,7 @@ Compatibility is not possible directly with .NET Core. But due to the fact that 
 Install-Package T4.FileManager.VisualStudio.FullFramework
 ```
 
-`FileManager.ttinclude` should be automatically added to your project root.
+`T4.FileManager.VisualStudio.ttinclude` should be automatically added to your project root.
 
 ## Usage
 
