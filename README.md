@@ -6,4 +6,4 @@ Manager for generating multiple files with T4 text templates.
 
 ## Manual
 
-Link to [Manual Documentation](../docs/_manual/index.md).
+Link to [Manual Documentation](docs/_manual/index.md).
