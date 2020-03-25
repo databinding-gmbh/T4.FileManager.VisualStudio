@@ -1,41 +1,27 @@
-# start or create file
-
-Start or create a new file to generate.
+# Start or create file
 
 ```
 fileManager.CreateNewFile(filename, projectname, subfolders, properties);
 ```
 
-Content of this file ends with next call of method above or with generating method ([proceed-to-generate-files](proceed-to-generate-files.md)).
+The following content is then generated into the file. 
 
-## parameters
+To finish the file there are the following possibilities:
 
-### filename (string)
+- A new file is simply started with the method above. 
+- The content should be generated (see [proceed-to-generate-files](proceed-to-generate-files.md)).
+- It will be completed with the finish method: `fileManager.FinishFile()`.
 
-The name of started file.
-
-*Example: "test.cs"*
-
-### projectname (string)
-
-The name of the project, where should be generate the file.
-
-*Example*: "Test"
-
-### subfolders (string)
-
-Subfolders starting point from project root.
-
-*Example: Path.Combine("Example", "Tests")*
+## Parameters
 
 | Parameter   | Type                       | Description                                                  | Exmaple/Value                                                |
 | ----------- | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | filename    | string                     | The name of started file.                                    | "test.cs"<br />required value, should NOT BE *null*          |
 | projectname | string                     | The name of the project, where should be generate the file.  | "Test.Business"<br />*null* = project name of current project |
-| subfolders  | string                     | Subfolders starting point from project root.                 | Path.Combine("Example", "Tests")<br />*null* = root of project |
+| subfolders  | string                     | Subfolder path with starting point from defined project.     | Path.Combine("Example", "Tests")<br />*null* = root of project |
 | properties  | Dictionary<string, object> | Adding visual studio properties as example "CustomTool" or "CopyToOutputDirectory". | var settings = new Dictionary<string, object>();<br />settings.Add("CopyToOutputDirectory", 1)<br />*null* = no properties set |
 
-#### properties
+#### Properties
 
 There are some defined values for the **Property**:
 
@@ -77,11 +63,10 @@ var settings = new Dictionary<string, object>();
 settings.Add(Property.CopyToOutputDirectory, CopyToOutputDirectory.CopyAlways);
 ```
 
-## *compatibility to old FileManager*
+## *Compatibility to old FileManager*
 
 ```
 fileManager.StartNewFile(filename, projectname, subfolders, propertiesFromOldFileManager);
 ```
 
-**Important: Optional parameters not exists in new file manager because is not working for Visual Studio 2017. Clean up optional parameters for new file manager.**
-
+**Important: Optional parameters are not implemented in the File Manager because this is no longer possible in T4 since Visual Studio 2017. Clean up optional parameters for the new File Manager.**

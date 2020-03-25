@@ -1,6 +1,6 @@
-# proceed to generate files
+# Proceed to generate files
 
-At the end generate the files with following code.
+Finally the files can be generated with the following code:
 
 ```
 fileManager.Generate();
@@ -15,7 +15,7 @@ fileManager.CanOverwriteExistingFile = true; // default
 fileManager.CanOverwriteExistingFile = false;
 ```
 
-## *compatibility to old FileManager*
+## *Compatibility to old FileManager*
 
 ```
 fileManager.Process();

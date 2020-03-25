@@ -1,8 +1,8 @@
-# include to text template
+# Include to text template
 
-Create empty text template file (*.tt). 
+Create an empty text template file (*.tt). 
 
-Add following code to the top of file.
+Add the following code to the top of the file:
 
 ```
 <#@ include file="$(ProjectDir)\T4.FileManager.ttinclude" #>

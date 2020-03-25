@@ -1,6 +1,6 @@
-# add header to files
+# Add header to files
 
-f you want to add a header to your files, you can set it once and it will be added to all your generated files.
+If you want to add a header to your files, you can set it once and it will be added to all your generated files.
 
 At first, you need to start the header.
 
@@ -22,14 +22,12 @@ If you want to clear your header in same T4 file, you can use following code.
 fileManager.ClearHeader();
 ```
 
-## *compatibility to old FileManager*
+## *Compatibility to old FileManager*
 
 StartHeader is equivalent to old file manager.
 
- Instead of FinishHeader use old EndBlock.
+Instead of FinishHeader use old EndBlock.
 
 ```
 fileManager.EndBlock();
 ```
-
-### 
