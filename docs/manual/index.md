@@ -1,4 +1,4 @@
-File Manager for the generation of multiple files with T4 Text Templating.
+[![Build Status](https://dev.azure.com/databinding/Building%20Blocks/_apis/build/status/T4.FileManager?branchName=master)](https://dev.azure.com/databinding/Building%20Blocks/_build/latest?definitionId=2&branchName=master)
 
 # Requirements
 
