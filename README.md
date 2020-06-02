@@ -2,7 +2,7 @@
 
 ![Build Status](https://dev.azure.com/databinding/Building%20Blocks/_apis/build/status/T4.FileManager?branchName=master) [![Nuget](https://img.shields.io/nuget/v/T4.FileManager.VisualStudio)](https://www.nuget.org/packages/T4.FileManager.VisualStudio/)
 
-Link to [Manual Documentation](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/docs/manual).
+Go to the [wiki](https://github.com/databinding-gmbh/T4.FileManager.VisualStudio/wiki) for detailed documentation.
 
 ## Getting Started
 
@@ -20,7 +20,7 @@ Install the nuget package in your project.
 Install-Package T4.FileManager.VisualStudio
 ```
 
-For more information see [documentation](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/docs).
+For more information see [wiki](https://github.com/databinding-gmbh/T4.FileManager.VisualStudio/wiki).
 
 ## Running
 
