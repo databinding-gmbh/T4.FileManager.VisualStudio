@@ -1,4 +1,4 @@
-![Build Status](https://dev.azure.com/databinding/Building%20Blocks/_apis/build/status/T4.FileManager?branchName=master) [![Nuget](https://img.shields.io/nuget/v/T4.FileManager.VisualStudio?label=T4.FileManager.VisualStudio)](https://www.nuget.org/packages/T4.FileManager.VisualStudio/)
+![Build Status](https://dev.azure.com/databinding/Building%20Blocks/_apis/build/status/T4.FileManager?branchName=master) [![Nuget](https://img.shields.io/nuget/v/T4.FileManager.VisualStudio)](https://www.nuget.org/packages/T4.FileManager.VisualStudio/)
 
 # Requirements
 
