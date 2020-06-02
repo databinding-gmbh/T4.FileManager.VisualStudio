@@ -1,8 +1,8 @@
 # T4.FileManager.VisualStudio
 
-[![Build Status](https://dev.azure.com/databinding/Building%20Blocks/_apis/build/status/T4.FileManager?branchName=master)](https://dev.azure.com/databinding/Building%20Blocks/_build/latest?definitionId=2&branchName=master) 
+![Build Status](https://dev.azure.com/databinding/Building%20Blocks/_apis/build/status/T4.FileManager?branchName=master)
 
-![Nuget](https://img.shields.io/nuget/v/T4.FileManager.VisualStudio?label=T4.FileManager.VisualStudio)
+[![Nuget](https://img.shields.io/nuget/v/T4.FileManager.VisualStudio?label=T4.FileManager.VisualStudio)](https://www.nuget.org/packages/T4.FileManager.VisualStudio/)
 
 Link to [Manual Documentation](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/docs/manual).
 
