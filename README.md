@@ -8,13 +8,13 @@ Link to [Manual Documentation](https://databinding-gmbh.github.io/T4.FileManager
 
 ### Prerequisites
 
-Install the following things:
-
 | Program | Version | Link | Info |
 |-------------|-------------|-----|--|
 | Visual Studio Community | 2017,2019 | https://visualstudio.microsoft.com/vs/ | N/A
 
 ### Installing
+
+Install the nuget package in your project.
 
 ```
 Install-Package T4.FileManager.VisualStudio
