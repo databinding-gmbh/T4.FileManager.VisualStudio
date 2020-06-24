@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestProfile xmlns="http://www.specflow.org/schemas/plus/TestProfile/1.5">
+  <Settings projectName="T4 FileManager VisualStudio" />
+  <Execution stopAfterFailures="0" testThreadCount="1" testSchedulingMode="Sequential" />
+  <TestAssemblyPaths>
+    <TestAssemblyPath>T4.FileManager.VisualStudio.AcceptanceCriteria.dll</TestAssemblyPath>
+  </TestAssemblyPaths>
+  <Environment platform="x64" />
+  <DeploymentTransformation>
+    <Steps>
+    </Steps>
+  </DeploymentTransformation>
+</TestProfile>
