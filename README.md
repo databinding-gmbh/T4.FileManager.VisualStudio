@@ -28,7 +28,7 @@ The execution of the generation remains on the original T4 Text Templates (https
 
 ## Testing
 
-There are some user story oriented SpecFlow test for ensuring that the FileManager is working as expected.
+There are some user story oriented SpecFlow tests for ensuring that the FileManager is working as expected.
 These tests are located in the project  `T4.FileManager.VisualStudio.AcceptanceCriteria`.
 
 ## Authors
