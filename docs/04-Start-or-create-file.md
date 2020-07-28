@@ -9,7 +9,7 @@ The following content is then generated into the file.
 To finish the file there are the following possibilities:
 
 - A new file is simply started with the method above. 
-- The content should be generated (see [proceed-to-generate-files](../proceed-to-generate-files.md)).
+- The content should be generated (see [proceed-to-generate-files](../06-Proceed-to-generate-files.md)).
 - It will be completed with the finish method: `fileManager.FinishFile()`.
 
 ## Parameters
