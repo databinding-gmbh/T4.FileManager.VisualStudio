@@ -1,12 +1,12 @@
 
-name: Publish docs via GitHub Pages
+name: Publish docs via GitHub Pages and generate PDF
 on:
   push:
     branches:
       - master
 
 jobs:
-  build:
+  pages:
     name: Deploy docs
     runs-on: ubuntu-latest
     steps:
@@ -17,3 +17,28 @@ jobs:
         uses: mhausenblas/mkdocs-deploy-gh-pages@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  pdf:
+    name: Generate pdf
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v1
+
+      - name: Checkout databinding pandoc assets
+        uses: actions/checkout@v2
+        with:
+          repository: databinding-gmbh/BuildingBlocks.Documentation.Pandoc
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - run: mkdir output
+
+      - name: Pandoc Document Converter
+        uses: maxheld83/pandoc@v2
+        with:
+          args: '*.md -o output/documentation.pdf --toc -N -V margin-top=50mm -V margin-left=20mm -V margin-right=20mm -V margin-bottom=30mm --template template -V titlepage=true -V toc-own-page=true -V page-background="layout-background.pdf" -V titlepage-background="layout-title-background.pdf" -V page-background-opacity=1 -V version=1.0.0 -V lang=de'
+      
+      - name: Upload document
+        uses: actions/upload-artifact@master
+        with:
+          name: output
+          path: output
