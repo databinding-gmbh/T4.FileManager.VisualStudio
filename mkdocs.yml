@@ -1,4 +1,4 @@
-site_name: T4.FileManager.VisualStudio
+site_name: T4.FileManager.VisualStudio Documentation
 site_description: 'Manager for generating multiple files with T4 text templates.'
 site_author: 'databinding GmbH'
 docs_dir: docs/
