@@ -4,7 +4,5 @@ site_author: 'databinding GmbH'
 docs_dir: docs/
 repo_name: 'databinding-gmbh/T4.FileManager.VisualStudio'
 repo_url: 'https://github.com/databinding-gmbh/T4.FileManager.VisualStudio'
-nav:
-    - Home: index.md
 theme:
   name: 'material'
