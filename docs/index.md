@@ -6,10 +6,9 @@ Manager for generating multiple files with T4 text templates.
 
 ### Installing and Usage
 
-1. [First steps](01-First-Steps)
-2. [Include to text template](02-Include-to-text-template)
-3. [Create instance](03-Create-instance)
-4. [Start or create file](04-Start-or-create-file)
-5. [Add header to files](05-Add-header-to-files)
-6. [Proceed to generate files](06-Proceed-to-generate-files)
-   
+1. [First steps](01-First-Steps.md)
+2. [Include to text template](02-Include-to-text-template.md)
+3. [Create instance](03-Create-instance.md)
+4. [Start or create file](04-Start-or-create-file.md)
+5. [Add header to files](05-Add-header-to-files.md)
+6. [Proceed to generate files](06-Proceed-to-generate-files.md)   
