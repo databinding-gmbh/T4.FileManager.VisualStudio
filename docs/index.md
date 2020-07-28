@@ -1,10 +1,10 @@
-# T4.FileManager.VisualStudio
+## T4.FileManager.VisualStudio
 
 ![Build Status](https://dev.azure.com/databinding/Building%20Blocks/_apis/build/status/T4.FileManager?branchName=master) [![Nuget](https://img.shields.io/nuget/v/T4.FileManager.VisualStudio)](https://www.nuget.org/packages/T4.FileManager.VisualStudio/)
 
 Manager for generating multiple files with T4 text templates.
 
-## Installing and Usage
+### Installing and Usage
 
 1. [First steps](01-First-Steps)
 2. [Include to text template](02-Include-to-text-template)
