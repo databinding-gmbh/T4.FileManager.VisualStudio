@@ -2,7 +2,7 @@
 
 ![Build Status](https://dev.azure.com/databinding/Building%20Blocks/_apis/build/status/T4.FileManager?branchName=master) [![Nuget](https://img.shields.io/nuget/v/T4.FileManager.VisualStudio)](https://www.nuget.org/packages/T4.FileManager.VisualStudio/)
 
-Go to the [wiki](https://github.com/databinding-gmbh/T4.FileManager.VisualStudio/wiki) for detailed documentation.
+Go to the [documentation](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/) for detailed usage.
 
 ## Getting Started
 
