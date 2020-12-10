@@ -70,20 +70,22 @@
 
         /// <summary>Generates a &lt;YourT4ScriptWithoutTTExtension&gt;.info.json file with details about generated files.</summary>
         /// <value>Default value is true.</value>
-        public bool IsInfoFileGenerationEnabled = true;
+        public bool IsInfoFileGenerationEnabled;
 
         /// <summary>
         /// Constructor for the instantiation of the FileManager.
         /// </summary>
         /// <param name="textTransformation">Code to generate as <see cref="StringBuilder"/>.</param>
         /// <param name="host">The interface for the host that transforms text template.</param>
-        public T4FileManager(StringBuilder textTransformation, ITextTemplatingEngineHost host, bool )
+        public T4FileManager(StringBuilder textTransformation, ITextTemplatingEngineHost host, bool isInfoFileGenerationEnabled = true)
         {
             this._textTransformation = textTransformation;
             this._host = host;
-            if ()
+            if (IsInfoFileGenerationEnabled = isInfoFileGenerationEnabled)
             {
-                this._host.SetFileExtension("/"); // 
+                // The only working solution to prevent output file generation as of VS2019
+                // See: https://stackoverflow.com/questions/2601202/how-not-to-output-default-t4-generated-file/13878689#13878689
+                this._host.SetFileExtension("/");
             }
 
             this._filesToGenerate = new List<FileToGenerate>();
