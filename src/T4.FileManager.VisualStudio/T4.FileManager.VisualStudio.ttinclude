@@ -68,15 +68,23 @@
         /// <value>Default value is false.</value>
         public bool IsAutoCleanUpWithResharperEnabled = false;
 
+        /// <summary>Generates a &lt;YourT4ScriptWithoutTTExtension&gt;.info.json file with details about generated files.</summary>
+        /// <value>Default value is true.</value>
+        public bool IsInfoFileGenerationEnabled = true;
+
         /// <summary>
         /// Constructor for the instantiation of the FileManager.
         /// </summary>
         /// <param name="textTransformation">Code to generate as <see cref="StringBuilder"/>.</param>
         /// <param name="host">The interface for the host that transforms text template.</param>
-        public T4FileManager(StringBuilder textTransformation, ITextTemplatingEngineHost host)
+        public T4FileManager(StringBuilder textTransformation, ITextTemplatingEngineHost host, bool )
         {
             this._textTransformation = textTransformation;
             this._host = host;
+            if ()
+            {
+                this._host.SetFileExtension("/"); // 
+            }
 
             this._filesToGenerate = new List<FileToGenerate>();
             this._generatedInfo = new GeneratedInfo();
@@ -273,9 +281,12 @@
             }
 
             this.DeleteExistingFiles();
+            if (!IsInfoFileGenerationEnabled)
+            {
+                return;
+            }
 
             this._generatedInfo.FilesToGenerate = this._filesToGenerate;
-
             File.WriteAllText(templateFile, JsonConvert.SerializeObject(this._generatedInfo, Formatting.Indented));
         }
 
