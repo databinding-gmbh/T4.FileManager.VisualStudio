@@ -10,6 +10,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Threading.Tasks" #>
 <#@ import namespace="EnvDTE" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ import namespace="Newtonsoft.Json" #>
 <#+
     public class T4FileManager
