@@ -6,11 +6,11 @@
     <description>File Manager for the generation of multiple files with T4 Text Templating.</description>
     <version>0.0.0-replaceversion</version>
     <icon>logo-t4-file-manager.png</icon>
-    <authors>Thierry Iseli, René Leupold</authors>
+    <authors>Thierry Iseli, René Leupold, Martin Arndt</authors>
     <owners>databindinggmbh</owners>
     <repository type="git" url="https://github.com/databinding-gmbh/T4.FileManager.VisualStudio" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright ©2020 databinding GmbH</copyright>
+    <copyright>©2020 databinding GmbH</copyright>
     <tags>t4 file manager code generation visual studio vs vsstudio metadata programming</tags>
     <license type="file">LICENSE.txt</license>
     <releaseNotes>Initial release</releaseNotes>
