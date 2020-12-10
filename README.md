@@ -34,6 +34,7 @@ These tests are located in the project  `T4.FileManager.VisualStudio.AcceptanceC
 ## Authors
 
 - Thierry Iseli - *Inital work* - [Thierry Iseli (databinding)](https://github.com/databinding-thierryiseli)  
+- Martin Arndt - *Improvements* - [Martin Arndt](https://github.com/eagle3386)
 
 ## License
 
