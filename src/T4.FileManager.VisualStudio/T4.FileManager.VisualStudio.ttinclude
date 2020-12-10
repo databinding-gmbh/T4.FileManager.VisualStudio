@@ -81,7 +81,7 @@
         {
             this._textTransformation = textTransformation;
             this._host = host;
-            if (IsInfoFileGenerationEnabled = isInfoFileGenerationEnabled)
+            if (!(IsInfoFileGenerationEnabled = isInfoFileGenerationEnabled))
             {
                 // The only working solution to prevent output file generation as of VS2019
                 // See: https://stackoverflow.com/questions/2601202/how-not-to-output-default-t4-generated-file/13878689#13878689
