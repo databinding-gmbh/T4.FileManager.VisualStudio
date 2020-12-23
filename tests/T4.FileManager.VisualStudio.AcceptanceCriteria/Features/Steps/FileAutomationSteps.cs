@@ -27,7 +27,7 @@
         {
             var pathDestination =
                 VisualStudioHelper.GetProjectDirectory("T4.FileManager.VisualStudio.AcceptanceCriteria");
-            var pathSource = Path.Combine(pathDestination, "..\\..\\", "src\\T4.FileManager.VisualStudio");
+            var pathSource = Path.Combine(pathDestination, "..\\..\\", "src\\");
 
             var fmSource = Path.Combine(pathSource, "T4.FileManager.VisualStudio.ttinclude");
             var fmDest = Path.Combine(pathDestination, "T4.FileManager.VisualStudio.ttinclude");
