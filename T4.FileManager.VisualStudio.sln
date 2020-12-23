@@ -5,12 +5,12 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4863E0DC-C241-4FA2-9B2A-1B49942E4814}"
 	ProjectSection(SolutionItems) = preProject
-		azure-pipelines.yml = azure-pipelines.yml
+		build\azure-pipelines.yml = build\azure-pipelines.yml
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T4.FileManager.VisualStudio", "src\T4.FileManager.VisualStudio\T4.FileManager.VisualStudio.csproj", "{212BD7A0-C2F0-4842-99B0-AE8FE0C96C52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T4.FileManager.VisualStudio", "src\T4.FileManager.VisualStudio.csproj", "{212BD7A0-C2F0-4842-99B0-AE8FE0C96C52}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4.FileManager.VisualStudio.AcceptanceCriteria", "tests\T4.FileManager.VisualStudio.AcceptanceCriteria\T4.FileManager.VisualStudio.AcceptanceCriteria.csproj", "{902EA521-E0E5-4617-B037-C1CC1A16593B}"
 EndProject

@@ -1,0 +1,13 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="CopyT4FileManagerVisualStudio" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <CopyFiles Include="$(NuGetPackageRoot)\T4.FileManager.VisualStudio\0.0.0-replaceversion\T4.FileManager.VisualStudio.ttinclude" 
+                 SkipUnchangedFiles="true"
+                 ContinueOnError="WarnAndContinue" />
+    </ItemGroup>
+    <Copy
+      SourceFiles="@(CopyFiles)"
+      DestinationFolder="$(ProjectDir)"
+      ContinueOnError="WarnAndContinue" />
+  </Target>
+</Project>

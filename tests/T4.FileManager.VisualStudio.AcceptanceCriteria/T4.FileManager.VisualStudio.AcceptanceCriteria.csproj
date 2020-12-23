@@ -133,15 +133,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper\DteUtil.cs" />
-    <Compile Include="Helper\RetryUtil.cs" />
-    <Compile Include="Helper\VisualStudioHelper.cs" />
-    <Compile Include="Hooks\GeneratedFile.cs" />
-    <Compile Include="Hooks\StepTransformation.cs" />
-    <Compile Include="Hooks\TemplateChanges.cs" />
+    <Compile Include="Features\Helper\DteUtil.cs" />
+    <Compile Include="Features\Helper\RetryUtil.cs" />
+    <Compile Include="Features\Helper\VisualStudioHelper.cs" />
+    <Compile Include="Features\Hooks\GeneratedFile.cs" />
+    <Compile Include="Features\Hooks\StepTransformation.cs" />
+    <Compile Include="Features\Hooks\TemplateChanges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Steps\FileAutomationSteps.cs" />
-    <Compile Include="Steps\TestSetup.cs" />
+    <Compile Include="Features\Steps\FileAutomationSteps.cs" />
+    <Compile Include="Features\Steps\TestSetup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="azureDevOps.cmd">
@@ -161,12 +161,6 @@
     </None>
     <None Include="runtests.cmd" />
     <None Include="specflow.json" />
-    <None Include="SpecRunTestProfile.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="SpecRunTestProfile_2011_09.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="TestOverwrite\ReadMe.md" />
     <None Include="TestSubfolderNew\ReadMe.md" />
     <None Include="TestSubfolder\ReadMe.md" />
