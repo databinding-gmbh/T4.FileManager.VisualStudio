@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\SpecRun.SpecFlow.3-1-0.3.1.53\build\SpecRun.SpecFlow.3-1-0.props" Condition="Exists('..\..\packages\SpecRun.SpecFlow.3-1-0.3.1.53\build\SpecRun.SpecFlow.3-1-0.props')" />
-  <Import Project="..\..\packages\SpecRun.Runner.3.1.53\build\SpecRun.Runner.props" Condition="Exists('..\..\packages\SpecRun.Runner.3.1.53\build\SpecRun.Runner.props')" />
-  <Import Project="..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.89\build\SpecFlow.Tools.MsBuild.Generation.props" Condition="Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.89\build\SpecFlow.Tools.MsBuild.Generation.props')" />
+  <Import Project="..\..\packages\SpecRun.SpecFlow.3-5-0.3.5.8\build\SpecRun.SpecFlow.3-5-0.props" Condition="Exists('..\..\packages\SpecRun.SpecFlow.3-5-0.3.5.8\build\SpecRun.SpecFlow.3-5-0.props')" />
+  <Import Project="..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.5.5\build\SpecFlow.Tools.MsBuild.Generation.props" Condition="Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.5.5\build\SpecFlow.Tools.MsBuild.Generation.props')" />
+  <Import Project="..\..\packages\SpecRun.Runner.3.5.8\build\SpecRun.Runner.props" Condition="Exists('..\..\packages\SpecRun.Runner.3.5.8\build\SpecRun.Runner.props')" />
   <Import Project="..\..\packages\Microsoft.NET.Test.Sdk.15.0.0\build\net45\Microsoft.Net.Test.Sdk.props" Condition="Exists('..\..\packages\Microsoft.NET.Test.Sdk.15.0.0\build\net45\Microsoft.Net.Test.Sdk.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -56,8 +56,8 @@
     <Reference Include="Google.Protobuf, Version=3.7.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
-    <Reference Include="SpecRun.Runtime.SpecFlowPlugin, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SpecRun.SpecFlow.3-1-0.3.1.53\lib\net45\SpecRun.Runtime.SpecFlowPlugin.dll</HintPath>
+    <Reference Include="SpecRun.Runtime.SpecFlowPlugin, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SpecRun.SpecFlow.3-5-0.3.5.8\lib\net461\SpecRun.Runtime.SpecFlowPlugin.dll</HintPath>
     </Reference>
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\..\packages\stdole.7.0.3302\lib\net10\stdole.dll</HintPath>
@@ -113,15 +113,15 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TechTalk.SpecFlow, Version=3.1.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SpecFlow.3.1.89\lib\net45\TechTalk.SpecFlow.dll</HintPath>
+    <Reference Include="TechTalk.SpecFlow, Version=3.5.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SpecFlow.3.5.5\lib\net461\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
-    <Reference Include="TechTalk.SpecRun, Version=3.1.0.0, Culture=neutral, PublicKeyToken=d0fc5cc18b3b389b, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SpecRun.SpecFlow.3-1-0.3.1.53\lib\net45\TechTalk.SpecRun.dll</HintPath>
+    <Reference Include="TechTalk.SpecRun, Version=3.5.0.0, Culture=neutral, PublicKeyToken=d0fc5cc18b3b389b, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SpecRun.SpecFlow.3-5-0.3.5.8\lib\net461\TechTalk.SpecRun.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="TechTalk.SpecRun.Common, Version=3.1.0.0, Culture=neutral, PublicKeyToken=d0fc5cc18b3b389b, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SpecRun.SpecFlow.3-1-0.3.1.53\lib\net45\TechTalk.SpecRun.Common.dll</HintPath>
+    <Reference Include="TechTalk.SpecRun.Common, Version=3.5.0.0, Culture=neutral, PublicKeyToken=d0fc5cc18b3b389b, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SpecRun.SpecFlow.3-5-0.3.5.8\lib\net461\TechTalk.SpecRun.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Utf8Json, Version=1.3.7.0, Culture=neutral, PublicKeyToken=8a73d3ba7e392e27, processorArchitecture=MSIL">
@@ -136,12 +136,40 @@
     <Compile Include="Features\Helper\DteUtil.cs" />
     <Compile Include="Features\Helper\RetryUtil.cs" />
     <Compile Include="Features\Helper\VisualStudioHelper.cs" />
-    <Compile Include="Features\Hooks\GeneratedFile.cs" />
+    <Compile Include="Features\Dto\GeneratedFile.cs" />
     <Compile Include="Features\Hooks\StepTransformation.cs" />
-    <Compile Include="Features\Hooks\TemplateChanges.cs" />
+    <Compile Include="Features\Dto\TemplateChanges.cs" />
+    <Compile Include="OrderDto.g.cs" />
+    <Compile Include="OrderDtoWithCustom.g.cs">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OrderDtoWithCustom.g1.cs</LastGenOutput>
+    </Compile>
+    <Compile Include="OrderDtoWithCustom.g1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderDtoWithCustom.g.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrderDtoWithGlobal.g.cs" />
+    <Compile Include="PersonDto.g.cs" />
+    <Compile Include="PersonDtoWithCustom.g.cs">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PersonDtoWithCustom.g1.cs</LastGenOutput>
+    </Compile>
+    <Compile Include="PersonDtoWithCustom.g1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PersonDtoWithCustom.g.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonDtoWithGlobal.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Features\Steps\FileAutomationSteps.cs" />
     <Compile Include="Features\Steps\TestSetup.cs" />
+    <Compile Include="TestOldFilesCleanUpRenamed.g.cs" />
+    <Compile Include="TestOverwrite\TestNoDelete.g.cs" />
+    <Compile Include="TestOverwrite\TestNoDelete2.g.cs" />
+    <Compile Include="TestOverwrite\TestNoDelete3.g.cs" />
+    <Compile Include="TestSubfolderNew\OrderDto.g.cs" />
+    <Compile Include="TestSubfolderNew\PersonDto.g.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="azureDevOps.cmd">
@@ -161,12 +189,92 @@
     </None>
     <None Include="runtests.cmd" />
     <None Include="specflow.json" />
+    <None Include="SpecRunTestProfile.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SpecRunTestProfile_2011_09.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="TestOverwrite\ReadMe.md" />
     <None Include="TestSubfolderNew\ReadMe.md" />
     <None Include="TestSubfolder\ReadMe.md" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Test.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Test.txt</LastGenOutput>
+    </Content>
+    <Content Include="Test.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Test.tt</DependentUpon>
+    </Content>
+    <Content Include="TestCustomTool.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestCustomTool.txt</LastGenOutput>
+    </Content>
+    <Content Include="TestCustomTool.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestCustomTool.tt</DependentUpon>
+    </Content>
+    <Content Include="TestDelete.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestDelete.txt</LastGenOutput>
+    </Content>
+    <Content Include="TestDelete.txt">
+      <DependentUpon>TestDelete.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Content>
+    <Content Include="TestGlobalHeader.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestGlobalHeader.txt</LastGenOutput>
+    </Content>
+    <Content Include="TestGlobalHeader.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestGlobalHeader.tt</DependentUpon>
+    </Content>
+    <Content Include="TestInOtherProject.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestInOtherProject.txt</LastGenOutput>
+    </Content>
+    <Content Include="TestInOtherProject.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestInOtherProject.tt</DependentUpon>
+    </Content>
+    <Content Include="TestNoDelete.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestNoDelete.txt</LastGenOutput>
+    </Content>
+    <Content Include="TestNoDelete.txt">
+      <DependentUpon>TestNoDelete.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Content>
+    <Content Include="TestOldFilesCleanUp.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestOldFilesCleanUp.txt</LastGenOutput>
+    </Content>
+    <Content Include="TestOldFilesCleanUp.txt">
+      <DependentUpon>TestOldFilesCleanUp.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Content>
+    <Content Include="TestSubfolder.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestSubfolder.txt</LastGenOutput>
+    </Content>
+    <Content Include="TestSubfolder.txt">
+      <DependentUpon>TestSubfolder.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -175,17 +283,17 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Microsoft.NET.Test.Sdk.15.0.0\build\net45\Microsoft.Net.Test.Sdk.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.NET.Test.Sdk.15.0.0\build\net45\Microsoft.Net.Test.Sdk.props'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.NET.Test.Sdk.15.0.0\build\net45\Microsoft.Net.Test.Sdk.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.NET.Test.Sdk.15.0.0\build\net45\Microsoft.Net.Test.Sdk.targets'))" />
-    <Error Condition="!Exists('..\..\packages\SpecFlow.3.1.89\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecFlow.3.1.89\build\SpecFlow.targets'))" />
-    <Error Condition="!Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.89\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.89\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
-    <Error Condition="!Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.89\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.89\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
-    <Error Condition="!Exists('..\..\packages\SpecRun.Runner.3.1.53\build\SpecRun.Runner.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecRun.Runner.3.1.53\build\SpecRun.Runner.props'))" />
-    <Error Condition="!Exists('..\..\packages\SpecRun.Runner.3.1.53\build\SpecRun.Runner.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecRun.Runner.3.1.53\build\SpecRun.Runner.targets'))" />
-    <Error Condition="!Exists('..\..\packages\SpecRun.SpecFlow.3-1-0.3.1.53\build\SpecRun.SpecFlow.3-1-0.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecRun.SpecFlow.3-1-0.3.1.53\build\SpecRun.SpecFlow.3-1-0.props'))" />
-    <Error Condition="!Exists('..\..\packages\SpecRun.SpecFlow.3-1-0.3.1.53\build\SpecRun.SpecFlow.3-1-0.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecRun.SpecFlow.3-1-0.3.1.53\build\SpecRun.SpecFlow.3-1-0.targets'))" />
+    <Error Condition="!Exists('..\..\packages\SpecRun.Runner.3.5.8\build\SpecRun.Runner.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecRun.Runner.3.5.8\build\SpecRun.Runner.props'))" />
+    <Error Condition="!Exists('..\..\packages\SpecRun.Runner.3.5.8\build\SpecRun.Runner.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecRun.Runner.3.5.8\build\SpecRun.Runner.targets'))" />
+    <Error Condition="!Exists('..\..\packages\SpecFlow.3.5.5\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecFlow.3.5.5\build\SpecFlow.targets'))" />
+    <Error Condition="!Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.5.5\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.5.5\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
+    <Error Condition="!Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.5.5\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.5.5\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
+    <Error Condition="!Exists('..\..\packages\SpecRun.SpecFlow.3-5-0.3.5.8\build\SpecRun.SpecFlow.3-5-0.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecRun.SpecFlow.3-5-0.3.5.8\build\SpecRun.SpecFlow.3-5-0.props'))" />
+    <Error Condition="!Exists('..\..\packages\SpecRun.SpecFlow.3-5-0.3.5.8\build\SpecRun.SpecFlow.3-5-0.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecRun.SpecFlow.3-5-0.3.5.8\build\SpecRun.SpecFlow.3-5-0.targets'))" />
   </Target>
   <Import Project="..\..\packages\Microsoft.NET.Test.Sdk.15.0.0\build\net45\Microsoft.Net.Test.Sdk.targets" Condition="Exists('..\..\packages\Microsoft.NET.Test.Sdk.15.0.0\build\net45\Microsoft.Net.Test.Sdk.targets')" />
-  <Import Project="..\..\packages\SpecFlow.3.1.89\build\SpecFlow.targets" Condition="Exists('..\..\packages\SpecFlow.3.1.89\build\SpecFlow.targets')" />
-  <Import Project="..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.89\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.89\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
-  <Import Project="..\..\packages\SpecRun.Runner.3.1.53\build\SpecRun.Runner.targets" Condition="Exists('..\..\packages\SpecRun.Runner.3.1.53\build\SpecRun.Runner.targets')" />
-  <Import Project="..\..\packages\SpecRun.SpecFlow.3-1-0.3.1.53\build\SpecRun.SpecFlow.3-1-0.targets" Condition="Exists('..\..\packages\SpecRun.SpecFlow.3-1-0.3.1.53\build\SpecRun.SpecFlow.3-1-0.targets')" />
+  <Import Project="..\..\packages\SpecRun.Runner.3.5.8\build\SpecRun.Runner.targets" Condition="Exists('..\..\packages\SpecRun.Runner.3.5.8\build\SpecRun.Runner.targets')" />
+  <Import Project="..\..\packages\SpecFlow.3.5.5\build\SpecFlow.targets" Condition="Exists('..\..\packages\SpecFlow.3.5.5\build\SpecFlow.targets')" />
+  <Import Project="..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.5.5\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.5.5\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
+  <Import Project="..\..\packages\SpecRun.SpecFlow.3-5-0.3.5.8\build\SpecRun.SpecFlow.3-5-0.targets" Condition="Exists('..\..\packages\SpecRun.SpecFlow.3-5-0.3.5.8\build\SpecRun.SpecFlow.3-5-0.targets')" />
 </Project>

@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Dto;
+
     using TechTalk.SpecFlow;
     using TechTalk.SpecFlow.Assist;
 

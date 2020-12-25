@@ -1,0 +1,20 @@
+{
+  "FilesToGenerate": [
+    {
+      "Filename": "PersonDtoWithCustom.g.cs",
+      "Project": "",
+      "Path": "",
+      "Properties": {
+        "CustomTool": "TextTemplatingFileGenerator"
+      }
+    },
+    {
+      "Filename": "OrderDtoWithCustom.g.cs",
+      "Project": "",
+      "Path": "",
+      "Properties": {
+        "CustomTool": "TextTemplatingFileGenerator"
+      }
+    }
+  ]
+}

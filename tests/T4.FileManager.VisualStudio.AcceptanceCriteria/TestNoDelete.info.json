@@ -1,0 +1,10 @@
+{
+  "FilesToGenerate": [
+    {
+      "Filename": "TestNoDelete2.g.cs",
+      "Project": "",
+      "Path": "TestOverwrite",
+      "Properties": {}
+    }
+  ]
+}

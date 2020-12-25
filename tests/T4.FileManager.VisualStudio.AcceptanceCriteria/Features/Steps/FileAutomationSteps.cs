@@ -7,16 +7,16 @@
 
     using FluentAssertions;
 
+    using T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Dto;
     using T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Helper;
-    using T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Hooks;
 
     using TechTalk.SpecFlow;
 
     [Binding]
-    class FileAutomationSteps
+    public class FileAutomationSteps
     {
         private string projectName = "T4.FileManager.VisualStudio.AcceptanceCriteria";
-        private string sourcePath;
+        private string pathTestEnvironment;
         private ProjectItem t4Template;
         private string targetTestPath;
         private IList<GeneratedFile> files;
@@ -25,17 +25,16 @@
         [Given(@"the file manager")]
         public void GivenTheFileManager()
         {
-            var pathDestination =
+            this.pathTestEnvironment =
                 VisualStudioHelper.GetProjectDirectory("T4.FileManager.VisualStudio.AcceptanceCriteria");
-            var pathSource = Path.Combine(pathDestination, "..\\..\\", "src\\");
+            var pathSource = Path.Combine(pathTestEnvironment, "..\\..\\", "src\\");
 
-            var fmSource = Path.Combine(pathSource, "T4.FileManager.VisualStudio.ttinclude");
-            var fmDest = Path.Combine(pathDestination, "T4.FileManager.VisualStudio.ttinclude");
+            var fileManagerFromSource = Path.Combine(pathSource, "T4.FileManager.VisualStudio.ttinclude");
+            var fileManagerForTest = Path.Combine(this.pathTestEnvironment, "T4.FileManager.VisualStudio.ttinclude");
 
-            File.Copy(fmSource, fmDest, true);
+            File.Copy(fileManagerFromSource, fileManagerForTest, true);
 
-            this.sourcePath = pathDestination;
-            this.targetTestPath = pathDestination;
+            this.targetTestPath = this.pathTestEnvironment;
         }
 
         [Given(@"for target project ""(.*)"" to generate files")]
@@ -48,7 +47,7 @@
         [Given(@"the script ""(.*)"" with following content for automation")]
         public void GivenTheScriptWithFollowingContentForAutomation(string filename, string templateContent)
         {
-            this.currentTesteeFilePath = Path.Combine(this.sourcePath, filename);
+            this.currentTesteeFilePath = Path.Combine(this.pathTestEnvironment, filename);
             File.WriteAllText(this.currentTesteeFilePath, templateContent);
 
             this.t4Template = VisualStudioHelper.AddFileToProject(
@@ -59,7 +58,7 @@
         [Given(@"the script ""(.*)"" modified by following content:")]
         public void GivenTheScriptModifiedByFollowingContent(string filename, string templateContent)
         {
-            var file = Path.Combine(this.sourcePath, filename);
+            var file = Path.Combine(this.pathTestEnvironment, filename);
 
             VisualStudioHelper.RemoveFileFromProject(file);
 
@@ -97,7 +96,7 @@
         {
             foreach (var file in files)
             {
-                var testee = Path.Combine(this.targetTestPath, file.Folder ?? "", file.Name);
+                var testee = file.GetFullPath(this.targetTestPath);
 
                 if (string.IsNullOrWhiteSpace(file.ContainsContent) == false)
                 {
@@ -117,7 +116,7 @@
         {
             foreach (var file in files)
             {
-                var testee = Path.Combine(this.targetTestPath, file.Folder ?? "", file.Name);
+                var testee = file.GetFullPath(this.targetTestPath);
 
                 File.Exists(testee).Should().BeFalse();
             }
@@ -127,7 +126,9 @@
         public void ThenCustomToolIsSet(string customTool, IList<GeneratedFile> files)
         {
             foreach (var testee in files)
+            {
                 VisualStudioHelper.GetCustomToolByFileName(testee.Name, this.projectName).Should().Be(customTool);
+            }
         }
 
         [Then(@"all files contains following content:")]
@@ -135,9 +136,10 @@
         {
             foreach (var file in this.files)
             {
-                var fullPath = Path.Combine(this.targetTestPath, file.Folder ?? "", file.Name);
-                var testee = File.ReadAllText(fullPath);
-                testee.Contains(content).Should().BeTrue();
+                var filePath = file.GetFullPath(this.targetTestPath);
+                var testee = File.ReadAllText(filePath);
+                
+                testee.Should().Contain(content);
             }
         }
     }

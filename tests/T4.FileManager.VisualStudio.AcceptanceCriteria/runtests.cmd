@@ -11,7 +11,7 @@
 
 @if ERRORLEVEL 1 goto end
 
-@cd ..\packages\SpecRun.Runner.*\tools\net45
+@cd ..\packages\SpecRun.Runner.*\tools\net461
 
 @set profile=%1
 @if "%profile%" == "" set profile=Default

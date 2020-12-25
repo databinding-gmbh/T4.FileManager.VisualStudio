@@ -1,0 +1,16 @@
+{
+  "FilesToGenerate": [
+    {
+      "Filename": "PersonDtoWithGlobal.g.cs",
+      "Project": "",
+      "Path": "",
+      "Properties": {}
+    },
+    {
+      "Filename": "OrderDtoWithGlobal.g.cs",
+      "Project": "",
+      "Path": "",
+      "Properties": {}
+    }
+  ]
+}
