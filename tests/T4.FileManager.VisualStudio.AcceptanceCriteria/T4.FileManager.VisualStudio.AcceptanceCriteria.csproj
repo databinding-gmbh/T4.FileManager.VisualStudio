@@ -139,37 +139,9 @@
     <Compile Include="Features\Dto\GeneratedFile.cs" />
     <Compile Include="Features\Hooks\StepTransformation.cs" />
     <Compile Include="Features\Dto\TemplateChanges.cs" />
-    <Compile Include="OrderDto.g.cs" />
-    <Compile Include="OrderDtoWithCustom.g.cs">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OrderDtoWithCustom.g1.cs</LastGenOutput>
-    </Compile>
-    <Compile Include="OrderDtoWithCustom.g1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OrderDtoWithCustom.g.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OrderDtoWithGlobal.g.cs" />
-    <Compile Include="PersonDto.g.cs" />
-    <Compile Include="PersonDtoWithCustom.g.cs">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PersonDtoWithCustom.g1.cs</LastGenOutput>
-    </Compile>
-    <Compile Include="PersonDtoWithCustom.g1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PersonDtoWithCustom.g.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PersonDtoWithGlobal.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Features\Steps\FileAutomationSteps.cs" />
     <Compile Include="Features\Steps\TestSetup.cs" />
-    <Compile Include="TestOldFilesCleanUpRenamed.g.cs" />
-    <Compile Include="TestOverwrite\TestNoDelete.g.cs" />
-    <Compile Include="TestOverwrite\TestNoDelete2.g.cs" />
-    <Compile Include="TestOverwrite\TestNoDelete3.g.cs" />
-    <Compile Include="TestSubfolderNew\OrderDto.g.cs" />
-    <Compile Include="TestSubfolderNew\PersonDto.g.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="azureDevOps.cmd">
@@ -189,92 +161,12 @@
     </None>
     <None Include="runtests.cmd" />
     <None Include="specflow.json" />
-    <None Include="SpecRunTestProfile.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="SpecRunTestProfile_2011_09.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="TestOverwrite\ReadMe.md" />
     <None Include="TestSubfolderNew\ReadMe.md" />
     <None Include="TestSubfolder\ReadMe.md" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Test.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Test.txt</LastGenOutput>
-    </Content>
-    <Content Include="Test.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Test.tt</DependentUpon>
-    </Content>
-    <Content Include="TestCustomTool.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestCustomTool.txt</LastGenOutput>
-    </Content>
-    <Content Include="TestCustomTool.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestCustomTool.tt</DependentUpon>
-    </Content>
-    <Content Include="TestDelete.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestDelete.txt</LastGenOutput>
-    </Content>
-    <Content Include="TestDelete.txt">
-      <DependentUpon>TestDelete.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Content>
-    <Content Include="TestGlobalHeader.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestGlobalHeader.txt</LastGenOutput>
-    </Content>
-    <Content Include="TestGlobalHeader.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestGlobalHeader.tt</DependentUpon>
-    </Content>
-    <Content Include="TestInOtherProject.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestInOtherProject.txt</LastGenOutput>
-    </Content>
-    <Content Include="TestInOtherProject.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestInOtherProject.tt</DependentUpon>
-    </Content>
-    <Content Include="TestNoDelete.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestNoDelete.txt</LastGenOutput>
-    </Content>
-    <Content Include="TestNoDelete.txt">
-      <DependentUpon>TestNoDelete.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Content>
-    <Content Include="TestOldFilesCleanUp.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestOldFilesCleanUp.txt</LastGenOutput>
-    </Content>
-    <Content Include="TestOldFilesCleanUp.txt">
-      <DependentUpon>TestOldFilesCleanUp.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Content>
-    <Content Include="TestSubfolder.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestSubfolder.txt</LastGenOutput>
-    </Content>
-    <Content Include="TestSubfolder.txt">
-      <DependentUpon>TestSubfolder.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
