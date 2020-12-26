@@ -1,4 +1,5 @@
-﻿Feature: UT004 Generate File with custom tool
+﻿@db-9
+Feature: UT004 Generate File with custom tool
 	As a developer
 	I can generate code with t4 with definied custom tool property
 

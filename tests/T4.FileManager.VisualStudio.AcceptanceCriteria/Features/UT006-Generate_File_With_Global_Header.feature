@@ -1,4 +1,5 @@
-﻿Feature: UT006 Generate File with global header
+﻿@db-11
+Feature: UT006 Generate File with global header
 	As a developer
 	I can generate code with t4 and a global custom header
 

@@ -1,4 +1,5 @@
-﻿Feature: UT003 Generate File in other project
+﻿@db-8
+Feature: UT003 Generate File in other project
 	As a developer
 	I can generate code with t4 in different files and in different project
 

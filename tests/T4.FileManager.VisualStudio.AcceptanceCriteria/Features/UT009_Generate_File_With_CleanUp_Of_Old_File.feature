@@ -1,4 +1,5 @@
-﻿Feature: UT009 Generate File with cleanup old File
+﻿@db-8
+Feature: UT009 Generate File with cleanup old File
 	As a developer
 	I can generate code with t4 without taking care of old generated files
 

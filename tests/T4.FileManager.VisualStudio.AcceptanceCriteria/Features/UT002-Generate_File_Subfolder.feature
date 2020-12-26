@@ -1,4 +1,5 @@
-﻿Feature: UT002 Generate File in subfolder
+﻿@db-7
+Feature: UT002 Generate File in subfolder
 	As a developer
 	I can generate T4 files in subfolders
 

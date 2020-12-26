@@ -1,4 +1,5 @@
-﻿Feature: UT001 Generate Code
+﻿@db-6
+Feature: UT001 Generate Code
 	As a developer
 	I can generate code with t4 in different files
 
