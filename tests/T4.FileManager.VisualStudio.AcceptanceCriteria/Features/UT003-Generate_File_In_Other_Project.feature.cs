@@ -20,8 +20,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.5.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [TechTalk.SpecRun.FeatureAttribute("UT003 Generate File in other project", new string[] {
-            "db-8"}, Description="\tAs a developer\r\n\tI can generate code with t4 in different files and in different" +
-        " project", SourceFile="Features\\UT003-Generate_File_In_Other_Project.feature", SourceLine=1)]
+            "db-8"}, Description="\tAs a developer\r\n\tI can generate code with the T4.FileManager with each class in " +
+        "its own file or in different projects", SourceFile="Features\\UT003-Generate_File_In_Other_Project.feature", SourceLine=1)]
     public partial class UT003GenerateFileInOtherProjectFeature
     {
         
@@ -37,8 +37,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT003 Generate File in other project", "\tAs a developer\r\n\tI can generate code with t4 in different files and in different" +
-                    " project", ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT003 Generate File in other project", "\tAs a developer\r\n\tI can generate code with the T4.FileManager with each class in " +
+                    "its own file or in different projects", ProgrammingLanguage.CSharp, new string[] {
                         "db-8"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -105,7 +105,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("the file manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 8
- testRunner.And("the script \"TestInOtherProject.tt\" with following content for automation", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
+ testRunner.And("the script \"TestInOtherProject.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
 <#@ assembly name=""System.Core"" #>
 <#@ import namespace=""System.Linq"" #>
 <#@ import namespace=""System.Text"" #>
@@ -135,11 +135,11 @@ fileManager.Generate();
 #>", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 39
- testRunner.And("for target project \"T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestPro" +
-                        "ject\" to generate files", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I select the target project \"T4.FileManager.VisualStudio.AcceptanceCriteria.Examp" +
+                        "leTestProject\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 40
- testRunner.When("I run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});

@@ -1,11 +1,11 @@
 ﻿@db-6
 Feature: UT001 Generate Code
 	As a developer
-	I can generate code with t4 in different files
+	I can generate code with the T4.FileManager with each class in its own file
 
 Scenario: Generate two files
 	Given the file manager
-	And the script "Test.tt" with following content for automation
+	And the script "Test.tt" with the following content
 		"""
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
@@ -36,7 +36,7 @@ namespace Test
 fileManager.Generate();
 #>
 		"""
-	When I run the script for automation
+	When I run the script
 	Then the following files are generated:
 		| File           |
 		| PersonDto.g.cs |

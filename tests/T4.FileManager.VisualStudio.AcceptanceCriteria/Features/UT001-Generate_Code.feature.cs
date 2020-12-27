@@ -20,7 +20,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.5.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [TechTalk.SpecRun.FeatureAttribute("UT001 Generate Code", new string[] {
-            "db-6"}, Description="\tAs a developer\r\n\tI can generate code with t4 in different files", SourceFile="Features\\UT001-Generate_Code.feature", SourceLine=1)]
+            "db-6"}, Description="\tAs a developer\r\n\tI can generate code with the T4.FileManager with each class in " +
+        "its own file", SourceFile="Features\\UT001-Generate_Code.feature", SourceLine=1)]
     public partial class UT001GenerateCodeFeature
     {
         
@@ -36,7 +37,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT001 Generate Code", "\tAs a developer\r\n\tI can generate code with t4 in different files", ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT001 Generate Code", "\tAs a developer\r\n\tI can generate code with the T4.FileManager with each class in " +
+                    "its own file", ProgrammingLanguage.CSharp, new string[] {
                         "db-6"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -103,7 +105,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("the file manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 8
- testRunner.And("the script \"Test.tt\" with following content for automation", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
+ testRunner.And("the script \"Test.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
 <#@ assembly name=""System.Core"" #>
 <#@ import namespace=""System.Linq"" #>
 <#@ import namespace=""System.Text"" #>
@@ -133,7 +135,7 @@ fileManager.Generate();
 #>", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 39
- testRunner.When("I run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});

@@ -5,7 +5,7 @@ Feature: UT013 Generate File change behaviour
 
 Background: T4 File Manager and base script
 	Given the file manager
-	And the script "TestDelete.tt" with following content for automation
+	And the script "TestDelete.tt" with the following content
 		"""
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
@@ -34,7 +34,7 @@ fileManager.Generate();
 		"""
 
 Scenario: Generate files with CanOverwriteExistingFile is set to true, files deleted
-	Given I run the script for automation
+	Given I run the script
 	And the following files are generated:
 		| File            | Folder        |
 		| TestDelete.g.cs | TestOverwrite |
@@ -43,7 +43,7 @@ Scenario: Generate files with CanOverwriteExistingFile is set to true, files del
 		| fileManager.CanOverwriteExistingFile = false;                         | fileManager.CanOverwriteExistingFile = true;                             |
 		| fileManager.CreateNewFile("TestDelete.g.cs","","TestOverwrite",null); | fileManager.CreateNewFile("TestNoDelete3.g.cs","","TestOverwrite",null); |
 		| public class TestDelete                                               | public class NewTestDeleteModel                                          |
-	When I run the script for automation
+	When I run the script
 	Then the following files are generated:
 		| File               | Folder        |
 		| TestNoDelete3.g.cs | TestOverwrite |

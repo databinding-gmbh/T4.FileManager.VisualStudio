@@ -1,11 +1,11 @@
 ﻿@db-9
 Feature: UT004 Generate File with custom tool
 	As a developer
-	I can generate code with t4 with definied custom tool property
+	I can generate code with the T4.FileManager and definied custom tool properties
 
 Scenario: Generate files with custom tool
 	Given the file manager	
-	And the script "TestCustomTool.tt" with following content for automation
+	And the script "TestCustomTool.tt" with the following content
 		"""
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
@@ -39,12 +39,12 @@ namespace Test
 fileManager.Generate();
 #>
 		"""
-	When I run the script for automation
+	When I run the script
 	Then the following files are generated:
 		| File           |
 		| PersonDtoWithCustom.g.cs |
 		| OrderDtoWithCustom.g.cs  |
-	And custom tool is set to "TextTemplatingFileGenerator" for following files:
+	And the custom tool is set to "TextTemplatingFileGenerator" for the following files:
 		| File           |
 		| PersonDtoWithCustom.g.cs |
 		| OrderDtoWithCustom.g.cs  |

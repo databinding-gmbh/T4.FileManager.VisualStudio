@@ -5,7 +5,7 @@ Feature: UT009 Generate File with cleanup old File
 
 Scenario: Generate files with clean up of old files (based on *.info.json)
 	Given the file manager
-	And the script "TestOldFilesCleanUp.tt" with following content for automation
+	And the script "TestOldFilesCleanUp.tt" with the following content
 		"""
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
@@ -30,7 +30,7 @@ namespace Test
 fileManager.Generate();
 #>
 		"""
-	When I run the script for automation
+	When I run the script
 	Then the following files are generated:
 		| File           |
 		| TestOldFilesCleanUp.g.cs |
@@ -59,7 +59,7 @@ namespace Test
 fileManager.Generate();
 #>
 		"""
-	When I run the script for automation
+	When I run the script
 	Then the following files are cleaned up:
 		| File           |
 		| TestOldFilesCleanUp.g.cs |

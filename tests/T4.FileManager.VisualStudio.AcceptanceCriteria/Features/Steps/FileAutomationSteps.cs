@@ -37,14 +37,14 @@
             this.targetTestPath = this.pathTestEnvironment;
         }
 
-        [Given(@"for target project ""(.*)"" to generate files")]
+        [Given(@"I select the target project ""(.*)""")]
         public void GivenTargetProjectForToGenerateFiles(string name)
         {
             this.projectName = name;
             this.targetTestPath = Path.Combine(this.targetTestPath, "..\\", this.projectName);
         }
 
-        [Given(@"the script ""(.*)"" with following content for automation")]
+        [Given(@"the script ""(.*)"" with the following content")]
         public void GivenTheScriptWithFollowingContentForAutomation(string filename, string templateContent)
         {
             this.currentTesteeFilePath = Path.Combine(this.pathTestEnvironment, filename);
@@ -70,6 +70,7 @@
         }
 
         [Given(@"I change the line")]
+        [When(@"I change the line")]
         public void GivenIChangeTheLine(IList<TemplateChanges> changes)
         {
             var template = File.ReadAllText(this.currentTesteeFilePath);
@@ -81,9 +82,9 @@
             this.GivenTheScriptModifiedByFollowingContent(this.currentTesteeFilePath, template);
         }
 
-        [Given(@"I run the script for automation")]
-        [When(@"I run the script for automation again")]
-        [When(@"I run the script for automation")]
+        [When(@"I run the script")]
+        [When(@"I run the script again")]
+        [Given(@"I run the script")]
         public void WhenIRunTheScriptForAutomation()
         {
             VisualStudioHelper.SaveFileAutomaticallyRunCustomTool(this.t4Template);
@@ -122,7 +123,7 @@
             }
         }
 
-        [Then(@"custom tool is set to ""(.*)"" for following files:")]
+        [Then(@"the custom tool is set to ""(.*)"" for the following files:")]
         public void ThenCustomToolIsSet(string customTool, IList<GeneratedFile> files)
         {
             foreach (var testee in files)
@@ -131,7 +132,7 @@
             }
         }
 
-        [Then(@"all files contains following content:")]
+        [Then(@"all files contains the following content:")]
         public void ThenAllFilesContainsFollowingContent(string content)
         {
             foreach (var file in this.files)

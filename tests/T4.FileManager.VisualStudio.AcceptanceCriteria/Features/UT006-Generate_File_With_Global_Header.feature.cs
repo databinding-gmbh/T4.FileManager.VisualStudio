@@ -20,7 +20,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.5.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [TechTalk.SpecRun.FeatureAttribute("UT006 Generate File with global header", new string[] {
-            "db-11"}, Description="\tAs a developer\r\n\tI can generate code with t4 and a global custom header", SourceFile="Features\\UT006-Generate_File_With_Global_Header.feature", SourceLine=1)]
+            "db-11"}, Description="\tAs a developer\r\n\tI can generate code with the T4.FileManager using my own custom" +
+        " header", SourceFile="Features\\UT006-Generate_File_With_Global_Header.feature", SourceLine=1)]
     public partial class UT006GenerateFileWithGlobalHeaderFeature
     {
         
@@ -36,7 +37,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT006 Generate File with global header", "\tAs a developer\r\n\tI can generate code with t4 and a global custom header", ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT006 Generate File with global header", "\tAs a developer\r\n\tI can generate code with the T4.FileManager using my own custom" +
+                    " header", ProgrammingLanguage.CSharp, new string[] {
                         "db-11"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -103,7 +105,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("the file manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 8
- testRunner.And("the script \"TestGlobalHeader.tt\" with following content for automation", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
+ testRunner.And("the script \"TestGlobalHeader.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
 <#@ assembly name=""System.Core"" #>
 <#@ import namespace=""System.Linq"" #>
 <#@ import namespace=""System.Text"" #>
@@ -143,7 +145,7 @@ fileManager.Generate();
 #>", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 49
- testRunner.When("I run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
@@ -155,7 +157,7 @@ fileManager.Generate();
  testRunner.Then("the following files are generated:", ((string)(null)), table9, "Then ");
 #line hidden
 #line 54
- testRunner.And("all files contains following content:", "// -------------------------\r\n// databinding - T4\r\n// -------------------------", ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("all files contains the following content:", "// -------------------------\r\n// databinding - T4\r\n// -------------------------", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

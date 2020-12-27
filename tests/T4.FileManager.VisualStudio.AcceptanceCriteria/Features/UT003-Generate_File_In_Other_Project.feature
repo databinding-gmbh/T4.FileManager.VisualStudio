@@ -1,11 +1,11 @@
 ﻿@db-8
 Feature: UT003 Generate File in other project
 	As a developer
-	I can generate code with t4 in different files and in different project
+	I can generate code with the T4.FileManager with each class in its own file or in different projects
 
 Scenario: Generate files in other .NET project
 	Given the file manager	
-	And the script "TestInOtherProject.tt" with following content for automation
+	And the script "TestInOtherProject.tt" with the following content
 		"""
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
@@ -36,8 +36,8 @@ namespace Test
 fileManager.Generate();
 #>
 		"""
-	And for target project "T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject" to generate files
-	When I run the script for automation
+	And I select the target project "T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject"
+	When I run the script
 	Then the following files are generated:
 		| File           |
 		| PersonDto.g.cs |
