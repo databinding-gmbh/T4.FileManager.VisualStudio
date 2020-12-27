@@ -9,8 +9,22 @@
 
     public static class VisualStudioHelper
     {
-        private static readonly DTE dte = DteUtil.GetCurrentDte();
+        public static DTE Dte { get; internal set; } = DteUtil.GetCurrentDte();
 
+        public static void CleanupViaT4()
+        {
+            var dte = DteUtil.GetCurrentDte();
+            var project = dte.Solution.Cast<Project>().First(p => p.Name == "T4.FileManager.VisualStudio.AcceptanceCriteria");
+            var cleanup = GetAllProjectItemsRecursive(project.ProjectItems)
+                .FirstOrDefault(p => p.Name.Contains("CleanUpTestoutput.tt"));
+            
+            if (cleanup != null)
+            {
+                cleanup.Open();
+                cleanup.Save();
+            }
+        }
+        
         public static void CleanupFiles(string[] projectNames, string[] extensions)
         {
             RetryUtil.RetryOnException(() =>
@@ -24,7 +38,9 @@
                     var items = GetAllProjectItemsRecursive(project.ProjectItems);
 
                     foreach (var extension in extensions)
+                    {
                         cleanupItems.AddRange(items.Where(n => n.Name.EndsWith(extension)));
+                    }
                 }
 
                 foreach (var item in cleanupItems)
@@ -33,17 +49,25 @@
 
                     item.Remove();
 
-                    if (File.Exists(fullPath)) File.Delete(fullPath);
+                    if (File.Exists(fullPath))
+                    {
+                        File.Delete(fullPath);
+                    }
                 }
 
                 foreach (var projectName in projectNames)
                 {
                     var projectPath = GetProjectDirectory(projectName);
                     foreach (var extension in extensions)
-                    foreach (var file in Directory.EnumerateFiles(projectPath,
-                        $"*{extension}",
-                        SearchOption.AllDirectories))
-                        File.Delete(file);
+                    {
+                        foreach (var file in Directory.EnumerateFiles(
+                            projectPath,
+                            $"*{extension}",
+                            SearchOption.AllDirectories))
+                        {
+                            File.Delete(file);
+                        }
+                    }
                 }
             });
         }
@@ -54,8 +78,11 @@
 
             RetryUtil.RetryOnException(() =>
             {
-                var item = dte.Solution.FindProjectItem(name);
-                if (item != null) customTool = item.Properties.Item("CustomTool").Value;
+                var item = Dte.Solution.FindProjectItem(name);
+                if (item != null)
+                {
+                    customTool = item.Properties.Item("CustomTool").Value;
+                }
             });
 
             return customTool;
@@ -87,12 +114,13 @@
         {
             RetryUtil.RetryOnException(() =>
             {
-                var projectItem = dte.Solution.FindProjectItem(fileName);
+                var projectItem = Dte.Solution.FindProjectItem(fileName);
                 projectItem?.Remove();
             });
         }
 
-        public static ProjectItem AddFileToProject(string projectName,
+        public static ProjectItem AddFileToProject(
+            string projectName,
             string fileName,
             string customTool = "TextTemplatingFileGenerator")
         {
@@ -109,7 +137,9 @@
                 var property = projectItem.Properties.Item("CustomTool");
 
                 if (property == null)
+                {
                     throw new ArgumentException("The property CustomTool was not found.");
+                }
 
                 property.Value = customTool;
             });
@@ -121,7 +151,10 @@
         {
             foreach (ProjectItem projectItem in projectItems)
             {
-                foreach (var subItem in GetAllProjectItemsRecursive(projectItem.ProjectItems)) yield return subItem;
+                foreach (var subItem in GetAllProjectItemsRecursive(projectItem.ProjectItems))
+                {
+                    yield return subItem;
+                }
 
                 yield return projectItem;
             }
@@ -131,7 +164,7 @@
         {
             IEnumerable<Project> projects = null;
 
-            RetryUtil.RetryOnException(() => { projects = dte.Solution.Projects.Cast<Project>(); });
+            RetryUtil.RetryOnException(() => { projects = Dte.Solution.Projects.Cast<Project>(); });
 
             return projects;
         }

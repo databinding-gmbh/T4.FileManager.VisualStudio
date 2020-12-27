@@ -28,7 +28,8 @@
                     
                     Task.Delay(delay).Wait();
                 }
-            } while (true);
+            } 
+            while (true);
         }
     }
 }

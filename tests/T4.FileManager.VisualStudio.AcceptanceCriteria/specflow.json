@@ -1,3 +1,7 @@
 ﻿{
+  "livingDocGenerator": {
+    "enabled": true,
+    "filepath": "TestExecution.json"
+  },
   "plugins": []
 }

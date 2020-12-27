@@ -19,14 +19,16 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.5.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("UT003 Generate File in other project", Description="\tAs a developer\r\n\tI can generate code with t4 in different files and in different" +
-        " project", SourceFile="Features\\UT003-Generate_File_In_Other_Project.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("UT003 Generate File in other project", new string[] {
+            "db-8"}, Description="\tAs a developer\r\n\tI can generate code with t4 in different files and in different" +
+        " project", SourceFile="Features\\UT003-Generate_File_In_Other_Project.feature", SourceLine=1)]
     public partial class UT003GenerateFileInOtherProjectFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-        private string[] _featureTags = ((string[])(null));
+        private string[] _featureTags = new string[] {
+                "db-8"};
         
 #line 1 "UT003-Generate_File_In_Other_Project.feature"
 #line hidden
@@ -36,7 +38,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT003 Generate File in other project", "\tAs a developer\r\n\tI can generate code with t4 in different files and in different" +
-                    " project", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    " project", ProgrammingLanguage.CSharp, new string[] {
+                        "db-8"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -72,13 +75,13 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files in other .NET project", SourceLine=4)]
+        [TechTalk.SpecRun.ScenarioAttribute("Generate files in other .NET project", SourceLine=5)]
         public virtual void GenerateFilesInOther_NETProject()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate files in other .NET project", null, tagsOfScenario, argumentsOfScenario);
-#line 5
+#line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -98,10 +101,10 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 6
+#line 7
  testRunner.Given("the file manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 7
+#line 8
  testRunner.And("the script \"TestInOtherProject.tt\" with following content for automation", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
 <#@ assembly name=""System.Core"" #>
 <#@ import namespace=""System.Linq"" #>
@@ -131,11 +134,11 @@ public class <#= itm #>
 fileManager.Generate();
 #>", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 38
+#line 39
  testRunner.And("for target project \"T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestPro" +
                         "ject\" to generate files", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 39
+#line 40
  testRunner.When("i run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -144,7 +147,7 @@ fileManager.Generate();
                             "PersonDto.g.cs"});
                 table6.AddRow(new string[] {
                             "OrderDto.g.cs"});
-#line 40
+#line 41
  testRunner.Then("following files are generated:", ((string)(null)), table6, "Then ");
 #line hidden
             }

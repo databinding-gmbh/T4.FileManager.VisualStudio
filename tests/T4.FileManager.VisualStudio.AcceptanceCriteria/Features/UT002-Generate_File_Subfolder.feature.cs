@@ -19,13 +19,15 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.5.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("UT002 Generate File in subfolder", Description="\tAs a developer\r\n\tI can generate T4 files in subfolders", SourceFile="Features\\UT002-Generate_File_Subfolder.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("UT002 Generate File in subfolder", new string[] {
+            "db-7"}, Description="\tAs a developer\r\n\tI can generate T4 files in subfolders", SourceFile="Features\\UT002-Generate_File_Subfolder.feature", SourceLine=1)]
     public partial class UT002GenerateFileInSubfolderFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-        private string[] _featureTags = ((string[])(null));
+        private string[] _featureTags = new string[] {
+                "db-7"};
         
 #line 1 "UT002-Generate_File_Subfolder.feature"
 #line hidden
@@ -34,7 +36,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT002 Generate File in subfolder", "\tAs a developer\r\n\tI can generate T4 files in subfolders", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT002 Generate File in subfolder", "\tAs a developer\r\n\tI can generate T4 files in subfolders", ProgrammingLanguage.CSharp, new string[] {
+                        "db-7"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -72,12 +75,12 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         
         public virtual void FeatureBackground()
         {
-#line 5
-#line hidden
 #line 6
- testRunner.Given("the file manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
+ testRunner.Given("the file manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 8
  testRunner.And("the script \"TestSubfolder.tt\" with following content for automation", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
 <#@ assembly name=""System.Core"" #>
 <#@ import namespace=""System.Linq"" #>
@@ -109,13 +112,13 @@ fileManager.Generate();
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate T4 files in existing subfolder", SourceLine=38)]
+        [TechTalk.SpecRun.ScenarioAttribute("Generate T4 files in existing subfolder", SourceLine=39)]
         public virtual void GenerateT4FilesInExistingSubfolder()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate T4 files in existing subfolder", null, tagsOfScenario, argumentsOfScenario);
-#line 39
+#line 40
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -135,10 +138,10 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 5
+#line 6
 this.FeatureBackground();
 #line hidden
-#line 40
+#line 41
  testRunner.When("i run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -150,20 +153,20 @@ this.FeatureBackground();
                 table2.AddRow(new string[] {
                             "OrderDto.g.cs",
                             "TestSubfolder"});
-#line 41
+#line 42
  testRunner.Then("following files are generated:", ((string)(null)), table2, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Change output folder in T4 move generated files to new location", SourceLine=45)]
+        [TechTalk.SpecRun.ScenarioAttribute("Change output folder in T4 move generated files to new location", SourceLine=46)]
         public virtual void ChangeOutputFolderInT4MoveGeneratedFilesToNewLocation()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Change output folder in T4 move generated files to new location", null, tagsOfScenario, argumentsOfScenario);
-#line 46
+#line 47
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -183,10 +186,10 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 5
+#line 6
 this.FeatureBackground();
 #line hidden
-#line 47
+#line 48
  testRunner.And("i run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -195,10 +198,10 @@ this.FeatureBackground();
                 table3.AddRow(new string[] {
                             "fileManager.CreateNewFile(itm + \".g.cs\",\"\",\"TestSubfolder\",null);",
                             "fileManager.CreateNewFile(itm + \".g.cs\",\"\",\"TestSubfolderNew\",null);"});
-#line 48
+#line 49
  testRunner.And("i change the line", ((string)(null)), table3, "And ");
 #line hidden
-#line 51
+#line 52
  testRunner.When("i run the script for automation again", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -210,7 +213,7 @@ this.FeatureBackground();
                 table4.AddRow(new string[] {
                             "OrderDto.g.cs",
                             "TestSubfolderNew"});
-#line 52
+#line 53
  testRunner.Then("following files are generated:", ((string)(null)), table4, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -222,7 +225,7 @@ this.FeatureBackground();
                 table5.AddRow(new string[] {
                             "OrderDto.g.cs",
                             "TestSubfolder"});
-#line 56
+#line 57
  testRunner.And("the following files no longer exist:", ((string)(null)), table5, "And ");
 #line hidden
             }

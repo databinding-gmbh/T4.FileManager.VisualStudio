@@ -1,0 +1,110 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+
+<# 
+// Cleanup via T4 to avoid process locks of Techtalk.Specrun.Executor
+// and make it easier manually clean up testoutput
+var testoutputProjects = new string[] { "T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject", "T4.FileManager.VisualStudio.AcceptanceCriteria" };
+var extensions = new[] { ".tt", ".g.cs", ".g1.cs", ".info.json", ".txt" };
+
+var dte = this.GetHostServiceProvider(this.Host);
+var projects = this.GetSolutionProjects(dte)
+                    .Where(p => testoutputProjects.Contains(p.Name));
+
+var cleanupItems = new List<ProjectItem>();
+
+foreach(var project in projects)
+{
+    var items = this.GetAllProjectItemsRecursive(project.ProjectItems);
+
+    foreach (var extension in extensions)
+    {
+        cleanupItems.AddRange(items.Where(n => n.Name.EndsWith(extension)));
+    }
+
+    // cleanup visual studio projects
+    foreach (var item in cleanupItems)
+    {
+        if (item.Name.Contains("CleanUpTestoutput"))
+        {
+            continue;
+        }
+
+        var fullPath = GetProjectItemFullPath(item);
+
+        item.Remove();
+
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+        }
+    }
+
+    // cleanup directory
+    var projectPath = GetProjectDirectory(project);
+    foreach (var extension in extensions)   
+    {
+        foreach (var file in Directory.EnumerateFiles(projectPath, $"*{extension}", SearchOption.AllDirectories))
+        {
+            if (file.Contains("CleanUpTestoutput"))
+            {
+                continue;
+            }
+
+            File.Delete(file);
+        }
+    }
+}
+#>
+
+<#+ 
+private DTE GetHostServiceProvider(ITextTemplatingEngineHost host)
+{
+    var hostServiceProvider = host as IServiceProvider;
+
+    DTE dteHost = null;
+
+    if (hostServiceProvider != null)
+    {
+        dteHost = hostServiceProvider.GetCOMService(typeof(DTE)) as DTE;
+    }
+
+    return dteHost;
+}
+
+private IEnumerable<Project> GetSolutionProjects(DTE dte)
+{
+    return dte.Solution.Projects.Cast<Project>();
+}
+
+private IEnumerable<ProjectItem> GetAllProjectItemsRecursive(ProjectItems projectItems)
+{
+    foreach (ProjectItem projectItem in projectItems)
+    {
+        foreach (var subItem in GetAllProjectItemsRecursive(projectItem.ProjectItems))
+        {
+            yield return subItem;
+        }
+
+        yield return projectItem;
+    }
+}
+
+private string GetProjectItemFullPath(ProjectItem item)
+{
+    return item.Properties.Item("FullPath").Value.ToString();
+}
+
+private string GetProjectDirectory(Project item)
+{
+    return Path.GetDirectoryName(item.FullName);
+}
+#>

@@ -10,19 +10,7 @@
         [AfterTestRun]
         public static void AfterTestRun()
         {
-            VisualStudioHelper.CleanupFiles(new[]
-                {
-                    "T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject",
-                    "T4.FileManager.VisualStudio.AcceptanceCriteria"
-                },
-                new[]
-                {
-                    ".tt",
-                    ".g.cs",
-                    ".g1.cs",
-                    ".info.json",
-                    ".txt"
-                });
+            VisualStudioHelper.CleanupViaT4();
         }
     }
 }

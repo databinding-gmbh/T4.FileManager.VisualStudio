@@ -19,13 +19,15 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.5.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("UT004 Generate File with custom tool", Description="\tAs a developer\r\n\tI can generate code with t4 with definied custom tool property", SourceFile="Features\\UT004-Generate_File_With_CustomTool.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("UT004 Generate File with custom tool", new string[] {
+            "db-9"}, Description="\tAs a developer\r\n\tI can generate code with t4 with definied custom tool property", SourceFile="Features\\UT004-Generate_File_With_CustomTool.feature", SourceLine=1)]
     public partial class UT004GenerateFileWithCustomToolFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-        private string[] _featureTags = ((string[])(null));
+        private string[] _featureTags = new string[] {
+                "db-9"};
         
 #line 1 "UT004-Generate_File_With_CustomTool.feature"
 #line hidden
@@ -34,7 +36,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT004 Generate File with custom tool", "\tAs a developer\r\n\tI can generate code with t4 with definied custom tool property", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT004 Generate File with custom tool", "\tAs a developer\r\n\tI can generate code with t4 with definied custom tool property", ProgrammingLanguage.CSharp, new string[] {
+                        "db-9"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,13 +73,13 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files with custom tool", SourceLine=4)]
+        [TechTalk.SpecRun.ScenarioAttribute("Generate files with custom tool", SourceLine=5)]
         public virtual void GenerateFilesWithCustomTool()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate files with custom tool", null, tagsOfScenario, argumentsOfScenario);
-#line 5
+#line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -96,10 +99,10 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 6
+#line 7
  testRunner.Given("the file manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 7
+#line 8
  testRunner.And("the script \"TestCustomTool.tt\" with following content for automation", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
 <#@ assembly name=""System.Core"" #>
 <#@ import namespace=""System.Linq"" #>
@@ -132,7 +135,7 @@ public class <#= itm #>WithCustom
 fileManager.Generate();
 #>", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 41
+#line 42
  testRunner.When("i run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
@@ -141,7 +144,7 @@ fileManager.Generate();
                             "PersonDtoWithCustom.g.cs"});
                 table7.AddRow(new string[] {
                             "OrderDtoWithCustom.g.cs"});
-#line 42
+#line 43
  testRunner.Then("following files are generated:", ((string)(null)), table7, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
@@ -150,7 +153,7 @@ fileManager.Generate();
                             "PersonDtoWithCustom.g.cs"});
                 table8.AddRow(new string[] {
                             "OrderDtoWithCustom.g.cs"});
-#line 46
+#line 47
  testRunner.And("custom tool is set to \"TextTemplatingFileGenerator\" for following files:", ((string)(null)), table8, "And ");
 #line hidden
             }

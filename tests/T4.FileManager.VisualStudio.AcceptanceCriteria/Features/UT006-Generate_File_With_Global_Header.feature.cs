@@ -19,13 +19,15 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.5.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("UT006 Generate File with global header", Description="\tAs a developer\r\n\tI can generate code with t4 and a global custom header", SourceFile="Features\\UT006-Generate_File_With_Global_Header.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("UT006 Generate File with global header", new string[] {
+            "db-11"}, Description="\tAs a developer\r\n\tI can generate code with t4 and a global custom header", SourceFile="Features\\UT006-Generate_File_With_Global_Header.feature", SourceLine=1)]
     public partial class UT006GenerateFileWithGlobalHeaderFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-        private string[] _featureTags = ((string[])(null));
+        private string[] _featureTags = new string[] {
+                "db-11"};
         
 #line 1 "UT006-Generate_File_With_Global_Header.feature"
 #line hidden
@@ -34,7 +36,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT006 Generate File with global header", "\tAs a developer\r\n\tI can generate code with t4 and a global custom header", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT006 Generate File with global header", "\tAs a developer\r\n\tI can generate code with t4 and a global custom header", ProgrammingLanguage.CSharp, new string[] {
+                        "db-11"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,13 +73,13 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate multiple files with global header", SourceLine=4)]
+        [TechTalk.SpecRun.ScenarioAttribute("Generate multiple files with global header", SourceLine=5)]
         public virtual void GenerateMultipleFilesWithGlobalHeader()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate multiple files with global header", null, tagsOfScenario, argumentsOfScenario);
-#line 5
+#line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -96,10 +99,10 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 6
+#line 7
  testRunner.Given("the file manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 7
+#line 8
  testRunner.And("the script \"TestGlobalHeader.tt\" with following content for automation", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
 <#@ assembly name=""System.Core"" #>
 <#@ import namespace=""System.Linq"" #>
@@ -139,7 +142,7 @@ public class OrderDtoWithGlobal
 fileManager.Generate();
 #>", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 48
+#line 49
  testRunner.When("i run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
@@ -148,10 +151,10 @@ fileManager.Generate();
                             "PersonDtoWithGlobal.g.cs"});
                 table9.AddRow(new string[] {
                             "OrderDtoWithGlobal.g.cs"});
-#line 49
+#line 50
  testRunner.Then("following files are generated:", ((string)(null)), table9, "Then ");
 #line hidden
-#line 53
+#line 54
  testRunner.And("all files contains following content:", "// -------------------------\r\n// databinding - T4\r\n// -------------------------", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
