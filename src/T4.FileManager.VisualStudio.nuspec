@@ -4,7 +4,7 @@
   <metadata>
     <id>T4.FileManager.VisualStudio</id>
     <description>File Manager for the generation of multiple files with T4 Text Templating.</description>
-    <version>0.0.0-replaceversion</version>
+    <version>$version$</version>
     <icon>logo-t4-file-manager.png</icon>
     <authors>Thierry Iseli, René Leupold</authors>
     <owners>databindinggmbh</owners>
@@ -14,18 +14,10 @@
     <tags>t4 file manager code generation visual studio vs vsstudio metadata programming</tags>
     <license type="file">LICENSE.txt</license>
     <releaseNotes>Initial release</releaseNotes>
-    <contentFiles>
-      <files include="any/netstandard2.0/T4.FileManager.VisualStudio.ttinclude" buildAction="Content" />
-      <files include="any/netstandard2.0/T4.FileManager.VisualStudio.ttinclude" buildAction="ContentFiles" />
-    </contentFiles>
   </metadata>
   <files>
-    <file src="T4.FileManager.VisualStudio.ttinclude" target="" />
-    <file src="T4.FileManager.VisualStudio.targets" target="build/netcore" />
-    <file src="T4.FileManager.VisualStudio.targets" target="build/netstandard" />
-    <file src="T4.FileManager.VisualStudio.targets" target="build/netcoreapp" />
+    <file src="T4.FileManager.VisualStudio.ttinclude" target="contentFiles\any\any" />
     <file src="T4.FileManager.VisualStudio.ttinclude" target="content" />
-    <file src="T4.FileManager.VisualStudio.ttinclude" target="contentFiles" />
     <file src="images\logo-t4-file-manager.png" target="" />
     <file src="LICENSE.txt" target="" />
   </files>
