@@ -142,7 +142,7 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 41
- testRunner.When("i run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                             "File",
@@ -154,7 +154,7 @@ this.FeatureBackground();
                             "OrderDto.g.cs",
                             "TestSubfolder"});
 #line 42
- testRunner.Then("following files are generated:", ((string)(null)), table2, "Then ");
+ testRunner.Then("the following files are generated:", ((string)(null)), table2, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -190,7 +190,7 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 48
- testRunner.And("i run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "From",
@@ -199,10 +199,10 @@ this.FeatureBackground();
                             "fileManager.CreateNewFile(itm + \".g.cs\",\"\",\"TestSubfolder\",null);",
                             "fileManager.CreateNewFile(itm + \".g.cs\",\"\",\"TestSubfolderNew\",null);"});
 #line 49
- testRunner.And("i change the line", ((string)(null)), table3, "And ");
+ testRunner.And("I change the line", ((string)(null)), table3, "And ");
 #line hidden
 #line 52
- testRunner.When("i run the script for automation again", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I run the script for automation again", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "File",
@@ -214,7 +214,7 @@ this.FeatureBackground();
                             "OrderDto.g.cs",
                             "TestSubfolderNew"});
 #line 53
- testRunner.Then("following files are generated:", ((string)(null)), table4, "Then ");
+ testRunner.Then("the following files are generated:", ((string)(null)), table4, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "File",

@@ -140,7 +140,7 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 37
- testRunner.Given("i run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "File",
@@ -149,7 +149,7 @@ this.FeatureBackground();
                             "TestNoDelete.g.cs",
                             "TestOverwrite"});
 #line 38
- testRunner.And("following files are generated:", ((string)(null)), table13, "And ");
+ testRunner.And("the following files are generated:", ((string)(null)), table13, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "From",
@@ -161,10 +161,10 @@ this.FeatureBackground();
                             "public class TestNoDelete",
                             "public class TestNoDelete2"});
 #line 41
- testRunner.And("i change the line", ((string)(null)), table14, "And ");
+ testRunner.And("I change the line", ((string)(null)), table14, "And ");
 #line hidden
 #line 45
- testRunner.When("i run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                             "File",
@@ -176,7 +176,7 @@ this.FeatureBackground();
                             "TestNoDelete2.g.cs",
                             "TestOverwrite"});
 #line 46
- testRunner.Then("following files are generated:", ((string)(null)), table15, "Then ");
+ testRunner.Then("the following files are generated:", ((string)(null)), table15, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -212,7 +212,7 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 52
- testRunner.Given("i run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                             "File",
@@ -221,7 +221,7 @@ this.FeatureBackground();
                             "TestNoDelete.g.cs",
                             "TestOverwrite"});
 #line 53
- testRunner.And("following files are generated:", ((string)(null)), table16, "And ");
+ testRunner.And("the following files are generated:", ((string)(null)), table16, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                             "From",
@@ -230,10 +230,10 @@ this.FeatureBackground();
                             "// first run template",
                             "// second run template"});
 #line 56
- testRunner.And("i change the line", ((string)(null)), table17, "And ");
+ testRunner.And("I change the line", ((string)(null)), table17, "And ");
 #line hidden
 #line 59
- testRunner.When("i run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                             "File",
@@ -244,7 +244,7 @@ this.FeatureBackground();
                             "// first run template",
                             "TestOverwrite"});
 #line 60
- testRunner.Then("following files are generated:", ((string)(null)), table18, "Then ");
+ testRunner.Then("the following files are generated:", ((string)(null)), table18, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

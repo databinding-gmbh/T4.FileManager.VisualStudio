@@ -34,19 +34,19 @@ fileManager.Generate();
 		"""
 
 Scenario: Generate files with CanOverwriteExistingFile is set to true, files deleted
-	Given i run the script for automation
-	And following files are generated:
+	Given I run the script for automation
+	And the following files are generated:
 		| File            | Folder        |
 		| TestDelete.g.cs | TestOverwrite |
-	And i change the line
+	And I change the line
 		| From                                                                  | To                                                                       |
 		| fileManager.CanOverwriteExistingFile = false;                         | fileManager.CanOverwriteExistingFile = true;                             |
 		| fileManager.CreateNewFile("TestDelete.g.cs","","TestOverwrite",null); | fileManager.CreateNewFile("TestNoDelete3.g.cs","","TestOverwrite",null); |
 		| public class TestDelete                                               | public class NewTestDeleteModel                                          |
-	When i run the script for automation
-	Then following files are generated:
+	When I run the script for automation
+	Then the following files are generated:
 		| File               | Folder        |
 		| TestNoDelete3.g.cs | TestOverwrite |
-	And following files are cleaned up:
+	And the following files are cleaned up:
 		| File            | Folder        |
 		| TestDelete.g.cs | TestOverwrite |

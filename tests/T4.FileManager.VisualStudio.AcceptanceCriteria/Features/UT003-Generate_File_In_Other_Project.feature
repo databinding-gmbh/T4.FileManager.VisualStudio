@@ -37,8 +37,8 @@ fileManager.Generate();
 #>
 		"""
 	And for target project "T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject" to generate files
-	When i run the script for automation
-	Then following files are generated:
+	When I run the script for automation
+	Then the following files are generated:
 		| File           |
 		| PersonDto.g.cs |
 		| OrderDto.g.cs  |

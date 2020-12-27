@@ -69,7 +69,7 @@
                 file);
         }
 
-        [Given(@"i change the line")]
+        [Given(@"I change the line")]
         public void GivenIChangeTheLine(IList<TemplateChanges> changes)
         {
             var template = File.ReadAllText(this.currentTesteeFilePath);
@@ -81,17 +81,17 @@
             this.GivenTheScriptModifiedByFollowingContent(this.currentTesteeFilePath, template);
         }
 
-        [Given(@"i run the script for automation")]
-        [When(@"i run the script for automation again")]
-        [When(@"i run the script for automation")]
+        [Given(@"I run the script for automation")]
+        [When(@"I run the script for automation again")]
+        [When(@"I run the script for automation")]
         public void WhenIRunTheScriptForAutomation()
         {
             VisualStudioHelper.SaveFileAutomaticallyRunCustomTool(this.t4Template);
         }
 
-        [Given(@"following files are generated:")]
-        [Then(@"following files are generated:")]
-        [Then(@"following files exists:")]
+        [Given(@"the following files are generated:")]
+        [Then(@"the following files are generated:")]
+        [Then(@"the following files exists:")]
         public void ThenFollowingFilesExists(IList<GeneratedFile> files)
         {
             foreach (var file in files)
@@ -111,7 +111,7 @@
         }
 
         [Then(@"the following files no longer exist:")]
-        [Then(@"following files are cleaned up:")]
+        [Then(@"the following files are cleaned up:")]
         public void ThenFollowingFilesNotExists(IList<GeneratedFile> files)
         {
             foreach (var file in files)

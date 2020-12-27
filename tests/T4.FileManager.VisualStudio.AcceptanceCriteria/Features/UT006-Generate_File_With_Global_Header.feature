@@ -46,8 +46,8 @@ namespace Test
 fileManager.Generate();
 #>
 		"""
-	When i run the script for automation
-	Then following files are generated:
+	When I run the script for automation
+	Then the following files are generated:
 		| File           |
 		| PersonDtoWithGlobal.g.cs |
 		| OrderDtoWithGlobal.g.cs  |

@@ -129,14 +129,14 @@ fileManager.Generate();
 #>", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 33
- testRunner.When("i run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
                 table10.AddRow(new string[] {
                             "TestOldFilesCleanUp.g.cs"});
 #line 34
- testRunner.Then("following files are generated:", ((string)(null)), table10, "Then ");
+ testRunner.Then("the following files are generated:", ((string)(null)), table10, "Then ");
 #line hidden
 #line 37
  testRunner.Given("the script \"TestOldFilesCleanUp.tt\" modified by following content:", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
@@ -163,21 +163,21 @@ fileManager.Generate();
 #>", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 62
- testRunner.When("i run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
                 table11.AddRow(new string[] {
                             "TestOldFilesCleanUp.g.cs"});
 #line 63
- testRunner.Then("following files are cleaned up:", ((string)(null)), table11, "Then ");
+ testRunner.Then("the following files are cleaned up:", ((string)(null)), table11, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
                 table12.AddRow(new string[] {
                             "TestOldFilesCleanUpRenamed.g.cs"});
 #line 66
- testRunner.And("following files are generated:", ((string)(null)), table12, "And ");
+ testRunner.And("the following files are generated:", ((string)(null)), table12, "And ");
 #line hidden
             }
             this.ScenarioCleanup();

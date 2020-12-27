@@ -30,8 +30,8 @@ namespace Test
 fileManager.Generate();
 #>
 		"""
-	When i run the script for automation
-	Then following files are generated:
+	When I run the script for automation
+	Then the following files are generated:
 		| File           |
 		| TestOldFilesCleanUp.g.cs |
 	Given the script "TestOldFilesCleanUp.tt" modified by following content:
@@ -59,10 +59,10 @@ namespace Test
 fileManager.Generate();
 #>
 		"""
-	When i run the script for automation
-	Then following files are cleaned up:
+	When I run the script for automation
+	Then the following files are cleaned up:
 		| File           |
 		| TestOldFilesCleanUp.g.cs |
-	And following files are generated:
+	And the following files are generated:
 		| File           |
 		| TestOldFilesCleanUpRenamed.g.cs |

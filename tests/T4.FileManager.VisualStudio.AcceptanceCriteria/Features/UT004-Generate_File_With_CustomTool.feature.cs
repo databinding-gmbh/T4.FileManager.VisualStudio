@@ -136,7 +136,7 @@ fileManager.Generate();
 #>", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 42
- testRunner.When("i run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I run the script for automation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
@@ -145,7 +145,7 @@ fileManager.Generate();
                 table7.AddRow(new string[] {
                             "OrderDtoWithCustom.g.cs"});
 #line 43
- testRunner.Then("following files are generated:", ((string)(null)), table7, "Then ");
+ testRunner.Then("the following files are generated:", ((string)(null)), table7, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
