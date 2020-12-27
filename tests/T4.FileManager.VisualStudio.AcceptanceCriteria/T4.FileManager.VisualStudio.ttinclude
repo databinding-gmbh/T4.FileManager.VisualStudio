@@ -80,6 +80,9 @@
             this.textTransformation = textTransformation;
             this.host = host;
 
+            // prevent "error generating output" in ide, if output extension not set
+            this.host.SetFileExtension(".txt");
+
             this.filesToGenerate = new List<FileToGenerate>();
             this.generatedInfo = new GeneratedInfo();
             this.dte = GetHostServiceProvider();
@@ -92,6 +95,16 @@
         public static T4FileManager Create(GeneratedTextTransformation textTransformation)
         {
             return new T4FileManager(textTransformation.GenerationEnvironment, textTransformation.Host);
+        }
+
+        /// <Summary>
+        /// Workaround: set invalid file extension to prevent generation of template main output file (Suggessted by Eagle3386)
+        /// Produces the warning A custom tool 'TextTemplatingFileGenerator' is associated with file '*.tt', but the output of the 
+        /// custom tool was not found in the project.
+        /// </Summary>
+        public void DisableTemplateMainOutputFile()
+        {
+            this.host.SetFileExtension("/");
         }
 
         /// <summary>
