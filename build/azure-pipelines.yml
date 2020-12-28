@@ -116,4 +116,4 @@ stages:
         command: push
         nuGetFeedType: external
         packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
-        publishFeedCredentials: '$(NuGetFeed)'
+        publishFeedCredentials: 'NuGetFeed'
