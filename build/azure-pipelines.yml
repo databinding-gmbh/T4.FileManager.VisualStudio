@@ -1,3 +1,9 @@
+parameters:
+- name: canPublish
+  displayName: Deploy to nuget
+  type: boolean
+  default: false
+
 trigger:
     branches:
         include:
@@ -92,28 +98,30 @@ stages:
         publishVstsFeed: '$(NuGetFeed)'
         allowPackageConflicts: true
 
-- stage: DEPLOY_TO_NUGET
-  pool: databinding self hosted interactive
-  variables:
-    - group: Prod
+- ${{ if eq(parameters.canPublish, true) }}: 
+  - stage: DEPLOY_TO_NUGET
+    condition: and(succeeded(), eq(variables['Publish'], 'true')) 
+    pool: databinding self hosted interactive
+    variables:
+      - group: Prod
 
-  jobs:
-  - job:
-    steps:
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        patterns: 'drop/**/*'
-        path: 'drop'
+    jobs:
+    - job:
+      steps:
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          patterns: 'drop/**/*'
+          path: 'drop'
 
-    - task: NuGetToolInstaller@1
-      displayName: 'Use NuGet '
-      inputs:
-        checkLatest: true
+      - task: NuGetToolInstaller@1
+        displayName: 'Use NuGet '
+        inputs:
+          checkLatest: true
 
-    - task: NuGetCommand@2
-      displayName: 'NuGet push'
-      inputs:
-        command: push
-        nuGetFeedType: external
-        packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
-        publishFeedCredentials: 'NuGetFeed'
+      - task: NuGetCommand@2
+        displayName: 'NuGet push'
+        inputs:
+          command: push
+          nuGetFeedType: external
+          packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
+          publishFeedCredentials: 'NuGetFeed'
