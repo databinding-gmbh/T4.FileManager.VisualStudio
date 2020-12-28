@@ -91,3 +91,29 @@ stages:
         packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
         publishVstsFeed: '$(NuGetFeed)'
         allowPackageConflicts: true
+
+- stage: DEPLOY_TO_NUGET
+  pool: databinding self hosted interactive
+  variables:
+    - group: Prod
+
+  jobs:
+  - job:
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        patterns: 'drop/**/*'
+        path: 'drop'
+
+    - task: NuGetToolInstaller@1
+      displayName: 'Use NuGet '
+      inputs:
+        checkLatest: true
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet push'
+      inputs:
+        command: push
+        nuGetFeedType: external
+        packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
+        publishFeedCredentials: '$(NuGetFeed)'
