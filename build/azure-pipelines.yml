@@ -70,11 +70,7 @@ stages:
   pool: databinding self hosted interactive
   variables:
     - group: Test
-    - name: Env
-      value: Test
-    - group: Test
-    - name: NuGetFeed
-      value: $[variables.NuGetFeed]
+
   jobs:
   - job:
     steps:
