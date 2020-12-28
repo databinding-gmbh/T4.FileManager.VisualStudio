@@ -1,101 +1,91 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
     branches:
         include:
-         - '*'
-         
-pool: databinding self hosted interactive
+         - master
 
-steps:
-- task: NuGetToolInstaller@1
-  inputs:
-    versionSpec: 
-    checkLatest: true
-- task: GitVersion@4
-  inputs:
-    updateAssemblyInfo: true
-    preferBundledVersion: false
-  displayName: Run GitVersion task
-- script: echo %Action%%BuildVersion%
-  env:
-    Action: '##vso[build.updatebuildnumber]'
-    BuildVersion: $(GitVersion.SemVer)
-  displayName: Set build version
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      $filePath = '$(Build.Repository.LocalPath)/src/T4.FileManager.VisualStudio.targets'
-      (Get-Content $filePath).Replace('0.0.0-replaceversion','$(GitVersion.NuGetVersionV2)') | Set-Content $filePath
-  displayName: Replace version in T4.FileManager.VisualStudio.targets 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      $filePath = '$(Build.Repository.LocalPath)/src/T4.FileManager.VisualStudio.nuspec'
-      (Get-Content $filePath).Replace('0.0.0-replaceversion','$(GitVersion.NuGetVersionV2)') | Set-Content $filePath
-  displayName: Replace version in T4.FileManager.VisualStudio.nuspec 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: '**/T4.FileManager.VisualStudio.csproj'
-    configuration: 'release'
-  displayName: Build .NET Standard T4.FileManager.VisualStudio - Release
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore'
-    restoreSolution: '**/packages.config'
-    feedsToUse: 'select'
-    restoreDirectory: '$(System.DefaultWorkingDirectory)\packages'
-  displayName: Restore for Full Framework
-- task: VSBuild@1
-  inputs:
-    solution: '**/T4.FileManager.VisualStudio.AcceptanceCriteria.csproj'
-    configuration: 'release'
-  displayName: Build Full Framework AcceptanceCriteria - Release 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'Start-Process -FilePath "$(Build.Repository.LocalPath)/T4.FileManager.VisualStudio.sln"'
-  displayName: Start solution on build agnet in visual studio for AcceptanceCriteria-Tests
-- task: VSTest@2
-  inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*AcceptanceCriteria*.dll
-      !**\*TestAdapter.dll
-      !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)'
-  displayName: Run SpecFlow-Tests (AcceptanceCriteria-Tests)
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(Agent.TempDirectory)/TestResults'
-    Contents: '**'
-    TargetFolder: '$(Build.StagingDirectory)/TestResults'
-  displayName: Copy test results to staging directory    
-- task: NuGetCommand@2
-  inputs:
-    command: 'pack'
-    packagesToPack: '**/*.nuspec'
-    versioningScheme: 'off'
-  condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release'), eq(variables['Build.SourceBranch'], 'refs/heads/develop')))
-  displayName: Pack T4.FileManager.VisualStudio 
-- task: NuGetCommand@2
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg;!$(Build.ArtifactStagingDirectory)/*.symbols.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: '$(InternalNugetFeed)'
-    allowPackageConflicts: true
-  condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release'), eq(variables['Build.SourceBranch'], 'refs/heads/develop')))
-  displayName: Push T4.FileManager.VisualStudio to internal nuget feed
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
-  displayName: Publish staging directory
+stages:
+- stage: BUILD_AND_TEST
+  pool: databinding self hosted interactive
+  jobs:
+  - job:
+    steps:
+    - task: GitVersion@4
+      inputs:
+        updateAssemblyInfo: true
+        preferBundledVersion: false
+      displayName: Run GitVersion task
+
+    - script: echo %Action%%BuildVersion%
+      displayName: Set build version
+      env:
+        Action: '##vso[build.updatebuildnumber]'
+        BuildVersion: $(GitVersion.SemVer)
+
+    - task: NuGetToolInstaller@1
+      displayName: 'Use NuGet '
+      inputs:
+        checkLatest: true
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet restore'
+      inputs:
+        restoreSolution: T4.FileManager.VisualStudio.sln
+
+    - task: VSBuild@1
+      displayName: 'Build solution T4.FileManager.VisualStudio.sln'
+      inputs:
+        solution: T4.FileManager.VisualStudio.sln
+        clean: true
+
+    - powershell: 'Start-Process -FilePath "$(Build.Repository.LocalPath)/T4.FileManager.VisualStudio.sln"'
+      displayName: 'Start Visual Studio for testing acceptance criteria'
+
+    - task: VSTest@2
+      displayName: 'VsTest - Test Szenarios'
+      inputs:
+        testAssemblyVer2: |
+          **\*AcceptanceCriteria*.dll
+          !**\*TestAdapter.dll
+          !**\obj\**
+
+    - task: techtalk.techtalk-specflow-plus.specflow-plus.SpecFlowPlus@0
+      displayName: 'SpecFlow+ Living Doc'
+      inputs:
+        projectFilePath: tests/T4.FileManager.VisualStudio.AcceptanceCriteria/Features
+        projectName: 'T4 Filemanager for Visual Studio'
+        workItemPrefix: 'db-'
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet pack'
+      inputs:
+        command: pack
+        packagesToPack: src/T4.FileManager.VisualStudio.nuspec
+        versioningScheme: byBuildNumber
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+
+- stage: DEPLOY_TEST
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
+  pool: databinding self hosted interactive
+  variables:
+    - group: Test
+    - name: Env
+      value: Test
+    - group: Test
+    - name: NuGetFeed
+      value: $[variables.NuGetFeed]
+  jobs:
+  - job:
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        patterns: 'drop/**/*'
+        path: 'drop'
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet push'
+      inputs:
+        command: push
+        publishVstsFeed: '$(NuGetFeed)'
+        allowPackageConflicts: true
