@@ -83,9 +83,15 @@ stages:
         patterns: 'drop/**/*'
         path: 'drop'
 
+    - task: NuGetToolInstaller@1
+      displayName: 'Use NuGet '
+      inputs:
+        checkLatest: true
+
     - task: NuGetCommand@2
       displayName: 'NuGet push'
       inputs:
         command: push
+        packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
         publishVstsFeed: '$(NuGetFeed)'
         allowPackageConflicts: true
