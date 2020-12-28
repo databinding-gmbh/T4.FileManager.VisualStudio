@@ -111,6 +111,7 @@
             this.files = files;
         }
 
+        [Then(@"the following files are not generated:")]
         [Then(@"the following files no longer exist:")]
         [Then(@"the following files are cleaned up:")]
         public void ThenFollowingFilesNotExists(IList<GeneratedFile> files)

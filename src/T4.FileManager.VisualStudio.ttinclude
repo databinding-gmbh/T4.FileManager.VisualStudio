@@ -15,7 +15,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 
 <#+
-   public class T4FileManager
+   public partial class T4FileManager
     {
         /// <summary>
         /// The interface for the host that transforms text template.
@@ -102,9 +102,10 @@
         /// Produces the warning A custom tool 'TextTemplatingFileGenerator' is associated with file '*.tt', but the output of the 
         /// custom tool was not found in the project.
         /// </Summary>
-        public void DisableTemplateMainOutputFile()
+        public T4FileManager DisableTemplateMainOutputFile()
         {
             this.host.SetFileExtension("/");
+            return this;
         }
 
         /// <summary>

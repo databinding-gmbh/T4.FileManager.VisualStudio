@@ -140,23 +140,23 @@ fileManager.Generate();
 #line 42
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
-                table7.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "PersonDtoWithCustom.g.cs"});
-                table7.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "OrderDtoWithCustom.g.cs"});
 #line 43
- testRunner.Then("the following files are generated:", ((string)(null)), table7, "Then ");
+ testRunner.Then("the following files are generated:", ((string)(null)), table11, "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
-                table8.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "PersonDtoWithCustom.g.cs"});
-                table8.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "OrderDtoWithCustom.g.cs"});
 #line 47
- testRunner.And("the custom tool is set to \"TextTemplatingFileGenerator\" for the following files:", ((string)(null)), table8, "And ");
+ testRunner.And("the custom tool is set to \"TextTemplatingFileGenerator\" for the following files:", ((string)(null)), table12, "And ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -141,14 +141,14 @@ fileManager.Generate();
 #line 40
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
-                table6.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "PersonDto.g.cs"});
-                table6.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "OrderDto.g.cs"});
 #line 41
- testRunner.Then("the following files are generated:", ((string)(null)), table6, "Then ");
+ testRunner.Then("the following files are generated:", ((string)(null)), table10, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

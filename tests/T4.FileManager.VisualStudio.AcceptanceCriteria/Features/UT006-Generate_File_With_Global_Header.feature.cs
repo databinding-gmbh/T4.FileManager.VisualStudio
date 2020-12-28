@@ -147,14 +147,14 @@ fileManager.Generate();
 #line 49
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
-                table9.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "PersonDtoWithGlobal.g.cs"});
-                table9.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "OrderDtoWithGlobal.g.cs"});
 #line 50
- testRunner.Then("the following files are generated:", ((string)(null)), table9, "Then ");
+ testRunner.Then("the following files are generated:", ((string)(null)), table13, "Then ");
 #line hidden
 #line 54
  testRunner.And("all files contains the following content:", "// -------------------------\r\n// databinding - T4\r\n// -------------------------", ((TechTalk.SpecFlow.Table)(null)), "And ");
