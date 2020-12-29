@@ -42,7 +42,8 @@ fileManager.Generate();
 		| PersonDto.g.cs |
 		| OrderDto.g.cs  |
 
-Scenario: Generate files with missing output extension directive set file extension .txt as default
+
+Scenario: Generate files uses .txt as default file extension when no output extension directive is set
 	Given the file manager
 	And the script "TestMissingFileExtension.tt" with the following content
 		"""
@@ -81,7 +82,8 @@ fileManager.Generate();
 		| OrderTxtDto.g.cs             |
 		| TestMissingFileExtension.txt |
 
-Scenario: Generate files with output extension .cs directive set file extension to .txt as default to avoid "error generation output" compile errors
+
+Scenario: Generate files ignores output extension .cs and uses .txt as default to avoid "error generation output" compile errors
 	Given the file manager
 	And the script "TestCsExtension.tt" with the following content
 		"""
@@ -90,7 +92,7 @@ Scenario: Generate files with output extension .cs directive set file extension 
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ output extension=".cs" #>
+<#@ output extension=".cs" #> <# /* **** <====== is ignored **** */ #>
 
 <#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
 
@@ -121,7 +123,8 @@ fileManager.Generate();
 		| OrderCsDto.g.cs     |
 		| TestCsExtension.txt |
 
-Scenario: Generate files with DisableTemplateMainOutputFile enabled disable generation of the t4 main output file (Workaround invalid file extension)
+
+Scenario: Generate files with DisableTemplateMainOutputFile enabled prevents generation of the t4 main output file (Workaround invalid file extension)
 	Given the file manager
 	And the script "TestInvalidFileExtension.tt" with the following content
 		"""
@@ -136,7 +139,7 @@ Scenario: Generate files with DisableTemplateMainOutputFile enabled disable gene
 
 <#
 var files = new string[] { "PersonIvDto", "OrderIvDto" };
-var fileManager = T4FileManager.Create(this).DisableTemplateMainOutputFile();
+var fileManager = T4FileManager.Create(this).DisableTemplateMainOutputFile(); // <=== prevent main output file
 
 foreach(var itm in files)
 {

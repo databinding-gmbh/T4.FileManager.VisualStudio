@@ -150,15 +150,15 @@ fileManager.Generate();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files with missing output extension directive set file extension .txt as" +
-            " default", SourceLine=44)]
-        public virtual void GenerateFilesWithMissingOutputExtensionDirectiveSetFileExtension_TxtAsDefault()
+        [TechTalk.SpecRun.ScenarioAttribute("Generate files uses .txt as default file extension when no output extension direc" +
+            "tive is set", SourceLine=45)]
+        public virtual void GenerateFilesUses_TxtAsDefaultFileExtensionWhenNoOutputExtensionDirectiveIsSet()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate files with missing output extension directive set file extension .txt as" +
-                    " default", null, tagsOfScenario, argumentsOfScenario);
-#line 45
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate files uses .txt as default file extension when no output extension direc" +
+                    "tive is set", null, tagsOfScenario, argumentsOfScenario);
+#line 46
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -178,10 +178,10 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 46
+#line 47
  testRunner.Given("the file manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 47
+#line 48
  testRunner.And("the script \"TestMissingFileExtension.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
 <#@ assembly name=""System.Core"" #>
 <#@ import namespace=""System.Linq"" #>
@@ -210,7 +210,7 @@ public class <#= itm #>
 fileManager.Generate();
 #>", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 77
+#line 78
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -221,22 +221,22 @@ fileManager.Generate();
                             "OrderTxtDto.g.cs"});
                 table2.AddRow(new string[] {
                             "TestMissingFileExtension.txt"});
-#line 78
+#line 79
  testRunner.Then("the following files are generated:", ((string)(null)), table2, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files with output extension .cs directive set file extension to .txt as " +
-            "default to avoid \"error generation output\" compile errors", SourceLine=83)]
-        public virtual void GenerateFilesWithOutputExtension_CsDirectiveSetFileExtensionTo_TxtAsDefaultToAvoidErrorGenerationOutputCompileErrors()
+        [TechTalk.SpecRun.ScenarioAttribute("Generate files ignores output extension .cs and uses .txt as default to avoid \"er" +
+            "ror generation output\" compile errors", SourceLine=85)]
+        public virtual void GenerateFilesIgnoresOutputExtension_CsAndUses_TxtAsDefaultToAvoidErrorGenerationOutputCompileErrors()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate files with output extension .cs directive set file extension to .txt as " +
-                    "default to avoid \"error generation output\" compile errors", null, tagsOfScenario, argumentsOfScenario);
-#line 84
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate files ignores output extension .cs and uses .txt as default to avoid \"er" +
+                    "ror generation output\" compile errors", null, tagsOfScenario, argumentsOfScenario);
+#line 86
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -256,16 +256,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 85
+#line 87
  testRunner.Given("the file manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 86
+#line 88
  testRunner.And("the script \"TestCsExtension.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
 <#@ assembly name=""System.Core"" #>
 <#@ import namespace=""System.Linq"" #>
 <#@ import namespace=""System.Text"" #>
 <#@ import namespace=""System.Collections.Generic"" #>
-<#@ output extension="".cs"" #>
+<#@ output extension="".cs"" #> <# /* **** <====== is ignored **** */ #>
 
 <#@ include file=""$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude"" #>
 
@@ -289,7 +289,7 @@ public class <#= itm #>
 fileManager.Generate();
 #>", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 117
+#line 119
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -300,22 +300,22 @@ fileManager.Generate();
                             "OrderCsDto.g.cs"});
                 table3.AddRow(new string[] {
                             "TestCsExtension.txt"});
-#line 118
+#line 120
  testRunner.Then("the following files are generated:", ((string)(null)), table3, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files with DisableTemplateMainOutputFile enabled disable generation of t" +
-            "he t4 main output file (Workaround invalid file extension)", SourceLine=123)]
-        public virtual void GenerateFilesWithDisableTemplateMainOutputFileEnabledDisableGenerationOfTheT4MainOutputFileWorkaroundInvalidFileExtension()
+        [TechTalk.SpecRun.ScenarioAttribute("Generate files with DisableTemplateMainOutputFile enabled prevents generation of " +
+            "the t4 main output file (Workaround invalid file extension)", SourceLine=126)]
+        public virtual void GenerateFilesWithDisableTemplateMainOutputFileEnabledPreventsGenerationOfTheT4MainOutputFileWorkaroundInvalidFileExtension()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate files with DisableTemplateMainOutputFile enabled disable generation of t" +
-                    "he t4 main output file (Workaround invalid file extension)", null, tagsOfScenario, argumentsOfScenario);
-#line 124
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate files with DisableTemplateMainOutputFile enabled prevents generation of " +
+                    "the t4 main output file (Workaround invalid file extension)", null, tagsOfScenario, argumentsOfScenario);
+#line 127
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -335,10 +335,10 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 125
+#line 128
  testRunner.Given("the file manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 126
+#line 129
  testRunner.And("the script \"TestInvalidFileExtension.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
 <#@ assembly name=""System.Core"" #>
 <#@ import namespace=""System.Linq"" #>
@@ -350,7 +350,7 @@ this.ScenarioInitialize(scenarioInfo);
 
 <#
 var files = new string[] { ""PersonIvDto"", ""OrderIvDto"" };
-var fileManager = T4FileManager.Create(this).DisableTemplateMainOutputFile();
+var fileManager = T4FileManager.Create(this).DisableTemplateMainOutputFile(); // <=== prevent main output file
 
 foreach(var itm in files)
 {
@@ -368,7 +368,7 @@ public partial class <#= itm #>
 fileManager.Generate();
 #>", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 157
+#line 160
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -377,14 +377,14 @@ fileManager.Generate();
                             "PersonIvDto.g.cs"});
                 table4.AddRow(new string[] {
                             "OrderIvDto.g.cs"});
-#line 158
+#line 161
  testRunner.Then("the following files are generated:", ((string)(null)), table4, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
                 table5.AddRow(new string[] {
                             "TestInvalidFileExtension.txt"});
-#line 162
+#line 165
  testRunner.And("the following files are not generated:", ((string)(null)), table5, "And ");
 #line hidden
             }
