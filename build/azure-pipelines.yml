@@ -86,7 +86,7 @@ stages:
         path: 'drop'
 
     - task: NuGetToolInstaller@1
-      displayName: 'Use NuGet '
+      displayName: 'Use NuGet'
       inputs:
         checkLatest: true
 
@@ -100,7 +100,6 @@ stages:
 
 - ${{ if eq(parameters.canPublish, true) }}: 
   - stage: DEPLOY_TO_NUGET
-    condition: and(succeeded(), eq(variables['Publish'], 'true')) 
     pool: databinding self hosted interactive
     variables:
       - group: Prod
@@ -114,7 +113,7 @@ stages:
           path: 'drop'
 
       - task: NuGetToolInstaller@1
-        displayName: 'Use NuGet '
+        displayName: 'Use NuGet'
         inputs:
           checkLatest: true
 
