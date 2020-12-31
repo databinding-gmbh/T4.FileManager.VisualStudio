@@ -166,6 +166,9 @@
     <None Include="Features\UT001-Generate_Code.feature">
       <LastGenOutput>Generate_Files_FileManager.feature.cs</LastGenOutput>
     </None>
+    <None Include="ReportTemplate.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="runtests.cmd" />
     <None Include="specflow.json" />
     <None Include="TestOverwrite\ReadMe.md" />
