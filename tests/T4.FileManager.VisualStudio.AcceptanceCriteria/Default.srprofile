@@ -6,7 +6,7 @@
     <TestAssemblyPath>T4.FileManager.VisualStudio.AcceptanceCriteria.dll</TestAssemblyPath>
   </TestAssemblyPaths>
   <Report>
-    <Template name="..\..\ReportTemplate.cshtml" outputCulture="de-ch" outputName="T4FileManagerVisualStudio.html" />
+    <Template name="ReportTemplate.cshtml" outputCulture="de-ch" outputName="T4FileManagerVisualStudio.html" />
   </Report>
   <Environment platform="x64" />
   <DeploymentTransformation>

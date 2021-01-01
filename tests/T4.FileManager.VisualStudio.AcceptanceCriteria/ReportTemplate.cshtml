@@ -290,10 +290,9 @@
     <ul>
         <li>Project: @Model.Configuration.ProjectName</li>
         <li>Configuration: @Model.Configuration.Name</li>
-        <li>Test Assemblies: @string.Join(", ", Model.Configuration.TestAssemblyPaths)</li>
         <li>Start Time: @Model.ExecutionTime.StartTime</li>
         <li>Duration: @Model.ExecutionTime.Duration</li>
-        <li>Test Threads: @Model.TestThreads.Count</li>
+
         @if (Model.FrameworkError != null)
         {
             <li><div class="errorMessage">Execution framework error: @(Model.FrameworkError.ToString())</div></li>

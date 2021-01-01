@@ -12,6 +12,7 @@ trigger:
 stages:
 - stage: BUILD_AND_TEST
   pool: databinding self hosted interactive
+
   jobs:
   - job:
     steps:
@@ -53,6 +54,7 @@ stages:
           **\*AcceptanceCriteria*.dll
           !**\*TestAdapter.dll
           !**\obj\**
+        resultsFolder: '$(Common.TestResultsDirectory)'
 
     - task: techtalk.techtalk-specflow-plus.specflow-plus.SpecFlowPlus@0
       displayName: 'SpecFlow+ Living Doc'
@@ -60,6 +62,37 @@ stages:
         projectFilePath: tests/T4.FileManager.VisualStudio.AcceptanceCriteria/Features
         projectName: 'T4 Filemanager for Visual Studio'
         workItemPrefix: 'db-'
+
+    - powershell: |
+       New-Item mkdocs.yml -Force
+             Add-Content -path mkdocs.yml "
+             site_name: T4.FileManager.VisualStudio Documentation $(GitVersion.SemVer)
+             site_description: 'Manager for generating multiple files with T4 text templates.'
+             site_author: 'databinding gmbh'
+             docs_dir: docs/
+             repo_name: ' $(Build.Repository.Name)'
+             repo_url: '$(Build.Repository.Uri)'
+             theme:
+               name: 'material'"
+      displayName: 'Create mkdocs.yml'
+
+    - script: |
+         pip install mkdocs
+         mkdocs build 
+      displayName: 'Build Documentation'
+
+    - task: CopyFiles@2
+      displayName: 'Copy documentation'
+      inputs:
+        SourceFolder: site
+        TargetFolder: '$(Build.ArtifactStagingDirectory)\documentation'
+
+    - task: CopyFiles@2
+      displayName: 'Copy test report'
+      inputs:
+        SourceFolder: '$(Common.TestResultsDirectory)'
+        Contents: '*.html'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)\documentation'
 
     - task: NuGetCommand@2
       displayName: 'NuGet pack'
@@ -70,6 +103,12 @@ stages:
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: documentation'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)\documentation'
+        ArtifactName: documentation
 
 - stage: DEPLOY_TEST
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
