@@ -2,7 +2,13 @@
 
 [![Build Status](https://dev.azure.com/databinding/Building%20Blocks/_apis/build/status/databinding-gmbh.T4.FileManager.VisualStudio?branchName=master)](https://dev.azure.com/databinding/Building%20Blocks/_build/latest?definitionId=39&branchName=master) [![Nuget](https://img.shields.io/nuget/v/T4.FileManager.VisualStudio)](https://www.nuget.org/packages/T4.FileManager.VisualStudio/)
 
-Go to the [documentation](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/) for detailed usage.
+ 
+
+## Documentation
+
+Our [documentation](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/) offers all the details you need to know to work with T4.FileManager.
+
+
 
 ## Getting Started
 
@@ -33,7 +39,7 @@ These tests are located in the project  `T4.FileManager.VisualStudio.AcceptanceC
 
 ## Authors
 
-- René Leupold - *initial work*
+- RenÃ© Leupold - *initial work*
 - Thierry Iseli - *Consolidation of [T4.FileManager](https://github.com/renegadexx/T4.FileManager)*
 
 ## Contributors
