@@ -130,7 +130,7 @@ stages:
     - task: AccidentalFish.githubpages-publish.AccidentalFish.GitHubPages-Publish.GitHubPagesPublish@1
       displayName: 'Publishes to GitHub Pages'
       inputs:
-        docPath: '\documentation\*'
+        docPath: 'documentation\documentation\*'
         githubusername: '$(username)'
         githubemail: '$(email)'
         githubaccesstoken: '$(pat)'
