@@ -1,0 +1,2983 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>T4 FileManager VisualStudio Test Execution Report</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript">
+        /**
+        * jQuery.fn.sortElements
+        * --------------
+        * #author James Padolsey (http://james.padolsey.com)
+        * #version 0.11
+        * #updated 18-MAR-2010
+        * #url https://raw.github.com/jamespadolsey/jQuery-Plugins/master/sortElements/jquery.sortElements.js
+        * --------------
+        * #param Function comparator:
+        *   Exactly the same behaviour as [1,2,3].sort(comparator)
+        *
+        * #param Function getSortable
+        *   A function that should return the element that is
+        *   to be sorted. The comparator will run on the
+        *   current collection, but you may want the actual
+        *   resulting sort to occur on a parent or another
+        *   associated element.
+        *
+        *   E.g. $('td').sortElements(comparator, function(){
+        *      return this.parentNode;
+        *   })
+        *
+        *   The <td>'s parent (<tr>) will be sorted instead
+        *   of the <td> itself.
+        */
+        jQuery.fn.sortElements = (function () {
+
+            var sort = [].sort;
+
+            return function (comparator, getSortable) {
+
+                getSortable = getSortable || function () { return this; };
+
+                var placements = this.map(function () {
+
+                    var sortElement = getSortable.call(this),
+                        parentNode = sortElement.parentNode,
+
+                        // Since the element itself will change position, we have
+                        // to have some way of storing it's original position in
+                        // the DOM. The easiest way is to have a 'flag' node:
+                        nextSibling = parentNode.insertBefore(
+                            document.createTextNode(''),
+                            sortElement.nextSibling
+                        );
+
+                    return function () {
+
+                        if (parentNode === this) {
+                            throw new Error(
+                                "You can't sort elements if any one is a descendant of another."
+                            );
+                        }
+
+                        // Insert before flag:
+                        parentNode.insertBefore(this, nextSibling);
+                        // Remove flag:
+                        parentNode.removeChild(nextSibling);
+
+                    };
+
+                });
+
+                return sort.call(this, comparator).each(function (i) {
+                    placements[i].call(getSortable.call(this));
+                });
+
+            };
+
+        })();
+    </script>
+    <script type="text/javascript">
+        jQuery.fn.setBarSizes = (function () {
+            return function (metricName, maxBarSize, min) {
+                var max = Math.max.apply(Math, $.makeArray($(this).map(function () { return Number($(this).attr('data-sr-' + metricName)); })));
+                var scale = 1.0;
+                while (max > 0.0 && max <= 10.0) {
+                    scale = scale * 10.0;
+                    max = max * 10.0;
+                }
+                max = (Math.ceil(max / 2) * 2) / scale;
+
+                this.each(function () {
+                    var barAnchor = $(this).find('a');
+                    var actual = $(this).attr('data-sr-' + metricName);
+                    var newHeight = Math.max(Math.round(maxBarSize * (actual - min) / (max - min)), 2);
+                    barAnchor.css({ height: newHeight });
+                });
+
+                var unit = "";
+                if (metricName.substr(metricName.length - 4, 4) === "time")
+                    unit = "s";
+
+                $('#testview .scale-min-label').each(function () {
+                    $(this).text(min.toString() + unit);
+                });
+                $('#testview .scale-max-label').each(function () {
+                    $(this).text(max.toString() + unit);
+                });
+                var mid = max / 2;
+                $('#testview .scale-mid-label').each(function () {
+                    $(this).text(mid.toString() + unit);
+                });
+            };
+        })();
+
+        function getComparer(metricName, isDesc) {
+            return function (a, b) {
+                var aNumber = Number($(a).attr('data-sr-' + metricName));
+                var bNumber = Number($(b).attr('data-sr-' + metricName));
+                var result = aNumber > bNumber ? 1 : (aNumber < bNumber ? -1 : 0);
+                if (isDesc)
+                    result = -1 * result;
+
+                if (result == 0 && metricName != "order")
+                    result = getComparer("order", false)(a, b);
+
+                return result;
+            };
+        }
+
+        var currentSort = "";
+        function doSort(allowToggleDesc) {
+            var newSort = $("input[name='barSortOrder']:checked").val();
+            if (allowToggleDesc && currentSort == newSort) {
+                $('#barSortDesc').click();
+                doSort(false);
+                return;
+            }
+            currentSort = newSort;
+            $('#testview td.testview-item').sortElements(getComparer(newSort, $('#barSortDesc').is(':checked')));
+        }
+
+
+        function doSetHeights(allowSort) {
+            var selectedMetric = $("input[name='barHeight']:checked").val();
+            $('#testview td.testview-item').setBarSizes(selectedMetric, 60, 0.0);
+
+            if (allowSort && currentSort != selectedMetric) {
+                var $radios = $("input[name='barSortOrder']");
+                $radios.filter('[value=' + selectedMetric + ']').attr('checked', true);
+                $("#barSortDesc").attr("checked", [true]);
+                doSort(false);
+            }
+        }
+
+        $(document).ready(function () {
+            $("input[name='barSortOrder']").click(function () { doSort(true); return true; });
+            $("input[name='barSortDesc']").change(function () { doSort(false); });
+            $("input[name='barHeight']").change(function () { doSetHeights(true); });
+
+            doSort(false);
+            doSetHeights(false);
+
+            $("div.scrollable").css({ 'overflow': 'auto' });
+        });
+    </script>
+    <link href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            color: #000000;
+            font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif;
+            line-height: 130%;
+        }
+
+        h1 {
+            font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;
+            font-size: 170%;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;
+            font-size: 130%;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;
+            font-size: 120%;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        a.bar {
+            text-decoration: none;
+            display: block;
+            line-height: 1px;
+        }
+
+        .description {
+            font-style: italic;
+        }
+
+        .log {
+            width: 600px;
+            white-space: pre-wrap;
+            display: block;
+            margin: 0px;
+        }
+
+        .errorMessage {
+            width: 600px;
+            color: Red;
+            font-weight: bold;
+        }
+
+        .stackTrace {
+            width: 600px;
+            white-space: pre-wrap;
+            font-style: italic;
+            color: Red;
+            display: block;
+        }
+
+        table.testEvents {
+            border: solid 1px #e8eef4;
+            border-collapse: collapse;
+        }
+
+            table.testEvents td {
+                vertical-align: top;
+                padding: 5px;
+                border: solid 1px #e8eef4;
+            }
+
+            table.testEvents th {
+                padding: 6px 5px;
+                text-align: left;
+                background-color: #e8eef4;
+                border: solid 1px #e8eef4;
+            }
+
+        .comment {
+            font-style: italic;
+            font-size: smaller;
+        }
+
+        .startupBar {
+            background-color: #EEEEEE;
+            cursor: default;
+        }
+
+        .colorSucceeded {
+            background-color: #90ED7B;
+        }
+
+        .colorIgnored {
+            background-color: #FFFF85;
+        }
+
+        .colorPending {
+            background-color: #D47BED;
+        }
+
+        .colorNothingToRun {
+            background-color: #CCCCFF;
+        }
+
+        .colorSkipped {
+            background-color: #CCCCFF;
+        }
+
+        .colorInconclusive {
+            background-color: #7BEDED;
+        }
+
+        .colorCleanupFailed {
+            background-color: #FFCCCC;
+        }
+
+        .colorRandomlyFailed {
+            background-color: #EDB07B;
+        }
+
+        .colorFailed {
+            background-color: #ED5F5F;
+        }
+
+        .colorInitializationFailed {
+            background-color: #FF0000;
+        }
+
+        .colorFrameworkError {
+            background-color: #FF0000;
+        }
+
+        ul.subNodeLinks {
+            padding-left: 20px;
+            margin: 0px;
+        }
+
+            ul.subNodeLinks li {
+                list-style: none;
+            }
+
+        /* views general */
+        div.scrollable {
+            /*overflow: auto; - thsi has to be set from js, because of an IE9 bug */
+        }
+
+        div.viewbox {
+            position: relative;
+            border: 3px solid #e8eef4;
+        }
+
+            div.viewbox table {
+                border: 0px;
+            }
+
+        /* testview */
+        #testview {
+            padding-top: 23px;
+        }
+
+        table.testview-items td {
+            vertical-align: bottom;
+            padding: 0px 1px 0px 1px;
+        }
+
+        td.right-padding, td.left-padding {
+            width: 25px;
+            min-width: 25px;
+        }
+
+        table.testview-items a.bar {
+            width: 5px;
+        }
+
+        table.testview-items tr.testview-items-row {
+            height: 60px;
+        }
+
+        /* scale */
+        table.vertical-scale {
+            position: absolute;
+            top: 23px;
+            left: 0px;
+            width: 100%;
+            z-index: -100;
+        }
+
+            table.vertical-scale td, tr.horizontal-scale td {
+                font-size: 60%;
+                line-height: normal;
+            }
+
+            table.vertical-scale tr.scale-max, table.vertical-scale tr.scale-mid {
+                height: 30px;
+            }
+
+            tr.horizontal-scale, table.vertical-scale tr.scale-min {
+                height: 12px;
+            }
+
+        td.scale-max-label, td.scale-mid-label, td.scale-min-label {
+            border-top: solid 1px #E6E6E6;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        td.scale-10-label {
+            border-left: solid 1px #E6E6E6;
+            text-align: left;
+            vertical-align: bottom;
+            padding-left: 1px;
+        }
+
+        tr.scale-mid td, tr.scale-min td, tr.scale-max td {
+            border-top: solid 1px #E6E6E6;
+        }
+
+
+        /* bar-control */
+        #bar-control {
+            font-size: 60%;
+            line-height: normal;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+        }
+
+            #bar-control label {
+                font-weight: bold;
+                vertical-align: middle;
+            }
+
+            #bar-control .option {
+                vertical-align: middle;
+                text-transform: lowercase;
+            }
+
+            #bar-control input[type="checkbox"] {
+                padding: 0 2px 0 3px;
+            }
+
+            #bar-control input {
+                vertical-align: top;
+                height: 12px;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            #bar-control div {
+                float: right;
+                margin: 3px 5px 3px 5px;
+            }
+
+        /* timeline view */
+        #timelineview {
+            padding-top: 5px;
+        }
+
+        table.timelineview a {
+            height: 20px;
+        }
+
+        table.timelineview td {
+            vertical-align: bottom;
+            padding: 0px 1px 0px 0px;
+            border: 0px;
+        }
+
+        tr.thread-items-row {
+            height: 25px;
+        }
+
+            tr.thread-items-row td {
+                vertical-align: bottom;
+            }
+
+        td.thread-label {
+            padding: 0px 6px 0px 6px;
+            text-align: right;
+            line-height: 18px;
+            vertical-align: bottom;
+        }
+
+        th.thread-label {
+            padding: 3px 6px 0px 6px;
+            line-height: 18px;
+            text-align: left;
+            vertical-align: bottom;
+        }
+
+        /* custom styles */
+        body {
+            margin-left: 3rem;
+            margin-right: 3rem;
+        }
+
+        .dbContainer {
+            background: #f2f2f2;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+            .dbContainer h2 {
+                margin-top: 0;
+                margin-bottom: 1rem;
+            }
+
+        .dbResult2,
+        .dbResult {
+            /*width: 100%;*/
+            margin-bottom: 1.5rem;
+        }
+
+            .dbResult2 th,
+            .dbResult th {
+                background-color: transparent !important;
+                border: none;
+                border-bottom: 2px double #000 !important;
+            }
+
+                .dbResult2 td:not(:last-child),
+                .dbResult2 th:not(:last-child),
+                .dbResult td:not(:last-child),
+                .dbResult th:not(:last-child) {
+                    border-right: 2px solid #fff !important;
+                }
+
+            .dbResult2 tr:nth-child(even),
+            .dbResult tr:nth-child(even) {
+                background: #fff;
+            }
+
+            .dbResult2 th:nth-child(n+3),
+            .dbResult th:nth-child(n+2) {
+                width: 110px;
+                text-align: center;
+            }
+
+            .dbResult2 td:nth-child(n+4),
+            .dbResult td:nth-child(n+3) {
+                width: 110px;
+                text-align: right;
+                padding-right: 10px;
+            }
+
+            .dbResult2 th:nth-child(n+3),
+            .dbResult2 td:nth-child(n+4) {
+                width: 90px;
+            }
+
+        #testview,
+        #timelineview {
+            background-color: #fff;
+        }
+
+        .dbUserStory {
+            margin-top: 2.75em;
+            margin-bottom: 1em;
+            box-shadow: 10px 10px 8px #888888;
+            background-color: #fff;
+            padding-left: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .dbUserStory-icon {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .dbUserStory h3 {
+            margin-top: -0.35em;
+            margin-bottom: 15px;
+        }
+
+        .dbUserStory-icon i {
+            font-size: 4em;
+            border-radius: 50%;
+            padding: 1rem;
+            background-color: #fff;
+            margin-top: -0.6em;
+        }
+
+        .dbTraceEvent th {
+            background-color: transparent !important;
+            border: none;
+            border-bottom: 2px double #000 !important;
+        }
+
+            .dbTraceEvent td:not(:last-child),
+            .dbTraceEvent th:not(:last-child) {
+                border-right: 2px solid #fff !important;
+            }
+
+        .dbTraceEvent tr:nth-child(even) {
+            background: #fff;
+        }
+
+        .dbTraceEvent video {
+            height: 300px;
+        }
+        /* end custom styles */
+    </style>
+</head>
+<body>
+    <div class="report_header" style="width: 100%; text-align: center;">
+        <img alt="databinding" style="height: 150px;" src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+0AAAKKCAYAAABIwbpFAAAACXBIWXMAAC4jAAAuIwF4pT92AAAgAElEQVR4nO3d33HbZroHYGRn7+294wwv7K3A2gqsrSBKA4pcQZQKrFQQpQJLbGDlCiJVEKmCSBea0d2JKvCZz/syy4gkSEoE8AJ8nhlOziG1JgmAAH7fn/f75suXLxUAAACQz9/sEwAAAMhJaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSE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DbTflmXTsve6rxnYPwvszBLaAQCAPilzvd8s+LyloNvPk/HoMuaLpxKjA1YF9scyYmDuWXaa4fEAAEAvTMajEmg/rflZr0p19sP7h8u5V1oWIwDqKsVXEdj3D+8frudeYaf9fdc3AAAA0Bu3pUjbkp72p95XVfXrZDwq4f20iyHn0bt+Gp9llWOBnUX0tAMAAL0R88LPYh77Ju5iLvxZ0+E4hueXUQHfz7242AdrsrOM0A4AAPROBONl89tXmQb4MnT+chtV56NXvXym4w0+02P0sAvsLCW0AwAAvRS97sfxqJsvvspNDL2/jkcJ8X8s6pGPcP46HtOgvveM9y8NBweL3gNmCe0AAECvTcajt1Hobd3h6F3rzbrydE9oBwAABmEmvB+8sOe9KXcR1juvaE9/CO0AAMCgxLD5ow3nlzfpLpafM3edjQntAADAYMUc9KPofW87wJdh8BfCOi8htAMAADshAvxBFI9bZ+305/gcVelLWL91ZPFSQjsAALCTIsSXx9v47+sNKsHfzVSc//pfc9VpgtAOAACwxMwSbwuXgIOmCe0AAACQ1N/sGAAAAMhJaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAASEpoBwAAgKSEdgAAAEhKaAcAAICkhHYAAABISmgHAACApIR2AAAAyKiqqv8H2W/u2DzJWboAAAAASUVORK5CYII=' />
+    </div>
+    <h1>T4 FileManager VisualStudio Test Execution Report</h1>
+    
+    <ul>
+        <li>Project: T4 FileManager VisualStudio</li>
+        <li>Configuration: T4 FileManager VisualStudio</li>
+        <li>Start Time: 02.01.2021 16:39:38</li>
+        <li>Duration: 00:00:24.4375992</li>
+
+    </ul>
+
+
+    <div class="dbContainer dbResult">
+        <h2>Result: all tests passed</h2>
+        <table class="testEvents">
+                <tr>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+    </tr>
+
+                <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 199px;"
+           title="13 succeeded"
+           ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>13</td>
+    <td>13</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+        </table>
+    </div>
+    <div class="dbContainer">
+        <h2>Test Timeline Summary</h2>
+
+        <div id="timelineview" class="viewbox">
+            <div class="scrollable">
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th class="thread-label" colspan="2">thread</th>
+                    </tr>
+                        <tr class="thread-items-row">
+                            <td class="thread-label" title="Machine: CHBRNDB010">#0</td>
+                            <td colspan="2">
+                                <table class="timelineview" cellpadding="0" cellspacing="0">
+                                    <tr>
+
+                                            <td>
+        <a class="bar startupBar"
+           style="width: 6px;"
+             title="test thread startup"
+>&nbsp;</a>
+    </td>
+
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 39px;"
+             title="Generate two files (in UT001 Generate Code)"
+             href="#t-2094596363.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 3px;"
+             title="Generate files uses .txt as default file extension when no output extension directive is set (in UT001 Generate Code)"
+             href="#t1178789637.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 3px;"
+             title="Generate files ignores output extension .cs and uses .txt as default to avoid &quot;error generation output&quot; compile errors (in UT001 Generate Code)"
+             href="#t1273030201.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 3px;"
+             title="Generate files with DisableTemplateMainOutputFile enabled prevents generation of the t4 main output file (Workaround invalid file extension) (in UT001 Generate Code)"
+             href="#t-1977239690.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 3px;"
+             title="Generate T4 files in existing subfolder (in UT002 Generate File in subfolder)"
+             href="#t2058156846.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 3px;"
+             title="Change output folder in T4 move generated files to new location (in UT002 Generate File in subfolder)"
+             href="#t1704376177.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 3px;"
+             title="Generate files in other .NET project (in UT003 Generate File in other project)"
+             href="#t1371724111.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 3px;"
+             title="Generate files with custom tool (in UT004 Generate File with custom tool)"
+             href="#t1535095873.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 3px;"
+             title="Generate multiple files with global header (in UT006 Generate File with global header)"
+             href="#t1798309043.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 3px;"
+             title="Generate files with clean up of old files (based on *.info.json) (in UT009 Generate File with cleanup old File)"
+             href="#t527981845.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 3px;"
+             title="Generate files with CanOverwriteExistingFile is set to false, no files deleted (in UT013 Generate files without modifications)"
+             href="#t1493338900.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 3px;"
+             title="No content changes if CanOverwriteExistingFile is set to false (in UT013 Generate files without modifications)"
+             href="#t-1814841281.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 3px;"
+             title="Generate files with CanOverwriteExistingFile is set to true, files deleted (in UT013 Generate File change behaviour)"
+             href="#t-1932679639.0"
+>&nbsp;</a>
+    </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    <tr class="horizontal-scale">
+                        <td>&nbsp;</td>
+                            <td class="scale-10-label" style="width: 67px; min-width: 67px;">0s</td>
+                        <td class="scale-10-label">18s</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="dbContainer">
+        
+    <h2>Test Result View</h2>
+    <div id="testview" class="viewbox">
+        <div id="bar-control">
+            <div id="bar-control-sort">
+                <label>sort by:</label>
+                <span class="option"><input type="radio" name="barSortOrder" value="exectime" />Time</span>
+                <span class="option"><input type="radio" name="barSortOrder" value="acttime" />Act Time</span>
+                <span class="option"><input type="radio" name="barSortOrder" value="order" />Execution</span>
+                <span class="option"><input type="radio" name="barSortOrder" value="rescode" checked="checked" />Result</span>
+                <span class="option"><input type="checkbox" name="barSortDesc" id="barSortDesc" checked="checked" />desc</span>
+            </div>
+            <div id="bar-control-heights">
+                <label>heights:</label>
+                <span class="option"><input type="radio" checked="checked" name="barHeight" value="exectime" />Time</span>
+                <span class="option"><input type="radio" name="barHeight" value="acttime" />Act Time</span>
+            </div>
+        </div>
+        <table class="vertical-scale" cellpadding="0" cellspacing="0">
+            <tr class="scale-max">
+                <td class="left-padding scale-max-label">&nbsp;</td>
+                <td colspan="13">&nbsp;</td>
+                <td class="right-padding">&nbsp;</td>
+            </tr>
+            <tr class="scale-mid">
+                <td class="left-padding scale-mid-label">&nbsp;</td>
+                <td colspan="13">&nbsp;</td>
+                <td class="right-padding">&nbsp;</td>
+            </tr>
+            <tr class="scale-min">
+                <td class="left-padding scale-min-label">&nbsp;</td>
+                <td colspan="13">&nbsp;</td>
+                <td class="right-padding">&nbsp;</td>
+            </tr>
+        </table>
+        <div class="scrollable">
+            <table class="testview-items" cellpadding="0" cellspacing="0">
+                <tr class="testview-items-row">
+                    <td class="left-padding">&nbsp;</td>
+    <td class="testview-item"
+        data-sr-exectime="7.0624653" data-sr-rescode="110" data-sr-order="0" data-sr-acttime="0.498">
+        <a class="bar colorSucceeded"
+           style="height: 60px;"
+           title="Generate two files (in UT001 Generate Code)"
+           href="#t-2094596363.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="0.6094502" data-sr-rescode="110" data-sr-order="1" data-sr-acttime="0.094">
+        <a class="bar colorSucceeded"
+           style="height: 5px;"
+           title="Generate files uses .txt as default file extension when no output extension directive is set (in UT001 Generate Code)"
+           href="#t1178789637.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="0.6250059" data-sr-rescode="110" data-sr-order="2" data-sr-acttime="0.078">
+        <a class="bar colorSucceeded"
+           style="height: 5px;"
+           title="Generate files ignores output extension .cs and uses .txt as default to avoid &quot;error generation output&quot; compile errors (in UT001 Generate Code)"
+           href="#t1273030201.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="0.5468119" data-sr-rescode="110" data-sr-order="3" data-sr-acttime="0.078">
+        <a class="bar colorSucceeded"
+           style="height: 5px;"
+           title="Generate files with DisableTemplateMainOutputFile enabled prevents generation of the t4 main output file (Workaround invalid file extension) (in UT001 Generate Code)"
+           href="#t-1977239690.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="0.6406075" data-sr-rescode="110" data-sr-order="4" data-sr-acttime="0.125">
+        <a class="bar colorSucceeded"
+           style="height: 5px;"
+           title="Generate T4 files in existing subfolder (in UT002 Generate File in subfolder)"
+           href="#t2058156846.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="1.2187867" data-sr-rescode="110" data-sr-order="5" data-sr-acttime="1.125">
+        <a class="bar colorSucceeded"
+           style="height: 10px;"
+           title="Change output folder in T4 move generated files to new location (in UT002 Generate File in subfolder)"
+           href="#t1704376177.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="0.6874833" data-sr-rescode="110" data-sr-order="6" data-sr-acttime="0.078">
+        <a class="bar colorSucceeded"
+           style="height: 6px;"
+           title="Generate files in other .NET project (in UT003 Generate File in other project)"
+           href="#t1371724111.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="1.406337" data-sr-rescode="110" data-sr-order="7" data-sr-acttime="0.391">
+        <a class="bar colorSucceeded"
+           style="height: 12px;"
+           title="Generate files with custom tool (in UT004 Generate File with custom tool)"
+           href="#t1535095873.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="0.6562222" data-sr-rescode="110" data-sr-order="8" data-sr-acttime="0.094">
+        <a class="bar colorSucceeded"
+           style="height: 6px;"
+           title="Generate multiple files with global header (in UT006 Generate File with global header)"
+           href="#t1798309043.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="1.4374738" data-sr-rescode="110" data-sr-order="9" data-sr-acttime="0.141">
+        <a class="bar colorSucceeded"
+           style="height: 12px;"
+           title="Generate files with clean up of old files (based on *.info.json) (in UT009 Generate File with cleanup old File)"
+           href="#t527981845.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="1.4531503" data-sr-rescode="110" data-sr-order="10" data-sr-acttime="0.063">
+        <a class="bar colorSucceeded"
+           style="height: 12px;"
+           title="Generate files with CanOverwriteExistingFile is set to false, no files deleted (in UT013 Generate files without modifications)"
+           href="#t1493338900.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="0.8594028" data-sr-rescode="110" data-sr-order="11" data-sr-acttime="0.078">
+        <a class="bar colorSucceeded"
+           style="height: 7px;"
+           title="No content changes if CanOverwriteExistingFile is set to false (in UT013 Generate files without modifications)"
+           href="#t-1814841281.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="1.5468671" data-sr-rescode="110" data-sr-order="12" data-sr-acttime="0.063">
+        <a class="bar colorSucceeded"
+           style="height: 13px;"
+           title="Generate files with CanOverwriteExistingFile is set to true, files deleted (in UT013 Generate File change behaviour)"
+           href="#t-1932679639.0">&nbsp;</a>
+    </td>
+                    <td class="right-padding">&nbsp;</td>
+                </tr>
+                <tr class="horizontal-scale">
+                    <td class="left-padding">&nbsp;</td>
+                    <td colspan="10">&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    </div>
+
+    <div class="dbContainer" id="featureSummary">
+        
+    <h2>Feature Summary</h2>
+    <table class="testEvents dbResult2">
+            <tr>
+            <th>Feature</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+            <th>Duration</th>
+    </tr>
+
+
+            <tr>
+                <td><a href="#f986310517">UT001 Generate Code</a></td>
+                    <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 199px;"
+           title="4 succeeded"
+           ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>4</td>
+    <td>4</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:08.8437333</td>
+
+            </tr>
+            <tr>
+                <td><a href="#f-96435804">UT002 Generate File in subfolder</a></td>
+                    <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 199px;"
+           title="2 succeeded"
+           ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>2</td>
+    <td>2</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:01.8593942</td>
+
+            </tr>
+            <tr>
+                <td><a href="#f-1031975714">UT003 Generate File in other project</a></td>
+                    <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 199px;"
+           title="1 succeeded"
+           ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.6874833</td>
+
+            </tr>
+            <tr>
+                <td><a href="#f966940054">UT004 Generate File with custom tool</a></td>
+                    <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 199px;"
+           title="1 succeeded"
+           ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:01.4063370</td>
+
+            </tr>
+            <tr>
+                <td><a href="#f-2056088297">UT006 Generate File with global header</a></td>
+                    <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 199px;"
+           title="1 succeeded"
+           ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.6562222</td>
+
+            </tr>
+            <tr>
+                <td><a href="#f-1575294401">UT009 Generate File with cleanup old File</a></td>
+                    <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 199px;"
+           title="1 succeeded"
+           ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:01.4374738</td>
+
+            </tr>
+            <tr>
+                <td><a href="#f-1383308094">UT013 Generate File change behaviour</a></td>
+                    <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 199px;"
+           title="1 succeeded"
+           ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:01.5468671</td>
+
+            </tr>
+            <tr>
+                <td><a href="#f1545385305">UT013 Generate files without modifications</a></td>
+                    <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 199px;"
+           title="2 succeeded"
+           ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>2</td>
+    <td>2</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:02.3125531</td>
+
+            </tr>
+    </table>
+
+    </div>
+    <div class="dbContainer">
+        <a name="error_summary" />
+        <h2>Error Summary</h2>
+        <table class="testEvents dbResult2">
+                <tr>
+            <th>Acceptance Criteria</th>
+        <th>Status</th>
+    </tr>
+
+
+                            <tr>
+                    <td colspan="3">No data</td>
+                </tr>
+        </table>
+    </div>
+
+    <div class="dbContainer">
+        <h2 id="scenarioSummary">Scenario Summary</h2>
+            <hr />
+            <div class="dbUserStory">
+                <div class="dbUserStory-icon">
+                    <i class="fas fa-street-view"></i>
+                </div>
+                <a name="f986310517" />
+                <h3>Feature: UT001 Generate Code</h3>
+                    <div class="description">
+                        <pre>	As a developer
+	I can generate code with the T4.FileManager with each class in its own file</pre>
+                    </div>
+                    <div class="dbFeatureKpi">
+                        Success rate:     <span class="dbPercent">
+            100%
+    </span>
+    <span>4/4</span>
+
+                    </div>
+            </div>
+            <table class="testEvents dbResult2">
+                    <tr>
+            <th>Acceptance Criteria</th>
+        <th>Status</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t-2094596363.0">Scenario: Generate two files</a>
+
+                        </td>
+
+                        
+                                <td><i style="color:green" class="fas fa-check-square"></i> Succeeded</td>
+        <td>00:00:07.0624653</td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t1178789637.0">Scenario: Generate files uses .txt as default file extension when no output extension directive is set</a>
+
+                        </td>
+
+                        
+                                <td><i style="color:green" class="fas fa-check-square"></i> Succeeded</td>
+        <td>00:00:00.6094502</td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t1273030201.0">Scenario: Generate files ignores output extension .cs and uses .txt as default to avoid &quot;error generation output&quot; compile errors</a>
+
+                        </td>
+
+                        
+                                <td><i style="color:green" class="fas fa-check-square"></i> Succeeded</td>
+        <td>00:00:00.6250059</td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t-1977239690.0">Scenario: Generate files with DisableTemplateMainOutputFile enabled prevents generation of the t4 main output file (Workaround invalid file extension)</a>
+
+                        </td>
+
+                        
+                                <td><i style="color:green" class="fas fa-check-square"></i> Succeeded</td>
+        <td>00:00:00.5468119</td>
+
+                    </tr>
+            </table>
+            <hr />
+            <div class="dbUserStory">
+                <div class="dbUserStory-icon">
+                    <i class="fas fa-street-view"></i>
+                </div>
+                <a name="f-96435804" />
+                <h3>Feature: UT002 Generate File in subfolder</h3>
+                    <div class="description">
+                        <pre>	As a developer
+	I can generate code with the T4.FileManager with each class in its own file in a subfolder</pre>
+                    </div>
+                    <div class="dbFeatureKpi">
+                        Success rate:     <span class="dbPercent">
+            100%
+    </span>
+    <span>2/2</span>
+
+                    </div>
+            </div>
+            <table class="testEvents dbResult2">
+                    <tr>
+            <th>Acceptance Criteria</th>
+        <th>Status</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t2058156846.0">Scenario: Generate T4 files in existing subfolder</a>
+
+                        </td>
+
+                        
+                                <td><i style="color:green" class="fas fa-check-square"></i> Succeeded</td>
+        <td>00:00:00.6406075</td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t1704376177.0">Scenario: Change output folder in T4 move generated files to new location</a>
+
+                        </td>
+
+                        
+                                <td><i style="color:green" class="fas fa-check-square"></i> Succeeded</td>
+        <td>00:00:01.2187867</td>
+
+                    </tr>
+            </table>
+            <hr />
+            <div class="dbUserStory">
+                <div class="dbUserStory-icon">
+                    <i class="fas fa-street-view"></i>
+                </div>
+                <a name="f-1031975714" />
+                <h3>Feature: UT003 Generate File in other project</h3>
+                    <div class="description">
+                        <pre>	As a developer
+	I can generate code with the T4.FileManager with each class in its own file or in different projects</pre>
+                    </div>
+                    <div class="dbFeatureKpi">
+                        Success rate:     <span class="dbPercent">
+            100%
+    </span>
+    <span>1/1</span>
+
+                    </div>
+            </div>
+            <table class="testEvents dbResult2">
+                    <tr>
+            <th>Acceptance Criteria</th>
+        <th>Status</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t1371724111.0">Scenario: Generate files in other .NET project</a>
+
+                        </td>
+
+                        
+                                <td><i style="color:green" class="fas fa-check-square"></i> Succeeded</td>
+        <td>00:00:00.6874833</td>
+
+                    </tr>
+            </table>
+            <hr />
+            <div class="dbUserStory">
+                <div class="dbUserStory-icon">
+                    <i class="fas fa-street-view"></i>
+                </div>
+                <a name="f966940054" />
+                <h3>Feature: UT004 Generate File with custom tool</h3>
+                    <div class="description">
+                        <pre>	As a developer
+	I can generate code with the T4.FileManager and definied custom tool properties</pre>
+                    </div>
+                    <div class="dbFeatureKpi">
+                        Success rate:     <span class="dbPercent">
+            100%
+    </span>
+    <span>1/1</span>
+
+                    </div>
+            </div>
+            <table class="testEvents dbResult2">
+                    <tr>
+            <th>Acceptance Criteria</th>
+        <th>Status</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t1535095873.0">Scenario: Generate files with custom tool</a>
+
+                        </td>
+
+                        
+                                <td><i style="color:green" class="fas fa-check-square"></i> Succeeded</td>
+        <td>00:00:01.4063370</td>
+
+                    </tr>
+            </table>
+            <hr />
+            <div class="dbUserStory">
+                <div class="dbUserStory-icon">
+                    <i class="fas fa-street-view"></i>
+                </div>
+                <a name="f-2056088297" />
+                <h3>Feature: UT006 Generate File with global header</h3>
+                    <div class="description">
+                        <pre>	As a developer
+	I can generate code with the T4.FileManager using my own custom header</pre>
+                    </div>
+                    <div class="dbFeatureKpi">
+                        Success rate:     <span class="dbPercent">
+            100%
+    </span>
+    <span>1/1</span>
+
+                    </div>
+            </div>
+            <table class="testEvents dbResult2">
+                    <tr>
+            <th>Acceptance Criteria</th>
+        <th>Status</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t1798309043.0">Scenario: Generate multiple files with global header</a>
+
+                        </td>
+
+                        
+                                <td><i style="color:green" class="fas fa-check-square"></i> Succeeded</td>
+        <td>00:00:00.6562222</td>
+
+                    </tr>
+            </table>
+            <hr />
+            <div class="dbUserStory">
+                <div class="dbUserStory-icon">
+                    <i class="fas fa-street-view"></i>
+                </div>
+                <a name="f-1575294401" />
+                <h3>Feature: UT009 Generate File with cleanup old File</h3>
+                    <div class="description">
+                        <pre>	As a developer
+	I can generate code with the T4.FileManager without taking care of old generated files</pre>
+                    </div>
+                    <div class="dbFeatureKpi">
+                        Success rate:     <span class="dbPercent">
+            100%
+    </span>
+    <span>1/1</span>
+
+                    </div>
+            </div>
+            <table class="testEvents dbResult2">
+                    <tr>
+            <th>Acceptance Criteria</th>
+        <th>Status</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t527981845.0">Scenario: Generate files with clean up of old files (based on *.info.json)</a>
+
+                        </td>
+
+                        
+                                <td><i style="color:green" class="fas fa-check-square"></i> Succeeded</td>
+        <td>00:00:01.4374738</td>
+
+                    </tr>
+            </table>
+            <hr />
+            <div class="dbUserStory">
+                <div class="dbUserStory-icon">
+                    <i class="fas fa-street-view"></i>
+                </div>
+                <a name="f-1383308094" />
+                <h3>Feature: UT013 Generate File change behaviour</h3>
+                    <div class="description">
+                        <pre>	As a developer
+	I can change the behaviour of supress changes to overwrite existing files</pre>
+                    </div>
+                    <div class="dbFeatureKpi">
+                        Success rate:     <span class="dbPercent">
+            100%
+    </span>
+    <span>1/1</span>
+
+                    </div>
+            </div>
+            <table class="testEvents dbResult2">
+                    <tr>
+            <th>Acceptance Criteria</th>
+        <th>Status</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t-1932679639.0">Scenario: Generate files with CanOverwriteExistingFile is set to true, files deleted</a>
+
+                        </td>
+
+                        
+                                <td><i style="color:green" class="fas fa-check-square"></i> Succeeded</td>
+        <td>00:00:01.5468671</td>
+
+                    </tr>
+            </table>
+            <hr />
+            <div class="dbUserStory">
+                <div class="dbUserStory-icon">
+                    <i class="fas fa-street-view"></i>
+                </div>
+                <a name="f1545385305" />
+                <h3>Feature: UT013 Generate files without modifications</h3>
+                    <div class="description">
+                        <pre>	As a developer
+	I can generate code with the T4.FileManager and supress changes if the file exist</pre>
+                    </div>
+                    <div class="dbFeatureKpi">
+                        Success rate:     <span class="dbPercent">
+            100%
+    </span>
+    <span>2/2</span>
+
+                    </div>
+            </div>
+            <table class="testEvents dbResult2">
+                    <tr>
+            <th>Acceptance Criteria</th>
+        <th>Status</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t1493338900.0">Scenario: Generate files with CanOverwriteExistingFile is set to false, no files deleted</a>
+
+                        </td>
+
+                        
+                                <td><i style="color:green" class="fas fa-check-square"></i> Succeeded</td>
+        <td>00:00:01.4531503</td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t-1814841281.0">Scenario: No content changes if CanOverwriteExistingFile is set to false</a>
+
+                        </td>
+
+                        
+                                <td><i style="color:green" class="fas fa-check-square"></i> Succeeded</td>
+        <td>00:00:00.8594028</td>
+
+                    </tr>
+            </table>
+    </div>
+
+    <div class="dbContainer">
+        <h2 id="executionDetails">Execution Details</h2>
+            <hr />
+            <a name="t-2094596363.0" />
+            <h3>Scenario: Generate two files (in T4.FileManager.AcceptanceCriteria, UT001 Generate Code)</h3>
+                <div class="description">
+                    tags: db-6
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 02.01.2021 16:39:44</li>
+                <li>Execution time (sec): 7.0624653</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents dbTraceEvent">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given the file manager</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate two files] -->
+                                <pre class="log">Display Name: !VisualStudio.DTE.16.0:13076
+done: FileAutomationSteps.GivenTheFileManager() (0.2s)</pre>
+                            </td>
+                            <td>Succeeded in 0.312s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the script &quot;Test.tt&quot; with the following content
+  --- multiline step argument ---
+  &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+  &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+  &lt;#@ output extension=&quot;.txt&quot; #&gt;
+  
+  &lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+  
+  &lt;#
+  var files = new string[] { &quot;PersonDto&quot;, &quot;OrderDto&quot; };
+  var fileManager = T4FileManager.Create(this);
+  
+  foreach(var itm in files)
+  {
+  fileManager.CreateNewFile(itm + &quot;.g.cs&quot;, &quot;&quot;,&quot;&quot;,null);
+  #&gt;
+  namespace Test
+  {
+  public class &lt;#= itm #&gt;
+  {
+  }
+  }
+  &lt;#
+  }
+  
+  fileManager.Generate();
+  #&gt;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate two files] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheScriptWithFollowingContentForAutomation(&quot;Test.tt&quot;, &quot;&lt;#@ template debu...&quot;) (6.0s)</pre>
+                            </td>
+                            <td>Succeeded in 6.049s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">When I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Generate two files] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.5s)</pre>
+                            </td>
+                            <td>Succeeded in 0.498s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Then the following files are generated:
+  --- table step argument ---
+  | File           |
+  | PersonDto.g.cs |
+  | OrderDto.g.cs  |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate two files] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.125s</td>
+                        </tr>
+            </table>
+            <hr />
+            <a name="t1178789637.0" />
+            <h3>Scenario: Generate files uses .txt as default file extension when no output extension directive is set (in T4.FileManager.AcceptanceCriteria, UT001 Generate Code)</h3>
+                <div class="description">
+                    tags: db-6
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 02.01.2021 16:39:51</li>
+                <li>Execution time (sec): 0.6094502</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents dbTraceEvent">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given the file manager</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files uses .txt as default file extension when no output extension directive is set] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheFileManager() (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the script &quot;TestMissingFileExtension.tt&quot; with the following content
+  --- multiline step argument ---
+  &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+  &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+  
+  &lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+  
+  &lt;#
+  var files = new string[] { &quot;PersonTxtDto&quot;, &quot;OrderTxtDto&quot; };
+  var fileManager = T4FileManager.Create(this);
+  
+  foreach(var itm in files)
+  {
+  fileManager.CreateNewFile(itm + &quot;.g.cs&quot;, &quot;&quot;,&quot;&quot;,null);
+  #&gt;
+  namespace Test
+  {
+  public class &lt;#= itm #&gt;
+  {
+  }
+  }
+  &lt;#
+  }
+  
+  fileManager.Generate();
+  #&gt;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files uses .txt as default file extension when no output extension directive is set] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheScriptWithFollowingContentForAutomation(&quot;TestMissingFileEx...&quot;, &quot;&lt;#@ template debu...&quot;) (0.5s)</pre>
+                            </td>
+                            <td>Succeeded in 0.5s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">When I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Generate files uses .txt as default file extension when no output extension directive is set] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.094s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Then the following files are generated:
+  --- table step argument ---
+  | File                         |
+  | PersonTxtDto.g.cs            |
+  | OrderTxtDto.g.cs             |
+  | TestMissingFileExtension.txt |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate files uses .txt as default file extension when no output extension directive is set] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0s</td>
+                        </tr>
+            </table>
+            <hr />
+            <a name="t1273030201.0" />
+            <h3>Scenario: Generate files ignores output extension .cs and uses .txt as default to avoid &quot;error generation output&quot; compile errors (in T4.FileManager.AcceptanceCriteria, UT001 Generate Code)</h3>
+                <div class="description">
+                    tags: db-6
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 02.01.2021 16:39:51</li>
+                <li>Execution time (sec): 0.6250059</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents dbTraceEvent">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given the file manager</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files ignores output extension .cs and uses .txt as default to avoid &quot;error generation output&quot; compile errors] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheFileManager() (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.031s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the script &quot;TestCsExtension.tt&quot; with the following content
+  --- multiline step argument ---
+  &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+  &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+  &lt;#@ output extension=&quot;.cs&quot; #&gt; &lt;# /* **** &lt;====== is ignored **** */ #&gt;
+  
+  &lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+  
+  &lt;#
+  var files = new string[] { &quot;PersonCsDto&quot;, &quot;OrderCsDto&quot; };
+  var fileManager = T4FileManager.Create(this);
+  
+  foreach(var itm in files)
+  {
+  fileManager.CreateNewFile(itm + &quot;.g.cs&quot;, &quot;&quot;,&quot;&quot;,null);
+  #&gt;
+  namespace Test
+  {
+  public class &lt;#= itm #&gt;
+  {
+  }
+  }
+  &lt;#
+  }
+  
+  fileManager.Generate();
+  #&gt;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files ignores output extension .cs and uses .txt as default to avoid &quot;error generation output&quot; compile errors] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheScriptWithFollowingContentForAutomation(&quot;TestCsExtension.tt&quot;, &quot;&lt;#@ template debu...&quot;) (0.5s)</pre>
+                            </td>
+                            <td>Succeeded in 0.5s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">When I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Generate files ignores output extension .cs and uses .txt as default to avoid &quot;error generation output&quot; compile errors] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.078s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Then the following files are generated:
+  --- table step argument ---
+  | File                |
+  | PersonCsDto.g.cs    |
+  | OrderCsDto.g.cs     |
+  | TestCsExtension.txt |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate files ignores output extension .cs and uses .txt as default to avoid &quot;error generation output&quot; compile errors] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+            </table>
+            <hr />
+            <a name="t-1977239690.0" />
+            <h3>Scenario: Generate files with DisableTemplateMainOutputFile enabled prevents generation of the t4 main output file (Workaround invalid file extension) (in T4.FileManager.AcceptanceCriteria, UT001 Generate Code)</h3>
+                <div class="description">
+                    tags: db-6
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 02.01.2021 16:39:52</li>
+                <li>Execution time (sec): 0.5468119</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents dbTraceEvent">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given the file manager</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with DisableTemplateMainOutputFile enabled prevents generation of the t4 main output file (Workaround invalid file extension)] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheFileManager() (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the script &quot;TestInvalidFileExtension.tt&quot; with the following content
+  --- multiline step argument ---
+  &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+  &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+  &lt;#@ output extension=&quot;.txt&quot; #&gt;
+  
+  &lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+  
+  &lt;#
+  var files = new string[] { &quot;PersonIvDto&quot;, &quot;OrderIvDto&quot; };
+  var fileManager = T4FileManager.Create(this).DisableTemplateMainOutputFile(); // &lt;=== prevent main output file
+  
+  foreach(var itm in files)
+  {
+  fileManager.CreateNewFile(itm + &quot;.g.cs&quot;, &quot;&quot;,&quot;&quot;,null);
+  #&gt;
+  namespace Test
+  {
+  public partial class &lt;#= itm #&gt;
+  {
+  }
+  }
+  &lt;#
+  }
+  
+  fileManager.Generate();
+  #&gt;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with DisableTemplateMainOutputFile enabled prevents generation of the t4 main output file (Workaround invalid file extension)] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheScriptWithFollowingContentForAutomation(&quot;TestInvalidFileEx...&quot;, &quot;&lt;#@ template debu...&quot;) (0.4s)</pre>
+                            </td>
+                            <td>Succeeded in 0.438s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">When I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Generate files with DisableTemplateMainOutputFile enabled prevents generation of the t4 main output file (Workaround invalid file extension)] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.078s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Then the following files are generated:
+  --- table step argument ---
+  | File             |
+  | PersonIvDto.g.cs |
+  | OrderIvDto.g.cs  |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate files with DisableTemplateMainOutputFile enabled prevents generation of the t4 main output file (Workaround invalid file extension)] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the following files are not generated:
+  --- table step argument ---
+  | File                         |
+  | TestInvalidFileExtension.txt |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate files with DisableTemplateMainOutputFile enabled prevents generation of the t4 main output file (Workaround invalid file extension)] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesNotExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0s</td>
+                        </tr>
+            </table>
+            <hr />
+            <a name="t2058156846.0" />
+            <h3>Scenario: Generate T4 files in existing subfolder (in T4.FileManager.AcceptanceCriteria, UT002 Generate File in subfolder)</h3>
+                <div class="description">
+                    tags: db-7
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 02.01.2021 16:39:53</li>
+                <li>Execution time (sec): 0.6406075</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents dbTraceEvent">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given the file manager</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate T4 files in existing subfolder] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheFileManager() (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the script &quot;TestSubfolder.tt&quot; with the following content
+  --- multiline step argument ---
+  &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+  &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+  &lt;#@ output extension=&quot;.txt&quot; #&gt;
+  
+  &lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+  
+  &lt;#
+  var files = new string[] { &quot;PersonDto&quot;, &quot;OrderDto&quot; };
+  var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+  
+  foreach(var itm in files)
+  {
+  fileManager.CreateNewFile(itm + &quot;.g.cs&quot;,&quot;&quot;,&quot;TestSubfolder&quot;,null);
+  #&gt;
+  namespace Test.TestSubFolder
+  {
+  public class &lt;#= itm #&gt;
+  {
+  }
+  }
+  &lt;#
+  }
+  
+  fileManager.Generate();
+  #&gt;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate T4 files in existing subfolder] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheScriptWithFollowingContentForAutomation(&quot;TestSubfolder.tt&quot;, &quot;&lt;#@ template debu...&quot;) (0.5s)</pre>
+                            </td>
+                            <td>Succeeded in 0.484s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">When I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Generate T4 files in existing subfolder] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.125s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Then the following files are generated:
+  --- table step argument ---
+  | File           | Folder        |
+  | PersonDto.g.cs | TestSubfolder |
+  | OrderDto.g.cs  | TestSubfolder |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate T4 files in existing subfolder] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+            </table>
+            <hr />
+            <a name="t1704376177.0" />
+            <h3>Scenario: Change output folder in T4 move generated files to new location (in T4.FileManager.AcceptanceCriteria, UT002 Generate File in subfolder)</h3>
+                <div class="description">
+                    tags: db-7
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 02.01.2021 16:39:53</li>
+                <li>Execution time (sec): 1.2187867</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents dbTraceEvent">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given the file manager</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Change output folder in T4 move generated files to new location] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheFileManager() (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the script &quot;TestSubfolder.tt&quot; with the following content
+  --- multiline step argument ---
+  &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+  &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+  &lt;#@ output extension=&quot;.txt&quot; #&gt;
+  
+  &lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+  
+  &lt;#
+  var files = new string[] { &quot;PersonDto&quot;, &quot;OrderDto&quot; };
+  var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+  
+  foreach(var itm in files)
+  {
+  fileManager.CreateNewFile(itm + &quot;.g.cs&quot;,&quot;&quot;,&quot;TestSubfolder&quot;,null);
+  #&gt;
+  namespace Test.TestSubFolder
+  {
+  public class &lt;#= itm #&gt;
+  {
+  }
+  }
+  &lt;#
+  }
+  
+  fileManager.Generate();
+  #&gt;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Change output folder in T4 move generated files to new location] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheScriptWithFollowingContentForAutomation(&quot;TestSubfolder.tt&quot;, &quot;&lt;#@ template debu...&quot;) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.047s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">When I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Change output folder in T4 move generated files to new location] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.063s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And I change the line
+  --- table step argument ---
+  | From                                                              | To                                                                   |
+  | fileManager.CreateNewFile(itm + &quot;.g.cs&quot;,&quot;&quot;,&quot;TestSubfolder&quot;,null); | fileManager.CreateNewFile(itm + &quot;.g.cs&quot;,&quot;&quot;,&quot;TestSubfolderNew&quot;,null); |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Change output folder in T4 move generated files to new location] -->
+                                <pre class="log">done: FileAutomationSteps.GivenIChangeTheLine(System.Collection...) (1.0s)</pre>
+                            </td>
+                            <td>Succeeded in 1s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And I run the script again</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Change output folder in T4 move generated files to new location] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.062s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Then the following files are generated:
+  --- table step argument ---
+  | File           | Folder           |
+  | PersonDto.g.cs | TestSubfolderNew |
+  | OrderDto.g.cs  | TestSubfolderNew |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Change output folder in T4 move generated files to new location] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the following files no longer exist:
+  --- table step argument ---
+  | File           | Folder        |
+  | PersonDto.g.cs | TestSubfolder |
+  | OrderDto.g.cs  | TestSubfolder |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Change output folder in T4 move generated files to new location] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesNotExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0s</td>
+                        </tr>
+            </table>
+            <hr />
+            <a name="t1371724111.0" />
+            <h3>Scenario: Generate files in other .NET project (in T4.FileManager.AcceptanceCriteria, UT003 Generate File in other project)</h3>
+                <div class="description">
+                    tags: db-8
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 02.01.2021 16:39:54</li>
+                <li>Execution time (sec): 0.6874833</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents dbTraceEvent">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given the file manager</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files in other .NET project] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheFileManager() (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the script &quot;TestInOtherProject.tt&quot; with the following content
+  --- multiline step argument ---
+  &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+  &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+  &lt;#@ output extension=&quot;.txt&quot; #&gt;
+  
+  &lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+  
+  &lt;#
+  var files = new string[] { &quot;PersonDto&quot;, &quot;OrderDto&quot; };
+  var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+  
+  foreach(var itm in files)
+  {
+  fileManager.CreateNewFile(itm + &quot;.g.cs&quot;,&quot;T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject&quot;,&quot;&quot;,null);
+  #&gt;
+  namespace Test
+  {
+  public class &lt;#= itm #&gt;
+  {
+  }
+  }
+  &lt;#
+  }
+  
+  fileManager.Generate();
+  #&gt;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files in other .NET project] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheScriptWithFollowingContentForAutomation(&quot;TestInOtherProjec...&quot;, &quot;&lt;#@ template debu...&quot;) (0.6s)</pre>
+                            </td>
+                            <td>Succeeded in 0.563s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And I select the target project &quot;T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject&quot;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files in other .NET project] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTargetProjectForToGenerateFiles(&quot;T4.FileManager.Vi...&quot;) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">When I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Generate files in other .NET project] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.078s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Then the following files are generated:
+  --- table step argument ---
+  | File           |
+  | PersonDto.g.cs |
+  | OrderDto.g.cs  |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate files in other .NET project] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0s</td>
+                        </tr>
+            </table>
+            <hr />
+            <a name="t1535095873.0" />
+            <h3>Scenario: Generate files with custom tool (in T4.FileManager.AcceptanceCriteria, UT004 Generate File with custom tool)</h3>
+                <div class="description">
+                    tags: db-9
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 02.01.2021 16:39:55</li>
+                <li>Execution time (sec): 1.406337</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents dbTraceEvent">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given the file manager</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with custom tool] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheFileManager() (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the script &quot;TestCustomTool.tt&quot; with the following content
+  --- multiline step argument ---
+  &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+  &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+  &lt;#@ output extension=&quot;.txt&quot; #&gt;
+  
+  &lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+  
+  &lt;#
+  var files = new string[] { &quot;PersonDto&quot;, &quot;OrderDto&quot; };
+  var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+  
+  var properties = new Dictionary&lt;string, object&gt;();
+  properties.Add(Property.CustomTool, (object)&quot;TextTemplatingFileGenerator&quot;);
+  
+  foreach(var itm in files)
+  {
+  fileManager.CreateNewFile(itm + &quot;WithCustom.g.cs&quot;,&quot;&quot;,&quot;&quot;,properties);
+  #&gt;
+  namespace Test
+  {
+  public class &lt;#= itm #&gt;WithCustom
+  {
+  }
+  }
+  &lt;#
+  }
+  
+  fileManager.Generate();
+  #&gt;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with custom tool] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheScriptWithFollowingContentForAutomation(&quot;TestCustomTool.tt&quot;, &quot;&lt;#@ template debu...&quot;) (0.7s)</pre>
+                            </td>
+                            <td>Succeeded in 0.703s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">When I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Generate files with custom tool] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.4s)</pre>
+                            </td>
+                            <td>Succeeded in 0.391s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Then the following files are generated:
+  --- table step argument ---
+  | File                     |
+  | PersonDtoWithCustom.g.cs |
+  | OrderDtoWithCustom.g.cs  |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate files with custom tool] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the custom tool is set to &quot;TextTemplatingFileGenerator&quot; for the following files:
+  --- table step argument ---
+  | File                     |
+  | PersonDtoWithCustom.g.cs |
+  | OrderDtoWithCustom.g.cs  |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate files with custom tool] -->
+                                <pre class="log">done: FileAutomationSteps.ThenCustomToolIsSet(&quot;TextTemplatingFil...&quot;, System.Collection...) (0.3s)</pre>
+                            </td>
+                            <td>Succeeded in 0.297s</td>
+                        </tr>
+            </table>
+            <hr />
+            <a name="t1798309043.0" />
+            <h3>Scenario: Generate multiple files with global header (in T4.FileManager.AcceptanceCriteria, UT006 Generate File with global header)</h3>
+                <div class="description">
+                    tags: db-11
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 02.01.2021 16:39:57</li>
+                <li>Execution time (sec): 0.6562222</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents dbTraceEvent">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given the file manager</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate multiple files with global header] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheFileManager() (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the script &quot;TestGlobalHeader.tt&quot; with the following content
+  --- multiline step argument ---
+  &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+  &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+  &lt;#@ output extension=&quot;.txt&quot; #&gt;
+  
+  &lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+  
+  &lt;#
+  var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+  fileManager.StartHeader();
+  #&gt;
+  // -------------------------
+  // databinding - T4
+  // -------------------------
+  &lt;#
+  fileManager.FinishHeader();
+  fileManager.CreateNewFile(&quot;PersonDtoWithGlobal.g.cs&quot;,&quot;&quot;,&quot;&quot;,null);	
+  #&gt;
+  namespace Test
+  {
+  public class PersonDtoWithGlobal
+  {
+  }
+  }
+  &lt;#
+  fileManager.CreateNewFile(&quot;OrderDtoWithGlobal.g.cs&quot;,&quot;&quot;,&quot;&quot;,null);	
+  #&gt;
+  namespace Test
+  {
+  public class OrderDtoWithGlobal
+  {
+  }
+  }
+  &lt;#
+  fileManager.Generate();
+  #&gt;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate multiple files with global header] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheScriptWithFollowingContentForAutomation(&quot;TestGlobalHeader.tt&quot;, &quot;&lt;#@ template debu...&quot;) (0.5s)</pre>
+                            </td>
+                            <td>Succeeded in 0.516s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">When I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Generate multiple files with global header] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.094s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Then the following files are generated:
+  --- table step argument ---
+  | File                     |
+  | PersonDtoWithGlobal.g.cs |
+  | OrderDtoWithGlobal.g.cs  |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate multiple files with global header] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And all files contains the following content:
+  --- multiline step argument ---
+  // -------------------------
+  // databinding - T4
+  // -------------------------</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate multiple files with global header] -->
+                                <pre class="log">done: FileAutomationSteps.ThenAllFilesContainsFollowingContent(&quot;// --------------...&quot;) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.031s</td>
+                        </tr>
+            </table>
+            <hr />
+            <a name="t527981845.0" />
+            <h3>Scenario: Generate files with clean up of old files (based on *.info.json) (in T4.FileManager.AcceptanceCriteria, UT009 Generate File with cleanup old File)</h3>
+                <div class="description">
+                    tags: db-8
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 02.01.2021 16:39:57</li>
+                <li>Execution time (sec): 1.4374738</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents dbTraceEvent">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given the file manager</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with clean up of old files (based on *.info.json)] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheFileManager() (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the script &quot;TestOldFilesCleanUp.tt&quot; with the following content
+  --- multiline step argument ---
+  &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+  &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+  &lt;#@ output extension=&quot;.txt&quot; #&gt;
+  
+  &lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+  
+  &lt;#
+  var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+  fileManager.CreateNewFile(&quot;TestOldFilesCleanUp.g.cs&quot;,&quot;&quot;,&quot;&quot;,null);	
+  #&gt;
+  namespace Test
+  {
+  public class TestOldFilesCleanUp
+  {
+  }
+  }
+  &lt;#
+  fileManager.Generate();
+  #&gt;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with clean up of old files (based on *.info.json)] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheScriptWithFollowingContentForAutomation(&quot;TestOldFilesClean...&quot;, &quot;&lt;#@ template debu...&quot;) (0.4s)</pre>
+                            </td>
+                            <td>Succeeded in 0.453s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">When I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Generate files with clean up of old files (based on *.info.json)] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.078s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Then the following files are generated:
+  --- table step argument ---
+  | File                     |
+  | TestOldFilesCleanUp.g.cs |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate files with clean up of old files (based on *.info.json)] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given the script &quot;TestOldFilesCleanUp.tt&quot; modified by following content:
+  --- multiline step argument ---
+  &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+  &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+  &lt;#@ output extension=&quot;.txt&quot; #&gt;
+  
+  &lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+  
+  &lt;#
+  var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+  fileManager.CreateNewFile(&quot;TestOldFilesCleanUpRenamed.g.cs&quot;,&quot;&quot;,&quot;&quot;,null);	
+  #&gt;
+  namespace Test
+  {
+  public class TestOldFilesCleanUpRenamed
+  {
+  }
+  }
+  &lt;#
+  fileManager.Generate();
+  #&gt;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with clean up of old files (based on *.info.json)] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheScriptModifiedByFollowingContent(&quot;TestOldFilesClean...&quot;, &quot;&lt;#@ template debu...&quot;) (0.8s)</pre>
+                            </td>
+                            <td>Succeeded in 0.781s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">When I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Generate files with clean up of old files (based on *.info.json)] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.063s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Then the following files are cleaned up:
+  --- table step argument ---
+  | File                     |
+  | TestOldFilesCleanUp.g.cs |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate files with clean up of old files (based on *.info.json)] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesNotExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the following files are generated:
+  --- table step argument ---
+  | File                            |
+  | TestOldFilesCleanUpRenamed.g.cs |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate files with clean up of old files (based on *.info.json)] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0s</td>
+                        </tr>
+            </table>
+            <hr />
+            <a name="t1493338900.0" />
+            <h3>Scenario: Generate files with CanOverwriteExistingFile is set to false, no files deleted (in T4.FileManager.AcceptanceCriteria, UT013 Generate files without modifications)</h3>
+                <div class="description">
+                    tags: db-127
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 02.01.2021 16:39:59</li>
+                <li>Execution time (sec): 1.4531503</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents dbTraceEvent">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given the file manager</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with CanOverwriteExistingFile is set to false, no files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheFileManager() (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the script &quot;TestNoDelete.tt&quot; with the following content
+  --- multiline step argument ---
+  &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+  &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+  &lt;#@ output extension=&quot;.txt&quot; #&gt;
+  
+  &lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+  
+  &lt;#
+  var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+  fileManager.CanOverwriteExistingFile = false;
+  fileManager.CreateNewFile(&quot;TestNoDelete.g.cs&quot;,&quot;&quot;,&quot;TestOverwrite&quot;,null);	
+  #&gt;
+  namespace Test
+  {
+  public class TestNoDelete
+  {
+  // first run template
+  }
+  }
+  &lt;#
+  fileManager.Generate();
+  #&gt;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with CanOverwriteExistingFile is set to false, no files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheScriptWithFollowingContentForAutomation(&quot;TestNoDelete.tt&quot;, &quot;&lt;#@ template debu...&quot;) (0.5s)</pre>
+                            </td>
+                            <td>Succeeded in 0.5s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with CanOverwriteExistingFile is set to false, no files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.063s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the following files are generated:
+  --- table step argument ---
+  | File              | Folder        |
+  | TestNoDelete.g.cs | TestOverwrite |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with CanOverwriteExistingFile is set to false, no files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And I change the line
+  --- table step argument ---
+  | From                                                                    | To                                                                       |
+  | fileManager.CreateNewFile(&quot;TestNoDelete.g.cs&quot;,&quot;&quot;,&quot;TestOverwrite&quot;,null); | fileManager.CreateNewFile(&quot;TestNoDelete2.g.cs&quot;,&quot;&quot;,&quot;TestOverwrite&quot;,null); |
+  | public class TestNoDelete                                               | public class TestNoDelete2                                               |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with CanOverwriteExistingFile is set to false, no files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.GivenIChangeTheLine(System.Collection...) (0.8s)</pre>
+                            </td>
+                            <td>Succeeded in 0.781s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">When I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Generate files with CanOverwriteExistingFile is set to false, no files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.063s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Then the following files are generated:
+  --- table step argument ---
+  | File               | Folder        |
+  | TestNoDelete.g.cs  | TestOverwrite |
+  | TestNoDelete2.g.cs | TestOverwrite |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate files with CanOverwriteExistingFile is set to false, no files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+            </table>
+            <hr />
+            <a name="t-1814841281.0" />
+            <h3>Scenario: No content changes if CanOverwriteExistingFile is set to false (in T4.FileManager.AcceptanceCriteria, UT013 Generate files without modifications)</h3>
+                <div class="description">
+                    tags: db-127
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 02.01.2021 16:40:00</li>
+                <li>Execution time (sec): 0.8594028</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents dbTraceEvent">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given the file manager</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - No content changes if CanOverwriteExistingFile is set to false] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheFileManager() (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.031s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the script &quot;TestNoDelete.tt&quot; with the following content
+  --- multiline step argument ---
+  &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+  &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+  &lt;#@ output extension=&quot;.txt&quot; #&gt;
+  
+  &lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+  
+  &lt;#
+  var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+  fileManager.CanOverwriteExistingFile = false;
+  fileManager.CreateNewFile(&quot;TestNoDelete.g.cs&quot;,&quot;&quot;,&quot;TestOverwrite&quot;,null);	
+  #&gt;
+  namespace Test
+  {
+  public class TestNoDelete
+  {
+  // first run template
+  }
+  }
+  &lt;#
+  fileManager.Generate();
+  #&gt;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - No content changes if CanOverwriteExistingFile is set to false] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheScriptWithFollowingContentForAutomation(&quot;TestNoDelete.tt&quot;, &quot;&lt;#@ template debu...&quot;) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.031s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - No content changes if CanOverwriteExistingFile is set to false] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.047s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the following files are generated:
+  --- table step argument ---
+  | File              | Folder        |
+  | TestNoDelete.g.cs | TestOverwrite |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - No content changes if CanOverwriteExistingFile is set to false] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And I change the line
+  --- table step argument ---
+  | From                  | To                     |
+  | // first run template | // second run template |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - No content changes if CanOverwriteExistingFile is set to false] -->
+                                <pre class="log">done: FileAutomationSteps.GivenIChangeTheLine(System.Collection...) (0.6s)</pre>
+                            </td>
+                            <td>Succeeded in 0.641s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">When I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - No content changes if CanOverwriteExistingFile is set to false] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.078s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Then the following files are generated:
+  --- table step argument ---
+  | File              | Contains              | Folder        |
+  | TestNoDelete.g.cs | // first run template | TestOverwrite |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - No content changes if CanOverwriteExistingFile is set to false] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+            </table>
+            <hr />
+            <a name="t-1932679639.0" />
+            <h3>Scenario: Generate files with CanOverwriteExistingFile is set to true, files deleted (in T4.FileManager.AcceptanceCriteria, UT013 Generate File change behaviour)</h3>
+                <div class="description">
+                    tags: db-127
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 02.01.2021 16:40:01</li>
+                <li>Execution time (sec): 1.5468671</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents dbTraceEvent">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given the file manager</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with CanOverwriteExistingFile is set to true, files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheFileManager() (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the script &quot;TestDelete.tt&quot; with the following content
+  --- multiline step argument ---
+  &lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+  &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
+  &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+  &lt;#@ output extension=&quot;.txt&quot; #&gt;
+  
+  &lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+  
+  &lt;#
+  var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+  fileManager.CanOverwriteExistingFile = false;
+  fileManager.CreateNewFile(&quot;TestDelete.g.cs&quot;,&quot;&quot;,&quot;TestOverwrite&quot;,null);	
+  #&gt;
+  namespace Test
+  {
+  public class TestDelete
+  {
+  // first run template
+  }
+  }
+  &lt;#
+  fileManager.Generate();
+  #&gt;</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with CanOverwriteExistingFile is set to true, files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.GivenTheScriptWithFollowingContentForAutomation(&quot;TestDelete.tt&quot;, &quot;&lt;#@ template debu...&quot;) (0.6s)</pre>
+                            </td>
+                            <td>Succeeded in 0.578s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Given I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with CanOverwriteExistingFile is set to true, files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.078s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the following files are generated:
+  --- table step argument ---
+  | File            | Folder        |
+  | TestDelete.g.cs | TestOverwrite |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with CanOverwriteExistingFile is set to true, files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And I change the line
+  --- table step argument ---
+  | From                                                                  | To                                                                       |
+  | fileManager.CanOverwriteExistingFile = false;                         | fileManager.CanOverwriteExistingFile = true;                             |
+  | fileManager.CreateNewFile(&quot;TestDelete.g.cs&quot;,&quot;&quot;,&quot;TestOverwrite&quot;,null); | fileManager.CreateNewFile(&quot;TestNoDelete3.g.cs&quot;,&quot;&quot;,&quot;TestOverwrite&quot;,null); |
+  | public class TestDelete                                               | public class NewTestDeleteModel                                          |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestArrange: Scenario - Generate files with CanOverwriteExistingFile is set to true, files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.GivenIChangeTheLine(System.Collection...) (0.8s)</pre>
+                            </td>
+                            <td>Succeeded in 0.797s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">When I run the script</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAct: Scenario - Generate files with CanOverwriteExistingFile is set to true, files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.WhenIRunTheScriptForAutomation() (0.1s)</pre>
+                            </td>
+                            <td>Succeeded in 0.063s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">Then the following files are generated:
+  --- table step argument ---
+  | File               | Folder        |
+  | TestNoDelete3.g.cs | TestOverwrite |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate files with CanOverwriteExistingFile is set to true, files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0.016s</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre class="log">And the following files are cleaned up:
+  --- table step argument ---
+  | File            | Folder        |
+  | TestDelete.g.cs | TestOverwrite |</pre>
+                            </td>
+                            <td>
+                                <!-- [TestAssert: Scenario - Generate files with CanOverwriteExistingFile is set to true, files deleted] -->
+                                <pre class="log">done: FileAutomationSteps.ThenFollowingFilesNotExists(System.Collection...) (0.0s)</pre>
+                            </td>
+                            <td>Succeeded in 0s</td>
+                        </tr>
+            </table>
+    </div>
+
+</body>
+</html>
