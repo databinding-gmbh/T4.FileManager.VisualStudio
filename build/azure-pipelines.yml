@@ -99,16 +99,42 @@ stages:
       inputs:
         command: pack
         packagesToPack: src/T4.FileManager.VisualStudio.nuspec
+        packDestination: '$(Build.ArtifactStagingDirectory)/nuget'
         versioningScheme: byBuildNumber
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/nuget'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: documentation'
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)\documentation'
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/documentation'
         ArtifactName: documentation
+
+- stage: DEPLOY_GITHUB_PAGES
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
+  pool: databinding self hosted interactive
+  variables:
+    - group: github
+
+  jobs:
+  - job:
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        patterns: 'documentation/**/*'
+        path: 'documentation'
+
+    - task: AccidentalFish.githubpages-publish.AccidentalFish.GitHubPages-Publish.GitHubPagesPublish@1
+      displayName: 'Publishes to GitHub Pages'
+      inputs:
+       docPath: '\documentation\*'
+       githubusername: '$(username)'
+       githubemail: '$(email)'
+       githubaccesstoken: '$(pat)''
+       repositoryname: $(repo)
 
 - stage: DEPLOY_TEST
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
