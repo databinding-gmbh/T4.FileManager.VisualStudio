@@ -114,6 +114,13 @@ stages:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/documentation'
         ArtifactName: documentation
 
+    - task: GitTag@5
+      inputs:
+        workingdir: '$(SYSTEM.DEFAULTWORKINGDIRECTORY)'
+        tag: '$(GitVersion.SemVer)'
+        tagMessage: '$(GitVersion.SemVer)'
+        useLightweightTags: true
+     
 - stage: DEPLOY_GITHUB_PAGES
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
   pool: databinding self hosted interactive
@@ -163,13 +170,6 @@ stages:
         packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
         publishVstsFeed: '$(NuGetFeed)'
         allowPackageConflicts: true
-
-    - task: GitTag@5
-      inputs:
-        workingdir: '$(SYSTEM.DEFAULTWORKINGDIRECTORY)'
-        tag: '$(GitVersion.SemVer)'
-        tagMessage: '$(GitVersion.SemVer)'
-        useLightweightTags: true
       
 - ${{ if eq(parameters.canPublish, true) }}: 
   - stage: DEPLOY_TO_NUGET
