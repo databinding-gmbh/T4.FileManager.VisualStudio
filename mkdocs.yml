@@ -1,8 +1,0 @@
-site_name: T4.FileManager.VisualStudio Documentation
-site_description: 'Manager for generating multiple files with T4 text templates.'
-site_author: 'databinding GmbH'
-docs_dir: docs/
-repo_name: 'databinding-gmbh/T4.FileManager.VisualStudio'
-repo_url: 'https://github.com/databinding-gmbh/T4.FileManager.VisualStudio'
-theme:
-  name: 'material'
