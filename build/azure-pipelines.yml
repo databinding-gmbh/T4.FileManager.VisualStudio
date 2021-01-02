@@ -130,11 +130,11 @@ stages:
     - task: AccidentalFish.githubpages-publish.AccidentalFish.GitHubPages-Publish.GitHubPagesPublish@1
       displayName: 'Publishes to GitHub Pages'
       inputs:
-       docPath: '\documentation\*'
-       githubusername: '$(username)'
-       githubemail: '$(email)'
-       githubaccesstoken: '$(pat)''
-       repositoryname: $(repo)
+        docPath: '\documentation\*'
+        githubusername: '$(username)'
+        githubemail: '$(email)'
+        githubaccesstoken: '$(pat)'
+        repositoryname: $(repo)
 
 - stage: DEPLOY_TEST
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
