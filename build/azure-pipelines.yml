@@ -16,10 +16,11 @@ stages:
   jobs:
   - job:
     steps:
-    - task: GitVersion@4
+    - task: GitVersion@5
       inputs:
         updateAssemblyInfo: true
         preferBundledVersion: false
+        versionSpec: '0.0.0'
       displayName: Run GitVersion task
 
     - script: echo %Action%%BuildVersion%
