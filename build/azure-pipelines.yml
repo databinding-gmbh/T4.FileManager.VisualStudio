@@ -117,8 +117,8 @@ stages:
     - task: GitTag@5
       inputs:
         workingdir: '$(SYSTEM.DEFAULTWORKINGDIRECTORY)'
-        tag: '$(GitVersion.SemVer)'
-        tagMessage: '$(GitVersion.SemVer)'
+        tag: '$(GitVersion.FullSemVer)'
+        tagMessage: '$(GitVersion.FullSemVer)'
         useLightweightTags: true
      
 - stage: DEPLOY_GITHUB_PAGES
