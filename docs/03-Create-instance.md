@@ -3,6 +3,11 @@
 Create instance of T4.FileManager.
 
 ```
+var fileManager = new T4FileManager(this);
+```
+or
+
+```
 var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
 ```
 
