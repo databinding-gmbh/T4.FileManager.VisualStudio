@@ -114,12 +114,13 @@ stages:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/documentation'
         ArtifactName: documentation
 
-    - task: GitTag@5
-      inputs:
-        workingdir: '$(SYSTEM.DEFAULTWORKINGDIRECTORY)'
-        tag: '$(GitVersion.FullSemVer)'
-        tagMessage: '$(GitVersion.FullSemVer)'
-        useLightweightTags: true
+    - ${{ if eq(parameters.canPublish, true) }}: 
+      - task: GitTag@5
+        inputs:
+          workingdir: '$(SYSTEM.DEFAULTWORKINGDIRECTORY)'
+          tag: '$(GitVersion.AssemblySemVer)'
+          tagMessage: '$(GitVersion.AssemblySemVer)'
+          useLightweightTags: true
      
 - stage: DEPLOY_GITHUB_PAGES
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
