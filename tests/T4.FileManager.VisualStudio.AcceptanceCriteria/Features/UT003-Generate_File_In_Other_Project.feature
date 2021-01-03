@@ -18,7 +18,7 @@ Scenario: Generate files in other .NET project
 
 <#
 var files = new string[] { "PersonDto", "OrderDto" };
-var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+var fileManager = new T4FileManager(this);
 
 foreach(var itm in files)
 {

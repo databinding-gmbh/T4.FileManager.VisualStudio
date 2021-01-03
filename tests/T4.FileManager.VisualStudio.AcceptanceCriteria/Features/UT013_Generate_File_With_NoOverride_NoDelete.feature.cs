@@ -93,7 +93,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 <#@ include file=""$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude"" #>
 
 <#
-var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+var fileManager = T4FileManager.Create(this);
 fileManager.CanOverwriteExistingFile = false;
 fileManager.CreateNewFile(""TestNoDelete.g.cs"","""",""TestOverwrite"",null);	
 #>

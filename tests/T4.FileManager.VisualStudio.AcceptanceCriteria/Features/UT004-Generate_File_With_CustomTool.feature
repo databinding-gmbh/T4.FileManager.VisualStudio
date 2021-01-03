@@ -18,7 +18,7 @@ Scenario: Generate files with custom tool
 
 <#
 var files = new string[] { "PersonDto", "OrderDto" };
-var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+var fileManager = TemplateFileManager.Create(this);
 
 var properties = new Dictionary<string, object>();
 properties.Add(Property.CustomTool, (object)"TextTemplatingFileGenerator");

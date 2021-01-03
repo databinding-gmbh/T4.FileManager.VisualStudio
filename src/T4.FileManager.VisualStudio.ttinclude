@@ -73,6 +73,13 @@
         /// <summary>
         /// Constructor for the instantiation of the FileManager.
         /// </summary>
+        /// <param name="textTransformation">Code to generate as <see cref="GeneratedTextTransformation"/>.</param>
+        public T4FileManager(GeneratedTextTransformation textTransformation)
+        : this(textTransformation.GenerationEnvironment, textTransformation.Host) {}
+
+        /// <summary>
+        /// Constructor for the instantiation of the FileManager.
+        /// </summary>
         /// <param name="textTransformation">Code to generate as <see cref="StringBuilder"/>.</param>
         /// <param name="host">The interface for the host that transforms text template.</param>
         public T4FileManager(StringBuilder textTransformation, ITextTemplatingEngineHost host)
@@ -91,7 +98,7 @@
         /// <summary>
         /// Create instance of the FileManager.
         /// </summary>
-        /// <param name="textTransformation">Code to generate as <see cref="StringBuilder"/>.</param>
+        /// <param name="textTransformation">Code to generate as <see cref="GeneratedTextTransformation"/>.</param>
         public static T4FileManager Create(GeneratedTextTransformation textTransformation)
         {
             return new T4FileManager(textTransformation.GenerationEnvironment, textTransformation.Host);
@@ -836,5 +843,17 @@
 
         [JsonIgnore]
         public string AbsolutePath { get; set; }
+    }
+
+    /// <summary>
+    /// For backward compatibility scenarios only
+    /// </summary>
+    public class TemplateFileManager : T4FileManager
+    {
+        public TemplateFileManager(GeneratedTextTransformation textTransformation)
+        : base(textTransformation.GenerationEnvironment, textTransformation.Host) {}
+
+        public TemplateFileManager(StringBuilder textTransformation, ITextTemplatingEngineHost host)
+        : base (textTransformation, host) {}
     }
 #>
