@@ -45,6 +45,25 @@ These tests are located in the project  `T4.FileManager.VisualStudio.AcceptanceC
 
 ## How to Contribute
 
+Pull-requests are welcome! Please follow these rules so that we can integrate your pull-requests without much effort:
+
+* Create an issue and explain the problem with an example
+*	Reference the issue in your commits / pull-request
+*	Document the new behavior (in the docs folder)
+*	Create tests to verify the new behavior
+*	All existing tests must still pass, including the acceptance tests (in the tests folder)
+*	Clean-up the commit history 
+    *	No fix commits
+    *	Changes that belong together are in the same commit
+    *	All commits have a meaningful commit message
+* Keep the code maintainable and focused on the problem you try to solve
+    *	No feature-flags to turn the main logic on or off
+    *	No C# preprocessor directives (like #if DEBUG)
+    *	No modification of the author list (on GitHub and in the NuGet package)
+    *	No changes on the code style and formatting
+
+
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
