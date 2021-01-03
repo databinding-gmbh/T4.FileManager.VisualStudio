@@ -26,7 +26,7 @@ Install the nuget package in your project.
 Install-Package T4.FileManager.VisualStudio
 ```
 
-For more information see [documentation](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/01-First-Steps/).
+For more information see [documentation](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/01-Installation/).
 
 ## Running
 
