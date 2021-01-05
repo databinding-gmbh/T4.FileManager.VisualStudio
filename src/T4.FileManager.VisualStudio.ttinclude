@@ -7,9 +7,10 @@
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ import namespace="Newtonsoft.Json" #>
 <#@ import namespace="System" #>
+<#@ import namespace="System.Diagnostics" #>
 <#@ import namespace="System.IO" #>
-<#@ import namespace="System.Reflection" #>
 <#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Threading.Tasks" #>
 <#@ import namespace="System.Collections.Generic" #>
@@ -26,6 +27,11 @@
         /// Object for Visual Studio core automation.
         /// </summary>
         private readonly DTE dte;
+
+        /// <summary>
+        /// Object for logging.
+        /// </summary>
+        private readonly Logger logger;
 
         /// <summary>
         /// Code to generate as <see cref="StringBuilder"/>.
@@ -51,6 +57,11 @@
         /// Information about the current file to be generated.
         /// </summary>
         private FileToGenerate currentFileToGenerate;
+
+        /// <summary>
+        /// Switch to write log of generation to main output file.
+        /// </summary>
+        private bool isLogToMainOutputFileEnabled = false;
 
         /// <summary>
         /// Allow overwriting of files if it has already been generated.
@@ -93,6 +104,7 @@
             this.filesToGenerate = new List<FileToGenerate>();
             this.generatedInfo = new GeneratedInfo();
             this.dte = GetHostServiceProvider();
+            this.logger = new Logger(this.dte, Path.GetFileName(this.host.TemplateFile));
         }
 
         /// <summary>
@@ -111,7 +123,18 @@
         /// </Summary>
         public T4FileManager DisableTemplateMainOutputFile()
         {
+            this.logger.Information("TemplateMainOutputFile disabled");
             this.host.SetFileExtension("/");
+            return this;
+        }
+
+        /// <Summary>
+        /// Write log information to the main output file in addtion to the active visual studio output window.
+        /// </Summary>
+        public T4FileManager EnableLog()
+        {
+            this.logger.Information("Log to main output file enabled");
+            this.isLogToMainOutputFileEnabled = true;
             return this;
         }
 
@@ -120,6 +143,7 @@
         /// </summary>
         public void StartHeader()
         {
+            this.logger.Information("Header started");
             this.textTransformation.Clear();
         }
 
@@ -128,6 +152,7 @@
         /// </summary>
         public void FinishHeader()
         {
+            this.logger.Information("FinishHeader, {0} chars removed from main output", this.textTransformation.Length); 
             this.headerBlock = this.textTransformation.ToString();
             this.textTransformation.Remove(0, this.textTransformation.Length);
         }
@@ -145,6 +170,7 @@
         /// </summary>
         public void ClearHeader()
         {
+            this.logger.Information("ClearHeader called"); 
             this.headerBlock = null;
         }
 
@@ -212,14 +238,17 @@
         /// <param name="properties">Settings that can be defined for the generated file.</param>
         public void CreateNewFile(string filename, string project, string path, Dictionary<string, object> properties)
         {
+            this.logger.Information("Begin CreateNewFile {0}", filename);
             if (this.currentFileToGenerate != null && !string.IsNullOrEmpty(this.currentFileToGenerate.Filename))
             {
+                this.logger.Information("Finish previous file");
                 FinishFile();
             }
 
             properties = properties ?? new Dictionary<string, object>();
 
             var formattedPath = path == null ? null : path.Replace("/", @"\");
+            this.logger.Information("Formatted path set {0}", formattedPath);
 
             this.currentFileToGenerate = new FileToGenerate
             {
@@ -230,6 +259,7 @@
             };
 
             this.textTransformation.Clear();
+            this.logger.Information("End CreateNewFile {0}", filename);
         }
 
         /// <summary>
@@ -237,11 +267,13 @@
         /// </summary>
         public void FinishFile()
         {
+            this.logger.Information("Begin FinishFile");
             string directory = null;
 
             if (!string.IsNullOrEmpty(this.currentFileToGenerate.Project))
             {
                 directory = this.GetProjectDirectoryPath(this.currentFileToGenerate.Project);
+                this.logger.Information("Filepath {0} to project {1} for file {2}", directory, this.currentFileToGenerate.Project, this.currentFileToGenerate.Filename);
             }
 
             directory = directory ?? this.GetTemplateFileProjectDirectoryPath();
@@ -249,16 +281,20 @@
             if (!string.IsNullOrEmpty(this.currentFileToGenerate.Path))
             {
                 directory = Path.Combine(directory, this.currentFileToGenerate.Path);
+                this.logger.Information("Filepath {0} to solution dir {1} for file {2}", directory, this.currentFileToGenerate.Project, this.currentFileToGenerate.Filename);
             }
 
             this.currentFileToGenerate.AbsolutePath = directory;
             this.currentFileToGenerate.Content = this.textTransformation.Insert(0, this.headerBlock).ToString();
 
             this.filesToGenerate.Add(this.currentFileToGenerate);
+            this.logger.Information("File {0} added to list", this.currentFileToGenerate.Filename);
 
+            this.logger.Information("File content ({0} chars) removed from main text transformation", this.textTransformation.Length);
             this.textTransformation.Remove(0, this.textTransformation.Length);
 
             this.currentFileToGenerate = new FileToGenerate();
+            this.logger.Information("End FinishFile");
         }
 
         /// <summary>
@@ -274,8 +310,13 @@
         /// </summary>
         public void Generate()
         {
+            var stopWatch = new Stopwatch();
+	        stopWatch.Start();
+
+            this.logger.Information("Start Generate");
             if (this.currentFileToGenerate != null && !string.IsNullOrEmpty(this.currentFileToGenerate.Filename))
             {
+                this.logger.Information("Finish last file");
                 FinishFile();
             }
 
@@ -286,6 +327,7 @@
             {
                 var content = File.ReadAllText(templateFile);
                 filesInfoFromPreviousRun = JsonConvert.DeserializeObject<GeneratedInfo>(content);
+                this.logger.Information("Infos loaded from last run {0}", templateFile);
             }
 
             this.textTransformation.Clear();
@@ -296,11 +338,22 @@
                 this.GenerateNewFileForSolution(fileToGenerate);
             }
 
+            this.logger.Information("{0} files generated", this.filesToGenerate.Count);
             this.DeleteExistingFiles(filesInfoFromPreviousRun);
 
             this.generatedInfo.FilesToGenerate = this.filesToGenerate;
 
             File.WriteAllText(templateFile, JsonConvert.SerializeObject(this.generatedInfo, Formatting.Indented));
+            this.logger.Information("New info file {0} created", templateFile);
+            this.logger.Information("End Generate");
+            
+            stopWatch.Stop();
+            this.logger.Information("Duration: {0:h\\:mm\\:ss\\.fffff}", stopWatch.Elapsed);
+
+            if (this.isLogToMainOutputFileEnabled)
+            {
+                this.textTransformation.Append(this.logger.Log);
+            }
         }
 
         /// <summary>
@@ -365,9 +418,12 @@
                 var value = fileToGenerate.Properties[Property.CanOverwriteExistingFile] as bool?;
                 if (value == false)
                 {
+                    this.logger.Information("Can't overwrite file " + fileToGenerate.Filename);
                     return false;
                 }
             }
+
+            this.logger.Information("File {0} will be overwritten", fileToGenerate.Filename);
             return true;
         }
 
@@ -377,6 +433,7 @@
         /// <param name="fileToGenerate">File information.</param>
         private void GenerateNewFileForSolution(FileToGenerate fileToGenerate)
         {
+            this.logger.Information("Begin GenerateNewFileForSolution");
             var exists = this.HasProjectItem(fileToGenerate.AbsolutePath, fileToGenerate.Filename);
 
             this.AddMissingFileToProject(fileToGenerate.Project, fileToGenerate.AbsolutePath, fileToGenerate.Filename);
@@ -388,24 +445,33 @@
             if (fileToGenerate.Properties != null && (canOverwriteExistingFile && this.CanOverwriteExistingFile) || !exists)
             {
                 if (fileToGenerate.Properties != null)
+                {
                     foreach (var property in fileToGenerate.Properties)
                     {
                         if (property.Key == Property.CanOverwriteExistingFile)
+                        {
                             continue;
+                        }
 
+                        this.logger.Information("Set property key/value pair {0}/{1}", property.Key, property.Value);
                         this.SetPropertyValue(fileProjectItem, property.Key, property.Value);
                     }
+                }
 
                 if (IsAutoIndentEnabled)
                 {
                     this.FormatProjectItem(fileProjectItem);
+                    this.logger.Information("AutoIndent is enabled for file");
                 }
 
                 if (IsAutoCleanUpWithResharperEnabled)
                 {
                     this.FormatProjectItemWithResharper(fileProjectItem);
+                    this.logger.Information("AutoCleanup with resharper is enabled for file");
                 }
             }
+
+            this.logger.Information("End GenerateNewFileForSolution");
         }
 
         /// <summary>
@@ -413,8 +479,11 @@
         /// </summary>
         private void DeleteExistingFiles(GeneratedInfo filesInfoFromPreviousRun)
         {
+            this.logger.Information("Start DeleteExistingFiles");
+
             if (filesInfoFromPreviousRun == null || filesInfoFromPreviousRun.HasContent() == false || this.CanOverwriteExistingFile == false)
             {
+                this.logger.Information("Cancel DeleteExistingFiles (no files from previous run and CanOverwriteExistingFile: {0}", this.CanOverwriteExistingFile);
                 return;
             }
 
@@ -443,8 +512,11 @@
                 {
                     File.Delete(filePath);
                     this.RemoveFileFromProject(directory, file.Filename);
+                    this.logger.Information("Dirty file {0} removed", filePath);
                 }
             }
+
+            this.logger.Information("End DeleteExistingFiles");
         }
 
         /// <summary>
@@ -497,6 +569,7 @@
                 }
 
                 item.Document.Close(vsSaveChanges.vsSaveChangesYes);
+                this.logger.Information("VS command {0} executed", command);
             });
         }
 
@@ -510,6 +583,7 @@
         private void TryToExecuteCommand(ProjectItem item, string command, bool finished, int attempt)
         {
             System.Threading.Thread.Sleep(250);
+            this.logger.Information("TryToExecuteCommand {0}, attempt: {1}", command, attempt);
 
             if (finished)
             {
@@ -539,6 +613,7 @@
 
             if (attempt == 25)
             {
+                this.logger.Information("TryToExecuteCommand {0} failed");
                 return;
             }
 
@@ -698,7 +773,9 @@
             var combinedPath = Path.Combine(absolutePath, fileName);
 
             if (!exists)
+            {
                 projectItems.AddFromFile(combinedPath);
+            }
         }
 
         /// <summary>
@@ -743,6 +820,7 @@
 
             if (property != null)
             {
+                this.logger.Information("property {0} exists", propertyName);
                 property.Value = value;
             }
         }
@@ -844,6 +922,64 @@
         [JsonIgnore]
         public string AbsolutePath { get; set; }
     }
+
+    /// <summary>
+    /// Logger for detailed information
+    /// Note: NET 4 syntax to avoid errors in error list
+    /// </summary>
+    public class Logger
+    {
+        private readonly StringBuilder log;
+        private readonly EnvDTE.DTE dte;
+        private readonly string logSuffix;
+
+        public Logger(EnvDTE.DTE dte, string suffix)
+        {
+            this.dte = dte;
+            this.log = new StringBuilder();
+            this.logSuffix = suffix;
+        }
+    
+        public string Log
+        {
+            get
+            {
+                return this.log.ToString();
+            }
+        }
+
+        public void Information(string info)
+        {
+            string line = string.Format("{0} {1} | {2}", DateTime.Now, this.logSuffix, info);
+            this.WriteToOutput(line);
+            this.log.AppendLine(line);
+        }
+
+        public void Information(string info, params object[] parameters)
+        {
+            string line = string.Format(info, parameters);
+            this.Information(line);
+        }
+
+        private void WriteToOutput(string output)
+        {
+            if (dte == null)
+            {
+                return;
+            }
+
+            var window = dte.Windows.Item(EnvDTE.Constants.vsWindowKindOutput);
+            var outputWindow = window.Object as EnvDTE.OutputWindow;
+            if (outputWindow == null)
+            {
+                this.log.AppendLine("WriteToOutput | Unable to obtain OutputWindow object");
+            }
+ 
+            outputWindow.ActivePane.Activate();
+            outputWindow.ActivePane.OutputString(output);
+            outputWindow.ActivePane.OutputString("\n");
+        }
+    } 
 
     /// <summary>
     /// For backward compatibility scenarios only

@@ -139,6 +139,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Dto\LogOutput.cs" />
     <Compile Include="Features\Helper\DteUtil.cs" />
     <Compile Include="Features\Helper\RetryUtil.cs" />
     <Compile Include="Features\Helper\VisualStudioHelper.cs" />
@@ -155,6 +156,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Default.srprofile" />
+    <None Include="Features\UT016_Log_Activities.feature" />
     <None Include="Features\UT013_Generate_File_With_Overwrite.feature" />
     <None Include="Features\UT013_Generate_File_With_NoOverride_NoDelete.feature" />
     <None Include="Features\UT002-Generate_File_Subfolder.feature" />

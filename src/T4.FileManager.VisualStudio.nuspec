@@ -6,7 +6,7 @@
     <description>File Manager for the generation of multiple files with T4 Text Templating.</description>
     <version>$version$</version>
     <icon>logo-t4-file-manager.png</icon>
-    <authors>Thierry Iseli, René Leupold</authors>
+    <authors>René Leupold, Johnny Graber, Thierry Iseli</authors>
     <owners>databindinggmbh</owners>
     <repository type="git" url="https://github.com/databinding-gmbh/T4.FileManager.VisualStudio" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

@@ -22,5 +22,11 @@
         {
             return table.CreateSet<TemplateChanges>().ToList();
         }
+
+        [StepArgumentTransformation]
+        public IList<LogOutput> LogOutputTransform(Table table)
+        {
+            return table.CreateSet<LogOutput>().ToList();
+        }
     }
 }

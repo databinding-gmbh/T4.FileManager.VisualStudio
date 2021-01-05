@@ -144,5 +144,15 @@
                 testee.Should().Contain(content);
             }
         }
+
+        [Then(@"the file ""(.*)"" contains following log fragments")]
+        public void ThenTheFileContainsFollowingLogFragments(string file, IList<LogOutput> expectedContent)
+        {
+            var testee = File.ReadAllText(Path.Combine(this.pathTestEnvironment, file));
+            foreach (var expected in expectedContent)
+            {
+                testee.Should().Contain(expected.Textfragment);
+            }
+        }
     }
 }
