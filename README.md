@@ -51,7 +51,7 @@ Pull-requests are welcome! Please follow these rules so that we can integrate yo
 *	Reference the issue in your commits / pull-request
 *	Document the new behavior (in the docs folder)
 *	Create tests to verify the new behavior
-*	All existing tests must still pass, including the acceptance tests (in the tests folder)
+*	[All existing tests must still pass](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/T4FileManagerVisualStudio.html), including the acceptance tests (in the tests folder)
 *	Clean-up the commit history 
     *	No fix commits
     *	Changes that belong together are in the same commit
