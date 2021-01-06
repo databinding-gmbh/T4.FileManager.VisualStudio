@@ -21,6 +21,7 @@ stages:
         updateAssemblyInfo: true
         preferBundledVersion: false
         versionSpec: '0.0.0'
+        mode: ContinuousDelivery
       displayName: Run GitVersion task
 
     - script: echo %Action%%BuildVersion%
