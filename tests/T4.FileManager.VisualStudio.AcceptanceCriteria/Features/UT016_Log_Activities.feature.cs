@@ -84,12 +84,12 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files in other .NET project", SourceLine=9)]
-        public virtual void GenerateFilesInOther_NETProject()
+        [TechTalk.SpecRun.ScenarioAttribute("Log activities of generation process", SourceLine=9)]
+        public virtual void LogActivitiesOfGenerationProcess()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate files in other .NET project", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Log activities of generation process", null, tagsOfScenario, argumentsOfScenario);
 #line 10
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -158,6 +158,82 @@ fileManager.Generate();
                             "2 files generated"});
 #line 43
  testRunner.Then("the file \"TestWithLogEnabled.txt\" contains following log fragments", ((string)(null)), table27, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Add custom information to log", SourceLine=49)]
+        public virtual void AddCustomInformationToLog()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add custom information to log", null, tagsOfScenario, argumentsOfScenario);
+#line 50
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 7
+this.FeatureBackground();
+#line hidden
+#line 51
+ testRunner.Given("the script \"TestWithCustomLog.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
+<#@ assembly name=""System.Core"" #>
+<#@ import namespace=""System.Linq"" #>
+<#@ import namespace=""System.Text"" #>
+<#@ import namespace=""System.Collections.Generic"" #>
+<#@ output extension="".txt"" #>
+
+<#@ include file=""$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude"" #>
+
+<#
+var files = new string[] { ""PersonDto"", ""OrderDto"" };
+var fileManager = new T4FileManager(this).EnableLog(); // <-- log output to main file TestWithLogEnabled.txt
+
+foreach(var itm in files)
+{
+fileManager.CreateNewFile(itm + "".g.cs"", """", ""TestSubfolder"", null);
+#>
+namespace Test
+{
+public class <#= itm #>
+{
+<# fileManager.Log(""My custom log info for {0}"", itm); #>
+}
+}
+<#
+}
+
+fileManager.Generate();
+#>", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 83
+ testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Textfragment"});
+                table28.AddRow(new string[] {
+                            "My custom log info for OrderDto"});
+                table28.AddRow(new string[] {
+                            "My custom log info for PersonDto"});
+#line 84
+ testRunner.Then("the file \"TestWithCustomLog.txt\" contains following log fragments", ((string)(null)), table28, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

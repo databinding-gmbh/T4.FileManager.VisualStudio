@@ -174,6 +174,16 @@
             this.headerBlock = null;
         }
 
+        public void Log(string info)
+        {
+            this.logger.Information(info);
+        }
+
+        public void Log(string info, params object[] param)
+        {
+            this.logger.Information(info, param);
+        }
+
         /// <summary>
         /// A new file will be started. The generated code that was before this method is added to the last file.
         /// </summary>
