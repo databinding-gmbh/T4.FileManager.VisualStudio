@@ -25,6 +25,10 @@ stages:
         preferBundledVersion: false
         versionSpec: '0.0.0'
         mode: ContinuousDelivery
+        major-version-bump-message: '\+semver:\s?(breaking|major)'
+        minor-version-bump-message: '\+semver:\s?(feature|minor)'
+        patch-version-bump-message: '\+semver:\s?(fix|patch)'
+        no-bump-message: '\+semver:\s?(none|skip)'
       displayName: Run GitVersion task
 
     - script: echo %Action%%BuildVersion%
