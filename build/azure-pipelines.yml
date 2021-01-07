@@ -18,7 +18,7 @@ stages:
     steps:
     - task: gitversion/setup@0
       inputs:
-        versionSpec: '5.0.0'
+        versionSpec: '5.6.1'
     - task: GitVersion@5
       inputs:
         updateAssemblyInfo: true
