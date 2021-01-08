@@ -208,7 +208,7 @@ stages:
           targetType: 'inline'
           script: |
             $hash = @{
-            			    message="Gerade wurde die Version $(SemVer) des T4 FileManager auf NuGet unter $(NuGetUrl) publiziert"
+            			    message="Gerade haben wir die Version $(SemVer) des T4 FileManager auf NuGet unter $(NuGetUrl) publiziert."
             			    url="$(NuGetUrl)"
                   }
                   $JSON = $hash | convertto-json 
