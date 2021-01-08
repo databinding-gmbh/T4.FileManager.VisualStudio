@@ -203,3 +203,14 @@ stages:
           nuGetFeedType: external
           packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
           publishFeedCredentials: 'NuGetFeed'
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: |
+            $hash = @{
+            			    message="Gerade wurde die Version $(SemVer) des T4 FileManager auf NuGet unter $(NuGetUrl) publiziert"
+            			    url="$(NuGetUrl)"
+                  }
+                  $JSON = $hash | convertto-json 
+                  $uri = '$(SmToken)'
+                  Invoke-WebRequest -Uri $uri -Method Post -Body $JSON -ContentType "application/json"
