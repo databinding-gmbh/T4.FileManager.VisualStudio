@@ -10,10 +10,11 @@
     <owners>databindinggmbh</owners>
     <repository type="git" url="https://github.com/databinding-gmbh/T4.FileManager.VisualStudio" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright ©2020 databinding GmbH</copyright>
+    <copyright>Copyright 2021 databinding GmbH</copyright>
     <tags>t4 file manager code generation visual studio vs vsstudio metadata programming</tags>
     <license type="file">LICENSE.txt</license>
     <releaseNotes>
+      1.3.0 - Logging generation in output window and main output text file if .EnableLog() called (Feature UT016)
       1.2.4 - Referencing in .net core projects new with $(TargetDir) see: https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/02-Include-in-your-text-template/ 
     </releaseNotes>
     <contentFiles>
