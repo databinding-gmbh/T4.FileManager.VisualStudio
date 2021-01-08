@@ -16,9 +16,6 @@ stages:
   jobs:
   - job:
     steps:
-    - task: gitversion/setup@0
-      inputs:
-        versionSpec: '5.6.1'
     - task: GitVersion@5
       inputs:
         updateAssemblyInfo: true
@@ -30,7 +27,7 @@ stages:
         patch-version-bump-message: '\+semver:\s?(fix|patch)'
         no-bump-message: '\+semver:\s?(none|skip)'
       displayName: Run GitVersion task
-
+  
     - script: echo %Action%%BuildVersion%
       displayName: Set build version
       env:
