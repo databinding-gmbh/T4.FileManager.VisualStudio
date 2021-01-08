@@ -40,7 +40,7 @@ These tests are located in the project  `T4.FileManager.VisualStudio.AcceptanceC
 ## Authors
 
 - René Leupold - *initial work*
-- Thierry Iseli - *Consolidation of [T4.FileManager](https://github.com/renegadexx/T4.FileManager)*
+- Thierry Iseli - *Consolidation of [T4.TemplateFileManager](https://github.com/renegadexx/T4.Helper)*
 - Johnny Graber
 
 ## How to Contribute
@@ -78,4 +78,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - No support for TFS version control
 - *.txt4 is now named *.info.json
   
-Link to old FileManager: https://github.com/renegadexx/T4.Helper.
+Link to old T4.TemplateFileManager: https://github.com/renegadexx/T4.Helper.
