@@ -19,7 +19,6 @@
         private string pathTestEnvironment;
         private ProjectItem t4Template;
         private string targetTestPath;
-        private IList<GeneratedFile> files;
         private string currentTesteeFilePath;
 
         [Given(@"the file manager")]
@@ -107,8 +106,6 @@
 
                 File.Exists(testee).Should().BeTrue();
             }
-
-            this.files = files;
         }
 
         [Then(@"the following files are not generated:")]
@@ -133,16 +130,13 @@
             }
         }
 
-        [Then(@"all files contains the following content:")]
-        public void ThenAllFilesContainsFollowingContent(string content)
+        [Then(@"the file ""(.*)"" starts with header:")]
+        public void ThenTheFileStartsWithFollowingContent(string file, string expectedHeader)
         {
-            foreach (var file in this.files)
-            {
-                var filePath = file.GetFullPath(this.targetTestPath);
-                var testee = File.ReadAllText(filePath);
-                
-                testee.Should().Contain(content);
-            }
+            var filePath = Path.Combine(this.targetTestPath, file);
+            var testee = File.ReadAllText(filePath);
+            
+            testee.Should().StartWith(expectedHeader);
         }
 
         [Then(@"the file ""(.*)"" contains following log fragments")]

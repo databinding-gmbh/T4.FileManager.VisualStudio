@@ -162,7 +162,7 @@
     <None Include="Features\UT002-Generate_File_Subfolder.feature" />
     <None Include="Features\UT004-Generate_File_With_CustomTool.feature" />
     <None Include="Features\UT003-Generate_File_In_Other_Project.feature" />
-    <None Include="Features\UT006-Generate_File_With_Global_Header.feature" />
+    <None Include="Features\UT006-Generate_File_With_Standard_Header.feature" />
     <None Include="Features\UT009_Generate_File_With_CleanUp_Of_Old_File.feature" />
     <None Include="packages.config" />
     <None Include="Features\UT001-Generate_Code.feature">
