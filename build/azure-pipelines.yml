@@ -215,6 +215,6 @@ stages:
           targetType: 'filePath'
           filePath: 'drop/drop/NuGetMessage.ps1'
           arguments: > # Use this to avoid newline characters in multiline string
-            -uri $(SmToken)
+            -uri "$(SmToken)"
             -version $(BuildVersion)
             -nugeturl $(NuGetUrl)

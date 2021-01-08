@@ -11,4 +11,4 @@ $hash = @{
 
 $JSON = $hash | convertto-json 
 Write-Host $JSON
-Invoke-WebRequest -Uri $uri -Method Post -Body $JSON -ContentType "application/json"
+Invoke-WebRequest -Uri $uri -Method Post -Body $JSON -ContentType 'application/json'
