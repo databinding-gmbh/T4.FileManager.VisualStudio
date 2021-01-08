@@ -12,3 +12,7 @@ Manager for generating multiple files with T4 text templates.
 4. [Start or create file](04-Start-or-create-file.md)
 5. [Add header to files](05-Add-header-to-files.md)
 6. [Proceed to generate files](06-Proceed-to-generate-files.md)   
+7. [Features](07-Features.md)
+8. [Generated file infos as json](08-Generated-file-infos-as-json.md)
+9. [Living documentation and testing](09-Living-documentation-and-testing.md)
+10. [Change log](10-Change-log.md)
