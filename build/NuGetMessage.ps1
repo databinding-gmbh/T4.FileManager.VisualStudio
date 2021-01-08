@@ -1,6 +1,6 @@
 param (
 [string]$uri,
-[string]$version
+[string]$version,
 [string]$nugeturl
 )
 
