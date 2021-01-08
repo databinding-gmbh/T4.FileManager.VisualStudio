@@ -103,7 +103,7 @@ stages:
     - task: CopyFiles@2
       displayName: 'Copy send message script'
       inputs:
-        SourceFolder: build/*.ps1
+        SourceFolder: $(Build.SourcesDirectory)/build/*.ps1
         TargetFolder: '$(Build.ArtifactStagingDirectory)/nuget'
 
     - task: NuGetCommand@2
