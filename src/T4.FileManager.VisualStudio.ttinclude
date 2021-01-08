@@ -983,6 +983,7 @@
             if (outputWindow == null)
             {
                 this.log.AppendLine("WriteToOutput | Unable to obtain OutputWindow object");
+                return;
             }
  
             outputWindow.ActivePane.Activate();
