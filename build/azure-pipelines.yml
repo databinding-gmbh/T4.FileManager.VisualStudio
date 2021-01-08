@@ -213,7 +213,7 @@ stages:
       - task: PowerShell@2
         inputs:
           targetType: 'filePath'
-          filePath: 'drop/NuGetMessage.ps1'
+          filePath: 'drop/drop/NuGetMessage.ps1'
           arguments: > # Use this to avoid newline characters in multiline string
             -uri $(SmToken)
             -version $(BuildVersion)
