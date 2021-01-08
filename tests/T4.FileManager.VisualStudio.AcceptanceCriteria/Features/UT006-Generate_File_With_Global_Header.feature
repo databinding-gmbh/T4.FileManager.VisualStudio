@@ -3,9 +3,11 @@ Feature: UT006 Generate File with global header
 	As a developer
 	I can generate code with the T4.FileManager using my own custom header
 
-Scenario: Generate multiple files with global header
+Background: T4 Filemanager
 	Given the file manager
-	And the script "TestGlobalHeader.tt" with the following content
+
+Scenario: Generate multiple files with global header
+	Given the script "TestGlobalHeader.tt" with the following content
 		"""
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
