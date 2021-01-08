@@ -1,4 +1,8 @@
-param ($uri, $version, $nugeturl)
+param (
+[string]$uri,
+[string]$version
+[string]$nugeturl
+)
 
 $hash = @{
   message="Gerade haben wir die Version $($version) des T4 FileManager auf NuGet unter $($nugeturl) publiziert."
