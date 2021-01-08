@@ -208,8 +208,8 @@ stages:
           targetType: 'inline'
           script: |
             $hash = @{
-            			    message="Gerade haben wir die Version $(SemVer) des T4 FileManager auf NuGet unter $(NuGetUrl) publiziert."
-            			    url="$(NuGetUrl)"
+                      message="Gerade haben wir die Version $(BuildVersion) des T4 FileManager auf NuGet unter $(NuGetUrl) publiziert."
+                      url="$(NuGetUrl)"
                   }
                   $JSON = $hash | convertto-json 
                   $uri = '$(SmToken)'
