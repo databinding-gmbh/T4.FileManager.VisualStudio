@@ -7,3 +7,12 @@
 ## 1.2.4
 
 - Referencing in .net core projects new with $(TargetDir)
+
+## Breaking Changes compared to TemplateFileManager
+
+- No support for TFS Source Control
+- No Parameter template support with sessions
+- *.txt4 replaced with *.info.json
+- WriteLineToBuildPane replaced with FileManager.Log()
+- Disable split files (FileManager.Process) not supported
+
