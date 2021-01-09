@@ -1,5 +1,5 @@
 ﻿@db-127
-Feature: UT013 Generate File change behaviour
+Feature: UT013 Generate File with overwrite
 	As a developer
 	I can change the behaviour of supress changes to overwrite existing files
 

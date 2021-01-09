@@ -158,7 +158,7 @@
     <None Include="Default.srprofile" />
     <None Include="Features\UT016_Log_Activities.feature" />
     <None Include="Features\UT013_Generate_File_With_Overwrite.feature" />
-    <None Include="Features\UT013_Generate_File_With_NoOverride_NoDelete.feature" />
+    <None Include="Features\UT013_Generate_File_Without_Modifications.feature" />
     <None Include="Features\UT002-Generate_File_Subfolder.feature" />
     <None Include="Features\UT004-Generate_File_With_CustomTool.feature" />
     <None Include="Features\UT003-Generate_File_In_Other_Project.feature" />
