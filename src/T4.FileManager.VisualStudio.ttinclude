@@ -295,8 +295,14 @@
             }
 
             this.currentFileToGenerate.AbsolutePath = directory;
-            this.currentFileToGenerate.Content = this.textTransformation.Insert(0, this.headerBlock).ToString();
 
+            var header = this.headerBlock;
+            if (string.IsNullOrEmpty(header) == false)
+            {
+                header = this.headerBlock.Replace("$filename$", this.currentFileToGenerate.Filename);
+            }
+
+            this.currentFileToGenerate.Content = this.textTransformation.Insert(0, header).ToString();
             this.filesToGenerate.Add(this.currentFileToGenerate);
             this.logger.Information("File {0} added to list", this.currentFileToGenerate.Filename);
 

@@ -84,12 +84,12 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate multiple files with global header", SourceLine=8)]
-        public virtual void GenerateMultipleFilesWithGlobalHeader()
+        [TechTalk.SpecRun.ScenarioAttribute("Generate multiple files with standard header", SourceLine=8)]
+        public virtual void GenerateMultipleFilesWithStandardHeader()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate multiple files with global header", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate multiple files with standard header", null, tagsOfScenario, argumentsOfScenario);
 #line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -161,6 +161,93 @@ fileManager.Generate();
 #line hidden
 #line 58
  testRunner.And("the file \"PersonDtoWithGlobal.g.cs\" starts with header:", "// -------------------------\r\n// databinding - T4\r\n// -------------------------", ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Generate multiple files with filename in standard header (SA1633)", SourceLine=65)]
+        public virtual void GenerateMultipleFilesWithFilenameInStandardHeaderSA1633()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate multiple files with filename in standard header (SA1633)", null, tagsOfScenario, argumentsOfScenario);
+#line 66
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 67
+ testRunner.Given("the script \"TestSA1633Header.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
+<#@ assembly name=""System.Core"" #>
+<#@ import namespace=""System.Linq"" #>
+<#@ import namespace=""System.Text"" #>
+<#@ import namespace=""System.Collections.Generic"" #>
+<#@ output extension="".txt"" #>
+
+<#@ include file=""$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude"" #>
+
+<#
+var fileManager = T4FileManager.Create(this);
+fileManager.StartHeader();
+#>
+// <copyright file=""$filename$"" company=""databinding.gmbh"">
+//     databinding.gmbh - All rights reserved.
+// </copyright>
+// <author>Mr. T4</author>
+<#
+fileManager.FinishHeader();
+fileManager.CreateNewFile(""PersonDtoWithSA1633.g.cs"","""","""",null);	
+#>
+namespace Test
+{
+public class PersonDtoWithHeader
+{
+}
+}
+<#
+fileManager.CreateNewFile(""OrderDtoWithSA1633.g.cs"","""","""",null);	
+#>
+namespace Test
+{
+public class OrderDtoWithHeader
+{
+}
+}
+<#
+fileManager.Generate();
+#>", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 109
+ testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 110
+ testRunner.Then("the file \"PersonDtoWithSA1633.g.cs\" starts with header:", "// <copyright file=\"PersonDtoWithSA1633.g.cs\" company=\"databinding.gmbh\">\r\n//    " +
+                        " databinding.gmbh - All rights reserved.\r\n// </copyright>\r\n// <author>Mr. T4</au" +
+                        "thor>", ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 117
+ testRunner.And("the file \"OrderDtoWithSA1633.g.cs\" starts with header:", "// <copyright file=\"OrderDtoWithSA1633.g.cs\" company=\"databinding.gmbh\">\r\n//     " +
+                        "databinding.gmbh - All rights reserved.\r\n// </copyright>\r\n// <author>Mr. T4</aut" +
+                        "hor>", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
