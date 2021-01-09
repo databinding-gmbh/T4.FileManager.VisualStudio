@@ -19,10 +19,10 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.5.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("UT013 Generate files without modifications", new string[] {
+    [TechTalk.SpecRun.FeatureAttribute("UT013 Generate File without modifications", new string[] {
             "db-127"}, Description="\tAs a developer\r\n\tI can generate code with the T4.FileManager and supress changes" +
         " if the file exist", SourceFile="Features\\UT013_Generate_File_Without_Modifications.feature", SourceLine=1)]
-    public partial class UT013GenerateFilesWithoutModificationsFeature
+    public partial class UT013GenerateFileWithoutModificationsFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -37,7 +37,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT013 Generate files without modifications", "\tAs a developer\r\n\tI can generate code with the T4.FileManager and supress changes" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT013 Generate File without modifications", "\tAs a developer\r\n\tI can generate code with the T4.FileManager and supress changes" +
                     " if the file exist", ProgrammingLanguage.CSharp, new string[] {
                         "db-127"});
             testRunner.OnFeatureStart(featureInfo);
@@ -110,12 +110,12 @@ fileManager.Generate();
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files with CanOverwriteExistingFile is set to false, no files deleted", SourceLine=35)]
-        public virtual void GenerateFilesWithCanOverwriteExistingFileIsSetToFalseNoFilesDeleted()
+        [TechTalk.SpecRun.ScenarioAttribute("No files deleted if CanOverwriteExistingFile is set to false", SourceLine=35)]
+        public virtual void NoFilesDeletedIfCanOverwriteExistingFileIsSetToFalse()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate files with CanOverwriteExistingFile is set to false, no files deleted", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No files deleted if CanOverwriteExistingFile is set to false", null, tagsOfScenario, argumentsOfScenario);
 #line 36
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

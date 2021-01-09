@@ -19,10 +19,10 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.5.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("UT013 Generate File change behaviour", new string[] {
+    [TechTalk.SpecRun.FeatureAttribute("UT013 Generate File with overwrite", new string[] {
             "db-127"}, Description="\tAs a developer\r\n\tI can change the behaviour of supress changes to overwrite exis" +
         "ting files", SourceFile="Features\\UT013_Generate_File_With_Overwrite.feature", SourceLine=1)]
-    public partial class UT013GenerateFileChangeBehaviourFeature
+    public partial class UT013GenerateFileWithOverwriteFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -37,7 +37,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT013 Generate File change behaviour", "\tAs a developer\r\n\tI can change the behaviour of supress changes to overwrite exis" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT013 Generate File with overwrite", "\tAs a developer\r\n\tI can change the behaviour of supress changes to overwrite exis" +
                     "ting files", ProgrammingLanguage.CSharp, new string[] {
                         "db-127"});
             testRunner.OnFeatureStart(featureInfo);

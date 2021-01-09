@@ -1,5 +1,5 @@
 ﻿@db-127
-Feature: UT013 Generate files without modifications
+Feature: UT013 Generate File without modifications
 	As a developer
 	I can generate code with the T4.FileManager and supress changes if the file exist
 
