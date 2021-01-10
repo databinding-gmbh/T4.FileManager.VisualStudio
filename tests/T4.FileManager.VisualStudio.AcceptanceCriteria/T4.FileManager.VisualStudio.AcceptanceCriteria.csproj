@@ -73,6 +73,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
       <Private>True</Private>
@@ -142,6 +143,7 @@
     <Compile Include="Features\Dto\LogOutput.cs" />
     <Compile Include="Features\Helper\DteUtil.cs" />
     <Compile Include="Features\Helper\RetryUtil.cs" />
+    <Compile Include="Features\Helper\ScreenCapture.cs" />
     <Compile Include="Features\Helper\VisualStudioHelper.cs" />
     <Compile Include="Features\Dto\GeneratedFile.cs" />
     <Compile Include="Features\Hooks\StepTransformation.cs" />
