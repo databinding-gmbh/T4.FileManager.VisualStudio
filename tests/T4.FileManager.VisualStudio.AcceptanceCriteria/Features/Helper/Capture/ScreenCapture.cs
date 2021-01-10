@@ -11,7 +11,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Helper
         /// <returns></returns>
         public Image CaptureScreen()
         {
-            return this.CaptureWindow(User32.GetForegroundWindow());
+            return this.CaptureWindow(User32.GetDesktopWindow());
         }
  
         /// <summary>
