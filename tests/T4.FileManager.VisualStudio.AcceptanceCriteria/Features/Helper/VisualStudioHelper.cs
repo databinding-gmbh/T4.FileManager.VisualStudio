@@ -10,8 +10,8 @@
     public static class VisualStudioHelper
     {
         public static DTE Dte { get; internal set; } = DteUtil.GetCurrentDte();
-        
-        public static bool CanOpenFileInCodeWindow { get; set; } 
+
+        public static bool CanOpenFileInCodeWindow { get; set; }
 
         public static void CleanupViaT4()
         {
@@ -19,14 +19,14 @@
             var project = dte.Solution.Cast<Project>().First(p => p.Name == "T4.FileManager.VisualStudio.AcceptanceCriteria");
             var cleanup = GetAllProjectItemsRecursive(project.ProjectItems)
                 .FirstOrDefault(p => p.Name.Contains("CleanUpTestoutput.tt"));
-            
+
             if (cleanup != null)
             {
                 cleanup.Open();
                 cleanup.Save();
             }
         }
-        
+
         public static void CleanupFiles(string[] projectNames, string[] extensions)
         {
             RetryUtil.RetryOnException(() =>
@@ -105,14 +105,17 @@
 
         public static void SaveFileAutomaticallyRunCustomTool(ProjectItem item)
         {
-            if (CanOpenFileInCodeWindow && item.Document == null)
+            RetryUtil.RetryOnException(() => 
             {
-                var filePath = GetProjectItemFullPath(item);
-                Dte.ItemOperations.OpenFile(filePath);
-            }
+                if (CanOpenFileInCodeWindow && item.Document == null)
+                {
+                    var filePath = GetProjectItemFullPath(item);
+                    Dte.ItemOperations.OpenFile(filePath);
+                }
 
-            item.Open();
-            item.Save();
+                item.Open();
+                item.Save();
+            });
         }
 
         public static void RemoveFileFromProject(string fileName)
