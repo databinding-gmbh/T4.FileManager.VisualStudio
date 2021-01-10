@@ -10,6 +10,8 @@
     public static class VisualStudioHelper
     {
         public static DTE Dte { get; internal set; } = DteUtil.GetCurrentDte();
+        
+        public static bool CanOpenFileInCodeWindow { get; set; } 
 
         public static void CleanupViaT4()
         {
@@ -103,11 +105,14 @@
 
         public static void SaveFileAutomaticallyRunCustomTool(ProjectItem item)
         {
-            RetryUtil.RetryOnException(() =>
+            if (CanOpenFileInCodeWindow && item.Document == null)
             {
-                item.Open();
-                item.Save();
-            });
+                var filePath = GetProjectItemFullPath(item);
+                Dte.ItemOperations.OpenFile(filePath);
+            }
+
+            item.Open();
+            item.Save();
         }
 
         public static void RemoveFileFromProject(string fileName)

@@ -141,9 +141,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\Dto\LogOutput.cs" />
+    <Compile Include="Features\Helper\Capture\DeviceCap.cs" />
+    <Compile Include="Features\Helper\Capture\GDI32.cs" />
+    <Compile Include="Features\Helper\Capture\User32.cs" />
     <Compile Include="Features\Helper\DteUtil.cs" />
     <Compile Include="Features\Helper\RetryUtil.cs" />
-    <Compile Include="Features\Helper\ScreenCapture.cs" />
+    <Compile Include="Features\Helper\Capture\ScreenCapture.cs" />
     <Compile Include="Features\Helper\VisualStudioHelper.cs" />
     <Compile Include="Features\Dto\GeneratedFile.cs" />
     <Compile Include="Features\Hooks\StepTransformation.cs" />
@@ -193,6 +196,7 @@
       <DependentUpon>CleanUpTestoutput.tt</DependentUpon>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -40,6 +40,10 @@ foreach(var project in projects)
 
         var fullPath = GetProjectItemFullPath(item);
 
+        if (item.Document != null) {
+            item.Document.Close();
+        }
+
         item.Remove();
 
         if (File.Exists(fullPath))

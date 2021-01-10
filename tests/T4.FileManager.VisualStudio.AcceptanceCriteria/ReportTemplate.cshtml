@@ -1141,6 +1141,21 @@
                     }
                     var relatedNode = GetTestNode(traceEvent);
 
+                    if (FormatTechMessages(traceEvent.TechMessages.TrimEnd()).Contains("SCREENSHOT["))
+                    {
+                        <tr>
+                            <!-- Routine by databinding GmbH-->
+                            <td colspan="3">
+                                <pre class="log">
+                                    @Raw(FormatTechMessages(traceEvent.TechMessages.TrimEnd())
+                                        .Replace("SCREENSHOT[ ", "<img width='100%' src='")
+                                        .Replace(" ]SCREENSHOT", "' />"))
+                                 </pre>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
                         <tr>
                             <td>
                                 <pre class="log">@(GetBusinessMessages(traceEvent))</pre>
@@ -1156,6 +1171,7 @@
                             </td>
                             <td>@traceEvent.ResultType in @GetSeconds(Math.Round(traceEvent.Duration.TotalSeconds, 3))s</td>
                         </tr>
+                    }
                 }
             </table>
         }

@@ -97,7 +97,9 @@ stages:
       displayName: 'Copy test report'
       inputs:
         SourceFolder: '$(Common.TestResultsDirectory)'
-        Contents: '*.html'
+        Contents: |
+         *.html
+         *.png
         TargetFolder: '$(Build.ArtifactStagingDirectory)\documentation'
 
     - task: CopyFiles@2

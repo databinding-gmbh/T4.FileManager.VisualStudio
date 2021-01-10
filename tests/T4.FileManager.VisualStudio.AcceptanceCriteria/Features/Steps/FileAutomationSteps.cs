@@ -86,6 +86,7 @@
         [Given(@"I run the script")]
         public void WhenIRunTheScriptForAutomation()
         {
+            VisualStudioHelper.CanOpenFileInCodeWindow = true;
             VisualStudioHelper.SaveFileAutomaticallyRunCustomTool(this.t4Template);
         }
 
