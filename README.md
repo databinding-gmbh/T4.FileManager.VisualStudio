@@ -75,7 +75,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Breaking changes to old FileManager
 
-- No support for TFS version control
-- *.txt4 is now named *.info.json
-  
+See section breaking changes of [Change log](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/10-Change-log/#breaking-changes-compared-to-templatefilemanager)
+
+
+
 Link to old T4.TemplateFileManager: https://github.com/renegadexx/T4.Helper.
