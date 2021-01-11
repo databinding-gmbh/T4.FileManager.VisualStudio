@@ -343,7 +343,7 @@
             {
                 var content = File.ReadAllText(templateFile);
                 filesInfoFromPreviousRun = JsonConvert.DeserializeObject<GeneratedInfo>(content);
-                this.logger.Information("Infos loaded from last run {0}", templateFile);
+                this.logger.Information("Infos loaded from last run {0}", Path.GetFileName(templateFile));
             }
 
             this.textTransformation.Clear();
