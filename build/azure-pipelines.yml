@@ -7,7 +7,7 @@ parameters:
 trigger:
     branches:
         include:
-         - '*'
+         - 'master'
 
 stages:
 - stage: BUILD_AND_TEST
