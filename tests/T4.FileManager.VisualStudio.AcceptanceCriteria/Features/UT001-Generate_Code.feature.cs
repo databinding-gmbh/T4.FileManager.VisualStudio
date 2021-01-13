@@ -385,7 +385,7 @@ fileManager.Generate();
                 table5.AddRow(new string[] {
                             "TestInvalidFileExtension.txt"});
 #line 165
- testRunner.And("the following files are not generated:", ((string)(null)), table5, "And ");
+ testRunner.But("the following files are not generated:", ((string)(null)), table5, "But ");
 #line hidden
             }
             this.ScenarioCleanup();

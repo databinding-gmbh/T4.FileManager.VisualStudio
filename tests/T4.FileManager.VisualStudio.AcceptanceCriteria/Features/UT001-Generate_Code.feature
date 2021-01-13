@@ -162,6 +162,6 @@ fileManager.Generate();
 		| File             |
 		| PersonIvDto.g.cs |
 		| OrderIvDto.g.cs  |
-	And the following files are not generated:
+	But the following files are not generated:
 		| File                         |
 		| TestInvalidFileExtension.txt |
