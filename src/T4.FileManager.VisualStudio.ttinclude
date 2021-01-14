@@ -863,6 +863,28 @@
                 return this.BuildAction.ToString();
             }
         }
+
+        internal Dictionary<string, object> ToDictionary()
+        {
+            var propertyDictionary = new Dictionary<string, object>();
+
+            if (!string.IsNullOrEmpty(this.CustomTool))
+            {
+                propertyDictionary.Add(Property.CustomTool, this.CustomTool);
+            }
+
+            if (properties.BuildAction.HasValue)
+            {
+                propertyDictionary.Add(Property.BuildAction, this.BuildAction);
+            }
+
+            foreach (var prop in this.TemplateParameter)
+            {
+                propertyDictionary.Add(prop.Key, prop.Value);
+            }
+
+            return propertyDictionary;
+        }
     }
 
     /// <summary>
