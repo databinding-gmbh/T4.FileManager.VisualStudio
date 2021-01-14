@@ -220,7 +220,6 @@
             CreateNewFile(filename, project, path, null);
         }
 
-
         /// <summary>
         ///  A new file will be started. The generated code that was before this method is added to the last file.
         /// </summary>
