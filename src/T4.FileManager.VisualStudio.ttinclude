@@ -205,26 +205,8 @@
         /// <param name="properties">Settings that can be defined for the generated file.</param>
         public void StartNewFile(string filename, string project, string path, FileProperties properties)
         {
-            var propertyDictionary = new Dictionary<string, object>();
-
             properties = properties ?? new FileProperties();
-
-            if (!string.IsNullOrEmpty(properties.CustomTool))
-            {
-                propertyDictionary.Add(Property.CustomTool, properties.CustomTool);
-            }
-
-            if (properties.BuildAction.HasValue)
-            {
-                propertyDictionary.Add(Property.BuildAction, properties.BuildAction);
-            }
-
-            foreach (var prop in properties.TemplateParameter)
-            {
-                propertyDictionary.Add(prop.Key, prop.Value);
-            }
-
-            CreateNewFile(filename, project, path, propertyDictionary);
+            CreateNewFile(filename, project, path, properties.ToDictionary());
         }
 
         /// <summary>
@@ -873,7 +855,7 @@
                 propertyDictionary.Add(Property.CustomTool, this.CustomTool);
             }
 
-            if (properties.BuildAction.HasValue)
+            if (this.BuildAction.HasValue)
             {
                 propertyDictionary.Add(Property.BuildAction, this.BuildAction);
             }

@@ -75,13 +75,22 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files with custom tool", SourceLine=5)]
-        public virtual void GenerateFilesWithCustomTool()
+        public virtual void FeatureBackground()
+        {
+#line 6
+#line hidden
+#line 7
+ testRunner.Given("the file manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Generate resx-File with custom tool", SourceLine=8)]
+        public virtual void GenerateResx_FileWithCustomTool()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate files with custom tool", null, tagsOfScenario, argumentsOfScenario);
-#line 6
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate resx-File with custom tool", null, tagsOfScenario, argumentsOfScenario);
+#line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -101,62 +110,160 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 7
- testRunner.Given("the file manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 6
+this.FeatureBackground();
 #line hidden
-#line 8
- testRunner.And("the script \"TestCustomTool.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
-<#@ assembly name=""System.Core"" #>
-<#@ import namespace=""System.Linq"" #>
-<#@ import namespace=""System.Text"" #>
-<#@ import namespace=""System.Collections.Generic"" #>
-<#@ output extension="".txt"" #>
-
-<#@ include file=""$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude"" #>
-
-<#
-var files = new string[] { ""PersonDto"", ""OrderDto"" };
-var fileManager = TemplateFileManager.Create(this);
-
-var properties = new Dictionary<string, object>();
-properties.Add(Property.CustomTool, (object)""TextTemplatingFileGenerator"");
-
-foreach(var itm in files)
-{
-fileManager.CreateNewFile(itm + ""WithCustom.g.cs"","""","""",properties);
-#>
-namespace Test
-{
-public class <#= itm #>WithCustom
-{
-}
-}
-<#
-}
-
-fileManager.Generate();
-#>", ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 10
+ testRunner.Given("the script \"ProjectTestDict.tt\" with the following content", "<#@ template debug=\"false\" hostspecific=\"true\" language=\"C#\" #>\r\n<#@ assembly nam" +
+                        "e=\"System.Core\" #>\r\n<#@ import namespace=\"System.Linq\" #>\r\n<#@ import namespace=" +
+                        "\"System.Text\" #>\r\n<#@ import namespace=\"System.Collections.Generic\" #>\r\n<#@ outp" +
+                        "ut extension=\".txt\" #>\r\n<#@ include file=\"$(ProjectDir)\\T4.FileManager.VisualStu" +
+                        "dio.ttinclude\" #>\r\n<#\r\nvar document = new List<string[]>();\r\ndocument.Add(new st" +
+                        "ring[] { \"FirstName\", \"Vorname\", \"Angaben zum Vornamen\"});\r\ndocument.Add(new str" +
+                        "ing[] { \"LastName\", \"Nachname\", \"Angaben zum Nachnamen\"});\r\ndocument.Add(new str" +
+                        "ing[] { \"Street\", \"Strasse\", \"Angaben zur Strasse\"});\r\n\r\nvar fileManager = Templ" +
+                        "ateFileManager.Create(this);\r\n\r\nvar properties = new Dictionary<string, object>(" +
+                        ");\r\nproperties.Add(Property.CustomTool, (object)\"ResXFileCodeGenerator\");\r\n\r\nfil" +
+                        "eManager.CreateNewFile(\"ProjectTest.resx\", \"\", \"\", properties);\r\n#>\r\n<?xml versi" +
+                        "on=\"1.0\" encoding=\"utf-8\"?>\r\n<root>\r\n<xsd:schema id=\"root\" xmlns=\"\" xmlns:xsd=\"h" +
+                        "ttp://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msd" +
+                        "ata\">\r\n  <xsd:element name=\"root\" msdata:IsDataSet=\"true\">\r\n    <xsd:complexType" +
+                        ">\r\n      <xsd:choice maxOccurs=\"unbounded\">\r\n        <xsd:element name=\"data\">\r\n" +
+                        "          <xsd:complexType>\r\n            <xsd:sequence>\r\n              <xsd:elem" +
+                        "ent name=\"value\" type=\"xsd:string\" minOccurs=\"0\" msdata:Ordinal=\"1\" />\r\n        " +
+                        "      <xsd:element name=\"comment\" type=\"xsd:string\" minOccurs=\"0\" msdata:Ordinal" +
+                        "=\"2\" />\r\n            </xsd:sequence>\r\n            <xsd:attribute name=\"name\" typ" +
+                        "e=\"xsd:string\" msdata:Ordinal=\"1\" />\r\n            <xsd:attribute name=\"type\" typ" +
+                        "e=\"xsd:string\" msdata:Ordinal=\"3\" />\r\n            <xsd:attribute name=\"mimetype\"" +
+                        " type=\"xsd:string\" msdata:Ordinal=\"4\" />\r\n          </xsd:complexType>\r\n        " +
+                        "</xsd:element>\r\n        <xsd:element name=\"resheader\">\r\n          <xsd:complexTy" +
+                        "pe>\r\n            <xsd:sequence>\r\n              <xsd:element name=\"value\" type=\"x" +
+                        "sd:string\" minOccurs=\"0\" msdata:Ordinal=\"1\" />\r\n            </xsd:sequence>\r\n   " +
+                        "         <xsd:attribute name=\"name\" type=\"xsd:string\" use=\"required\" />\r\n       " +
+                        "   </xsd:complexType>\r\n        </xsd:element>\r\n      </xsd:choice>\r\n    </xsd:co" +
+                        "mplexType>\r\n  </xsd:element>\r\n</xsd:schema>\r\n<resheader name=\"resmimetype\">\r\n  <" +
+                        "value>text/microsoft-resx</value>\r\n</resheader>\r\n<resheader name=\"version\">\r\n  <" +
+                        "value>1.3</value>\r\n</resheader>\r\n<resheader name=\"reader\">\r\n  <value>System.Reso" +
+                        "urces.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neut" +
+                        "ral, PublicKeyToken=b77a5c561934e089</value>\r\n</resheader>\r\n<resheader name=\"wri" +
+                        "ter\">\r\n  <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Versi" +
+                        "on=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>\r\n</reshe" +
+                        "ader>\r\n<# \r\nfor (int idx = 0; idx < document.Count; idx++)\r\n{\r\nvar item = docume" +
+                        "nt[idx];\r\n#>\r\n<data name=\"<#= item[0] #>\" xml:space=\"preserve\">\r\n  <value><#= it" +
+                        "em[1] #></value>\r\n  <comment><#= item[2] #></comment>\r\n</data>\t \r\n<#} #>\r\n</root" +
+                        ">\r\n<#\r\n\r\n\r\nfileManager.Generate();\r\n#>", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 42
+#line 90
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
                 table11.AddRow(new string[] {
-                            "PersonDtoWithCustom.g.cs"});
+                            "ProjectTest.resx"});
                 table11.AddRow(new string[] {
-                            "OrderDtoWithCustom.g.cs"});
-#line 43
+                            "ProjectTest.Designer.cs"});
+#line 91
  testRunner.Then("the following files are generated:", ((string)(null)), table11, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
                 table12.AddRow(new string[] {
-                            "PersonDtoWithCustom.g.cs"});
-                table12.AddRow(new string[] {
-                            "OrderDtoWithCustom.g.cs"});
-#line 47
- testRunner.And("the custom tool is set to \"TextTemplatingFileGenerator\" for the following files:", ((string)(null)), table12, "And ");
+                            "ProjectTest.resx"});
+#line 95
+ testRunner.And("the custom tool is set to \"ResXFileCodeGenerator\" for the following files:", ((string)(null)), table12, "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Generate resx-File with custom tool (StartNewFile FileProperties backward compati" +
+            "bility to T4.TemplateFileManager)", SourceLine=98)]
+        public virtual void GenerateResx_FileWithCustomToolStartNewFileFilePropertiesBackwardCompatibilityToT4_TemplateFileManager()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate resx-File with custom tool (StartNewFile FileProperties backward compati" +
+                    "bility to T4.TemplateFileManager)", null, tagsOfScenario, argumentsOfScenario);
+#line 99
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 100
+ testRunner.Given("the script \"TestTFMCustomTool.tt\" with the following content", "<#@ template debug=\"false\" hostspecific=\"true\" language=\"C#\" #>\r\n<#@ assembly nam" +
+                        "e=\"System.Core\" #>\r\n<#@ import namespace=\"System.Linq\" #>\r\n<#@ import namespace=" +
+                        "\"System.Text\" #>\r\n<#@ import namespace=\"System.Collections.Generic\" #>\r\n<#@ outp" +
+                        "ut extension=\".txt\" #>\r\n<#@ include file=\"$(ProjectDir)\\T4.FileManager.VisualStu" +
+                        "dio.ttinclude\" #>\r\n<#\r\nvar document = new List<string[]>();\r\ndocument.Add(new st" +
+                        "ring[] { \"FirstName\", \"Vorname\", \"Angaben zum Vornamen\"});\r\ndocument.Add(new str" +
+                        "ing[] { \"LastName\", \"Nachname\", \"Angaben zum Nachnamen\"});\r\ndocument.Add(new str" +
+                        "ing[] { \"Street\", \"Strasse\", \"Angaben zur Strasse\"});\r\n\r\nvar fileManager = Templ" +
+                        "ateFileManager.Create(this);\r\n\r\nvar fp = new FileProperties();\r\nfp.CustomTool = " +
+                        "\"ResXFileCodeGenerator\";\r\n\r\nfileManager.StartNewFile(\"ProjectTestTFM.resx\", \"\", " +
+                        "\"\", fp);\r\n#>\r\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<root>\r\n<xsd:schema id=\"ro" +
+                        "ot\" xmlns=\"\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:sche" +
+                        "mas-microsoft-com:xml-msdata\">\r\n  <xsd:element name=\"root\" msdata:IsDataSet=\"tru" +
+                        "e\">\r\n    <xsd:complexType>\r\n      <xsd:choice maxOccurs=\"unbounded\">\r\n        <x" +
+                        "sd:element name=\"data\">\r\n          <xsd:complexType>\r\n            <xsd:sequence>" +
+                        "\r\n              <xsd:element name=\"value\" type=\"xsd:string\" minOccurs=\"0\" msdata" +
+                        ":Ordinal=\"1\" />\r\n              <xsd:element name=\"comment\" type=\"xsd:string\" min" +
+                        "Occurs=\"0\" msdata:Ordinal=\"2\" />\r\n            </xsd:sequence>\r\n            <xsd:" +
+                        "attribute name=\"name\" type=\"xsd:string\" msdata:Ordinal=\"1\" />\r\n            <xsd:" +
+                        "attribute name=\"type\" type=\"xsd:string\" msdata:Ordinal=\"3\" />\r\n            <xsd:" +
+                        "attribute name=\"mimetype\" type=\"xsd:string\" msdata:Ordinal=\"4\" />\r\n          </x" +
+                        "sd:complexType>\r\n        </xsd:element>\r\n        <xsd:element name=\"resheader\">\r" +
+                        "\n          <xsd:complexType>\r\n            <xsd:sequence>\r\n              <xsd:ele" +
+                        "ment name=\"value\" type=\"xsd:string\" minOccurs=\"0\" msdata:Ordinal=\"1\" />\r\n       " +
+                        "     </xsd:sequence>\r\n            <xsd:attribute name=\"name\" type=\"xsd:string\" u" +
+                        "se=\"required\" />\r\n          </xsd:complexType>\r\n        </xsd:element>\r\n      </" +
+                        "xsd:choice>\r\n    </xsd:complexType>\r\n  </xsd:element>\r\n</xsd:schema>\r\n<resheader" +
+                        " name=\"resmimetype\">\r\n  <value>text/microsoft-resx</value>\r\n</resheader>\r\n<reshe" +
+                        "ader name=\"version\">\r\n  <value>1.3</value>\r\n</resheader>\r\n<resheader name=\"reade" +
+                        "r\">\r\n  <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version" +
+                        "=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>\r\n</reshead" +
+                        "er>\r\n<resheader name=\"writer\">\r\n  <value>System.Resources.ResXResourceWriter, Sy" +
+                        "stem.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c56" +
+                        "1934e089</value>\r\n</resheader>\r\n<# \r\nfor (int idx = 0; idx < document.Count; idx" +
+                        "++)\r\n{\r\nvar item = document[idx];\r\n#>\r\n<data name=\"<#= item[0] #>\" xml:space=\"pr" +
+                        "eserve\">\r\n  <value><#= item[1] #></value>\r\n  <comment><#= item[2] #></comment>\r\n" +
+                        "</data>\t \r\n<#} #>\r\n</root>\r\n<#\r\n\r\n\r\nfileManager.Generate();\r\n#>", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 180
+ testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                            "File"});
+                table13.AddRow(new string[] {
+                            "ProjectTestTFM.resx"});
+                table13.AddRow(new string[] {
+                            "ProjectTestTFM.Designer.cs"});
+#line 181
+ testRunner.Then("the following files are generated:", ((string)(null)), table13, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                            "File"});
+                table14.AddRow(new string[] {
+                            "ProjectTestTFM.resx"});
+#line 185
+ testRunner.And("the custom tool is set to \"ResXFileCodeGenerator\" for the following files:", ((string)(null)), table14, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
