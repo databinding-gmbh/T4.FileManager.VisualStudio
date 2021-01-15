@@ -187,7 +187,7 @@ fileManager.Generate();
 		| ProjectTestFP.resx |
 
 
-Scenario: Generate resx-File with custom tool (StartNewFile FileProperties backward compatibility to T4.TemplateFileManager)
+Scenario: Generate resx-File with custom tool (StartNewFile FileProperties backward compatibility T4.TemplateFileManager)
 	Given the script "TestTFMCustomTool.tt" with the following content
 		"""
 <#@ template debug="false" hostspecific="true" language="C#" #>
@@ -265,7 +265,7 @@ for (int idx = 0; idx < document.Count; idx++)
 <#
 
 
-fileManager.Generate();
+fileManager.Process();
 #>
 		"""
 	When I run the script

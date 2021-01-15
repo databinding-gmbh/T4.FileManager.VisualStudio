@@ -252,6 +252,95 @@ fileManager.Generate();
             }
             this.ScenarioCleanup();
         }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Generate multiple files with filename in standard header (SA1633 - Backward compa" +
+            "tibility T4.TemplateFileManager)", SourceLine=125)]
+        public virtual void GenerateMultipleFilesWithFilenameInStandardHeaderSA1633_BackwardCompatibilityT4_TemplateFileManager()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate multiple files with filename in standard header (SA1633 - Backward compa" +
+                    "tibility T4.TemplateFileManager)", null, tagsOfScenario, argumentsOfScenario);
+#line 126
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 127
+ testRunner.Given("the script \"TestSA1633HeaderTFM.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
+<#@ assembly name=""System.Core"" #>
+<#@ import namespace=""System.Linq"" #>
+<#@ import namespace=""System.Text"" #>
+<#@ import namespace=""System.Collections.Generic"" #>
+<#@ output extension="".txt"" #>
+
+<#@ include file=""$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude"" #>
+
+<#
+var fileManager = T4FileManager.Create(this);
+fileManager.StartHeader();
+#>
+// <copyright file=""$filename$"" company=""databinding.gmbh"">
+//     databinding.gmbh - All rights reserved.
+// </copyright>
+// <author>Mr. T4</author>
+<#
+fileManager.EndBlock();
+fileManager.CreateNewFile(""PersonDtoWithSA1633TFM.g.cs"","""","""",null);	
+#>
+namespace Test
+{
+public class PersonDtoWithHeader
+{
+}
+}
+<#
+fileManager.CreateNewFile(""OrderDtoWithSA1633TFM.g.cs"","""","""",null);	
+#>
+namespace Test
+{
+public class OrderDtoWithHeader
+{
+}
+}
+<#
+fileManager.Process();
+#>", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 169
+ testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 170
+ testRunner.Then("the file \"PersonDtoWithSA1633TFM.g.cs\" starts with header:", "// <copyright file=\"PersonDtoWithSA1633TFM.g.cs\" company=\"databinding.gmbh\">\r\n// " +
+                        "    databinding.gmbh - All rights reserved.\r\n// </copyright>\r\n// <author>Mr. T4<" +
+                        "/author>", ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 177
+ testRunner.And("the file \"OrderDtoWithSA1633TFM.g.cs\" starts with header:", "// <copyright file=\"OrderDtoWithSA1633TFM.g.cs\" company=\"databinding.gmbh\">\r\n//  " +
+                        "   databinding.gmbh - All rights reserved.\r\n// </copyright>\r\n// <author>Mr. T4</" +
+                        "author>", ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

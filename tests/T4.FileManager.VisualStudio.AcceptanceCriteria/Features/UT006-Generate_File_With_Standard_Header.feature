@@ -121,3 +121,63 @@ fileManager.Generate();
 // </copyright>
 // <author>Mr. T4</author>
 		"""
+
+
+Scenario: Generate multiple files with filename in standard header (SA1633 - Backward compatibility T4.TemplateFileManager)
+	Given the script "TestSA1633HeaderTFM.tt" with the following content
+		"""
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+
+<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
+
+<#
+var fileManager = T4FileManager.Create(this);
+fileManager.StartHeader();
+#>
+// <copyright file="$filename$" company="databinding.gmbh">
+//     databinding.gmbh - All rights reserved.
+// </copyright>
+// <author>Mr. T4</author>
+<#
+fileManager.EndBlock();
+fileManager.CreateNewFile("PersonDtoWithSA1633TFM.g.cs","","",null);	
+#>
+namespace Test
+{
+	public class PersonDtoWithHeader
+	{
+	}
+}
+<#
+fileManager.CreateNewFile("OrderDtoWithSA1633TFM.g.cs","","",null);	
+#>
+namespace Test
+{
+	public class OrderDtoWithHeader
+	{
+	}
+}
+<#
+fileManager.Process();
+#>
+		"""
+	When I run the script
+	Then the file "PersonDtoWithSA1633TFM.g.cs" starts with header:
+		"""
+// <copyright file="PersonDtoWithSA1633TFM.g.cs" company="databinding.gmbh">
+//     databinding.gmbh - All rights reserved.
+// </copyright>
+// <author>Mr. T4</author>
+		"""
+	And the file "OrderDtoWithSA1633TFM.g.cs" starts with header:
+		"""
+// <copyright file="OrderDtoWithSA1633TFM.g.cs" company="databinding.gmbh">
+//     databinding.gmbh - All rights reserved.
+// </copyright>
+// <author>Mr. T4</author>
+		"""

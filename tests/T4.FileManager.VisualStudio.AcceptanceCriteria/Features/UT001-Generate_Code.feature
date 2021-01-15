@@ -3,9 +3,12 @@ Feature: UT001 Generate Code
 	As a developer
 	I can generate code with the T4.FileManager with each class in its own file
 
-Scenario: Generate two files
+Background: T4 FileManager
 	Given the file manager
-	And the script "Test.tt" with the following content
+
+
+Scenario: Generate two files
+	Given the script "Test.tt" with the following content
 		"""
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
@@ -43,9 +46,47 @@ fileManager.Generate();
 		| OrderDto.g.cs  |
 
 
+Scenario: Generate two files (Backward compatibility T4.TemplateFileManager)
+	Given the script "TestTFM.tt" with the following content
+		"""
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+
+<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
+
+<#
+var files = new string[] { "TFMPersonDto", "TFMOrderDto" };
+var fileManager = T4FileManager.Create(this);
+
+foreach(var itm in files)
+{
+	fileManager.StartNewFile(itm + ".g.cs", "","",null);
+#>
+namespace Test
+{
+	public class <#= itm #>
+	{
+	}
+}
+<#
+}
+
+fileManager.Process();
+#>
+		"""
+	When I run the script
+	Then the following files are generated:
+		| File              |
+		| TFMPersonDto.g.cs |
+		| TFMOrderDto.g.cs  |
+
+
 Scenario: Generate files uses .txt as default file extension when no output extension directive is set
-	Given the file manager
-	And the script "TestMissingFileExtension.tt" with the following content
+	Given the script "TestMissingFileExtension.tt" with the following content
 		"""
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
@@ -84,8 +125,7 @@ fileManager.Generate();
 
 
 Scenario: Generate files ignores output extension .cs and uses .txt as default to avoid "error generation output" compile errors
-	Given the file manager
-	And the script "TestCsExtension.tt" with the following content
+	Given the script "TestCsExtension.tt" with the following content
 		"""
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
@@ -125,8 +165,7 @@ fileManager.Generate();
 
 
 Scenario: Generate files with DisableTemplateMainOutputFile enabled prevents generation of the t4 main output file (Workaround invalid file extension)
-	Given the file manager
-	And the script "TestInvalidFileExtension.tt" with the following content
+	Given the script "TestInvalidFileExtension.tt" with the following content
 		"""
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
