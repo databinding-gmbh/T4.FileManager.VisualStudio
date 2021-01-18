@@ -7,6 +7,8 @@ With the T4.FileManager you can define into which files T4 generates your code. 
 - Putting each generated data class into a single code file
 - Creating a server and a client component based on a common model
 - Distribute generated code to multiple projects within a solution
+- Set the file properties (like ResXFileCodeGenerator as CustomTool)
+- Update previously generated files
 
  
 
