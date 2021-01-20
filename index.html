@@ -425,7 +425,14 @@
                 
                 <h2 id="t4filemanagervisualstudio">T4.FileManager.VisualStudio</h2>
 <p><a href="https://dev.azure.com/databinding/Building%20Blocks/_build/latest?definitionId=39&amp;branchName=master"><img alt="Build Status" src="https://dev.azure.com/databinding/Building%20Blocks/_apis/build/status/databinding-gmbh.T4.FileManager.VisualStudio?branchName=master" /></a> <a href="https://www.nuget.org/packages/T4.FileManager.VisualStudio/"><img alt="Nuget" src="https://img.shields.io/nuget/v/T4.FileManager.VisualStudio" /></a></p>
-<p>Manager for generating multiple files with T4 text templates.</p>
+<p>With the T4.FileManager you can define into which files T4 generates your code. You are no longer bound to the default behaviour of T4 that generates all the code of the “example.tt” template into a single “example.cs” file. Now you can split your code into the files you want: </p>
+<ul>
+<li>Putting each generated data class into a single code file</li>
+<li>Creating a server and a client component based on a common model</li>
+<li>Distribute generated code to multiple projects within a solution</li>
+<li>Set the file properties (like ResXFileCodeGenerator as CustomTool)</li>
+<li>Update previously generated files</li>
+</ul>
 <h3 id="installing-and-usage">Installing and Usage</h3>
 <ol>
 <li><a href="01-Installation/">Installation</a></li>
