@@ -157,9 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="azureDevOps.cmd">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Default.srprofile" />
     <None Include="Features\UT016_Log_Activities.feature" />
     <None Include="Features\UT013_Generate_File_With_Overwrite.feature" />
@@ -176,7 +173,6 @@
     <None Include="ReportTemplate.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="runtests.cmd" />
     <None Include="specflow.json" />
     <None Include="TestOverwrite\ReadMe.md" />
     <None Include="TestSubfolderNew\ReadMe.md" />
