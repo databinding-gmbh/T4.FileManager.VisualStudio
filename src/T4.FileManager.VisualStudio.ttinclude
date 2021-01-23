@@ -384,33 +384,6 @@
         }
 
         /// <summary>
-        /// Automatic generation of the namespace for C#.
-        /// </summary>
-        /// <returns>The namespace as <see cref="string"/>.</returns>
-        public string GetNamespaceForCSharpCode()
-        {
-            var projectName = this.currentFileToGenerate.Project;
-
-            if (string.IsNullOrEmpty(projectName))
-            {
-                var projItem = this.dte.Solution.FindProjectItem(this.host.TemplateFile);
-                var prj = projItem.ContainingProject;
-                projectName = prj.Name;
-            }
-
-            var path = projectName;
-
-            if (!string.IsNullOrEmpty(this.currentFileToGenerate.Path))
-            {
-                path = Path.Combine(projectName, this.currentFileToGenerate.Path);
-            }
-
-            var currentNamespace = path.Replace(@"\", ".");
-
-            return currentNamespace;
-        }
-
-        /// <summary>
         /// Physical generation of the file.
         /// </summary>
         /// <param name="fileToGenerate">File information.</param>
