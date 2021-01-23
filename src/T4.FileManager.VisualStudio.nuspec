@@ -3,7 +3,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>T4.FileManager.VisualStudio</id>
-    <description>File Manager for the generation of multiple files with T4 Text Templating.</description>
+    <description>
+      With the T4.FileManager you can define into which files T4 generates your code. You are no longer bound to the default behaviour of T4 that generates all the code of the “example.tt” template into a single “example.cs” file. Now you can split your code into the files you want:
+
+      - Putting each generated data class into a single code file
+      - Creating a server and a client component based on a common model
+      - Distribute generated code to multiple projects within a solution
+      - Set the file properties (like ResXFileCodeGenerator as CustomTool)
+      - Update previously generated files
+    </description>
     <version>$version$</version>
     <icon>logo-t4-file-manager.png</icon>
     <authors>René Leupold, Johnny Graber, Thierry Iseli</authors>
