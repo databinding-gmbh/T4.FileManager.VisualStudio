@@ -17,8 +17,8 @@ Background: T4 File Manager and base script
 <#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
 
 <#
-var fileManager = T4FileManager.Create(this);
-fileManager.CanOverwriteExistingFile = false;
+var fileManager = T4FileManager.Create(this).DisableOverwriteExistingFile();
+
 fileManager.CreateNewFile("TestDelete.g.cs","","TestOverwrite",null);	
 #>
 namespace Test
@@ -40,7 +40,7 @@ Scenario: Generate files with CanOverwriteExistingFile is set to true, files del
 		| TestDelete.g.cs | TestOverwrite |
 	And I change the line
 		| From                                                                  | To                                                                       |
-		| fileManager.CanOverwriteExistingFile = false;                         | fileManager.CanOverwriteExistingFile = true;                             |
+		| T4FileManager.Create(this).DisableOverwriteExistingFile();            | T4FileManager.Create(this);                                              |
 		| fileManager.CreateNewFile("TestDelete.g.cs","","TestOverwrite",null); | fileManager.CreateNewFile("TestNoDelete3.g.cs","","TestOverwrite",null); |
 		| public class TestDelete                                               | public class NewTestDeleteModel                                          |
 	When I run the script

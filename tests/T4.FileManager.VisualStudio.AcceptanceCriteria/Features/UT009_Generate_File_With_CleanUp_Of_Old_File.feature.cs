@@ -158,7 +158,7 @@ this.FeatureBackground();
 <#@ include file=""$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude"" #>
 
 <#
-var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+var fileManager = new T4FileManager(this);
 fileManager.CreateNewFile(""TestOldFilesCleanUpRenamed.g.cs"","""","""",null);	
 #>
 namespace Test

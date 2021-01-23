@@ -17,8 +17,8 @@ Background: T4 File Manager and base script
 <#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
 
 <#
-var fileManager = T4FileManager.Create(this);
-fileManager.CanOverwriteExistingFile = false;
+var fileManager = T4FileManager.Create(this).DisableOverwriteExistingFile();
+
 fileManager.CreateNewFile("TestNoDelete.g.cs","","TestOverwrite",null);	
 #>
 namespace Test

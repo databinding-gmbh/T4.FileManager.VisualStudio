@@ -93,8 +93,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 <#@ include file=""$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude"" #>
 
 <#
-var fileManager = T4FileManager.Create(this);
-fileManager.CanOverwriteExistingFile = false;
+var fileManager = T4FileManager.Create(this).DisableOverwriteExistingFile();
+
 fileManager.CreateNewFile(""TestDelete.g.cs"","""",""TestOverwrite"",null);	
 #>
 namespace Test
@@ -155,8 +155,8 @@ this.FeatureBackground();
                             "From",
                             "To"});
                 table28.AddRow(new string[] {
-                            "fileManager.CanOverwriteExistingFile = false;",
-                            "fileManager.CanOverwriteExistingFile = true;"});
+                            "T4FileManager.Create(this).DisableOverwriteExistingFile();",
+                            "T4FileManager.Create(this);"});
                 table28.AddRow(new string[] {
                             "fileManager.CreateNewFile(\"TestDelete.g.cs\",\"\",\"TestOverwrite\",null);",
                             "fileManager.CreateNewFile(\"TestNoDelete3.g.cs\",\"\",\"TestOverwrite\",null);"});

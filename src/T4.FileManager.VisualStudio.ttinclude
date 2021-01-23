@@ -129,6 +129,36 @@
         }
 
         /// <Summary>
+        /// Change switch CanOverwriteExistingFile to false
+        /// </Summary>
+        public T4FileManager DisableOverwriteExistingFile()
+        {
+            this.logger.Information("CanOverwriteExistingFile is disabled (false)");
+            this.CanOverwriteExistingFile = false;
+            return this;
+        }
+
+        /// <Summary>
+        /// Change switch IsAutoCleanUpWithResharperEnabled to true
+        /// </Summary>
+        public T4FileManager EnableCleanUpWithResharper()
+        {
+            this.logger.Information("IsAutoCleanUpWithResharperEnabled is enabled (true)");
+            this.IsAutoCleanUpWithResharperEnabled = true;
+            return this;
+        }
+
+        /// <Summary>
+        /// Change switch IsAutoIndentEnabled to true
+        /// </Summary>
+        public T4FileManager EnableAutoIndent()
+        {
+            this.logger.Information("CanOverwriteExistingFile is disabled (false)");
+            this.IsAutoIndentEnabled = true;
+            return this;
+        }
+
+        /// <Summary>
         /// Write log information to the main output file in addtion to the active visual studio output window.
         /// </Summary>
         public T4FileManager EnableLog()

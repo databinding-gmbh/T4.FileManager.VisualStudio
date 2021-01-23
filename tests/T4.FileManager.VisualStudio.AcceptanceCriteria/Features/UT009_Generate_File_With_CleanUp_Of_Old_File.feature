@@ -50,7 +50,7 @@ Scenario: Generate files with clean up of old files (based on *.info.json)
 <#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
 
 <#
-var fileManager = new T4FileManager(this.GenerationEnvironment, this.Host);
+var fileManager = new T4FileManager(this);
 fileManager.CreateNewFile("TestOldFilesCleanUpRenamed.g.cs","","",null);	
 #>
 namespace Test
