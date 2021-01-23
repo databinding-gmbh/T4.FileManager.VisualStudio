@@ -14,12 +14,15 @@
     </description>
     <version>$version$</version>
     <icon>logo-t4-file-manager.png</icon>
-    <authors>René Leupold, Johnny Graber, Thierry Iseli</authors>
+    <authors>René Leupold, Johnny Graber</authors>
     <owners>databindinggmbh</owners>
     <repository type="git" url="https://github.com/databinding-gmbh/T4.FileManager.VisualStudio" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <copyright>Copyright 2021 databinding GmbH</copyright>
-    <tags>t4 file manager code generation visual studio vs vsstudio metadata programming</tags>
+    <tags>
+      t4 file manager code generation c# f# php python javascript java vb blazor razor html css 
+      visual studio vs vsstudio metadata programming dsl shared structure timesaver 
+    </tags>
     <license type="file">LICENSE.txt</license>
     <releaseNotes>
       see https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/10-Change-log/
