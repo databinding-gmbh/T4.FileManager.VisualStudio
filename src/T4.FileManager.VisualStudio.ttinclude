@@ -153,7 +153,7 @@
         /// </Summary>
         public T4FileManager EnableAutoIndent()
         {
-            this.logger.Information("CanOverwriteExistingFile is disabled (false)");
+            this.logger.Information("IsAutoIndentEnabled is enabled (true) / VS Format Document Shortcut");
             this.IsAutoIndentEnabled = true;
             return this;
         }
@@ -460,14 +460,14 @@
 
                 if (IsAutoIndentEnabled)
                 {
-                    this.FormatProjectItem(fileProjectItem);
                     this.logger.Information("AutoIndent is enabled for file");
+                    this.FormatProjectItem(fileProjectItem);
                 }
 
                 if (IsAutoCleanUpWithResharperEnabled)
                 {
-                    this.FormatProjectItemWithResharper(fileProjectItem);
                     this.logger.Information("AutoCleanup with resharper is enabled for file");
+                    this.FormatProjectItemWithResharper(fileProjectItem);
                 }
             }
 
@@ -549,28 +549,25 @@
                 throw new ArgumentNullException("item");
             }
 
-            Task.Factory.StartNew(() =>
+            if (item.IsOpen)
             {
-                if (item.IsOpen)
+                item.Document.Close(vsSaveChanges.vsSaveChangesNo);
+            }
+
+            item.Open();
+
+            foreach (var cmd in command)
+            {
+                if (string.IsNullOrWhiteSpace(cmd) == true)
                 {
-                    item.Document.Close(vsSaveChanges.vsSaveChangesNo);
+                    continue;
                 }
 
-                item.Open();
+                TryToExecuteCommand(item, cmd, false, 1);
+            }
 
-                foreach (var cmd in command)
-                {
-                    if (string.IsNullOrWhiteSpace(cmd) == true)
-                    {
-                        continue;
-                    }
-
-                    TryToExecuteCommand(item, cmd, false, 1);
-                }
-
-                item.Document.Close(vsSaveChanges.vsSaveChangesYes);
-                this.logger.Information("VS command {0} executed", command);
-            });
+            item.Document.Close(vsSaveChanges.vsSaveChangesYes);
+            this.logger.Information("VS command {0} executed", command);
         }
 
         /// <summary>

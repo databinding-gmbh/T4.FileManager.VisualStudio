@@ -204,3 +204,52 @@ fileManager.Generate();
 	But the following files are not generated:
 		| File                         |
 		| TestInvalidFileExtension.txt |
+
+
+Scenario: Format file content based on editor.config with EnableAutoIndent flag
+	Given the script "TestAutoIndent.tt" with the following content
+		"""
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+
+<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
+
+<#
+var files = new string[] { "FileFormat" };
+var fileManager = T4FileManager.Create(this).EnableAutoIndent(); // <=== Enable Format Document
+
+foreach(var itm in files)
+{
+	fileManager.CreateNewFile(itm + ".g.cs", "","",null);
+#>
+namespace Test
+{
+  public partial class <#= itm #>
+        {
+                      public int Id {get; set;}
+                            public string Name {get; set;}
+  }
+}
+
+<#
+}
+
+fileManager.Generate();
+#>
+		"""
+	When I run the script
+    	Then the file "FileFormat.g.cs" has following format:
+"""
+namespace Test
+{
+    public partial class FileFormat
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+}
+"""

@@ -474,6 +474,79 @@ fileManager.Generate();
             }
             this.ScenarioCleanup();
         }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Format file content based on editor.config with EnableAutoIndent flag", SourceLine=208)]
+        public virtual void FormatFileContentBasedOnEditor_ConfigWithEnableAutoIndentFlag()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Format file content based on editor.config with EnableAutoIndent flag", null, tagsOfScenario, argumentsOfScenario);
+#line 209
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 210
+ testRunner.Given("the script \"TestAutoIndent.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
+<#@ assembly name=""System.Core"" #>
+<#@ import namespace=""System.Linq"" #>
+<#@ import namespace=""System.Text"" #>
+<#@ import namespace=""System.Collections.Generic"" #>
+<#@ output extension="".txt"" #>
+
+<#@ include file=""$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude"" #>
+
+<#
+var files = new string[] { ""FileFormat"" };
+var fileManager = T4FileManager.Create(this).EnableAutoIndent(); // <=== Enable Format Document
+
+foreach(var itm in files)
+{
+fileManager.CreateNewFile(itm + "".g.cs"", """","""",null);
+#>
+namespace Test
+{
+public partial class <#= itm #>
+      {
+                    public int Id {get; set;}
+                          public string Name {get; set;}
+}
+}
+
+<#
+}
+
+fileManager.Generate();
+#>", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 244
+ testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 245
+     testRunner.Then("the file \"FileFormat.g.cs\" has following format:", "namespace Test\r\n{\r\n    public partial class FileFormat\r\n    {\r\n        public int" +
+                        " Id { get; set; }\r\n        public string Name { get; set; }\r\n    }\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

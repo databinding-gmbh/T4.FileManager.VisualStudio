@@ -131,13 +131,14 @@
             }
         }
 
+        [Then(@"the file ""(.*)"" has following format:")]
         [Then(@"the file ""(.*)"" starts with header:")]
-        public void ThenTheFileStartsWithFollowingContent(string file, string expectedHeader)
+        public void ThenTheFileStartsWithFollowingContent(string file, string expectedContent)
         {
             var filePath = Path.Combine(this.targetTestPath, file);
             var testee = File.ReadAllText(filePath);
             
-            testee.Should().StartWith(expectedHeader);
+            testee.Should().StartWith(expectedContent);
         }
 
         [Then(@"the file ""(.*)"" contains following log fragments")]
