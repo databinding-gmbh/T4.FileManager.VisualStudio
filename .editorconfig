@@ -1,0 +1,15 @@
+# To learn more about .editorconfig see https://aka.ms/editorconfigdocs
+
+# All files
+[*]
+indent_style = space
+
+[*.{cs,vb}]
+indent_style = space
+indent_size = 4
+
+[*.xml]
+indent_size = 2
+
+[*.config]
+indent_size = 2
