@@ -24,7 +24,7 @@ Our [documentation](https://databinding-gmbh.github.io/T4.FileManager.VisualStud
 
 | Program | Version | Link | Info |
 |-------------|-------------|-----|--|
-| Visual Studio Community | 2017, 2019 | https://visualstudio.microsoft.com/vs/ | N/A
+| Visual Studio | 2017, 2019 | https://visualstudio.microsoft.com/vs/ | N/A
 
 ### Installing
 
