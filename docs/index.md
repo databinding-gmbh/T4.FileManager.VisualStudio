@@ -10,6 +10,19 @@ With the T4.FileManager you can define into which files T4 generates your code. 
 - Set the file properties (like ResXFileCodeGenerator as CustomTool)
 - Update previously generated files
 
+### Features
+
+| Feature                                | Description |
+| -------------------------------------- | ----------- |
+| Overwrite Existing File                |             |
+| File Properties                        |             |
+| File Header                            |             |
+| Logging                                |             |
+| Disable main output file               |             |
+| Code Generation                        |             |
+| Support for subfolders                 |             |
+| Support for projects                   |             |
+| Shortcut support (Edit.FormatDocument) |             |
 
 ### Installing and Usage
 
