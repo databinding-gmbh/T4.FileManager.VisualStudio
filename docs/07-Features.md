@@ -1,15 +1,5 @@
 # Features
 
-## Get namespace
-
-If you want to get automatically the namespace of your current file, you can use following code for standard C# code namespace.
-
-```
-fileManager.GetNamespaceForCSharpCode();
-```
-
-**Important: Method can only be used after CreateNewFile(...)/StartNewFile(...)**.
-
 ## Auto indent
 
 You can set `IsAutoIndentEnabled` for enable visual studio process to format your generated files. The process is like opening the generated file, executing command `Edit.FormatDocument (CTRL+K, CTRL+D)`, saving and closing the file. Set property on file manager as following.
