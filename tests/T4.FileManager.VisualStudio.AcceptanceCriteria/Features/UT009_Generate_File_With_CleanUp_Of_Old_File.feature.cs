@@ -109,12 +109,12 @@ fileManager.Generate();
 #line 34
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "File"});
-            table18.AddRow(new string[] {
+            table16.AddRow(new string[] {
                         "TestOldFilesCleanUp.g.cs"});
 #line 35
- testRunner.Then("the following files are generated:", ((string)(null)), table18, "Then ");
+ testRunner.Then("the following files are generated:", ((string)(null)), table16, "Then ");
 #line hidden
         }
         
@@ -174,19 +174,19 @@ fileManager.Generate();
 #line 66
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
-                table19.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "TestOldFilesCleanUp.g.cs"});
 #line 67
- testRunner.Then("the following files are cleaned up:", ((string)(null)), table19, "Then ");
+ testRunner.Then("the following files are cleaned up:", ((string)(null)), table17, "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
-                table20.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "TestOldFilesCleanUpRenamed.g.cs"});
 #line 70
- testRunner.And("the following files are generated:", ((string)(null)), table20, "And ");
+ testRunner.And("the following files are generated:", ((string)(null)), table18, "And ");
 #line hidden
             }
             this.ScenarioCleanup();

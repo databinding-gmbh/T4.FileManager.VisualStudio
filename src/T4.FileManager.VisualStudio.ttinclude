@@ -236,7 +236,7 @@
         public void StartNewFile(string filename, string project, string path, FileProperties properties)
         {
             properties = properties ?? new FileProperties();
-            CreateNewFile(filename, project, path, properties.ToDictionary());
+            CreateNewFile(filename, project, path, properties);
         }
 
         /// <summary>
@@ -257,7 +257,7 @@
         /// <param name="project">Project name where the file is generated.</param>
         /// <param name="path">Subfolder within the project where the file is generated.</param>
         /// <param name="properties">Settings that can be defined for the generated file.</param>
-        public void CreateNewFile(string filename, string project, string path, Dictionary<string, object> properties)
+        public void CreateNewFile(string filename, string project, string path, FileProperties properties)
         {
             this.logger.Information("Begin CreateNewFile {0}", filename);
             if (this.currentFileToGenerate != null && !string.IsNullOrEmpty(this.currentFileToGenerate.Filename))
@@ -266,16 +266,16 @@
                 FinishFile();
             }
 
-            properties = properties ?? new Dictionary<string, object>();
-
             var formattedPath = path == null ? null : path.Replace("/", @"\");
             this.logger.Information("Formatted path set {0}", formattedPath);
+
+            properties = properties ?? new FileProperties();
 
             this.currentFileToGenerate = new FileToGenerate
             {
                 Filename = filename,
                 Path = formattedPath,
-                Properties = properties,
+                Properties = properties.ToDictionary(),
                 Project = project
             };
 
