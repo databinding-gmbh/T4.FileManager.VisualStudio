@@ -300,13 +300,6 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#get-namespace" class="md-nav__link">
-    Get namespace
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#auto-indent" class="md-nav__link">
     Auto indent
   </a>
@@ -389,13 +382,6 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#get-namespace" class="md-nav__link">
-    Get namespace
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#auto-indent" class="md-nav__link">
     Auto indent
   </a>
@@ -430,12 +416,6 @@
                 
                 
                 <h1 id="features">Features</h1>
-<h2 id="get-namespace">Get namespace</h2>
-<p>If you want to get automatically the namespace of your current file, you can use following code for standard C# code namespace.</p>
-<pre><code>fileManager.GetNamespaceForCSharpCode();
-</code></pre>
-
-<p><strong>Important: Method can only be used after CreateNewFile(...)/StartNewFile(...)</strong>.</p>
 <h2 id="auto-indent">Auto indent</h2>
 <p>You can set <code>IsAutoIndentEnabled</code> for enable visual studio process to format your generated files. The process is like opening the generated file, executing command <code>Edit.FormatDocument (CTRL+K, CTRL+D)</code>, saving and closing the file. Set property on file manager as following.</p>
 <pre><code>fileManager.IsAutoIndentEnabled = false; // default 
