@@ -88,3 +88,7 @@ See section breaking changes of [Change log](https://databinding-gmbh.github.io/
 
 
 Link to old T4.TemplateFileManager: https://github.com/renegadexx/T4.Helper.
+
+## T4 Intellisense Extensions for Visual Studio
+- [tangible T4 Editor](https://t4-editor.tangible-engineering.com/T4-Editor-Visual-T4-Editing.html)
+- [devart T4 Editor](https://www.devart.com/t4-editor/)
