@@ -1,3 +1,7 @@
+<p align="center">
+  <img height="150" src="https://raw.githubusercontent.com/databinding-gmbh/T4.FileManager.VisualStudio/master/src/images/logo-t4-file-manager.png" alt="T4 FileManager"/>
+</p>
+
 ## T4.FileManager.VisualStudio
 
 [![Build Status](https://dev.azure.com/databinding/Building%20Blocks/_apis/build/status/databinding-gmbh.T4.FileManager.VisualStudio?branchName=master)](https://dev.azure.com/databinding/Building%20Blocks/_build/latest?definitionId=39&branchName=master) [![Nuget](https://img.shields.io/nuget/v/T4.FileManager.VisualStudio)](https://www.nuget.org/packages/T4.FileManager.VisualStudio/)
