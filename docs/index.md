@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="150" src="https://raw.githubusercontent.com/databinding-gmbh/T4.FileManager.VisualStudio/master/src/images/logo-t4-file-manager.png" alt="T4 FileManager"/>
+  <img height="150" style="height:150px !important" src="https://raw.githubusercontent.com/databinding-gmbh/T4.FileManager.VisualStudio/master/src/images/logo-t4-file-manager.png" alt="T4 FileManager"/>
 </p>
 
 ## T4.FileManager.VisualStudio
