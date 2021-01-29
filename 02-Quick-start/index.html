@@ -436,7 +436,8 @@
 <li><a href="../07-Proceed-to-generate-files/">Close the file and generate it with the Generate() method</a></li>
 </ol>
 <p>The 4 parts are marked in bold in this T4 template:</p>
-<p>`&lt;#@ template debug="false" hostspecific="true" language="C#" #&gt;
+<p>`
+&lt;#@ template debug="false" hostspecific="true" language="C#" #&gt;
 &lt;#@ assembly name="System.Core" #&gt;
 &lt;#@ import namespace="System.Linq" #&gt;
 &lt;#@ import namespace="System.Text" #&gt;
@@ -460,7 +461,8 @@ var files = new string[] { "PersonDto", "OrderDto" };
 &lt;#
 }</p>
 <p>​   <strong>fileManager.Generate();</strong></p>
-<h1 id="_2">&gt;`</h1>
+<h1 id="_2">&gt;</h1>
+<p>`</p>
 <p>The call to IsAutoIndentEnabled is not necessary, but it will nicely format your code.</p>
 <h2 id="the-result">The result</h2>
 <p>If you run the template from above it will create the two files PersonDto.g.cs and OrderDto.g.cs next to your template.</p>
