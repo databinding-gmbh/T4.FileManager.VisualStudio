@@ -464,7 +464,7 @@
 <li><a href="../07-Proceed-to-generate-files/">Close the file and generate it with the Generate() method</a></li>
 </ol>
 <p>The 4 parts are marked in bold in this T4 template:</p>
-<pre><code>&lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+<pre><code class="csharp">&lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
 &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
 &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
 &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
@@ -502,19 +502,23 @@ namespace Test
 <h2 id="the-result">The result</h2>
 <p>If you run the template from above it will create the two files PersonDto.g.cs and OrderDto.g.cs next to your template.</p>
 <p>PersonDto.g.cs: </p>
-<p><code>namespace Test
+<pre><code>namespace Test
 {
     public class PersonDto
     {
     }
-}</code></p>
+}
+</code></pre>
+
 <p>OrderDto.g.cs:</p>
-<p><code>namespace Test
+<pre><code>amespace Test
 {
     public class OrderDto
     {
     }
-}</code></p>
+}
+</code></pre>
+
 <h2 id="want-to-know-more">Want to know more?</h2>
 <p>This is just the basic usage of T4.FileManager. You can find an explanation on all other features in the next pages of this documentation.</p>
                 
