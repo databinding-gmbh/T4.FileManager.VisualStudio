@@ -16,8 +16,8 @@ With those 4 steps can you use the T4.FileManager to generate code into differen
 
 
 The 4 parts are marked in bold in this T4 template:
-
-``` hl_lines="8 13 20 31"
+ 
+``` csharp hl_lines="8 13 20 31"
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
@@ -66,23 +66,27 @@ If you run the template from above it will create the two files PersonDto.g.cs a
 
 PersonDto.g.cs: 
 
-`namespace Test
+```
+namespace Test
 {
     public class PersonDto
     {
     }
-}`
+}
+```
 
 
 
 OrderDto.g.cs:
 
-`namespace Test
+```
+amespace Test
 {
 	public class OrderDto
 	{
 	}
-}`
+}
+```
 
 
 
