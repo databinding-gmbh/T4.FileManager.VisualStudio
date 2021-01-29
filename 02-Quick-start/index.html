@@ -246,20 +246,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#the-result" class="md-nav__link">
-    The result
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-know-more" class="md-nav__link">
-    Want to know more?
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -419,20 +405,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#the-result" class="md-nav__link">
-    The result
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#want-to-know-more" class="md-nav__link">
-    Want to know more?
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -464,61 +436,70 @@
 <li><a href="../07-Proceed-to-generate-files/">Close the file and generate it with the Generate() method</a></li>
 </ol>
 <p>The 4 parts are marked in bold in this T4 template:</p>
-<pre><code class="c#">&lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
-&lt;#@ assembly name=&quot;System.Core&quot; #&gt;
-&lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
-&lt;#@ import namespace=&quot;System.Text&quot; #&gt;
-&lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
-&lt;#@ output extension=&quot;.txt&quot; #&gt;
-
-&lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
-
-&lt;#
-var files = new string[] { &quot;PersonDto&quot;, &quot;OrderDto&quot; };
-
-var fileManager = T4FileManager.Create(this);
-fileManager.IsAutoIndentEnabled = true;
-
-
-
-foreach(var itm in files)
+<p>``` c# linenums="1" hl_lines="8 13 20 31"
+&lt;#@ template debug="false" hostspecific="true" language="C#" #&gt;
+&lt;#@ assembly name="System.Core" #&gt;
+&lt;#@ import namespace="System.Linq" #&gt;
+&lt;#@ import namespace="System.Text" #&gt;
+&lt;#@ import namespace="System.Collections.Generic" #&gt;
+&lt;#@ output extension=".txt" #&gt;</p>
+<p>&lt;#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #&gt;</p>
+<p>&lt;#
+var files = new string[] { "PersonDto", "OrderDto" };</p>
+<p>var fileManager = T4FileManager.Create(this);
+fileManager.IsAutoIndentEnabled = true;</p>
+<p>foreach(var itm in files)
 {
-    fileManager.CreateNewFile(itm + &quot;.g.cs&quot;, &quot;&quot;,&quot;&quot;,null);
-#&gt;
-namespace Test
+    fileManager.CreateNewFile(itm + ".g.cs", "","",null);</p>
+<h1 id="_1">&gt;</h1>
+<p>namespace Test
 {
     public class &lt;#= itm #&gt;
     {
     }
 }
 &lt;#
-}
+}</p>
+<pre><code>fileManager.Generate();
+</code></pre>
+<h1 id="_2">&gt;</h1>
+<pre><code>
 
-​   fileManager.Generate();
-#&gt;
+
+The call to IsAutoIndentEnabled is not necessary, but it will nicely format your code.
+
+
+
+## The result
+
+If you run the template from above it will create the two files PersonDto.g.cs and OrderDto.g.cs next to your template.
+
+
+
+PersonDto.g.cs: 
+
 </code></pre>
 
-<p>The call to IsAutoIndentEnabled is not necessary, but it will nicely format your code.</p>
-<h2 id="the-result">The result</h2>
-<p>If you run the template from above it will create the two files PersonDto.g.cs and OrderDto.g.cs next to your template.</p>
-<p>PersonDto.g.cs: </p>
-<pre><code>namespace Test
+<p>namespace Test
 {
     public class PersonDto
     {
     }
-}
+}</p>
+<pre><code>
+
+
+OrderDto.g.cs:
+
 </code></pre>
 
-<p>OrderDto.g.cs:</p>
-<pre><code>namespace Test
+<p>namespace Test
 {
     public class OrderDto
     {
     }
 }
-</code></pre>
-
+```</p>
 <h2 id="want-to-know-more">Want to know more?</h2>
 <p>This is just the basic usage of T4.FileManager. You can find an explanation on all other features in the next pages of this documentation.</p>
                 
