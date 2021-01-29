@@ -19,40 +19,38 @@ The 4 parts are marked in bold in this T4 template:
 
 
 
-`
-<#@ template debug="false" hostspecific="true" language="C#" #>
-<#@ assembly name="System.Core" #>
-<#@ import namespace="System.Linq" #>
-<#@ import namespace="System.Text" #>
-<#@ import namespace="System.Collections.Generic" #>
-<#@ output extension=".txt" #>
+`<#@ template debug="false" hostspecific="true" language="C#" #>`
+`<#@ assembly name="System.Core" #>`
+`<#@ import namespace="System.Linq" #>`
+`<#@ import namespace="System.Text" #>`
+`<#@ import namespace="System.Collections.Generic" #>`
+`<#@ output extension=".txt" #>`
 
-**<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>**
+`**<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>**`
 
-<#
-var files = new string[] { "PersonDto", "OrderDto" };
-**var fileManager = T4FileManager.Create(this);**
+`<#`
+`var files = new string[] { "PersonDto", "OrderDto" };`
+`**var fileManager = T4FileManager.Create(this);**`
 
-fileManager.IsAutoIndentEnabled = true;
-
+`fileManager.IsAutoIndentEnabled = true;`
 
 
-foreach(var itm in files)
-{
-	**fileManager.CreateNewFile(itm + ".g.cs", "","",null);**
-#>
-namespace Test
-{
-    public class <#= itm #>
-    {
-    }
-}
-<#
-}
 
-​	**fileManager.Generate();**
-#>
-`
+`foreach(var itm in files)`
+`{`
+	`**fileManager.CreateNewFile(itm + ".g.cs", "","",null);**`
+`#>`
+`namespace Test`
+`{`
+    `public class <#= itm #>`
+    `{`
+    `}`
+`}`
+`<#`
+`}`
+
+​	`**fileManager.Generate();**`
+`#>`
 
 
 
