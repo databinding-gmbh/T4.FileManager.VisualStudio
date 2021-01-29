@@ -19,7 +19,8 @@ The 4 parts are marked in bold in this T4 template:
 
 
 
-`<#@ template debug="false" hostspecific="true" language="C#" #>
+`
+<#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -50,7 +51,8 @@ namespace Test
 }
 
 ​	**fileManager.Generate();**
-#>`
+#>
+`
 
 
 
