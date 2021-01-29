@@ -471,19 +471,19 @@
 &lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
 &lt;#@ output extension=&quot;.txt&quot; #&gt;
 
-**&lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;**
+&lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
 
 &lt;#
 var files = new string[] { &quot;PersonDto&quot;, &quot;OrderDto&quot; };
-**var fileManager = T4FileManager.Create(this);**
 
+var fileManager = T4FileManager.Create(this);
 fileManager.IsAutoIndentEnabled = true;
 
 
 
 foreach(var itm in files)
 {
-    **fileManager.CreateNewFile(itm + &quot;.g.cs&quot;, &quot;&quot;,&quot;&quot;,null);**
+    fileManager.CreateNewFile(itm + &quot;.g.cs&quot;, &quot;&quot;,&quot;&quot;,null);
 #&gt;
 namespace Test
 {
@@ -494,7 +494,7 @@ namespace Test
 &lt;#
 }
 
-​   **fileManager.Generate();**
+​   fileManager.Generate();
 #&gt;
 </code></pre>
 
