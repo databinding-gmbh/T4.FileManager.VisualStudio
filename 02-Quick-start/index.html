@@ -246,6 +246,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#the-result" class="md-nav__link">
+    The result
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#want-to-know-more" class="md-nav__link">
+    Want to know more?
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -405,6 +419,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#the-result" class="md-nav__link">
+    The result
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#want-to-know-more" class="md-nav__link">
+    Want to know more?
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -436,33 +464,31 @@
 <li><a href="../07-Proceed-to-generate-files/">Close the file and generate it with the Generate() method</a></li>
 </ol>
 <p>The 4 parts are marked in bold in this T4 template:</p>
-<p>`
-&lt;#@ template debug="false" hostspecific="true" language="C#" #&gt;
-&lt;#@ assembly name="System.Core" #&gt;
-&lt;#@ import namespace="System.Linq" #&gt;
-&lt;#@ import namespace="System.Text" #&gt;
-&lt;#@ import namespace="System.Collections.Generic" #&gt;
-&lt;#@ output extension=".txt" #&gt;</p>
-<p><strong>&lt;#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #&gt;</strong></p>
-<p>&lt;#
-var files = new string[] { "PersonDto", "OrderDto" };
-<strong>var fileManager = T4FileManager.Create(this);</strong></p>
-<p>fileManager.IsAutoIndentEnabled = true;</p>
-<p>foreach(var itm in files)
-{
-    <strong>fileManager.CreateNewFile(itm + ".g.cs", "","",null);</strong></p>
-<h1 id="_1">&gt;</h1>
-<p>namespace Test
-{
-    public class &lt;#= itm #&gt;
-    {
-    }
-}
-&lt;#
-}</p>
-<p>​   <strong>fileManager.Generate();</strong></p>
-<h1 id="_2">&gt;</h1>
-<p>`</p>
+<p><code>&lt;#@ template debug="false" hostspecific="true" language="C#" #&gt;</code>
+<code>&lt;#@ assembly name="System.Core" #&gt;</code>
+<code>&lt;#@ import namespace="System.Linq" #&gt;</code>
+<code>&lt;#@ import namespace="System.Text" #&gt;</code>
+<code>&lt;#@ import namespace="System.Collections.Generic" #&gt;</code>
+<code>&lt;#@ output extension=".txt" #&gt;</code></p>
+<p><code>**&lt;#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #&gt;**</code></p>
+<p><code>&lt;#</code>
+<code>var files = new string[] { "PersonDto", "OrderDto" };</code>
+<code>**var fileManager = T4FileManager.Create(this);**</code></p>
+<p><code>fileManager.IsAutoIndentEnabled = true;</code></p>
+<p><code>foreach(var itm in files)</code>
+<code>{</code>
+    <code>**fileManager.CreateNewFile(itm + ".g.cs", "","",null);**</code>
+<code>#&gt;</code>
+<code>namespace Test</code>
+<code>{</code>
+    <code>public class &lt;#= itm #&gt;</code>
+    <code>{</code>
+    <code>}</code>
+<code>}</code>
+<code>&lt;#</code>
+<code>}</code></p>
+<p>​   <code>**fileManager.Generate();**</code>
+<code>#&gt;</code></p>
 <p>The call to IsAutoIndentEnabled is not necessary, but it will nicely format your code.</p>
 <h2 id="the-result">The result</h2>
 <p>If you run the template from above it will create the two files PersonDto.g.cs and OrderDto.g.cs next to your template.</p>
