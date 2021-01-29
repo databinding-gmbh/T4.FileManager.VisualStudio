@@ -18,15 +18,16 @@ With the T4.FileManager you can define into which files T4 generates your code. 
 
 | Feature                                | Description                                                  |
 | -------------------------------------- | ------------------------------------------------------------ |
-| Overwrite Existing File                | Overwrite previously generated files.                        |
-| File Properties                        | Specify file properties like CustomTool or BuildAction.      |
+| [Code Generation](02-Quick-start.md)                        | Put each generated class into a separate file.               |
 | [File Header](05-Add-header-to-files.md)                            | Create a custom header in your generated files.              |
-| Logging                                | Debug problems in your templates with the verbose log of T4.FileManager. |
-| Disable main output file               | Tell T4.FileManager not to create a main output file.        |
-| Code Generation                        | Put each generated class into a separate file.               |
-| Support for subfolders                 | Generate files inside subfolders.                            |
-| Support for projects                   | Generate files in different projects of your solution.       |
-| Shortcut support (Edit.FormatDocument) | Cleanup the generated files to your coding standards.        |
+| [Support for subfolders](05-Start-or-create-file.md)                 | Generate files inside subfolders.                            |
+| [Support for projects](05-Start-or-create-file.md)                   | Generate files in different projects of your solution.       |
+| [File Properties](05-Start-or-create-file.md#Properties)                        | Specify file properties like CustomTool or BuildAction.      |
+| [Overwrite Existing File](05-Start-or-create-file.md#Properties)                | Overwrite previously generated files.                        |
+| [Shortcut support (Edit.FormatDocument)](08-Auto-indent-and-clean-up.md) | Cleanup the generated files to your coding standards.        |
+| [Disable main output file](10-logging-and-main-output.file.md)               | Tell T4.FileManager not to create a main output file.        |
+| [Logging](10-logging-and-main-output.file.md)                                | Debug problems in your templates with the verbose log of T4.FileManager. |
+
 
 ### Installing and Usage
 
@@ -37,7 +38,8 @@ With the T4.FileManager you can define into which files T4 generates your code. 
 5. [Start or create file](05-Start-or-create-file.md)
 6. [Add header to files](06-Add-header-to-files.md)
 7. [Proceed to generate files](07-Proceed-to-generate-files.md)   
-8. [Features](07-Features.md)
-9. [Generated file infos as json](08-Generated-file-infos-as-json.md)
-10. [Living documentation and testing](09-Living-documentation-and-testing.md)
-11. [Change log](10-Change-log.md)
+8. [Auto indent and clean-up](08-Auto-indent-and-clean-up.md)
+9. [Generated file infos as json](09-Generated-file-infos-as-json.md)
+10. [Logging and main output file](10-logging-and-main-output.file.md)
+11. [Living documentation and testing](11-Living-documentation-and-testing.md)
+11. [Change log](12-Change-log.md)
