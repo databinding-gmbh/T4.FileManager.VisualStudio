@@ -17,9 +17,7 @@ With those 4 steps can you use the T4.FileManager to generate code into differen
 
 The 4 parts are marked in bold in this T4 template:
 
-
-
-```
+``` hl_lines="8 13 20 31"
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
@@ -27,19 +25,19 @@ The 4 parts are marked in bold in this T4 template:
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".txt" #>
 
-**<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>**
+<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
 
 <#
 var files = new string[] { "PersonDto", "OrderDto" };
-**var fileManager = T4FileManager.Create(this);**
 
+var fileManager = T4FileManager.Create(this);
 fileManager.IsAutoIndentEnabled = true;
 
 
 
 foreach(var itm in files)
 {
-	**fileManager.CreateNewFile(itm + ".g.cs", "","",null);**
+	fileManager.CreateNewFile(itm + ".g.cs", "","",null);
 #>
 namespace Test
 {
@@ -50,7 +48,7 @@ namespace Test
 <#
 }
 
-​	**fileManager.Generate();**
+​	fileManager.Generate();
 #>
 ```
 
