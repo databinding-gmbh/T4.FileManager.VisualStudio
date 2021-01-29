@@ -436,7 +436,7 @@
 <li><a href="../07-Proceed-to-generate-files/">Close the file and generate it with the Generate() method</a></li>
 </ol>
 <p>The 4 parts are marked in bold in this T4 template:</p>
-<p>``` csharp linenums="1" hl_lines="8 13 20 31"
+<p>``` csharp linenums="1" hl_lines="8 13 18 28"
 &lt;#@ template debug="false" hostspecific="true" language="C#" #&gt;
 &lt;#@ assembly name="System.Core" #&gt;
 &lt;#@ import namespace="System.Linq" #&gt;
@@ -459,9 +459,8 @@ fileManager.IsAutoIndentEnabled = true;</p>
     }
 }
 &lt;#
-}</p>
-<pre><code>fileManager.Generate();
-</code></pre>
+}
+    fileManager.Generate();</p>
 <h1 id="_2">&gt;</h1>
 <pre><code>
 
