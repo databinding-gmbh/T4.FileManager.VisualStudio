@@ -464,7 +464,7 @@
 <li><a href="../07-Proceed-to-generate-files/">Close the file and generate it with the Generate() method</a></li>
 </ol>
 <p>The 4 parts are marked in bold in this T4 template:</p>
-<pre><code class="csharp">&lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
+<pre><code class="c#">&lt;#@ template debug=&quot;false&quot; hostspecific=&quot;true&quot; language=&quot;C#&quot; #&gt;
 &lt;#@ assembly name=&quot;System.Core&quot; #&gt;
 &lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
 &lt;#@ import namespace=&quot;System.Text&quot; #&gt;
@@ -511,7 +511,7 @@ namespace Test
 </code></pre>
 
 <p>OrderDto.g.cs:</p>
-<pre><code>amespace Test
+<pre><code>namespace Test
 {
     public class OrderDto
     {
