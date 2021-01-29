@@ -8,10 +8,10 @@ After you installed T4.FileManager into your project, you can dive right into yo
 
 With those 4 steps can you use the T4.FileManager to generate code into different files:
 
-1. Include T4.FileManager.VisualStudio.ttinclude in your template
-2. Instantiate T4FileManager
-3. Start a new file with CreateNewFile() method
-4. Close the file and generate it with the Generate() method
+1. [Include T4.FileManager.VisualStudio.ttinclude in your template](03-Include-in-your-text-template.md)
+2. [Instantiate T4FileManager](04-Create-instance.md)
+3. [Start a new file with CreateNewFile() method](05-Start-or-create-file.md)
+4. [Close the file and generate it with the Generate() method](07-Proceed-to-generate-files.md)
 
 
 
@@ -32,6 +32,10 @@ The 4 parts are marked in bold in this T4 template:
 var files = new string[] { "PersonDto", "OrderDto" };
 **var fileManager = T4FileManager.Create(this);**
 
+fileManager.IsAutoIndentEnabled = true;
+
+
+
 foreach(var itm in files)
 {
 	**fileManager.CreateNewFile(itm + ".g.cs", "","",null);**
@@ -49,6 +53,8 @@ namespace Test
 #>`
 
 
+
+The call to IsAutoIndentEnabled is not necessary, but it will nicely format your code.
 
 
 
