@@ -10,7 +10,7 @@ With those 4 steps can you use the T4.FileManager to generate code into differen
 
 1. [Include T4.FileManager.VisualStudio.ttinclude in your template](03-Include-in-your-text-template.md)
 2. [Instantiate T4FileManager](04-Create-instance.md)
-3. [Start a new file with CreateNewFile() method](05-Start-or-create-file.md)
+3. [Start a new file with the CreateNewFile() method](05-Start-or-create-file.md)
 4. [Close the file and generate it with the Generate() method](07-Proceed-to-generate-files.md)
 
 
@@ -51,7 +51,7 @@ namespace Test
 
 
 
-The call to IsAutoIndentEnabled is not necessary, but it will nicely format your code.
+The call to *IsAutoIndentEnabled* is not necessary, but it will nicely format your code.
 
 
 

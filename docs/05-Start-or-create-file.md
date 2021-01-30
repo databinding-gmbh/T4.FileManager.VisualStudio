@@ -1,24 +1,22 @@
 # Start or create file
 
+Put this line into your text template (*.tt) where you want to start a new file:
+
 ```
 fileManager.CreateNewFile(filename, projectname, subfolders, properties);
 ```
 
-The following content is then generated into the file. 
+All the content that follows in your template will go into that file (until you close it with the [Generate()](07-Proceed-to-generate-files.md) method. 
 
-To finish the file there are the following possibilities:
 
-- A new file is simply started with the method above. 
-- The content should be generated (see [proceed-to-generate-files](07-Proceed-to-generate-files.md)).
-- It will be completed with the finish method: `fileManager.FinishFile()`.
 
 ## Parameters
 
 | Parameter   | Type                       | Description                                                  | Exmaple/Value                                                |
 | ----------- | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| filename    | string                     | The name of started file.                                    | "test.cs"<br />required value, should NOT BE *null*          |
-| projectname | string                     | The name of the project, where should be generate the file.  | "Test.Business"<br />*null* = project name of current project |
-| subfolders  | string                     | Subfolder path with starting point from defined project.     | Path.Combine("Example", "Tests")<br />*null* = root of project |
+| filename    | string                     | The name of the file.                                        | "test.cs"<br />required value, should NOT BE *null*          |
+| projectname | string                     | The name of the project in which the file is created.        | "Test.Business"<br />*null* = project name of current project |
+| subfolders  | string                     | The path of (sub) folders inside the project.                | Path.Combine("Example", "Tests")<br />*null* = root of project |
 | properties  | Dictionary<string, object> | Adding visual studio properties as example "CustomTool" or "CopyToOutputDirectory". | var settings = new Dictionary<string, object>();<br />settings.Add("CopyToOutputDirectory", 1)<br />*null* = no properties set |
 
 #### Properties

@@ -1,6 +1,6 @@
 # Create instance
 
-Create instance of T4.FileManager.
+Create an instance of T4.FileManager
 
 ```
 var fileManager = new T4FileManager(this);
