@@ -29,7 +29,7 @@ With the T4.FileManager you can define into which files T4 generates your code. 
 | [Logging](10-logging-and-main-output.file.md)                                | Debug problems in your templates with the verbose log of T4.FileManager. |
 
 
-### Installing and Usage
+### Table of contents
 
 1. [Installation](01-Installation.md)
 2. [Quick start](02-Quick-start.md)
