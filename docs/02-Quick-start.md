@@ -25,17 +25,17 @@ The 4 parts are marked in this T4 template:
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".txt" #>
 
-<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #> // **(1)**
+<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
 
 <#
 var files = new string[] { "PersonDto", "OrderDto" };
 
-var fileManager = T4FileManager.Create(this); // **(2)**
+var fileManager = T4FileManager.Create(this);
 fileManager.IsAutoIndentEnabled = true;
 
 foreach(var itm in files)
 {
-	fileManager.CreateNewFile(itm + ".g.cs", "","",null); // **(3)**
+	fileManager.CreateNewFile(itm + ".g.cs", "","",null);
 #>
 namespace Test
 {
@@ -45,7 +45,7 @@ namespace Test
 }
 <#
 }
-    fileManager.Generate(); // **(4)**
+    fileManager.Generate();
 #>
 ```
 
@@ -63,7 +63,7 @@ If you run the template from above it will create the two files PersonDto.g.cs a
 
 PersonDto.g.cs: 
 
-```
+``` csharp
 namespace Test
 {
     public class PersonDto
@@ -76,7 +76,7 @@ namespace Test
 
 OrderDto.g.cs:
 
-```
+``` csharp 
 namespace Test
 {
 	public class OrderDto
