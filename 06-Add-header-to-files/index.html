@@ -288,6 +288,20 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#add-filename-to-header" class="md-nav__link">
+    Add filename to header
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clear-header" class="md-nav__link">
+    Clear Header
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#compatibility-to-old-filemanager" class="md-nav__link">
     Compatibility to old FileManager
   </a>
@@ -399,6 +413,20 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#add-filename-to-header" class="md-nav__link">
+    Add filename to header
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clear-header" class="md-nav__link">
+    Clear Header
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#compatibility-to-old-filemanager" class="md-nav__link">
     Compatibility to old FileManager
   </a>
@@ -426,17 +454,58 @@
                 
                 
                 <h1 id="add-header-to-files">Add header to files</h1>
-<p>If you want to add a header to your files, you can set it once and it will be added to all your generated files.</p>
-<p>At first, you need to start the header.</p>
-<div class="highlight"><pre><span></span><code>fileManager.StartHeader();
+<p>You can specify a header that is written to your files. Everything that is between <em>StartHeader()</em> and <em>FinishHeader()</em> will go to the top of your file:</p>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="n">fileManager</span><span class="p">.</span><span class="n">StartHeader</span><span class="p">();</span>
+</span><span class="err">#</span><span class="p">&gt;</span>
+<span class="c1">// -------------------------</span>
+<span class="c1">// databinding - T4</span>
+<span class="c1">// -------------------------</span>
+<span class="p">&lt;</span><span class="err">#</span>
+<span class="hll"><span class="n">fileManager</span><span class="p">.</span><span class="n">FinishHeader</span><span class="p">();</span>
+</span><span class="n">fileManager</span><span class="p">.</span><span class="n">CreateNewFile</span><span class="p">(</span><span class="s">&quot;PersonDtoWithGlobal.g.cs&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="k">null</span><span class="p">);</span>
 </code></pre></div>
 
-<p>Add your header content in your T4.</p>
-<p>Complete your header.</p>
-<div class="highlight"><pre><span></span><code>fileManager.FinishHeader();
+<p>The generated files all get the same header:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// -------------------------</span>
+<span class="c1">// databinding - T4</span>
+<span class="c1">// -------------------------</span>
+<span class="k">namespace</span> <span class="nn">Test</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">PersonDtoWithGlobal</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 
-<p>If you want to clear your header in same T4 file, you can use following code.</p>
+<h2 id="add-filename-to-header">Add filename to header</h2>
+<p>You can access the name of the generated file with the <strong>$filename$</strong> template:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span> <span class="n">fileManager</span> <span class="p">=</span> <span class="n">T4FileManager</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="n">fileManager</span><span class="p">.</span><span class="n">StartHeader</span><span class="p">();</span>
+<span class="err">#</span><span class="p">&gt;</span>
+<span class="hll"><span class="c1">// &lt;copyright file=&quot;$filename$&quot; company=&quot;databinding.gmbh&quot;&gt;</span>
+</span><span class="c1">//     databinding.gmbh - All rights reserved.</span>
+<span class="c1">// &lt;/copyright&gt;</span>
+<span class="c1">// &lt;author&gt;Mr. T4&lt;/author&gt;</span>
+<span class="p">&lt;</span><span class="err">#</span>
+<span class="n">fileManager</span><span class="p">.</span><span class="n">FinishHeader</span><span class="p">();</span>
+<span class="n">fileManager</span><span class="p">.</span><span class="n">CreateNewFile</span><span class="p">(</span><span class="s">&quot;PersonDtoWithSA1633.g.cs&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="k">null</span><span class="p">);</span>
+</code></pre></div>
+
+<p>In the generated file $filename$ is replaced with the name of the file:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// &lt;copyright file=&quot;OrderDtoWithSA1633.g.cs&quot; company=&quot;databinding.gmbh&quot;&gt;</span>
+<span class="c1">//     databinding.gmbh - All rights reserved.</span>
+<span class="c1">// &lt;/copyright&gt;</span>
+<span class="c1">// &lt;author&gt;Mr. T4&lt;/author&gt;</span>
+<span class="k">namespace</span> <span class="nn">Test</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">OrderDtoWithHeader</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="clear-header">Clear Header</h2>
+<p>You can clear a defined header at any time with this method:</p>
 <div class="highlight"><pre><span></span><code>fileManager.ClearHeader();
 </code></pre></div>
 

@@ -440,9 +440,9 @@
                 
                 
                 <h1 id="include-in-your-text-template">Include in your text template</h1>
-<p>Create an empty text template file (*.tt). </p>
+<p>Open your text template (*.tt) or create a new one.</p>
 <h3 id="net-core-net-standard-net-5">.NET Core, .NET Standard, NET 5</h3>
-<p>The File Manger will be linked to the nuget system folder. You can compile your project and then reference it using $(TargetDir) in your template.</p>
+<p>The File Manger will be linked to the NuGet system folder. You can compile your project and then reference it using $(TargetDir) in your template.</p>
 <p>Add the following code to the top of the file:</p>
 <div class="highlight"><pre><span></span><code>&lt;#@ include file=&quot;$(TargetDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
 </code></pre></div>
