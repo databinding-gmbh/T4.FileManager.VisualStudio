@@ -72,7 +72,12 @@ stages:
              repo_name: ' $(Build.Repository.Name)'
              repo_url: '$(Build.Repository.Uri)'
              theme:
-               name: 'material'"
+               name: 'material'
+             markdown_extensions:
+                - pymdownx.highlight:
+                    linenums_style: pymdownx.inline
+                - pymdownx.superfences  
+               "
       displayName: 'Create mkdocs.yml'
 
     - script: |
