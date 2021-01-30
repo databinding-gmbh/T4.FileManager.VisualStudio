@@ -19,7 +19,7 @@
     
     
       
-        <title>Generated file infos as json - T4.FileManager.VisualStudio Documentation 2.0.0</title>
+        <title>Generated file infos as JSON - T4.FileManager.VisualStudio Documentation 2.0.0</title>
       
     
     
@@ -81,7 +81,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Generated file infos as json
+              Generated file infos as JSON
             
           </span>
         </div>
@@ -297,8 +297,8 @@
       
     
     
-    <a href="./" title="Generated file infos as json" class="md-nav__link md-nav__link--active">
-      Generated file infos as json
+    <a href="./" title="Generated file infos as JSON" class="md-nav__link md-nav__link--active">
+      Generated file infos as JSON
     </a>
     
   </li>
@@ -375,8 +375,21 @@
                   
                 
                 
-                <h1 id="generated-file-infos-as-json">Generated file infos as json</h1>
-<p>If you want to see what files your t4 generates, there should be a .json-File next to your .tt-File (.info.json). It contains a list of all file infos of your generated files. The .json-File is also used to clean up the files if there should be path changes after regenerating files in this step <code>fileManager.Generate()</code>  or <code>fileManager.Process()</code>.</p>
+                <h1 id="generated-file-infos-as-json">Generated file infos as JSON</h1>
+<p>You can see all files T4.FileManager generated in the <em>yourTemplate.info.json</em> file. It is used by T4.FileManager to clean-up after itself when you change the location of generated files.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;FilesToGenerate&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;Filename&quot;</span><span class="p">:</span> <span class="s2">&quot;ProjectTestFP.resx&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;Project&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;Path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;Properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;CustomTool&quot;</span><span class="p">:</span> <span class="s2">&quot;ResXFileCodeGenerator&quot;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
                 
               
               

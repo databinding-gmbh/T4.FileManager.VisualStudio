@@ -338,8 +338,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../09-Generated-file-infos-as-json/" title="Generated file infos as json" class="md-nav__link">
-      Generated file infos as json
+    <a href="../09-Generated-file-infos-as-json/" title="Generated file infos as JSON" class="md-nav__link">
+      Generated file infos as JSON
     </a>
   </li>
 
@@ -441,14 +441,14 @@
                 
                 <h1 id="auto-indent-and-clean-up">Auto indent and clean up</h1>
 <h2 id="auto-indent">Auto indent</h2>
-<p>You can set <code>IsAutoIndentEnabled</code> for enable visual studio process to format your generated files. The process is like opening the generated file, executing command <code>Edit.FormatDocument (CTRL+K, CTRL+D)</code>, saving and closing the file. Set property on file manager as following.</p>
+<p>You can set <code>IsAutoIndentEnabled</code> for enable visual studio process to format your generated files. The process is like opening the generated file, executing command <code>Edit.FormatDocument (CTRL+K, CTRL+D)</code>, saving and closing the file. You can change this behaviour by setting the property <em>IsAutoIndentEnabled</em> on the file manager:</p>
 <div class="highlight"><pre><span></span><code>fileManager.IsAutoIndentEnabled = false; // default 
 fileManager.IsAutoIndentEnabled = true;
 </code></pre></div>
 
 <p><strong>Important: There are 20 attempts per file trying to indent the file. This attempts are like normal user actions, wait until ends!</strong></p>
 <h2 id="auto-clean-up-with-resharper">Auto clean up with resharper</h2>
-<p>You can set <code>IsAutoCleanUpWithResharperEnabled</code> for enable Resharper process to clean up your generated files extendable with your StyleCop settings. The process is like opening the generated file, executing command <code>ReSharper_SilentCleanupCode (CTRL+E, CTRL+F)</code>, saving and closing the file. Set property on file manager as following.</p>
+<p>You can set <code>IsAutoCleanUpWithResharperEnabled</code> for enable Resharper process to clean up your generated files extendable with your StyleCop settings. The process is like opening the generated file, executing command <code>ReSharper_SilentCleanupCode (CTRL+E, CTRL+F)</code>, saving and closing the file. You can change this behaviour by setting the property <em>IsAutoCleanUpWithResharperEnabled</em> on the file manager:</p>
 <div class="highlight"><pre><span></span><code>fileManager.IsAutoCleanUpWithResharperEnabled = false; // default 
 fileManager.IsAutoCleanUpWithResharperEnabled = true;
 </code></pre></div>
@@ -487,13 +487,13 @@ fileManager.IsAutoCleanUpWithResharperEnabled = true;
           </a>
         
         
-          <a href="../09-Generated-file-infos-as-json/" title="Generated file infos as json" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../09-Generated-file-infos-as-json/" title="Generated file infos as JSON" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Generated file infos as json
+                Generated file infos as JSON
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
