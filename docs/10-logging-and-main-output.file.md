@@ -14,11 +14,11 @@ To turn on logging you need to create your T4.FileManager instance with this com
 
 
 
-You now get a log with all important steps of the file generation in the output window of Visual Studio and in the file *YourTemplateName.txt*.
+You now get a log with all important steps of the file generation in the output window of Visual Studio and in the file ***yourTemplate.txt***.
 
 
 
-You can write your own log messages with the Log() method:
+You can write your own log messages with the *Log()* method:
 
 `<# fileManager.Log("My custom log info for {0}", itm); #>`
 

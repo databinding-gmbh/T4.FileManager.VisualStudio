@@ -1,6 +1,6 @@
 # Proceed to generate files
 
-Finally the files can be generated with the following code:
+Finally, the files can be generated with the following code:
 
 ```
 fileManager.Generate();
@@ -8,7 +8,7 @@ fileManager.Generate();
 
 ## Overwrite existing files
 
-There is a variable to define if existing generated files should be overwritten or not.
+By default T4.FileManager only overwrites files it generated before. If you want to prevent that from happening, you can set the *CanOverwriteExistingFile* property to false:
 
 ```
 fileManager.CanOverwriteExistingFile = true; // default

@@ -1,3 +1,19 @@
-# Generated file infos as json
+# Generated file infos as JSON
 
-If you want to see what files your t4 generates, there should be a .json-File next to your .tt-File (.info.json). It contains a list of all file infos of your generated files. The .json-File is also used to clean up the files if there should be path changes after regenerating files in this step `fileManager.Generate()`  or `fileManager.Process()`.
+You can see all files T4.FileManager generated in the *yourTemplate.info.json* file. It is used by T4.FileManager to clean-up after itself when you change the location of generated files.
+
+```json
+{
+  "FilesToGenerate": [
+    {
+      "Filename": "ProjectTestFP.resx",
+      "Project": "",
+      "Path": "",
+      "Properties": {
+        "CustomTool": "ResXFileCodeGenerator"
+      }
+    }
+  ]
+}
+```
+

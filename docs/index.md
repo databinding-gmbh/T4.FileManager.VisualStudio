@@ -39,7 +39,7 @@ With the T4.FileManager you can define into which files T4 generates your code. 
 6. [Add header to files](06-Add-header-to-files.md)
 7. [Proceed to generate files](07-Proceed-to-generate-files.md)   
 8. [Auto indent and clean-up](08-Auto-indent-and-clean-up.md)
-9. [Generated file infos as json](09-Generated-file-infos-as-json.md)
+9. [Generated file infos as JSON](09-Generated-file-infos-as-json.md)
 10. [Logging and main output file](10-logging-and-main-output.file.md)
 11. [Living documentation and testing](11-Living-documentation-and-testing.md)
 11. [Change log](12-Change-log.md)
