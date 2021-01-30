@@ -428,23 +428,23 @@
                 <h1 id="add-header-to-files">Add header to files</h1>
 <p>If you want to add a header to your files, you can set it once and it will be added to all your generated files.</p>
 <p>At first, you need to start the header.</p>
-<pre><code>fileManager.StartHeader();
-</code></pre>
+<div class="highlight"><pre><span></span><code>fileManager.StartHeader();
+</code></pre></div>
 
 <p>Add your header content in your T4.</p>
 <p>Complete your header.</p>
-<pre><code>fileManager.FinishHeader();
-</code></pre>
+<div class="highlight"><pre><span></span><code>fileManager.FinishHeader();
+</code></pre></div>
 
 <p>If you want to clear your header in same T4 file, you can use following code.</p>
-<pre><code>fileManager.ClearHeader();
-</code></pre>
+<div class="highlight"><pre><span></span><code>fileManager.ClearHeader();
+</code></pre></div>
 
 <h2 id="compatibility-to-old-filemanager"><em>Compatibility to old FileManager</em></h2>
 <p>StartHeader is equivalent to old file manager.</p>
 <p>Instead of FinishHeader use old EndBlock.</p>
-<pre><code>fileManager.EndBlock();
-</code></pre>
+<div class="highlight"><pre><span></span><code>fileManager.EndBlock();
+</code></pre></div>
                 
               
               

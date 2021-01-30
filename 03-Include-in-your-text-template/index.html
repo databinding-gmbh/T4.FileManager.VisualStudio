@@ -444,14 +444,14 @@
 <h3 id="net-core-net-standard-net-5">.NET Core, .NET Standard, NET 5</h3>
 <p>The File Manger will be linked to the nuget system folder. You can compile your project and then reference it using $(TargetDir) in your template.</p>
 <p>Add the following code to the top of the file:</p>
-<pre><code>&lt;#@ include file=&quot;$(TargetDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code>&lt;#@ include file=&quot;$(TargetDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+</code></pre></div>
 
 <h3 id="net-framework">.NET Framework</h3>
 <p>The File Manager will be copied to the Project root. You can reference it using $(ProjectDir) in your template.</p>
 <p>Add the following code to the top of the file:</p>
-<pre><code>&lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code>&lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
+</code></pre></div>
                 
               
               

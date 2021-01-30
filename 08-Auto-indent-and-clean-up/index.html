@@ -442,16 +442,16 @@
                 <h1 id="auto-indent-and-clean-up">Auto indent and clean up</h1>
 <h2 id="auto-indent">Auto indent</h2>
 <p>You can set <code>IsAutoIndentEnabled</code> for enable visual studio process to format your generated files. The process is like opening the generated file, executing command <code>Edit.FormatDocument (CTRL+K, CTRL+D)</code>, saving and closing the file. Set property on file manager as following.</p>
-<pre><code>fileManager.IsAutoIndentEnabled = false; // default 
+<div class="highlight"><pre><span></span><code>fileManager.IsAutoIndentEnabled = false; // default 
 fileManager.IsAutoIndentEnabled = true;
-</code></pre>
+</code></pre></div>
 
 <p><strong>Important: There are 20 attempts per file trying to indent the file. This attempts are like normal user actions, wait until ends!</strong></p>
 <h2 id="auto-clean-up-with-resharper">Auto clean up with resharper</h2>
 <p>You can set <code>IsAutoCleanUpWithResharperEnabled</code> for enable Resharper process to clean up your generated files extendable with your StyleCop settings. The process is like opening the generated file, executing command <code>ReSharper_SilentCleanupCode (CTRL+E, CTRL+F)</code>, saving and closing the file. Set property on file manager as following.</p>
-<pre><code>fileManager.IsAutoCleanUpWithResharperEnabled = false; // default 
+<div class="highlight"><pre><span></span><code>fileManager.IsAutoCleanUpWithResharperEnabled = false; // default 
 fileManager.IsAutoCleanUpWithResharperEnabled = true;
-</code></pre>
+</code></pre></div>
 
 <p><strong>Important: There are 20 attempts per file trying to clean up the file. This attempts are like normal user actions, wait until ends!</strong></p>
                 
