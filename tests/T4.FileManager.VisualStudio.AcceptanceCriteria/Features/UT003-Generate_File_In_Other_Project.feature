@@ -22,7 +22,7 @@ var fileManager = new T4FileManager(this);
 
 foreach(var itm in files)
 {
-	fileManager.CreateNewFile(itm + ".g.cs","T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject","",null);
+	fileManager.CreateNewFile(itm + ".g.cs","T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject","");
 #>
 namespace Test
 {

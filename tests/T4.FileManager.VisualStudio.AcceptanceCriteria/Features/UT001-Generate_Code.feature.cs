@@ -129,7 +129,7 @@ var fileManager = T4FileManager.Create(this);
 
 foreach(var itm in files)
 {
-fileManager.CreateNewFile(itm + "".g.cs"", """","""",null);
+fileManager.CreateNewFile(itm + "".g.cs"", """","""");
 #>
 namespace Test
 {
@@ -204,7 +204,7 @@ var fileManager = T4FileManager.Create(this);
 
 foreach(var itm in files)
 {
-fileManager.StartNewFile(itm + "".g.cs"", """","""",null);
+fileManager.StartNewFile(itm + "".g.cs"", """","""");
 #>
 namespace Test
 {
@@ -280,7 +280,7 @@ var fileManager = T4FileManager.Create(this);
 
 foreach(var itm in files)
 {
-fileManager.CreateNewFile(itm + "".g.cs"", """","""",null);
+fileManager.CreateNewFile(itm + "".g.cs"", """","""");
 #>
 namespace Test
 {
@@ -359,7 +359,7 @@ var fileManager = T4FileManager.Create(this);
 
 foreach(var itm in files)
 {
-fileManager.CreateNewFile(itm + "".g.cs"", """","""",null);
+fileManager.CreateNewFile(itm + "".g.cs"", """","""");
 #>
 namespace Test
 {
@@ -438,7 +438,7 @@ var fileManager = T4FileManager.Create(this).DisableTemplateMainOutputFile(); //
 
 foreach(var itm in files)
 {
-fileManager.CreateNewFile(itm + "".g.cs"", """","""",null);
+fileManager.CreateNewFile(itm + "".g.cs"", """","""");
 #>
 namespace Test
 {
@@ -520,7 +520,7 @@ var fileManager = T4FileManager.Create(this).EnableAutoIndent(); // <=== Enable 
 
 foreach(var itm in files)
 {
-fileManager.CreateNewFile(itm + "".g.cs"", """","""",null);
+fileManager.CreateNewFile(itm + "".g.cs"", """","""");
 #>
 namespace Test
 {

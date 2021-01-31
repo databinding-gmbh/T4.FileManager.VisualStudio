@@ -19,7 +19,7 @@ Background: T4 File Manager and base script
 <#
 var fileManager = T4FileManager.Create(this).DisableOverwriteExistingFile();
 
-fileManager.CreateNewFile("TestNoDelete.g.cs","","TestOverwrite",null);	
+fileManager.CreateNewFile("TestNoDelete.g.cs","","TestOverwrite");	
 #>
 namespace Test
 {
@@ -39,15 +39,14 @@ Scenario: No files deleted if CanOverwriteExistingFile is set to false
 		| File              | Folder        |
 		| TestNoDelete.g.cs | TestOverwrite |
 	And I change the line
-		| From                                                                    | To                                                                       |
-		| fileManager.CreateNewFile("TestNoDelete.g.cs","","TestOverwrite",null); | fileManager.CreateNewFile("TestNoDelete2.g.cs","","TestOverwrite",null); |
-		| public class TestNoDelete                                               | public class TestNoDelete2                                               |
+		| From                                                               | To                                                                  |
+		| fileManager.CreateNewFile("TestNoDelete.g.cs","","TestOverwrite"); | fileManager.CreateNewFile("TestNoDelete2.g.cs","","TestOverwrite"); |
+		| public class TestNoDelete                                          | public class TestNoDelete2                                          |
 	When I run the script
 	Then the following files are generated:
 		| File               | Folder        |
 		| TestNoDelete.g.cs  | TestOverwrite |
 		| TestNoDelete2.g.cs | TestOverwrite |
-
 
 Scenario: No content changes if CanOverwriteExistingFile is set to false
 	Given I run the script

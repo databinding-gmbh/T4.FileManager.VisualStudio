@@ -94,7 +94,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 
 <#
 var fileManager = T4FileManager.Create(this);
-fileManager.CreateNewFile(""TestOldFilesCleanUp.g.cs"","""","""",null);	
+fileManager.CreateNewFile(""TestOldFilesCleanUp.g.cs"","""","""");	
 #>
 namespace Test
 {
@@ -159,7 +159,7 @@ this.FeatureBackground();
 
 <#
 var fileManager = new T4FileManager(this);
-fileManager.CreateNewFile(""TestOldFilesCleanUpRenamed.g.cs"","""","""",null);	
+fileManager.CreateNewFile(""TestOldFilesCleanUpRenamed.g.cs"","""","""");	
 #>
 namespace Test
 {

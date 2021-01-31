@@ -19,7 +19,7 @@ Background: Previously run automation created files
 
 <#
 var fileManager = T4FileManager.Create(this);
-fileManager.CreateNewFile("TestOldFilesCleanUp.g.cs","","",null);	
+fileManager.CreateNewFile("TestOldFilesCleanUp.g.cs","","");	
 #>
 namespace Test
 {
@@ -51,7 +51,7 @@ Scenario: Generate files with clean up of old files (based on *.info.json)
 
 <#
 var fileManager = new T4FileManager(this);
-fileManager.CreateNewFile("TestOldFilesCleanUpRenamed.g.cs","","",null);	
+fileManager.CreateNewFile("TestOldFilesCleanUpRenamed.g.cs","","");	
 #>
 namespace Test
 {

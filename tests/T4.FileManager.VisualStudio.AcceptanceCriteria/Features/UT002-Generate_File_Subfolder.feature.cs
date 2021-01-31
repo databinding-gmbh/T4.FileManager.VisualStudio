@@ -98,7 +98,7 @@ var fileManager = new T4FileManager(this);
 
 foreach(var itm in files)
 {
-fileManager.CreateNewFile(itm + "".g.cs"","""",""TestSubfolder"",null);
+fileManager.CreateNewFile(itm + "".g.cs"","""",""TestSubfolder"");
 #>
 namespace Test.TestSubFolder
 {
@@ -198,8 +198,8 @@ this.FeatureBackground();
                             "From",
                             "To"});
                 table8.AddRow(new string[] {
-                            "fileManager.CreateNewFile(itm + \".g.cs\",\"\",\"TestSubfolder\",null);",
-                            "fileManager.CreateNewFile(itm + \".g.cs\",\"\",\"TestSubfolderNew\",null);"});
+                            "fileManager.CreateNewFile(itm + \".g.cs\",\"\",\"TestSubfolder\");",
+                            "fileManager.CreateNewFile(itm + \".g.cs\",\"\",\"TestSubfolderNew\");"});
 #line 50
  testRunner.And("I change the line", ((string)(null)), table8, "And ");
 #line hidden

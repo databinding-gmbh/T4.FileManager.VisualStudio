@@ -95,7 +95,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 <#
 var fileManager = T4FileManager.Create(this).DisableOverwriteExistingFile();
 
-fileManager.CreateNewFile(""TestDelete.g.cs"","""",""TestOverwrite"",null);	
+fileManager.CreateNewFile(""TestDelete.g.cs"","""",""TestOverwrite"");	
 #>
 namespace Test
 {
@@ -158,8 +158,8 @@ this.FeatureBackground();
                             "T4FileManager.Create(this).DisableOverwriteExistingFile();",
                             "T4FileManager.Create(this);"});
                 table26.AddRow(new string[] {
-                            "fileManager.CreateNewFile(\"TestDelete.g.cs\",\"\",\"TestOverwrite\",null);",
-                            "fileManager.CreateNewFile(\"TestNoDelete3.g.cs\",\"\",\"TestOverwrite\",null);"});
+                            "fileManager.CreateNewFile(\"TestDelete.g.cs\",\"\",\"TestOverwrite\");",
+                            "fileManager.CreateNewFile(\"TestNoDelete3.g.cs\",\"\",\"TestOverwrite\");"});
                 table26.AddRow(new string[] {
                             "public class TestDelete",
                             "public class NewTestDeleteModel"});

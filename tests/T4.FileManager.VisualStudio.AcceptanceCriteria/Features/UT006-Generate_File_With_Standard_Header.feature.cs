@@ -132,7 +132,7 @@ fileManager.StartHeader();
 // -------------------------
 <#
 fileManager.FinishHeader();
-fileManager.CreateNewFile(""PersonDtoWithGlobal.g.cs"","""","""",null);	
+fileManager.CreateNewFile(""PersonDtoWithGlobal.g.cs"","""","""");	
 #>
 namespace Test
 {
@@ -141,7 +141,7 @@ public class PersonDtoWithGlobal
 }
 }
 <#
-fileManager.CreateNewFile(""OrderDtoWithGlobal.g.cs"","""","""",null);	
+fileManager.CreateNewFile(""OrderDtoWithGlobal.g.cs"","""","""");	
 #>
 namespace Test
 {
@@ -215,7 +215,7 @@ fileManager.StartHeader();
 // <author>Mr. T4</author>
 <#
 fileManager.FinishHeader();
-fileManager.CreateNewFile(""PersonDtoWithSA1633.g.cs"","""","""",null);	
+fileManager.CreateNewFile(""PersonDtoWithSA1633.g.cs"","""","""");	
 #>
 namespace Test
 {
@@ -224,7 +224,7 @@ public class PersonDtoWithHeader
 }
 }
 <#
-fileManager.CreateNewFile(""OrderDtoWithSA1633.g.cs"","""","""",null);	
+fileManager.CreateNewFile(""OrderDtoWithSA1633.g.cs"","""","""");	
 #>
 namespace Test
 {
@@ -304,7 +304,7 @@ fileManager.StartHeader();
 // <author>Mr. T4</author>
 <#
 fileManager.EndBlock();
-fileManager.CreateNewFile(""PersonDtoWithSA1633TFM.g.cs"","""","""",null);	
+fileManager.CreateNewFile(""PersonDtoWithSA1633TFM.g.cs"","""","""");	
 #>
 namespace Test
 {
@@ -313,7 +313,7 @@ public class PersonDtoWithHeader
 }
 }
 <#
-fileManager.CreateNewFile(""OrderDtoWithSA1633TFM.g.cs"","""","""",null);	
+fileManager.CreateNewFile(""OrderDtoWithSA1633TFM.g.cs"","""","""");	
 #>
 namespace Test
 {

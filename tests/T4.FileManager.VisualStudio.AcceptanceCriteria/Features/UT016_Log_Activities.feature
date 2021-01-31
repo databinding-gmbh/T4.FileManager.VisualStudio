@@ -25,7 +25,7 @@ var fileManager = new T4FileManager(this).EnableLog(); // <-- log output to main
 
 foreach(var itm in files)
 {
-	fileManager.CreateNewFile(itm + ".g.cs", "", "TestSubfolder", null);
+	fileManager.CreateNewFile(itm + ".g.cs", "", "TestSubfolder");
 #>
 namespace Test
 {
@@ -65,7 +65,7 @@ var fileManager = new T4FileManager(this).EnableLog(); // <-- log output to main
 
 foreach(var itm in files)
 {
-	fileManager.CreateNewFile(itm + ".g.cs", "", "TestSubfolder", null);
+	fileManager.CreateNewFile(itm + ".g.cs", "", "TestSubfolder");
 #>
 namespace Test
 {

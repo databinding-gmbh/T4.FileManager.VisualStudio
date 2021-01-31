@@ -22,7 +22,7 @@ var fileManager = new T4FileManager(this);
 
 foreach(var itm in files)
 {
-	fileManager.CreateNewFile(itm + ".g.cs","","TestSubfolder",null);
+	fileManager.CreateNewFile(itm + ".g.cs","","TestSubfolder");
 #>
 namespace Test.TestSubFolder
 {
@@ -49,7 +49,7 @@ Scenario: Change output folder in T4 move generated files to new location
 	When I run the script
 	And I change the line
 	 | From                                                              | To                                                                   |
-	 | fileManager.CreateNewFile(itm + ".g.cs","","TestSubfolder",null); | fileManager.CreateNewFile(itm + ".g.cs","","TestSubfolderNew",null); |
+	 | fileManager.CreateNewFile(itm + ".g.cs","","TestSubfolder"); | fileManager.CreateNewFile(itm + ".g.cs","","TestSubfolderNew"); |
 	And I run the script again
 	Then the following files are generated:
 		| File           | Folder           |
