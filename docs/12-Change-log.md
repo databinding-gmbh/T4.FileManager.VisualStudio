@@ -6,7 +6,7 @@
 - Added class **TemplateFileManager** for better backward compatibility
 - Header supports the placeholder $filename$ again
 - Methods to configure the t4 file manager now follow the builder pattern style
-- Breaking Changes
+- **Breaking Changes**
   - GetNamespaceForCSharpCode() removed because CreateNewFile knows the namespace already (set by developer)
   - CreateNewFile FileProperties Dictionary removed use class FileProperties instead
 

@@ -6,7 +6,7 @@
 
 ## Getting started 
 
-Install the File Manager with nuget. [![Nuget](https://img.shields.io/nuget/v/T4.FileManager.VisualStudio)](https://www.nuget.org/packages/T4.FileManager.VisualStudio/)
+Install the File Manager with NuGet. [![Nuget](https://img.shields.io/nuget/v/T4.FileManager.VisualStudio)](https://www.nuget.org/packages/T4.FileManager.VisualStudio/)
 
 ```
 Install-Package T4.FileManager.VisualStudio

@@ -1,10 +1,10 @@
 # Include in your text template
 
-Create an empty text template file (*.tt). 
+Open your text template (*.tt) or create a new one.
 
 ### .NET Core, .NET Standard, NET 5
 
-The File Manger will be linked to the nuget system folder. You can compile your project and then reference it using $(TargetDir) in your template.
+The File Manger will be linked to the NuGet system folder. You can compile your project and then reference it using $(TargetDir) in your template.
 
 Add the following code to the top of the file:
 
