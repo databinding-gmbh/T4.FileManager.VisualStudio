@@ -157,32 +157,33 @@ stages:
         githubaccesstoken: '$(pat)'
         repositoryname: $(repo)
 
-- stage: DEPLOY_TEST
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
-  pool: databinding self hosted interactive
-  variables:
-    - group: Test
+- ${{ if eq(parameters.canPublish, true) }}: 
+  - stage: DEPLOY_TEST
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
+    pool: databinding self hosted interactive
+    variables:
+      - group: Test
 
-  jobs:
-  - job:
-    steps:
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        patterns: 'drop/**/*'
-        path: 'drop'
+    jobs:
+    - job:
+      steps:
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          patterns: 'drop/**/*'
+          path: 'drop'
 
-    - task: NuGetToolInstaller@1
-      displayName: 'Use NuGet'
-      inputs:
-        checkLatest: true
+      - task: NuGetToolInstaller@1
+        displayName: 'Use NuGet'
+        inputs:
+          checkLatest: true
 
-    - task: NuGetCommand@2
-      displayName: 'NuGet push'
-      inputs:
-        command: push
-        packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
-        publishVstsFeed: '$(NuGetFeed)'
-        allowPackageConflicts: true
+      - task: NuGetCommand@2
+        displayName: 'NuGet push'
+        inputs:
+          command: push
+          packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
+          publishVstsFeed: '$(NuGetFeed)'
+          allowPackageConflicts: true
       
 - ${{ if eq(parameters.canPublish, true) }}: 
   - stage: DEPLOY_TO_NUGET
