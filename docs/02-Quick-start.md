@@ -17,7 +17,7 @@ With those 4 steps can you use the T4.FileManager to generate code into differen
 The 4 parts are marked in this T4 template:
 
 
-``` csharp hl_lines="8 13 18 28"
+``` csharp hl_lines="8 13 18 27"
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
@@ -30,12 +30,11 @@ The 4 parts are marked in this T4 template:
 <#
 var files = new string[] { "PersonDto", "OrderDto" };
 
-var fileManager = T4FileManager.Create(this);
-fileManager.IsAutoIndentEnabled = true;
+var fileManager = T4FileManager.Create(this).EnableAutoIndent();
 
 foreach(var itm in files)
 {
-	fileManager.CreateNewFile(itm + ".g.cs", "","",null);
+	fileManager.StartNewFile(itm + ".g.cs", "","");
 #>
 namespace Test
 {
@@ -45,13 +44,13 @@ namespace Test
 }
 <#
 }
-    fileManager.Generate();
+    fileManager.Process();
 #>
 ```
 
 
 
-The call to *IsAutoIndentEnabled* is not necessary, but it will nicely format your code.
+The call to *EnableAutoIndent()* is not necessary, but it will nicely format your code.
 
 
 

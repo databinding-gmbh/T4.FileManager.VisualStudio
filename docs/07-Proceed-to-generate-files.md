@@ -3,7 +3,7 @@
 Finally, the files can be generated with the following code:
 
 ```
-fileManager.Generate();
+fileManager.Process();
 ```
 
 ## Overwrite existing files
@@ -13,11 +13,5 @@ By default T4.FileManager only overwrites files it generated before. If you want
 ```
 fileManager.CanOverwriteExistingFile = true; // default
 fileManager.CanOverwriteExistingFile = false;
-```
-
-## *Compatibility to old FileManager*
-
-```
-fileManager.Process();
 ```
 

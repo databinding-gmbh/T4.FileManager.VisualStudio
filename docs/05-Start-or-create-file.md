@@ -12,23 +12,14 @@ All the content that follows in your template will go into that file (until you 
 
 ## Parameters
 
-| Parameter   | Type                       | Description                                                  | Exmaple/Value                                                |
-| ----------- | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| filename    | string                     | The name of the file.                                        | "test.cs"<br />required value, should NOT BE *null*          |
-| projectname | string                     | The name of the project in which the file is created.        | "Test.Business"<br />*null* = project name of current project |
-| subfolders  | string                     | The path of (sub) folders inside the project.                | Path.Combine("Example", "Tests")<br />*null* = root of project |
-| properties  | Dictionary<string, object> | Adding visual studio properties as example "CustomTool" or "CopyToOutputDirectory". | var settings = new Dictionary<string, object>();<br />settings.Add("CopyToOutputDirectory", 1)<br />*null* = no properties set |
+| Parameter   | Type                 | Description                                                  | Exmaple/Value                                                |
+| ----------- | -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| filename    | string               | The name of the file.                                        | "test.cs"<br />required value, should NOT BE *null*          |
+| projectname | string               | The name of the project in which the file is created.        | "Test.Business"<br />*null* = project name of current project |
+| subfolders  | string               | The path of (sub) folders inside the project.                | Path.Combine("Example", "Tests")<br />*null* = root of project |
+| properties  | class FileProperties | Adding visual studio properties as example "CustomTool" or "BuildAction". | var fp= new FileProperties();<br />fp.CustomTool = "ResXFileCodeGenerator" |
 
 #### Properties
-
-There are some defined values for the **Property**:
-
-```
-Property.CopyToOutputDirectory
-Property.BuildAction
-Property.CustomTool 
-Property.CanOverwriteExistingFile
-```
 
 Values for **CopyToOutputDirectory**:
 
@@ -47,21 +38,16 @@ BuildAction.Content
 BuildAction.EmbeddedResource
 ```
 
-Values for **CanOverwriteExistingFile**:
-
-```
-CanOverwriteExistingFile.Yes
-CanOverwriteExistingFile.No
-```
-
 #### *Example* 
 
 ```
-var settings = new Dictionary<string, object>();
-settings.Add(Property.CopyToOutputDirectory, CopyToOutputDirectory.CopyAlways);
+var settings = new FileProperties();
+settings.CustomTool = "";
+settings.BuildAction = BuildAction.EmbeddedResource;
+settings.CopyToOutputDirectory = CopyToOutputDirectory.DoNotCopy;
 ```
 
-## *Compatibility to old FileManager*
+## *Compatibility to old TemplateFileManager*
 
 ```
 fileManager.StartNewFile(filename, projectname, subfolders, propertiesFromOldFileManager);

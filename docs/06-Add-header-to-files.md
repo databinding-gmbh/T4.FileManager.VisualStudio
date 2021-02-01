@@ -10,7 +10,7 @@ fileManager.StartHeader();
 // -------------------------
 <#
 fileManager.FinishHeader();
-fileManager.CreateNewFile("PersonDtoWithGlobal.g.cs","","",null);
+fileManager.StartNewFile("PersonDtoWithGlobal.g.cs","","");
 ```
 
 
@@ -45,7 +45,7 @@ fileManager.StartHeader();
 // <author>Mr. T4</author>
 <#
 fileManager.FinishHeader();
-fileManager.CreateNewFile("PersonDtoWithSA1633.g.cs","","",null);
+fileManager.StartNewFile("PersonDtoWithSA1633.g.cs","","");
 ```
 
 

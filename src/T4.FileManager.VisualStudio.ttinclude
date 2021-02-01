@@ -834,6 +834,7 @@
         }
 
         public string CustomTool { get; set; }
+        public int? CopyToOutputDirectory { get; set; }
         public int? BuildAction { get; set; }
         public Dictionary<string, object> TemplateParameter { get; set; }
 
@@ -852,6 +853,11 @@
             if (!string.IsNullOrEmpty(this.CustomTool))
             {
                 propertyDictionary.Add(Property.CustomTool, this.CustomTool);
+            }
+
+            if (this.CopyToOutputDirectory.HasValue)
+            {
+                propertyDictionary.Add(Property.CopyToOutputDirectory, this.CopyToOutputDirectory.Value);
             }
 
             if (this.BuildAction.HasValue)
@@ -884,9 +890,9 @@
     /// </summary>
     public abstract class CopyToOutputDirectory
     {
-        public const uint DoNotCopy = 0;
-        public const uint CopyAlways = 1;
-        public const uint CopyIfNewer = 2;
+        public const int DoNotCopy = 0;
+        public const int CopyAlways = 1;
+        public const int CopyIfNewer = 2;
     }
 
     /// <summary>

@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Visual Studio 2017 or Visual Studio 2019
+- Visual Studio 2017 or later
 
 ## Getting started 
 
