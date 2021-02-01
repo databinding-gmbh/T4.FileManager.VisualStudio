@@ -14,7 +14,7 @@ All the content that follows in your template will go into that file (until you 
 
 | Parameter   | Type                 | Description                                                  | Exmaple/Value                                                |
 | ----------- | -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| filename    | string               | The name of the file.                                        | "test.cs"<br />required value, should NOT BE *null*          |
+| filename    | string               | The name of the file.                                        | "test.cs"<br />required value, must NOT BE *null*            |
 | projectname | string               | The name of the project in which the file is created.        | "Test.Business"<br />*null* = project name of current project |
 | subfolders  | string               | The path of (sub) folders inside the project.                | Path.Combine("Example", "Tests")<br />*null* = root of project |
 | properties  | class FileProperties | Adding visual studio properties as example "CustomTool" or "BuildAction". | var fp= new FileProperties();<br />fp.CustomTool = "ResXFileCodeGenerator" |
