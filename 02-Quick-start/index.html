@@ -476,14 +476,13 @@
 <span class="p">&lt;</span><span class="err">#</span>
 <span class="kt">var</span> <span class="n">files</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[]</span> <span class="p">{</span> <span class="s">&quot;PersonDto&quot;</span><span class="p">,</span> <span class="s">&quot;OrderDto&quot;</span> <span class="p">};</span>
 
-<span class="hll"><span class="kt">var</span> <span class="n">fileManager</span> <span class="p">=</span> <span class="n">T4FileManager</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span><span class="n">fileManager</span><span class="p">.</span><span class="n">IsAutoIndentEnabled</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
-
+<span class="hll"><span class="kt">var</span> <span class="n">fileManager</span> <span class="p">=</span> <span class="n">T4FileManager</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="n">EnableAutoIndent</span><span class="p">();</span>
+</span>
 <span class="k">foreach</span><span class="p">(</span><span class="kt">var</span> <span class="n">itm</span> <span class="k">in</span> <span class="n">files</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="hll">    <span class="n">fileManager</span><span class="p">.</span><span class="n">CreateNewFile</span><span class="p">(</span><span class="n">itm</span> <span class="p">+</span> <span class="s">&quot;.g.cs&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="k">null</span><span class="p">);</span>
-</span><span class="err">#</span><span class="p">&gt;</span>
-<span class="k">namespace</span> <span class="nn">Test</span>
+    <span class="n">fileManager</span><span class="p">.</span><span class="n">StartNewFile</span><span class="p">(</span><span class="n">itm</span> <span class="p">+</span> <span class="s">&quot;.g.cs&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">);</span>
+<span class="hll"><span class="err">#</span><span class="p">&gt;</span>
+</span><span class="k">namespace</span> <span class="nn">Test</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">class</span> <span class="p">&lt;</span><span class="err">#</span><span class="p">=</span> <span class="n">itm</span> <span class="err">#</span><span class="p">&gt;</span>
     <span class="p">{</span>
@@ -491,11 +490,11 @@
 <span class="p">}</span>
 <span class="p">&lt;</span><span class="err">#</span>
 <span class="p">}</span>
-<span class="hll">    <span class="n">fileManager</span><span class="p">.</span><span class="n">Generate</span><span class="p">();</span>
+<span class="hll">    <span class="n">fileManager</span><span class="p">.</span><span class="n">Process</span><span class="p">();</span>
 </span><span class="err">#</span><span class="p">&gt;</span>
 </code></pre></div>
 
-<p>The call to <em>IsAutoIndentEnabled</em> is not necessary, but it will nicely format your code.</p>
+<p>The call to <em>EnableAutoIndent()</em> is not necessary, but it will nicely format your code.</p>
 <h2 id="the-result">The result</h2>
 <p>If you run the template from above it will create the two files PersonDto.g.cs and OrderDto.g.cs next to your template.</p>
 <p>PersonDto.g.cs: </p>

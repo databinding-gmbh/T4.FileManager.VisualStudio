@@ -303,8 +303,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#compatibility-to-old-filemanager" class="md-nav__link">
-    Compatibility to old FileManager
+  <a href="#compatibility-to-old-templatefilemanager" class="md-nav__link">
+    Compatibility to old TemplateFileManager
   </a>
   
 </li>
@@ -453,8 +453,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#compatibility-to-old-filemanager" class="md-nav__link">
-    Compatibility to old FileManager
+  <a href="#compatibility-to-old-templatefilemanager" class="md-nav__link">
+    Compatibility to old TemplateFileManager
   </a>
   
 </li>
@@ -516,20 +516,13 @@
 </tr>
 <tr>
 <td>properties</td>
-<td>Dictionary<string, object></td>
-<td>Adding visual studio properties as example "CustomTool" or "CopyToOutputDirectory".</td>
-<td>var settings = new Dictionary<string, object>();<br />settings.Add("CopyToOutputDirectory", 1)<br /><em>null</em> = no properties set</td>
+<td>class FileProperties</td>
+<td>Adding visual studio properties as example "CustomTool" or "BuildAction".</td>
+<td>var fp= new FileProperties();<br />fp.CustomTool = "ResXFileCodeGenerator"</td>
 </tr>
 </tbody>
 </table>
 <h4 id="properties">Properties</h4>
-<p>There are some defined values for the <strong>Property</strong>:</p>
-<div class="highlight"><pre><span></span><code>Property.CopyToOutputDirectory
-Property.BuildAction
-Property.CustomTool 
-Property.CanOverwriteExistingFile
-</code></pre></div>
-
 <p>Values for <strong>CopyToOutputDirectory</strong>:</p>
 <div class="highlight"><pre><span></span><code>CopyToOutputDirectory.DoNotCopy
 CopyToOutputDirectory.CopyAlways
@@ -543,17 +536,14 @@ BuildAction.Content
 BuildAction.EmbeddedResource
 </code></pre></div>
 
-<p>Values for <strong>CanOverwriteExistingFile</strong>:</p>
-<div class="highlight"><pre><span></span><code>CanOverwriteExistingFile.Yes
-CanOverwriteExistingFile.No
-</code></pre></div>
-
 <h4 id="example"><em>Example</em></h4>
-<div class="highlight"><pre><span></span><code>var settings = new Dictionary&lt;string, object&gt;();
-settings.Add(Property.CopyToOutputDirectory, CopyToOutputDirectory.CopyAlways);
+<div class="highlight"><pre><span></span><code>var settings = new FileProperties();
+settings.CustomTool = &quot;&quot;;
+settings.BuildAction = BuildAction.EmbeddedResource;
+settings.CopyToOutputDirectory = CopyToOutputDirectory.DoNotCopy;
 </code></pre></div>
 
-<h2 id="compatibility-to-old-filemanager"><em>Compatibility to old FileManager</em></h2>
+<h2 id="compatibility-to-old-templatefilemanager"><em>Compatibility to old TemplateFileManager</em></h2>
 <div class="highlight"><pre><span></span><code>fileManager.StartNewFile(filename, projectname, subfolders, propertiesFromOldFileManager);
 </code></pre></div>
 
