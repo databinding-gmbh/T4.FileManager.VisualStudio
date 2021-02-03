@@ -17,7 +17,7 @@ With those 4 steps can you use the T4.FileManager to generate code into differen
 The 4 parts are marked in this T4 template:
 
 
-``` csharp hl_lines="8 13 18 27"
+``` csharp hl_lines="8 13 17 27"
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>

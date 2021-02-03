@@ -85,7 +85,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [T4 Text Templates](https://docs.microsoft.com/en-us/visualstudio/modeling/)
 - [Json.NET](https://www.newtonsoft.com/json)
 
-## Breaking changes to old FileManager
+## Breaking changes to old TemplateFileManager
 
 See section breaking changes of [Change log](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/10-Change-log/#breaking-changes-compared-to-templatefilemanager)
 
