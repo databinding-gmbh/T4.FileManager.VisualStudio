@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="OrderIvDto.g.cs" />
+    <Compile Remove="PersonIvDto.g.cs" />
+    <Compile Remove="TestAutoIndent.cs" />
+    <Compile Remove="TestDelete.cs" />
+    <Compile Remove="TestInvalidFileExtension.cs" />
+    <Compile Remove="TestOldFilesCleanUp.cs" />
+    <Compile Remove="TestOldFilesCleanUp.g.cs" />
+    <Compile Remove="TestSubfolder.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="T4.FileManager.VisualStudio.ttinclude" />
+    <None Remove="Test.info.json" />
+    <None Remove="TestAutoIndent.info.json" />
+    <None Remove="TestCsExtension.info.json" />
+    <None Remove="TestInvalidFileExtension.info.json" />
+    <None Remove="TestInvalidFileExtension.tt" />
+    <None Remove="TestMissingFileExtension.info.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Features\Helper\CleanUpTestoutput.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CleanUpTestoutput.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EnvDTE" Version="16.7.30508.193" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="microsoft.net.test.sdk" Version="16.8.3" />
+    <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.6.6" />
+    <PackageReference Include="SpecRun.SpecFlow" Version="3.6.2" />
+    <PackageReference Include="system.drawing.common" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Features\Helper\CleanUpTestoutput.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CleanUpTestoutput.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+</Project>
