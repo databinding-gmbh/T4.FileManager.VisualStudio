@@ -1,8 +1,8 @@
-﻿using System;
-using System.Drawing;
-
-namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Helper
+﻿namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Helper.Capture
 {
+    using System;
+    using System.Drawing;
+
     public class ScreenCapture
     {
         /// <summary>

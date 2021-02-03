@@ -1,9 +1,9 @@
-﻿namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Hooks
+﻿namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Hooks
 {
     using System.Collections.Generic;
     using System.Linq;
 
-    using T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Dto;
+    using T4.FileManager.NetCore.AcceptanceCriteria.Features.Dto;
 
     using TechTalk.SpecFlow;
     using TechTalk.SpecFlow.Assist;

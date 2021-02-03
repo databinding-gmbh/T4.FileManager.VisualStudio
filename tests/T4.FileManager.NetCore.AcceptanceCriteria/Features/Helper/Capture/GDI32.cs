@@ -1,8 +1,8 @@
-﻿using System;
-using System.Runtime.InteropServices;
-
-namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Helper
+﻿namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Helper.Capture
 {
+    using System;
+    using System.Runtime.InteropServices;
+
     public class GDI32
     {
 

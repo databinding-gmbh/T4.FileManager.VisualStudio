@@ -1,4 +1,4 @@
-﻿namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Helper
+﻿namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Helper
 {
     using System;
     using System.Collections.Generic;

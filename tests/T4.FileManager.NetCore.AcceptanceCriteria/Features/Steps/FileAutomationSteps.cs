@@ -1,4 +1,4 @@
-﻿namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Steps
+﻿namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
 {
     using System.Collections.Generic;
     using System.IO;
@@ -7,8 +7,8 @@
 
     using FluentAssertions;
 
-    using T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Dto;
-    using T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Helper;
+    using T4.FileManager.NetCore.AcceptanceCriteria.Features.Dto;
+    using T4.FileManager.NetCore.AcceptanceCriteria.Features.Helper;
 
     using TechTalk.SpecFlow;
 
@@ -28,7 +28,7 @@
                 VisualStudioHelper.GetProjectDirectory("T4.FileManager.NetCore.AcceptanceCriteria");
 
             var outputdir = Path.Combine(this.pathTestEnvironment, "bin\\debug\\net5.0\\");
-            var pathSource = Path.Combine(pathTestEnvironment, "..\\..\\", "src\\");
+            var pathSource = Path.Combine(this.pathTestEnvironment, "..\\..\\", "src\\");
 
             var fileManagerFromSource = Path.Combine(pathSource, "T4.FileManager.VisualStudio.ttinclude");
             var fileManagerForTest = Path.Combine(outputdir, "T4.FileManager.VisualStudio.ttinclude");
@@ -88,7 +88,7 @@
         [Given(@"I run the script")]
         public void WhenIRunTheScriptForAutomation()
         {
-            VisualStudioHelper.CanOpenFileInCodeWindow = true;
+            VisualStudioHelper.CanOpenFileInCodeWindow = false;
             VisualStudioHelper.SaveFileAutomaticallyRunCustomTool(this.t4Template);
         }
 
