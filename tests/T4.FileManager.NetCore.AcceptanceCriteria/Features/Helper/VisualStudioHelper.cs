@@ -103,9 +103,18 @@
             return directory;
         }
 
+        public static void ReplaceLineInProjectItem(ProjectItem item, string line, string replaceWith)
+        {
+            RetryUtil.RetryOnException(() =>
+            {
+                item.Document.ReplaceText(line, replaceWith);
+                item.Save();
+            });
+        }
+
         public static void SaveFileAutomaticallyRunCustomTool(ProjectItem item)
         {
-            RetryUtil.RetryOnException(() => 
+            RetryUtil.RetryOnException(() =>
             {
                 if (CanOpenFileInCodeWindow && item.Document == null)
                 {
@@ -127,29 +136,32 @@
             });
         }
 
-        public static ProjectItem AddFileToProject(
-            string projectName,
-            string fileName,
-            string customTool = "TextTemplatingFileGenerator")
+        public static void RecoverTemplateIfCorrupted(string path, string content)
+        {
+            RetryUtil.RetryOnException(() =>
+            {
+                // EnvDTE in .NET 5 can lost content of the template
+                var template = File.ReadAllText(path);
+
+                if (string.IsNullOrWhiteSpace(template))
+                {
+                    VisualStudioHelper.Dte.ItemOperations.OpenFile(path);
+                    VisualStudioHelper.Dte.ActiveDocument.Close();
+                    File.WriteAllText(path, content);
+                    VisualStudioHelper.Dte.ItemOperations.OpenFile(path);
+                }
+            });
+        }
+        
+        public static ProjectItem AddFileToProject(string projectName, string fileName)
         {
             ProjectItem projectItem = null;
 
             RetryUtil.RetryOnException(() =>
             {
                 var project = GetSolutionProjects().First(n => n.Name == projectName);
-
                 var path = Path.GetFullPath(fileName);
-
                 projectItem = project.ProjectItems.AddFromFile(path);
-
-                var property = projectItem.Properties.Item("CustomTool");
-
-                if (property == null)
-                {
-                    throw new ArgumentException("The property CustomTool was not found.");
-                }
-
-                property.Value = customTool;
             });
 
             return projectItem;

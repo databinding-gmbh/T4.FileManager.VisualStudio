@@ -1,5 +1,6 @@
 ﻿namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
 
@@ -20,6 +21,7 @@
         private ProjectItem t4Template;
         private string targetTestPath;
         private string currentTesteeFilePath;
+        private string t4TemplateContent;
 
         [Given(@"the file manager")]
         public void GivenTheFileManager()
@@ -50,37 +52,22 @@
         {
             this.currentTesteeFilePath = Path.Combine(this.pathTestEnvironment, filename);
             File.WriteAllText(this.currentTesteeFilePath, templateContent);
+            this.t4TemplateContent = templateContent;
 
-            this.t4Template = VisualStudioHelper.AddFileToProject(
-                this.projectName,
-                this.currentTesteeFilePath);
-        }
-
-        [Given(@"the script ""(.*)"" modified by following content:")]
-        public void GivenTheScriptModifiedByFollowingContent(string filename, string templateContent)
-        {
-            var file = Path.Combine(this.pathTestEnvironment, filename);
-
-            VisualStudioHelper.RemoveFileFromProject(file);
-
-            File.WriteAllText(file, templateContent);
-
-            this.t4Template = VisualStudioHelper.AddFileToProject(
-                this.projectName,
-                file);
+            this.t4Template = VisualStudioHelper.AddFileToProject(this.projectName, this.currentTesteeFilePath);
         }
 
         [Given(@"I change the line")]
         [When(@"I change the line")]
         public void GivenIChangeTheLine(IList<TemplateChanges> changes)
         {
-            var template = File.ReadAllText(this.currentTesteeFilePath);
+            // EnvDTE Automation in .NET 5 can lost content of files
+            VisualStudioHelper.RecoverTemplateIfCorrupted(this.currentTesteeFilePath, this.t4TemplateContent);
+
             foreach (var change in changes)
             {
-                template = template.Replace(change.From, change.To);
+                VisualStudioHelper.ReplaceLineInProjectItem(this.t4Template, change.From, change.To);
             }
-
-            this.GivenTheScriptModifiedByFollowingContent(this.currentTesteeFilePath, template);
         }
 
         [When(@"I run the script")]
@@ -88,7 +75,7 @@
         [Given(@"I run the script")]
         public void WhenIRunTheScriptForAutomation()
         {
-            VisualStudioHelper.CanOpenFileInCodeWindow = false;
+            VisualStudioHelper.CanOpenFileInCodeWindow = true;
             VisualStudioHelper.SaveFileAutomaticallyRunCustomTool(this.t4Template);
         }
 
@@ -107,7 +94,7 @@
                     testeeContent.Should().Contain(file.ContainsContent);
                 }
 
-                File.Exists(testee).Should().BeTrue();
+                File.Exists(testee).Should().BeTrue($"{testee} not found");
             }
         }
 
@@ -120,7 +107,7 @@
             {
                 var testee = file.GetFullPath(this.targetTestPath);
 
-                File.Exists(testee).Should().BeFalse();
+                File.Exists(testee).Should().BeFalse($"{testee} should not exists");
             }
         }
 
@@ -139,7 +126,7 @@
         {
             var filePath = Path.Combine(this.targetTestPath, file);
             var testee = File.ReadAllText(filePath);
-            
+
             testee.Should().StartWith(expectedContent);
         }
 

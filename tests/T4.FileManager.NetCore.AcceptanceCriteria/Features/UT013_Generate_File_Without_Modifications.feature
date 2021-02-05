@@ -3,7 +3,8 @@ Feature: UT013 Generate File without modifications
 	As a developer
 	I can generate code with the T4.FileManager and supress changes if the file exist
 
-Background: T4 File Manager and base script
+
+Scenario: No files deleted if CanOverwriteExistingFile is set to false
 	Given the file manager
 	And the script "TestNoDelete.tt" with the following content
 		"""
@@ -32,9 +33,7 @@ namespace Test
 fileManager.Process();
 #>
 		"""
-
-Scenario: No files deleted if CanOverwriteExistingFile is set to false
-	Given I run the script
+    And I run the script
 	And the following files are generated:
 		| File              | Folder        |
 		| TestNoDelete.g.cs | TestOverwrite |
@@ -49,14 +48,42 @@ Scenario: No files deleted if CanOverwriteExistingFile is set to false
 		| TestNoDelete2.g.cs | TestOverwrite |
 
 Scenario: No content changes if CanOverwriteExistingFile is set to false
-	Given I run the script
+	Given the file manager
+	And the script "TestNoChange.tt" with the following content
+		"""
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+
+<#@ include file="$(TargetDir)\T4.FileManager.VisualStudio.ttinclude" #>
+
+<#
+var fileManager = T4FileManager.Create(this).DisableOverwriteExistingFile();
+
+fileManager.StartNewFile("TestNoChange.g.cs","","TestOverwrite");	
+#>
+namespace Test
+{
+	public class TestNoDelete
+	{
+		// first run template
+	}
+}
+<#
+fileManager.Process();
+#>
+		"""
+    And I run the script
 	And the following files are generated:
 		| File              | Folder        |
-		| TestNoDelete.g.cs | TestOverwrite |
+		| TestNoChange.g.cs | TestOverwrite |
 	And I change the line
 		| From                  | To                     |
 		| // first run template | // second run template |
 	When I run the script
 	Then the following files are generated:
 		| File              | Contains              | Folder        |
-		| TestNoDelete.g.cs | // first run template | TestOverwrite |
+		| TestNoChange.g.cs | // first run template | TestOverwrite |

@@ -43,7 +43,6 @@
         [AfterStep]
         public void AfterStepActions()
         {
-
             if (this.context.TestError != null)
             {
                 var error = $"Error: {this.context.ScenarioInfo.Title} - {this.context.TestError.Message}";

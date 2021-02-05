@@ -4,4 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="OrderDto.g.cs" />
+    <Compile Remove="PersonDto.g.cs" />
+  </ItemGroup>
+
 </Project>
