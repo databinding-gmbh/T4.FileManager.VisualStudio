@@ -56,7 +56,6 @@
     <None Remove="T4.FileManager.VisualStudio.ttinclude" />
     <None Remove="Test.info.json" />
     <None Remove="Test.tt" />
-    <None Remove="Test.txt" />
     <None Remove="TestAutoIndent.info.json" />
     <None Remove="TestAutoIndent.tt" />
     <None Remove="TestCsExtension.info.json" />
@@ -82,7 +81,6 @@
     <None Remove="TestSubfolder.tt" />
     <None Remove="TestWithCustomLog.info.json" />
     <None Remove="TestWithCustomLog.tt" />
-    <None Remove="TestWithCustomLog.txt" />
     <None Remove="TestWithLogEnabled.info.json" />
     <None Remove="TestWithLogEnabled.tt" />
   </ItemGroup>
