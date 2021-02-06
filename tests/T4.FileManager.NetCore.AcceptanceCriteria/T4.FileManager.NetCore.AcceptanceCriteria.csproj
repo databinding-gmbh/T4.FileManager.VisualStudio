@@ -17,7 +17,6 @@
     <Compile Remove="PersonIvDto.g.cs" />
     <Compile Remove="PersonTxtDto.g.cs" />
     <Compile Remove="ProjectTestFP.cs" />
-    <Compile Remove="ProjectTestFP.Designer.cs" />
     <Compile Remove="Test.cs" />
     <Compile Remove="TestAutoIndent.cs" />
     <Compile Remove="TestDelete.cs" />
@@ -45,22 +44,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Remove="ProjectTestFP.resx" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Features\Helper\CleanUpTestoutput.tt" />
     <None Remove="Features\Helper\CleanUpTestoutput.txt" />
     <None Remove="ProjectTestFP.info.json" />
     <None Remove="ProjectTestFP.tt" />
+    <None Remove="ProjectTestFP.txt" />
     <None Remove="T4.FileManager.VisualStudio.ttinclude" />
     <None Remove="Test.info.json" />
     <None Remove="Test.tt" />
+    <None Remove="Test.txt" />
     <None Remove="TestAutoIndent.info.json" />
     <None Remove="TestAutoIndent.tt" />
     <None Remove="TestCsExtension.info.json" />
     <None Remove="TestDelete.info.json" />
     <None Remove="TestDelete.tt" />
+    <None Remove="TestDelete.txt" />
     <None Remove="TestGlobalHeader.info.json" />
     <None Remove="TestGlobalHeader.tt" />
     <None Remove="TestInOtherProject.info.json" />
@@ -71,14 +69,18 @@
     <None Remove="TestMissingFileExtension.tt" />
     <None Remove="TestNoChange.info.json" />
     <None Remove="TestNoChange.tt" />
+    <None Remove="TestNoChange.txt" />
     <None Remove="TestNoDelete.info.json" />
     <None Remove="TestNoDelete.tt" />
+    <None Remove="TestNoDelete.txt" />
     <None Remove="TestOldFilesCleanUp.info.json" />
     <None Remove="TestOldFilesCleanUp.tt" />
+    <None Remove="TestOldFilesCleanUp.txt" />
     <None Remove="TestSA1633Header.info.json" />
     <None Remove="TestSA1633Header.tt" />
     <None Remove="TestSubfolder.info.json" />
     <None Remove="TestSubfolder.tt" />
+    <None Remove="TestSubfolder.txt" />
     <None Remove="TestWithCustomLog.info.json" />
     <None Remove="TestWithCustomLog.tt" />
     <None Remove="TestWithLogEnabled.info.json" />
@@ -96,6 +98,21 @@
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ProjectTestFP.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ProjectTestFP.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="ProjectTestFP.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProjectTestFP.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

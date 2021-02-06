@@ -76,9 +76,14 @@
         public bool IsAutoIndentEnabled = false;
 
         /// <summary>
+        /// Enable Placeholder-Content for main output file to avoiding generation of empty .cs file 
+        /// and ignoring of the output extension directive in .net core projects.
+        /// </summary>
+        public bool IsNetCorePlaceholderContentEnabled = true;
+
+        /// <summary>
         /// Automatic indentation of the code with ReSharper.
         /// </summary>
-        /// <value>Default value is false.</value>
         public bool IsAutoCleanUpWithResharperEnabled = false;
 
         /// <summary>
@@ -235,7 +240,6 @@
         /// <param name="properties">Settings that can be defined for the generated file.</param>
         public void StartNewFile(string filename, string project, string path, FileProperties properties)
         {
-            properties = properties ?? new FileProperties();
             CreateNewFile(filename, project, path, properties);
         }
 
@@ -380,6 +384,11 @@
             if (this.isLogToMainOutputFileEnabled)
             {
                 this.textTransformation.Append(this.logger.Log);
+            }
+			
+            if (this.IsNetCorePlaceholderContentEnabled)
+            {
+                this.textTransformation.Append(".NET Core placeholder content to avoid ignoring the output extension directive");
             }
         }
 
