@@ -146,18 +146,18 @@ fileManager.Generate();
 #line 42
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
                             "Textfragment"});
-                table29.AddRow(new string[] {
+                table30.AddRow(new string[] {
                             "Log to main output file enabled"});
-                table29.AddRow(new string[] {
+                table30.AddRow(new string[] {
                             "Begin CreateNewFile PersonDto.g.cs"});
-                table29.AddRow(new string[] {
+                table30.AddRow(new string[] {
                             "Start DeleteExistingFiles"});
-                table29.AddRow(new string[] {
+                table30.AddRow(new string[] {
                             "2 files generated"});
 #line 43
- testRunner.Then("the file \"TestWithLogEnabled.txt\" contains following log fragments", ((string)(null)), table29, "Then ");
+ testRunner.Then("the file \"TestWithLogEnabled.txt\" contains following log fragments", ((string)(null)), table30, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -226,14 +226,14 @@ fileManager.Generate();
 #line 83
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
                             "Textfragment"});
-                table30.AddRow(new string[] {
+                table31.AddRow(new string[] {
                             "My custom log info for OrderDto"});
-                table30.AddRow(new string[] {
+                table31.AddRow(new string[] {
                             "My custom log info for PersonDto"});
 #line 84
- testRunner.Then("the file \"TestWithCustomLog.txt\" contains following log fragments", ((string)(null)), table30, "Then ");
+ testRunner.Then("the file \"TestWithCustomLog.txt\" contains following log fragments", ((string)(null)), table31, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -103,6 +103,15 @@
             return directory;
         }
 
+        public static void ReplaceLineInProjectItem(ProjectItem item, string line, string replaceWith)
+        {
+            RetryUtil.RetryOnException(() =>
+                {
+                    item.Document.ReplaceText(line, replaceWith);
+                    item.Save();
+                });
+        }
+
         public static void SaveFileAutomaticallyRunCustomTool(ProjectItem item)
         {
             RetryUtil.RetryOnException(() => 

@@ -54,31 +54,14 @@
                 this.currentTesteeFilePath);
         }
 
-        [Given(@"the script ""(.*)"" modified by following content:")]
-        public void GivenTheScriptModifiedByFollowingContent(string filename, string templateContent)
-        {
-            var file = Path.Combine(this.pathTestEnvironment, filename);
-
-            VisualStudioHelper.RemoveFileFromProject(file);
-
-            File.WriteAllText(file, templateContent);
-
-            this.t4Template = VisualStudioHelper.AddFileToProject(
-                this.projectName,
-                file);
-        }
-
         [Given(@"I change the line")]
         [When(@"I change the line")]
         public void GivenIChangeTheLine(IList<TemplateChanges> changes)
         {
-            var template = File.ReadAllText(this.currentTesteeFilePath);
             foreach (var change in changes)
             {
-                template = template.Replace(change.From, change.To);
+                VisualStudioHelper.ReplaceLineInProjectItem(this.t4Template, change.From, change.To);
             }
-
-            this.GivenTheScriptModifiedByFollowingContent(this.currentTesteeFilePath, template);
         }
 
         [When(@"I run the script")]
