@@ -1,13 +1,13 @@
 parameters:
-- name:'SolutionPath'
+- name: SolutionPath
   type: string
-- name: 'SolutionName'
+- name: SolutionName
   type: string
-- name: 'TestResultDir'
+- name: TestResultDir
   type: string
-- name: 'StagingDir'
+- name: StagingDir
   type: string
-- name: 'TestDllPattern'
+- name: TestDllPattern
   type: string
   
 steps:
