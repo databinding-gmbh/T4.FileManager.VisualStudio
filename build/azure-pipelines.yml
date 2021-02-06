@@ -27,41 +27,6 @@ stages:
         Action: '##vso[build.updatebuildnumber]'
         BuildVersion: $(GitVersion.SemVer)
 
-    - task: NuGetToolInstaller@1
-      displayName: 'Use NuGet '
-      inputs:
-        checkLatest: true
-
-    - task: NuGetCommand@2
-      displayName: 'NuGet restore'
-      inputs:
-        restoreSolution: T4.FileManager.VisualStudio.sln
-
-    - task: VSBuild@1
-      displayName: 'Build solution T4.FileManager.VisualStudio.sln'
-      inputs:
-        solution: T4.FileManager.VisualStudio.sln
-        clean: true
-
-    - powershell: 'Start-Process -FilePath "$(Build.Repository.LocalPath)/T4.FileManager.VisualStudio.sln"'
-      displayName: 'Start Visual Studio for testing acceptance criteria'
-
-    - task: VSTest@2
-      displayName: 'VsTest - Test Szenarios'
-      inputs:
-        testAssemblyVer2: |
-          **\*AcceptanceCriteria*.dll
-          !**\*TestAdapter.dll
-          !**\obj\**
-        resultsFolder: '$(Common.TestResultsDirectory)'
-
-    - task: techtalk.techtalk-specflow-plus.specflow-plus.SpecFlowPlus@0
-      displayName: 'SpecFlow+ Living Doc'
-      inputs:
-        projectFilePath: tests/T4.FileManager.VisualStudio.AcceptanceCriteria/Features
-        projectName: 'T4 Filemanager for Visual Studio'
-        workItemPrefix: 'db-'
-
     - powershell: |
        New-Item mkdocs.yml -Force
              Add-Content -path mkdocs.yml "
@@ -91,14 +56,25 @@ stages:
         SourceFolder: site
         TargetFolder: '$(Build.ArtifactStagingDirectory)\documentation'
 
-    - task: CopyFiles@2
-      displayName: 'Copy test report'
+    - task: NuGetToolInstaller@1
+      displayName: 'Use NuGet '
       inputs:
-        SourceFolder: '$(Common.TestResultsDirectory)'
-        Contents: |
-         *.html
-         *.png
-        TargetFolder: '$(Build.ArtifactStagingDirectory)\documentation'
+        checkLatest: true
+
+    - template: templates/build-and-test.yml
+      parameters:
+        SolutionPath: $(Build.Repository.LocalPath)  
+        SolutionName: 'T4.FileManager.VisualStudio.sln'   
+        TestResultDir: $(Common.TestResultsDirectory)  
+        StagingDir: $(Build.ArtifactStagingDirectory   
+        TestDllPattern: '**\*VisualStudio.AcceptanceCriteria*.dll'        
+
+    - task: techtalk.techtalk-specflow-plus.specflow-plus.SpecFlowPlus@0
+      displayName: 'SpecFlow+ Living Doc'
+      inputs:
+        projectFilePath: tests/T4.FileManager.VisualStudio.AcceptanceCriteria/Features
+        projectName: 'T4 Filemanager for Visual Studio'
+        workItemPrefix: 'db-'
 
     - task: CopyFiles@2
       displayName: 'Copy send message script'
