@@ -67,7 +67,7 @@ stages:
         SolutionName: 'T4.FileManager.VisualStudio.sln'   
         TestResultDir: '$(Common.TestResultsDirectory)'  
         StagingDir: '$(Build.ArtifactStagingDirectory)'  
-        TestDllPattern: '**\*VisualStudio.AcceptanceCriteria*.dll'        
+        TestDllPattern: '**\*T4.FileManager.AcceptanceCriteria.dll'        
 
     - task: techtalk.techtalk-specflow-plus.specflow-plus.SpecFlowPlus@0
       displayName: 'SpecFlow+ Living Doc'
