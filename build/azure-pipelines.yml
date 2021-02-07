@@ -61,16 +61,7 @@ stages:
       inputs:
         checkLatest: true
 
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/nuget'
 
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: documentation'
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/documentation'
-        ArtifactName: documentation
     
       
 - ${{ if eq(parameters.canPublish, true) }}: 
@@ -82,11 +73,6 @@ stages:
     jobs:
     - job:
       steps:
-      - task: DownloadPipelineArtifact@2
-        inputs:
-          patterns: 'drop/**/*'
-          path: 'drop'
-
 
       - task: PowerShell@2
         inputs:
