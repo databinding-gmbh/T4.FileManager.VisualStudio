@@ -72,8 +72,9 @@ stages:
     - template: templates/living-doc.yml
       parameters:
         StagingDir: '$(Build.ArtifactStagingDirectory)' 
-        TestAssembly: 'T4.FileManager.AcceptanceCriteria.dll'
         OutputPath: '$(Build.Repository.LocalPath)/tests/T4.FileManager.VisualStudio.AcceptanceCriteria/bin/Debug'
+        TestAssembly: 'T4.FileManager.AcceptanceCriteria.dll'
+       
         
     - task: techtalk.techtalk-specflow-plus.specflow-plus.SpecFlowPlus@0
       displayName: 'SpecFlow+ Living Doc'
