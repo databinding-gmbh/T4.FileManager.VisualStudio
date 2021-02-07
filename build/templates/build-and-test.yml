@@ -51,8 +51,7 @@ steps:
     TargetFolder: '${{ parameters.StagingDir }}\documentation'
     
 - script: |
-   livingdoc test-assembly ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }} -t ${{ parameters.OutputPath }}\${{ parameters.TestResult }} 
-   rename ${{ parameters.OutputPath }}\LivingDoc.html ${{ parameters.TestResult }}.html   
+   livingdoc test-assembly ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }} -t ${{ parameters.OutputPath }}\${{ parameters.TestResult }}  
    
   displayName: 'Build Living doc'
     
