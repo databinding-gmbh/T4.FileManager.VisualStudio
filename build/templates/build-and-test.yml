@@ -51,7 +51,7 @@ steps:
     TargetFolder: '${{ parameters.StagingDir }}\documentation'
     
 - script: |
-   livingdoc test-assembly ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }} -t ${{ parameters.OutputPath }}\${{ parameters.TestResult }}  
+   livingdoc test-assembly ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }} -t ${{ parameters.OutputPath }}\${{ parameters.TestResult }} --output ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }} -t ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }}.html  
    
   displayName: 'Build Living doc'
     
