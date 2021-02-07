@@ -61,4 +61,9 @@ steps:
     SourceFolder: '${{ parameters.OutputPath }}'
     Contents: |
      *.html
-    TargetFolder: '${{ parameters.StagingDir }}\documentation'   
+    TargetFolder: '${{ parameters.StagingDir }}\documentation' 
+
+- script: |
+   taskkill /F /IM devenv.exe /T
+   
+  displayName: 'Stop Visual Studio process'    
