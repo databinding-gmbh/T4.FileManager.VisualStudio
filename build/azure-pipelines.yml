@@ -64,16 +64,6 @@ stages:
     - template: templates/build-and-test.yml
       parameters:
         SolutionPath: '$(Build.Repository.LocalPath)'  
-        SolutionName: 'T4.FileManager.NetCore.AcceptanceCriteria.sln'   
-        TestResultDir: '$(Common.TestResultsDirectory)'  
-        StagingDir: '$(Build.ArtifactStagingDirectory)'  
-        TestDllPattern: '**\*T4.FileManager.NetCore.AcceptanceCriteria.dll'
-        OutputPath: '$(Build.Repository.LocalPath)/tests/T4.FileManager.NetCore.AcceptanceCriteria/bin/Debug/net5.0'
-        TestAssembly: 'T4.FileManager.NetCore.AcceptanceCriteria.dll' 
-
-    - template: templates/build-and-test.yml
-      parameters:
-        SolutionPath: '$(Build.Repository.LocalPath)'  
         SolutionName: 'T4.FileManager.VisualStudio.sln'   
         TestResultDir: '$(Common.TestResultsDirectory)'  
         StagingDir: '$(Build.ArtifactStagingDirectory)'  
