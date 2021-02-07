@@ -61,10 +61,50 @@ stages:
       inputs:
         checkLatest: true
 
-
-    
+    - template: templates/build-and-test.yml
+      parameters:
+        SolutionPath: '$(Build.Repository.LocalPath)'  
+        SolutionName: 'T4.FileManager.VisualStudio.sln'   
+        TestResultDir: '$(Common.TestResultsDirectory)'  
+        StagingDir: '$(Build.ArtifactStagingDirectory)'  
+        TestDllPattern: '**\*T4.FileManager.AcceptanceCriteria.dll'
+        OutputPath: '$(Build.Repository.LocalPath)/tests/T4.FileManager.VisualStudio.AcceptanceCriteria/bin/Debug'
+        TestAssembly: 'T4.FileManager.AcceptanceCriteria.dll'         
       
-- ${{ if eq(parameters.canPublish, true) }}: 
+    - task: techtalk.techtalk-specflow-plus.specflow-plus.SpecFlowPlus@0
+      displayName: 'SpecFlow+ Living Doc'
+      inputs:
+        projectFilePath: tests/T4.FileManager.VisualStudio.AcceptanceCriteria/Features
+        projectName: 'T4 Filemanager for Visual Studio'
+        workItemPrefix: 'db-'
+
+    - task: CopyFiles@2
+      displayName: 'Copy send message script'
+      inputs:
+        SourceFolder: $(Build.SourcesDirectory)/build
+        Contents: '*.ps1'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/nuget'
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet pack'
+      inputs:
+        command: pack
+        packagesToPack: src/T4.FileManager.VisualStudio.nuspec
+        packDestination: '$(Build.ArtifactStagingDirectory)/nuget'
+        versioningScheme: byBuildNumber
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/nuget'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: documentation'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/documentation'
+        ArtifactName: documentation
+      
+- ${{ if eq(parameters.canPublish, false) }}: 
   - stage: DEPLOY_TO_NUGET
     pool: databinding self hosted interactive
     variables:
@@ -73,6 +113,10 @@ stages:
     jobs:
     - job:
       steps:
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          patterns: 'drop/**/*'
+          path: 'drop'
 
       - task: PowerShell@2
         inputs:
