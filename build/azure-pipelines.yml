@@ -71,7 +71,7 @@ stages:
   
     - template: templates/living-doc.yml
       parameters:
-        StagingDir: '$(Build.ArtifactStagingDirectory)' 
+        StagingDir: $(Build.ArtifactStagingDirectory)
         OutputPath: '$(Build.Repository.LocalPath)/tests/T4.FileManager.VisualStudio.AcceptanceCriteria/bin/Debug'
         TestAssembly: 'T4.FileManager.AcceptanceCriteria.dll'
        
