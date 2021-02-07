@@ -9,6 +9,13 @@ parameters:
   type: string
 - name: TestDllPattern
   type: string
+- name: OutputPath
+  type: string
+- name: TestAssembly
+  type: string
+- name: TestResult
+  type: string
+  default: 'TestExecution.json'
   
 steps:
 - task: NuGetCommand@2
@@ -42,3 +49,17 @@ steps:
      *.html
      *.png
     TargetFolder: '${{ parameters.StagingDir }}\documentation'
+    
+ - script: |
+   livingdoc test-assembly ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }} -t ${{ parameters.OutputPath }}\${{ parameters.TestResult }} 
+   rename ${{ parameters.OutputPath }}\LivingDoc.html ${{ parameters.TestResult }}.html   
+   
+  displayName: 'Build Living doc'
+    
+- task: CopyFiles@2
+  displayName: 'Copy Living doc'
+  inputs:
+    SourceFolder: '${{ parameters.OutputPath }}'
+    Contents: |
+     *.html
+    TargetFolder: '${{ parameters.StagingDir }}\documentation'   
