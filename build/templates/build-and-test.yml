@@ -50,7 +50,7 @@ steps:
      *.png
     TargetFolder: '${{ parameters.StagingDir }}\documentation'
     
- - script: |
+- script: |
    livingdoc test-assembly ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }} -t ${{ parameters.OutputPath }}\${{ parameters.TestResult }} 
    rename ${{ parameters.OutputPath }}\LivingDoc.html ${{ parameters.TestResult }}.html   
    
