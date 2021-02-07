@@ -103,8 +103,66 @@ stages:
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/documentation'
         ArtifactName: documentation
+
+    - ${{ if eq(parameters.canPublish, true) }}: 
+      - task: GitTag@5
+        inputs:
+          workingdir: '$(SYSTEM.DEFAULTWORKINGDIRECTORY)'
+          tag: '$(GitVersion.AssemblySemVer)'
+          tagMessage: '$(GitVersion.AssemblySemVer)'
+          useLightweightTags: true
+     
+- stage: DEPLOY_GITHUB_PAGES
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
+  pool: databinding self hosted interactive
+  variables:
+    - group: github
+
+  jobs:
+  - job:
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        patterns: 'documentation/**/*'
+        path: 'documentation'
+
+    - task: AccidentalFish.githubpages-publish.AccidentalFish.GitHubPages-Publish.GitHubPagesPublish@1
+      displayName: 'Publishes to GitHub Pages'
+      inputs:
+        docPath: 'documentation\documentation\*'
+        githubusername: '$(username)'
+        githubemail: '$(email)'
+        githubaccesstoken: '$(pat)'
+        repositoryname: $(repo)
+
+- stage: DEPLOY_TEST
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
+  pool: databinding self hosted interactive
+  variables:
+    - group: Test
+
+  jobs:
+  - job:
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        patterns: 'drop/**/*'
+        path: 'drop'
+
+    - task: NuGetToolInstaller@1
+      displayName: 'Use NuGet'
+      inputs:
+        checkLatest: true
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet push'
+      inputs:
+        command: push
+        packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
+        publishVstsFeed: '$(NuGetFeed)'
+        allowPackageConflicts: true
       
-- ${{ if eq(parameters.canPublish, false) }}: 
+- ${{ if eq(parameters.canPublish, true) }}: 
   - stage: DEPLOY_TO_NUGET
     pool: databinding self hosted interactive
     variables:
@@ -118,11 +176,23 @@ stages:
           patterns: 'drop/**/*'
           path: 'drop'
 
+      - task: NuGetToolInstaller@1
+        displayName: 'Use NuGet'
+        inputs:
+          checkLatest: true
+
+      - task: NuGetCommand@2
+        displayName: 'NuGet push'
+        inputs:
+          command: push
+          nuGetFeedType: external
+          packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
+          publishFeedCredentials: 'NuGetFeed'
       - task: PowerShell@2
         inputs:
           targetType: 'filePath'
           filePath: 'drop/drop/NuGetMessage.ps1'
           arguments: > # Use this to avoid newline characters in multiline string
             -uri "$(SmToken)"
-            -version '2.0.0'
+            -version $(Build.BuildNumber)
             -nugeturl $(NuGetUrl)
