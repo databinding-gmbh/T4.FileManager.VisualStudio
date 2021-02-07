@@ -1,0 +1,44 @@
+parameters:
+- name: SolutionPath
+  type: string
+- name: SolutionName
+  type: string
+- name: TestResultDir
+  type: string
+- name: StagingDir
+  type: string
+- name: TestDllPattern
+  type: string
+  
+steps:
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    restoreSolution: ${{ parameters.SolutionName }}
+
+- task: VSBuild@1
+  displayName: 'Build solution ${{ parameters.SolutionName }}'
+  inputs:
+    solution: ${{ parameters.SolutionName }}
+    clean: true
+    
+- powershell: 'Start-Process -FilePath "${{ parameters.SolutionPath }}/${{ parameters.SolutionName }}"'
+  displayName: 'Start Visual Studio for testing acceptance criteria' 
+ 
+- task: VSTest@2
+  displayName: 'VsTest - Test Szenarios'
+  inputs:
+    testAssemblyVer2: |
+      ${{ parameters.TestDllPattern }}
+      !**\*TestAdapter.dll
+      !**\obj\**
+    resultsFolder: '${{ parameters.TestResultDir }}'
+    
+- task: CopyFiles@2
+  displayName: 'Copy test report'
+  inputs:
+    SourceFolder: '${{ parameters.TestResultDir }}'
+    Contents: |
+     *.html
+     *.png
+    TargetFolder: '${{ parameters.StagingDir }}\documentation'
