@@ -55,13 +55,13 @@
         [DllImport("ole32.dll")]
         private static extern int GetRunningObjectTable(int reserved, out IRunningObjectTable prot);
 
-        public static DTE GetCurrentDte()
+        public static DTE GetCurrentDte(string solutionName)
         {
             DTE dte = null;
 
             RetryUtil.RetryOnException(() =>
             {
-                dte = GetDtes().First(x => x.Solution?.FileName.Contains("T4.FileManager.VisualStudio") == true);
+                dte = GetDtes().First(x => x.Solution?.FileName.Contains(solutionName) == true);
                 dte.MainWindow.Activate();
                 dte.MainWindow.SetFocus();
             });

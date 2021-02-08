@@ -1,6 +1,5 @@
 ﻿namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Helper
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -9,14 +8,15 @@
 
     public static class VisualStudioHelper
     {
-        public static DTE Dte { get; internal set; } = DteUtil.GetCurrentDte();
+        private static DTE dte = DteUtil.GetCurrentDte("T4.FileManager.NetCore.AcceptanceCriteria");
 
         public static bool CanOpenFileInCodeWindow { get; set; }
 
         public static void CleanupViaT4()
         {
-            var dte = DteUtil.GetCurrentDte();
-            var project = dte.Solution.Cast<Project>().First(p => p.Name == "T4.FileManager.NetCore.AcceptanceCriteria");
+            var solutionName = "T4.FileManager.NetCore.AcceptanceCriteria";
+            var dte = DteUtil.GetCurrentDte(solutionName);
+            var project = dte.Solution.Cast<Project>().First(p => p.Name == solutionName);
             var cleanup = GetAllProjectItemsRecursive(project.ProjectItems)
                 .FirstOrDefault(p => p.Name.Contains("CleanUpTestoutput.tt"));
 
@@ -80,7 +80,7 @@
 
             RetryUtil.RetryOnException(() =>
             {
-                var item = Dte.Solution.FindProjectItem(name);
+                var item = dte.Solution.FindProjectItem(name);
                 if (item != null)
                 {
                     customTool = item.Properties.Item("CustomTool").Value?.ToString();
@@ -119,7 +119,7 @@
                 if (CanOpenFileInCodeWindow && item.Document == null)
                 {
                     var filePath = GetProjectItemFullPath(item);
-                    Dte.ItemOperations.OpenFile(filePath);
+                    dte.ItemOperations.OpenFile(filePath);
                 }
 
                 item.Open();
@@ -131,7 +131,7 @@
         {
             RetryUtil.RetryOnException(() =>
             {
-                var projectItem = Dte.Solution.FindProjectItem(fileName);
+                var projectItem = dte.Solution.FindProjectItem(fileName);
                 projectItem?.Remove();
             });
         }
@@ -145,10 +145,10 @@
 
                 if (string.IsNullOrWhiteSpace(template))
                 {
-                    VisualStudioHelper.Dte.ItemOperations.OpenFile(path);
-                    VisualStudioHelper.Dte.ActiveDocument.Close();
+                    dte.ItemOperations.OpenFile(path);
+                    dte.ActiveDocument.Close();
                     File.WriteAllText(path, content);
-                    VisualStudioHelper.Dte.ItemOperations.OpenFile(path);
+                    dte.ItemOperations.OpenFile(path);
                 }
             });
         }
@@ -184,7 +184,7 @@
         {
             IEnumerable<Project> projects = null;
 
-            RetryUtil.RetryOnException(() => { projects = Dte.Solution.Projects.Cast<Project>(); });
+            RetryUtil.RetryOnException(() => { projects = dte.Solution.Projects.Cast<Project>(); });
 
             return projects;
         }
