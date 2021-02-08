@@ -9,7 +9,6 @@
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="microsoft.net.test.sdk" Version="16.8.3" />
     <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.6.6" />
-    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.6.23" />
     <PackageReference Include="SpecRun.SpecFlow" Version="3.6.2" />
     <PackageReference Include="system.drawing.common" Version="5.0.0" />
   </ItemGroup>
