@@ -5,114 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="FileFormat.g.cs" />
-    <Compile Remove="OrderDto.g.cs" />
-    <Compile Remove="OrderDtoWithGlobal.g.cs" />
-    <Compile Remove="OrderDtoWithSA1633.g.cs" />
-    <Compile Remove="OrderIvDto.g.cs" />
-    <Compile Remove="OrderTxtDto.g.cs" />
-    <Compile Remove="PersonDto.g.cs" />
-    <Compile Remove="PersonDtoWithGlobal.g.cs" />
-    <Compile Remove="PersonDtoWithSA1633.g.cs" />
-    <Compile Remove="PersonIvDto.g.cs" />
-    <Compile Remove="PersonTxtDto.g.cs" />
-    <Compile Remove="ProjectTestFP.cs" />
-    <Compile Remove="Test.cs" />
-    <Compile Remove="TestAutoIndent.cs" />
-    <Compile Remove="TestDelete.cs" />
-    <Compile Remove="TestGlobalHeader.cs" />
-    <Compile Remove="TestInOtherProject.cs" />
-    <Compile Remove="TestInvalidFileExtension.cs" />
-    <Compile Remove="TestMissingFileExtension.cs" />
-    <Compile Remove="TestNoChange.cs" />
-    <Compile Remove="TestOldFilesCleanUp.cs" />
-    <Compile Remove="TestOldFilesCleanUp.g.cs" />
-    <Compile Remove="TestOldFilesCleanUpRenamed.g.cs" />
-    <Compile Remove="TestOverwrite\TestDelete.g.cs" />
-    <Compile Remove="TestOverwrite\TestNoChange.g.cs" />
-    <Compile Remove="TestOverwrite\TestNoDelete.g.cs" />
-    <Compile Remove="TestOverwrite\TestNoDelete2.g.cs" />
-    <Compile Remove="TestOverwrite\TestNoDelete3.g.cs" />
-    <Compile Remove="TestSA1633Header.cs" />
-    <Compile Remove="TestSubfolder.cs" />
-    <Compile Remove="TestSubfolderNew\OrderDto.g.cs" />
-    <Compile Remove="TestSubfolderNew\PersonDto.g.cs" />
-    <Compile Remove="TestSubfolder\OrderDto.g.cs" />
-    <Compile Remove="TestSubfolder\PersonDto.g.cs" />
-    <Compile Remove="TestWithCustomLog.cs" />
-    <Compile Remove="TestWithLogEnabled.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Features\Helper\CleanUpTestoutput.tt" />
-    <None Remove="Features\Helper\CleanUpTestoutput.txt" />
-    <None Remove="ProjectTestFP.info.json" />
-    <None Remove="ProjectTestFP.tt" />
-    <None Remove="ProjectTestFP.txt" />
-    <None Remove="T4.FileManager.VisualStudio.ttinclude" />
-    <None Remove="Test.info.json" />
-    <None Remove="Test.tt" />
-    <None Remove="Test.txt" />
-    <None Remove="TestAutoIndent.info.json" />
-    <None Remove="TestAutoIndent.tt" />
-    <None Remove="TestCsExtension.info.json" />
-    <None Remove="TestDelete.info.json" />
-    <None Remove="TestDelete.tt" />
-    <None Remove="TestDelete.txt" />
-    <None Remove="TestGlobalHeader.info.json" />
-    <None Remove="TestGlobalHeader.tt" />
-    <None Remove="TestInOtherProject.info.json" />
-    <None Remove="TestInOtherProject.tt" />
-    <None Remove="TestInvalidFileExtension.info.json" />
-    <None Remove="TestInvalidFileExtension.tt" />
-    <None Remove="TestMissingFileExtension.info.json" />
-    <None Remove="TestMissingFileExtension.tt" />
-    <None Remove="TestNoChange.info.json" />
-    <None Remove="TestNoChange.tt" />
-    <None Remove="TestNoChange.txt" />
-    <None Remove="TestNoDelete.info.json" />
-    <None Remove="TestNoDelete.tt" />
-    <None Remove="TestNoDelete.txt" />
-    <None Remove="TestOldFilesCleanUp.info.json" />
-    <None Remove="TestOldFilesCleanUp.tt" />
-    <None Remove="TestOldFilesCleanUp.txt" />
-    <None Remove="TestSA1633Header.info.json" />
-    <None Remove="TestSA1633Header.tt" />
-    <None Remove="TestSubfolder.info.json" />
-    <None Remove="TestSubfolder.tt" />
-    <None Remove="TestSubfolder.txt" />
-    <None Remove="TestWithCustomLog.info.json" />
-    <None Remove="TestWithCustomLog.tt" />
-    <None Remove="TestWithLogEnabled.info.json" />
-    <None Remove="TestWithLogEnabled.tt" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="EnvDTE" Version="16.7.30508.193" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="microsoft.net.test.sdk" Version="16.8.3" />
     <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.6.6" />
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.6.23" />
     <PackageReference Include="SpecRun.SpecFlow" Version="3.6.2" />
     <PackageReference Include="system.drawing.common" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="ProjectTestFP.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ProjectTestFP.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="ProjectTestFP.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ProjectTestFP.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
