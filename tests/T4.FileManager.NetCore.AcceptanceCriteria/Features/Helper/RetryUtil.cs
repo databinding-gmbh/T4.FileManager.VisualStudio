@@ -5,7 +5,7 @@
 
     public static class RetryUtil
     {
-        public static int maxAttempts = 7;
+        public static int maxAttempts = 10;
         public static TimeSpan delay = TimeSpan.FromSeconds(2);
 
         public static void RetryOnException(Action operation)

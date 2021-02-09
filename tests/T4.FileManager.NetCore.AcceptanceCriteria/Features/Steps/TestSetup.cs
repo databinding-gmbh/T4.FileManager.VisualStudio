@@ -22,7 +22,9 @@
         [AfterTestRun]
         public static void AfterTestRun()
         {
-            VisualStudioHelper.CleanupViaT4();
+            VisualStudioHelper.CleanupFiles(
+                new[] { "T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject", "T4.FileManager.NetCore.AcceptanceCriteria" },
+                new[] { ".tt", ".g.cs", ".g1.cs", ".info.json", ".txt", ".ttinclude", "*.Designer.cs", "*.resx" });
         }
 
         public static void PrintReportInfo(string filename, string info)
