@@ -70,7 +70,7 @@ stages:
         TestDllPattern: '**\*T4.FileManager.AcceptanceCriteria.dll'
         OutputPath: '$(Build.Repository.LocalPath)/tests/T4.FileManager.VisualStudio.AcceptanceCriteria/bin/Debug'
         TestAssembly: 'T4.FileManager.AcceptanceCriteria.dll'  
-        
+
    - template: templates/build-and-test.yml
      parameters:
        SolutionPath: '$(Build.Repository.LocalPath)'  
