@@ -39,6 +39,7 @@ steps:
       ${{ parameters.TestDllPattern }}
       !**\*TestAdapter.dll
       !**\obj\**
+      !**\bin\**\ref\**
     resultsFolder: '${{ parameters.TestResultDir }}'
     
 - task: CopyFiles@2
