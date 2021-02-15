@@ -4,9 +4,9 @@ The old version of T4.FileManager had bugs in new versions of Visual Studio that
 
 ## NET
 
-The latest end 2 end test report with printscreens can be found [here](../T4FileManagerVisualStudio.html). 
+The latest end 2 end test report with screenshots can be found [here](../T4FileManagerVisualStudio.html). 
 
-As an experiment we created a Living doc based on Specification by Example that can be found [here](../T4.FileManager.AcceptanceCriteria.dll.html). The report has a few visual defects because the full framework ist not supported by the tool SpecFlow.Plus.LivingDocPlugin.
+As an experiment we created a Living doc based on Specification by Example that can be found [here](../T4.FileManager.AcceptanceCriteria.dll.html). The report has a few visual defects because the full framework is not supported by the tool SpecFlow.Plus.LivingDocPlugin.
 
 ## NET Core/NET 5.0
 
@@ -21,7 +21,7 @@ The following scenarios of feature **UT001 Generate Code** have a different beha
 - Generate files ignores output extension .cs and uses .txt as default to avoid "error generation output" compile errors
 - Generate files with DisableTemplateMainOutputFile enabled prevents generation of the t4 main output file (Workaround invalid file extension)
 
-To find such differences in behaivors in Visual Studio 2019 our end 2 end tests were a great help to us.
+To find such differences in behaviors in Visual Studio 2019 our end 2 end tests were a great help to us.
 
 
 
