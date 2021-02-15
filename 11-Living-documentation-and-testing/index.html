@@ -321,9 +321,62 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Living documentation and testing
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
     <a href="./" title="Living documentation and testing" class="md-nav__link md-nav__link--active">
       Living documentation and testing
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#net" class="md-nav__link">
+    NET
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#net-corenet-50" class="md-nav__link">
+    NET Core/NET 5.0
+  </a>
+  
+    <nav class="md-nav" aria-label="NET Core/NET 5.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lessons-learned" class="md-nav__link">
+    Lessons learned
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -357,6 +410,43 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#net" class="md-nav__link">
+    NET
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#net-corenet-50" class="md-nav__link">
+    NET Core/NET 5.0
+  </a>
+  
+    <nav class="md-nav" aria-label="NET Core/NET 5.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lessons-learned" class="md-nav__link">
+    Lessons learned
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -377,7 +467,19 @@
                 
                 <h1 id="living-documentation-and-testing">Living documentation and testing</h1>
 <p>The old version of T4.FileManager had bugs in new versions of Visual Studio that where hard to detect. To prevent this from happening again, we decided to develop the new version with BDD and end 2 end tests that run inside Visual Studio. A nice benefit of this approach is that all features of T4.FileManager can be found in the examples section, including screenshots on how this should look in Visual Studio. </p>
-<p>The latest end 2 end test can be found <a href="../T4FileManagerVisualStudio.html">here</a>.</p>
+<h2 id="net">NET</h2>
+<p>The latest end 2 end test report with printscreens can be found <a href="../T4FileManagerVisualStudio.html">here</a>. </p>
+<p>As an experiment we created a Living doc based on Specification by Example that can be found <a href="../">here</a></p>
+<h2 id="net-corenet-50">NET Core/NET 5.0</h2>
+<p>The latest end 2 end test report with printscreens can be found <a href="..\T4FileManagerVisualStudioNETCore.html">here</a>. </p>
+<p>As an experiment we created a Living doc for NET 5 based on Specification by Example that can be found <a href="../T4.FileManager.NetCore.AcceptanceCriteria.dll.html">here</a></p>
+<h3 id="lessons-learned">Lessons learned</h3>
+<p>The following scenarios of feature <strong>UT001 Generate Code</strong> have a different behavior:</p>
+<ul>
+<li>Generate files ignores output extension .cs and uses .txt as default to avoid "error generation output" compile errors</li>
+<li>Generate files with DisableTemplateMainOutputFile enabled prevents generation of the t4 main output file (Workaround invalid file extension)</li>
+</ul>
+<p>To find such differences in behaivors in Visual Studio 2019 our end 2 end tests were a great help to us.</p>
                 
               
               
