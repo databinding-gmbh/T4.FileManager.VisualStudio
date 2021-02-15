@@ -6,7 +6,7 @@ The old version of T4.FileManager had bugs in new versions of Visual Studio that
 
 The latest end 2 end test report with printscreens can be found [here](../T4FileManagerVisualStudio.html). 
 
-As an experiment we created a Living doc based on Specification by Example that can be found [here](../)
+As an experiment we created a Living doc based on Specification by Example that can be found [here](../T4.FileManager.AcceptanceCriteria.dll.html)
 
 ## NET Core/NET 5.0
 
