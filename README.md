@@ -42,7 +42,7 @@ For more information see [documentation](https://databinding-gmbh.github.io/T4.F
 
 ## Running
 
-The execution of the generation remains on the original T4 Text Templates (https://docs.microsoft.com/en-us/visualstudio/modeling/code-generation-and-t4-text-templates?view=vs-2019).
+The execution of the generation remains on the original [T4 Text Templates](https://docs.microsoft.com/en-us/visualstudio/modeling/code-generation-and-t4-text-templates?view=vs-2019).
 
 ## Testing
 
