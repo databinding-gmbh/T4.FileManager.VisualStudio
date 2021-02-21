@@ -466,12 +466,12 @@
                 
                 
                 <h1 id="living-documentation-and-testing">Living documentation and testing</h1>
-<p>The old version of T4.FileManager had bugs in new versions of Visual Studio that where hard to detect. To prevent this from happening again, we decided to develop the new version with BDD and end 2 end tests that run inside Visual Studio. A nice benefit of this approach is that all features of T4.FileManager can be found in the examples section, including screenshots on how this should look in Visual Studio. </p>
+<p>The old version of T4.FileManager had bugs in new versions of Visual Studio that where hard to detect. To prevent this from happening again, we decided to develop the new version with BDD and end2end tests that run inside Visual Studio. A nice benefit of this approach is that all features of T4.FileManager can be found in the examples section, including screenshots on how this should look in Visual Studio. </p>
 <h2 id="net">NET</h2>
-<p>The latest end 2 end test report with screenshots can be found <a href="../T4FileManagerVisualStudio.html">here</a>. </p>
+<p>The latest end2end test report with screenshots can be found <a href="../T4FileManagerVisualStudio.html">here</a>. </p>
 <p>As an experiment we created a Living doc based on Specification by Example that can be found <a href="../T4.FileManager.AcceptanceCriteria.dll.html">here</a>. The report has a few visual defects because the full framework is not supported by the tool SpecFlow.Plus.LivingDocPlugin.</p>
 <h2 id="net-corenet-50">NET Core/NET 5.0</h2>
-<p>The latest end 2 end test report with printscreens can be found <a href="..\T4FileManagerVisualStudioNETCore.html">here</a>. </p>
+<p>The latest end2end test report with screenshots can be found <a href="..\T4FileManagerVisualStudioNETCore.html">here</a>. </p>
 <p>As an experiment we created a Living doc for NET 5 based on Specification by Example that can be found <a href="../T4.FileManager.NetCore.AcceptanceCriteria.dll.html">here</a></p>
 <h3 id="lessons-learned">Lessons learned</h3>
 <p>The following scenarios of feature <strong>UT001 Generate Code</strong> have a different behavior:</p>
@@ -479,7 +479,7 @@
 <li>Generate files ignores output extension .cs and uses .txt as default to avoid "error generation output" compile errors</li>
 <li>Generate files with DisableTemplateMainOutputFile enabled prevents generation of the t4 main output file (Workaround invalid file extension)</li>
 </ul>
-<p>To find such differences in behaviors in Visual Studio 2019 our end 2 end tests were a great help to us.</p>
+<p>To find such differences in behaviors in Visual Studio 2019 our end2end tests were a great help to us.</p>
                 
               
               
