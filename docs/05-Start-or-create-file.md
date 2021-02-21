@@ -3,7 +3,7 @@
 Put this line into your text template (*.tt) where you want to start a new file:
 
 ```
-fileManager.CreateNewFile(filename, projectname, subfolders, properties);
+fileManager.StartNewFile(filename, projectname, subfolders, properties);
 ```
 
 All the content that follows in your template will go into that file (until you close it with the [Generate()](07-Proceed-to-generate-files.md) method. 
