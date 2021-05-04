@@ -30,6 +30,8 @@ Our [documentation](https://databinding-gmbh.github.io/T4.FileManager.VisualStud
 |-------------|-------------|-----|--|
 | Visual Studio | 2017, 2019 | https://visualstudio.microsoft.com/vs/ | N/A
 
+Visual Studio 16.9.x has a bug that prevents you from debugging T4 templates. See [this post](https://improveandrepeat.com/2021/05/how-to-fix-the-t4-debugger-in-visual-studio-16-9-x/) for an explanation on how to fix it.
+
 ### Installing
 
 Install the nuget package in your project.
