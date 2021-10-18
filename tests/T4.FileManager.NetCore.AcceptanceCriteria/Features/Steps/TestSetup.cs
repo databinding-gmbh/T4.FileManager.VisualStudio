@@ -1,4 +1,6 @@
-﻿namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
+﻿using TechTalk.SpecFlow.Infrastructure;
+
+namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
 {
     using System;
     using System.Drawing.Imaging;
@@ -14,9 +16,12 @@
     {
         private readonly ScenarioContext context;
 
-        public TestSetup(ScenarioContext scenarioContext)
+        private readonly ISpecFlowOutputHelper outputHelper;
+
+        public TestSetup(ScenarioContext scenarioContext, ISpecFlowOutputHelper outputHelper)
         {
             this.context = scenarioContext;
+            this.outputHelper = outputHelper;
         }
 
         [AfterTestRun]
@@ -27,17 +32,18 @@
                 new[] { ".tt", ".g.cs", ".g1.cs", ".info.json", ".txt", ".ttinclude", "*.Designer.cs", "*.resx" });
         }
 
-        public static void PrintReportInfo(string filename, string info)
+        public void PrintReportInfo(string filename, string info)
         {
+            this.outputHelper.AddAttachment(filename);
             Console.WriteLine($" SCREENSHOT[ {filename} ]SCREENSHOT {info}");
         }
 
-        public static void TakeScreenshot(string info = "")
+        public void TakeScreenshot(string info = "")
         {
             var filename = "_a" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()) + "_screen.png";
             var img = new ScreenCapture().CaptureScreen();
             img.Save(filename, ImageFormat.Png);
-            PrintReportInfo(filename, info);
+            this.PrintReportInfo(filename, info);
         }
 
         [AfterStep]
@@ -46,7 +52,7 @@
             if (this.context.TestError != null)
             {
                 var error = $"Error: {this.context.ScenarioInfo.Title} - {this.context.TestError.Message}";
-                TakeScreenshot(error);
+                this.TakeScreenshot(error);
             }
         }
 
