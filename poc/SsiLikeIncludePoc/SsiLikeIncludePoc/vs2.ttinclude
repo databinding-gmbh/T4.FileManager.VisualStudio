@@ -1,0 +1,5 @@
+﻿<#
+    var dt = DateTime.Now.ToShortDateString();
+#>
+
+Ich bin der Inhalt von VS2.ttinclude <#= dt #>

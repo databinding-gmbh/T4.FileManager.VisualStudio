@@ -1,0 +1,20 @@
+﻿<#@ import namespace="System.Text" #>
+
+<# 
+    var service = (IServiceProvider)this.Host;
+    var parts = service.GetType().Assembly.ToString().Split(',');
+    string name = parts[0].Trim();
+    string version = parts.Length < 2 ? null : parts[1].Trim();
+    var vsVersion = Version.Parse(version.Replace("Version=", string.Empty));
+#>
+<# if (vsVersion.Major <= 16)
+{
+#>
+    <#@ include file="vs1.ttinclude" #>
+<#
+} else {
+#>
+    <#@ include file="vs2.ttinclude" #>
+<#
+}
+#>
