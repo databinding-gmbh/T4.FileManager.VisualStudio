@@ -1,5 +1,0 @@
-﻿
-
-Microsoft.VisualStudio.TextTemplating.VSHost.15.0
-Version=16.0.0.0
-16
