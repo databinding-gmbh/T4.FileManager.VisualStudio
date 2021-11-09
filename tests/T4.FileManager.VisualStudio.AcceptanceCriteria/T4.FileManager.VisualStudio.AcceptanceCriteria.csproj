@@ -202,6 +202,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CleanUpTestoutput.tt</DependentUpon>
     </Content>
+    <Content Include="Test.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Test.txt</LastGenOutput>
+    </Content>
+    <Content Include="Test.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Test.tt</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

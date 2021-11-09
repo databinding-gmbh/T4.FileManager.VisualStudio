@@ -28,12 +28,16 @@
       see https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/10-Change-log/
     </releaseNotes>
     <contentFiles>
-      <files include="any/any/T4.FileManager.VisualStudio.ttinclude" buildAction="Content" copyToOutput="true" />
+      <files include="any/any/*.ttinclude" buildAction="Content" copyToOutput="true" />
     </contentFiles>
   </metadata>
   <files>
     <file src="T4.FileManager.VisualStudio.ttinclude" target="contentFiles\any\any" />
     <file src="T4.FileManager.VisualStudio.ttinclude" target="content" />
+    <file src="T4.FileManager.VisualStudio19.ttinclude" target="contentFiles\any\any" />
+    <file src="T4.FileManager.VisualStudio19.ttinclude" target="content" />
+    <file src="T4.FileManager.VisualStudio22.ttinclude" target="contentFiles\any\any" />
+    <file src="T4.FileManager.VisualStudio22.ttinclude" target="content" />
     <file src="images\logo-t4-file-manager.png" target="" />
     <file src="LICENSE.txt" target="" />
   </files>
