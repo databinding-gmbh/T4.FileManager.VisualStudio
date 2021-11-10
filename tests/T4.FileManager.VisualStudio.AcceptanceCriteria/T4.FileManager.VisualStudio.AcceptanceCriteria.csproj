@@ -162,6 +162,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Default.srprofile" />
+    <None Include="Features\Helper\CleanUpTestoutput22.ttinclude">
+      <LastGenOutput>CleanUpTestoutput22.txt</LastGenOutput>
+    </None>
     <None Include="Features\UT016_Log_Activities.feature" />
     <None Include="Features\UT013_Generate_File_With_Overwrite.feature" />
     <None Include="Features\UT013_Generate_File_Without_Modifications.feature" />
@@ -201,15 +204,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CleanUpTestoutput.tt</DependentUpon>
-    </Content>
-    <Content Include="Test.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Test.txt</LastGenOutput>
-    </Content>
-    <Content Include="Test.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Test.tt</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

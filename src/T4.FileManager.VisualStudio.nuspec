@@ -36,8 +36,6 @@
     <file src="T4.FileManager.VisualStudio.ttinclude" target="content" />
     <file src="T4.FileManager.VisualStudio19.ttinclude" target="contentFiles\any\any" />
     <file src="T4.FileManager.VisualStudio19.ttinclude" target="content" />
-    <file src="T4.FileManager.VisualStudio22.ttinclude" target="contentFiles\any\any" />
-    <file src="T4.FileManager.VisualStudio22.ttinclude" target="content" />
     <file src="images\logo-t4-file-manager.png" target="" />
     <file src="LICENSE.txt" target="" />
   </files>
