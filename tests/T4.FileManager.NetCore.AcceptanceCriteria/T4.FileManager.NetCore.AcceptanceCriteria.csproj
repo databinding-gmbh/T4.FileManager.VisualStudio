@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="FileFormat.g.cs" />
     <Compile Remove="OrderDto.g.cs" />
     <Compile Remove="OrderDtoWithGlobal.g.cs" />
     <Compile Remove="OrderDtoWithSA1633.g.cs" />
@@ -33,7 +34,9 @@
     <None Remove="Test.info.json" />
     <None Remove="Test.tt" />
     <None Remove="Test.txt" />
+    <None Remove="TestAutoIndent.info.json" />
     <None Remove="TestAutoIndent.tt" />
+    <None Remove="TestAutoIndent.txt" />
     <None Remove="TestDelete.info.json" />
     <None Remove="TestDelete.tt" />
     <None Remove="TestDelete.txt" />

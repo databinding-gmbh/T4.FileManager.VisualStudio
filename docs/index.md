@@ -33,7 +33,6 @@ With the T4.FileManager you can define into which files T4 generates your code. 
 
 1. [Installation](01-Installation.md)
 2. [Quick start](02-Quick-start.md)
-3. [Include in your text template](03-Include-in-your-text-template.md)
 4. [Create instance](04-Create-instance.md)
 5. [Start or create file](05-Start-or-create-file.md)
 6. [Add header to files](06-Add-header-to-files.md)

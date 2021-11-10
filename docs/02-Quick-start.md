@@ -2,13 +2,36 @@
 
 After you installed T4.FileManager into your project, you can dive right into your T4 template. A more thorough explanation follows in the next pages. 
 
+## Include in your text template
 
+Open your text template (*.tt) or create a new one.
+
+### .NET Core, .NET Standard, NET 5, NET 6
+
+The File Manger will be linked to the NuGet system folder. You can compile your project and then reference it using **$(TargetDir)** in your template.
+
+Add the following code to the top of the file:
+
+```
+<#@ include file="$(TargetDir)\T4.FileManager.VisualStudio.ttinclude" #>
+```
+
+
+### .NET Framework 
+
+The File Manager will be copied to the Project root. You can reference it using **$(ProjectDir)** in your template.
+
+Add the following code to the top of the file:
+
+```
+<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
+```
 
 ## Extend your T4 template
 
 With those 4 steps can you use the T4.FileManager to generate code into different files:
 
-1. [Include T4.FileManager.VisualStudio.ttinclude in your template](03-Include-in-your-text-template.md)
+1. [Include T4.FileManager.VisualStudio.ttinclude in your template](02-Quick-start.md#include-in-your-text-template)
 2. [Instantiate T4FileManager](04-Create-instance.md)
 3. [Start a new file with the CreateNewFile() method](05-Start-or-create-file.md)
 4. [Close the file and generate it with the Generate() method](07-Proceed-to-generate-files.md)

@@ -1,5 +1,13 @@
 # Change log
 
+## 3.0.0
+
+- Support for Visual Studio 2022
+- **Breaking Changes**
+  - Visual Studio has Breaking Changes in EnvDTE-Automation.
+  - With this version T4.FileManager.VisualStudio.ttinclude works only in Visual Studio 2022
+  - For backward compatibility you can use T4.FileManager.VisualStudio19.ttinclude
+
 ## 2.0.0
 
 - Compatibility to T4.TemplateFileManager improved
