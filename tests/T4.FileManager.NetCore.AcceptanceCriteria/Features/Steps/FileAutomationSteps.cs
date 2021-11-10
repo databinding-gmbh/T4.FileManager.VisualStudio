@@ -37,6 +37,11 @@
 
             File.Copy(fileManagerFromSource, fileManagerForTest, true);
 
+            fileManagerFromSource = Path.Combine(pathSource, "T4.FileManager.VisualStudio19.ttinclude");
+            fileManagerForTest = Path.Combine(outputdir, "T4.FileManager.VisualStudio19.ttinclude");
+
+            File.Copy(fileManagerFromSource, fileManagerForTest, true);
+
             this.targetTestPath = this.pathTestEnvironment;
         }
 
