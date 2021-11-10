@@ -160,11 +160,17 @@
     <Compile Include="Features\Steps\TestSetup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Features\Helper\CleanUpTestoutput.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CleanUpTestoutput.tt</DependentUpon>
+    </Content>
     <None Include="app.config" />
     <None Include="Default.srprofile" />
-    <None Include="Features\Helper\CleanUpTestoutput22.ttinclude">
-      <LastGenOutput>CleanUpTestoutput22.txt</LastGenOutput>
-    </None>
+    <Content Include="Features\Helper\CleanUpTestoutput19.tt">
+      <LastGenOutput>CleanUpTestoutput19.txt</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </Content>
     <None Include="Features\UT016_Log_Activities.feature" />
     <None Include="Features\UT013_Generate_File_With_Overwrite.feature" />
     <None Include="Features\UT013_Generate_File_Without_Modifications.feature" />
@@ -199,11 +205,6 @@
     <Content Include="Features\Helper\CleanUpTestoutput.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CleanUpTestoutput.txt</LastGenOutput>
-    </Content>
-    <Content Include="Features\Helper\CleanUpTestoutput.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CleanUpTestoutput.tt</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

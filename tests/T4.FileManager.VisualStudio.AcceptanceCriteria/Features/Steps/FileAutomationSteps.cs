@@ -28,8 +28,13 @@
                 VisualStudioHelper.GetProjectDirectory("T4.FileManager.VisualStudio.AcceptanceCriteria");
             var pathSource = Path.Combine(pathTestEnvironment, "..\\..\\", "src\\");
 
-            var fileManagerFromSource = Path.Combine(pathSource, "*.ttinclude");
-            var fileManagerForTest = Path.Combine(this.pathTestEnvironment, "*.ttinclude");
+            var fileManagerFromSource = Path.Combine(pathSource, "T4.FileManager.VisualStudio.ttinclude");
+            var fileManagerForTest = Path.Combine(this.pathTestEnvironment, "T4.FileManager.VisualStudio.ttinclude");
+
+            File.Copy(fileManagerFromSource, fileManagerForTest, true);
+
+            fileManagerFromSource = Path.Combine(pathSource, "T4.FileManager.VisualStudio19.ttinclude");
+            fileManagerForTest = Path.Combine(this.pathTestEnvironment, "T4.FileManager.VisualStudio19.ttinclude");
 
             File.Copy(fileManagerFromSource, fileManagerForTest, true);
 
