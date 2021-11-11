@@ -35,7 +35,6 @@ steps:
 - task: VSTest@2
   displayName: 'VsTest - Test Szenarios'
   inputs:
-    vsTestVersion: 17.0
     testAssemblyVer2: |
       ${{ parameters.TestDllPattern }}
       !**\*TestAdapter.dll
