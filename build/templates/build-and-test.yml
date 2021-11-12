@@ -41,6 +41,8 @@ steps:
       !**\obj\**
       !**\bin\**\ref\**
     resultsFolder: '${{ parameters.TestResultDir }}'
+    vstestLocationMethod: location
+    vstestLocation: vstest.console.exe
     
 - task: CopyFiles@2
   displayName: 'Copy test report'
