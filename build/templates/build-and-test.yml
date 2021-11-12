@@ -42,7 +42,7 @@ steps:
       !**\bin\**\ref\**
     resultsFolder: '${{ parameters.TestResultDir }}'
     vstestLocationMethod: location
-    vstestLocation: vstest.console.exe
+    vstestLocation: C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe
     
 - task: CopyFiles@2
   displayName: 'Copy test report'
