@@ -90,7 +90,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Breaking changes to old TemplateFileManager
 
-See section breaking changes of [Change log](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/10-Change-log/#breaking-changes-compared-to-templatefilemanager)
+See section breaking changes of [Change log](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/12-Change-log/#breaking-changes-compared-to-templatefilemanager)
 
 
 
