@@ -26,8 +26,8 @@ Our [documentation](https://databinding-gmbh.github.io/T4.FileManager.VisualStud
 
 ### Prerequisites
 
-| Program     | Version | Info | File  |
-|-------------|-------------|-----|--|-------------|
+| Program     | Version     | Info | File        |
+|-------------|-------------|------|-------------|
 | [Visual Studio](https://visualstudio.microsoft.com/vs/) | 2022 |  since Version 3.0 | T4.FileManager.VisualStudio.ttinclude |
 | Visual Studio | 2017, 2019 | since Version 3.0 | T4.FileManager.VisualStudio19.ttinclude |
 
