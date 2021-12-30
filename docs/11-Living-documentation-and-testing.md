@@ -8,9 +8,9 @@ The latest functional testreport with screenshots can be found [here](../T4FileM
 
 As an experiment we created a Living doc based on Specification by Example that can be found [here](../T4.FileManager.AcceptanceCriteria.dll.html). The report has a few visual defects because the full framework is not supported by the tool SpecFlow.Plus.LivingDocPlugin.
 
-## NET Core/NET 5.0
+## NET Core/NET 5.0+
 
-The latest functional testreport with screenshots can be found [here](..\T4FileManagerVisualStudioNETCore.html). 
+The latest functional testreport with screenshots can be found [here](../T4FileManagerVisualStudioNETCore.html). 
 
 As an experiment we created a Living doc for NET 5 based on Specification by Example that can be found [here](../T4.FileManager.NetCore.AcceptanceCriteria.dll.html)
 
