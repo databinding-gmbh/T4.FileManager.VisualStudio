@@ -19,9 +19,9 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("UT013 Generate File with overwrite", new string[] {
-            "db-127"}, Description="\tAs a developer\r\n\tI can change the behaviour of supress changes to overwrite exis" +
-        "ting files", SourceFile="Features\\UT013_Generate_File_With_Overwrite.feature", SourceLine=1)]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("UT013 Generate File with overwrite")]
+    [NUnit.Framework.CategoryAttribute("db-127")]
     public partial class UT013GenerateFileWithOverwriteFeature
     {
         
@@ -33,7 +33,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 #line 1 "UT013_Generate_File_With_Overwrite.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
+        [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -43,18 +43,19 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
+        [NUnit.Framework.OneTimeTearDownAttribute()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -63,6 +64,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -110,7 +112,8 @@ fileManager.Generate();
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files with CanOverwriteExistingFile is set to true, files deleted", SourceLine=35)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate files with CanOverwriteExistingFile is set to true, files deleted")]
         public virtual void GenerateFilesWithCanOverwriteExistingFileIsSetToTrueFilesDeleted()
         {
             string[] tagsOfScenario = ((string[])(null));

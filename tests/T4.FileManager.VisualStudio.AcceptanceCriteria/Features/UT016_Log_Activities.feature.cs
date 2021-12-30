@@ -19,9 +19,9 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("UT016 Log activities", new string[] {
-            "db-1017"}, Description="\tAs a developer\r\n\tI can log to the main output file\r\n\tso that I can analyze the g" +
-        "eneration process", SourceFile="Features\\UT016_Log_Activities.feature", SourceLine=1)]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("UT016 Log activities")]
+    [NUnit.Framework.CategoryAttribute("db-1017")]
     public partial class UT016LogActivitiesFeature
     {
         
@@ -33,7 +33,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 #line 1 "UT016_Log_Activities.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
+        [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -43,18 +43,19 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
+        [NUnit.Framework.OneTimeTearDownAttribute()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -63,6 +64,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -84,7 +86,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Log activities of generation process", SourceLine=9)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Log activities of generation process")]
         public virtual void LogActivitiesOfGenerationProcess()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -163,7 +166,8 @@ fileManager.Generate();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Add custom information to log", SourceLine=49)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Add custom information to log")]
         public virtual void AddCustomInformationToLog()
         {
             string[] tagsOfScenario = ((string[])(null));

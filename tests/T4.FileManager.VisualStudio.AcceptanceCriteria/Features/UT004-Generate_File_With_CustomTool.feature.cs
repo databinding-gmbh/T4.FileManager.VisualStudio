@@ -19,9 +19,9 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("UT004 Generate File with custom tool", new string[] {
-            "db-9"}, Description="\tAs a developer\r\n\tI can generate code with the T4.FileManager and definied custom" +
-        " tool properties", SourceFile="Features\\UT004-Generate_File_With_CustomTool.feature", SourceLine=1)]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("UT004 Generate File with custom tool")]
+    [NUnit.Framework.CategoryAttribute("db-9")]
     public partial class UT004GenerateFileWithCustomToolFeature
     {
         
@@ -33,7 +33,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 #line 1 "UT004-Generate_File_With_CustomTool.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
+        [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -43,18 +43,19 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
+        [NUnit.Framework.OneTimeTearDownAttribute()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -63,6 +64,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -84,7 +86,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate resx-File with custom tool (Dictionary)", Description="\tRemoved since version 2.0.0", SourceLine=8)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate resx-File with custom tool (Dictionary)")]
         public virtual void GenerateResx_FileWithCustomToolDictionary()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -117,7 +120,8 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate resx-File with custom tool (FileProperties)", SourceLine=11)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate resx-File with custom tool (FileProperties)")]
         public virtual void GenerateResx_FileWithCustomToolFileProperties()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -209,8 +213,9 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate resx-File with custom tool (StartNewFile FileProperties backward compati" +
-            "bility T4.TemplateFileManager)", SourceLine=102)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate resx-File with custom tool (StartNewFile FileProperties backward compati" +
+            "bility T4.TemplateFileManager)")]
         public virtual void GenerateResx_FileWithCustomToolStartNewFileFilePropertiesBackwardCompatibilityT4_TemplateFileManager()
         {
             string[] tagsOfScenario = ((string[])(null));

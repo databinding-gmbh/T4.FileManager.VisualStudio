@@ -19,9 +19,9 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("UT006 Generate File with standard header", new string[] {
-            "db-11"}, Description="\tAs a developer\r\n\tI can generate code with the T4.FileManager using a standard he" +
-        "ader", SourceFile="Features\\UT006-Generate_File_With_Standard_Header.feature", SourceLine=1)]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("UT006 Generate File with standard header")]
+    [NUnit.Framework.CategoryAttribute("db-11")]
     public partial class UT006GenerateFileWithStandardHeaderFeature
     {
         
@@ -33,7 +33,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 #line 1 "UT006-Generate_File_With_Standard_Header.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
+        [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -43,18 +43,19 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
+        [NUnit.Framework.OneTimeTearDownAttribute()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -63,6 +64,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -84,7 +86,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate multiple files with standard header", SourceLine=8)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate multiple files with standard header")]
         public virtual void GenerateMultipleFilesWithStandardHeader()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -166,7 +169,8 @@ fileManager.Generate();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate multiple files with filename in standard header (SA1633)", SourceLine=65)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate multiple files with filename in standard header (SA1633)")]
         public virtual void GenerateMultipleFilesWithFilenameInStandardHeaderSA1633()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -253,8 +257,9 @@ fileManager.Generate();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate multiple files with filename in standard header (SA1633 - Backward compa" +
-            "tibility T4.TemplateFileManager)", SourceLine=125)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate multiple files with filename in standard header (SA1633 - Backward compa" +
+            "tibility T4.TemplateFileManager)")]
         public virtual void GenerateMultipleFilesWithFilenameInStandardHeaderSA1633_BackwardCompatibilityT4_TemplateFileManager()
         {
             string[] tagsOfScenario = ((string[])(null));

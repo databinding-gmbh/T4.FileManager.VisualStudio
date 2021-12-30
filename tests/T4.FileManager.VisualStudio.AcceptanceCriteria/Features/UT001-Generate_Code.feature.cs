@@ -19,9 +19,9 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("UT001 Generate Code", new string[] {
-            "db-6"}, Description="\tAs a developer\r\n\tI can generate code with the T4.FileManager with each class in " +
-        "its own file", SourceFile="Features\\UT001-Generate_Code.feature", SourceLine=1)]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("UT001 Generate Code")]
+    [NUnit.Framework.CategoryAttribute("db-6")]
     public partial class UT001GenerateCodeFeature
     {
         
@@ -33,7 +33,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 #line 1 "UT001-Generate_Code.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
+        [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -43,18 +43,19 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
+        [NUnit.Framework.OneTimeTearDownAttribute()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -63,6 +64,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -84,7 +86,8 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate two files", SourceLine=9)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate two files")]
         public virtual void GenerateTwoFiles()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -159,7 +162,8 @@ fileManager.Generate();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate two files (Backward compatibility T4.TemplateFileManager)", SourceLine=48)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate two files (Backward compatibility T4.TemplateFileManager)")]
         public virtual void GenerateTwoFilesBackwardCompatibilityT4_TemplateFileManager()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -234,8 +238,9 @@ fileManager.Process();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files uses .txt as default file extension when no output extension direc" +
-            "tive is set", SourceLine=87)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate files uses .txt as default file extension when no output extension direc" +
+            "tive is set")]
         public virtual void GenerateFilesUses_TxtAsDefaultFileExtensionWhenNoOutputExtensionDirectiveIsSet()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -312,8 +317,9 @@ fileManager.Generate();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files ignores output extension .cs and uses .txt as default to avoid \"er" +
-            "ror generation output\" compile errors", SourceLine=126)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate files ignores output extension .cs and uses .txt as default to avoid \"er" +
+            "ror generation output\" compile errors")]
         public virtual void GenerateFilesIgnoresOutputExtension_CsAndUses_TxtAsDefaultToAvoidErrorGenerationOutputCompileErrors()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -391,8 +397,9 @@ fileManager.Generate();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files with DisableTemplateMainOutputFile enabled prevents generation of " +
-            "the t4 main output file (Workaround invalid file extension)", SourceLine=166)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate files with DisableTemplateMainOutputFile enabled prevents generation of " +
+            "the t4 main output file (Workaround invalid file extension)")]
         public virtual void GenerateFilesWithDisableTemplateMainOutputFileEnabledPreventsGenerationOfTheT4MainOutputFileWorkaroundInvalidFileExtension()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -475,7 +482,8 @@ fileManager.Generate();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Format file content based on editor.config with EnableAutoIndent flag", SourceLine=208)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Format file content based on editor.config with EnableAutoIndent flag")]
         public virtual void FormatFileContentBasedOnEditor_ConfigWithEnableAutoIndentFlag()
         {
             string[] tagsOfScenario = ((string[])(null));
