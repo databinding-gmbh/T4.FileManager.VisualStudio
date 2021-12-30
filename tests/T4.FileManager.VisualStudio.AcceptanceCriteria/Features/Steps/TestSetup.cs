@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Drawing.Imaging;
 using System.IO;
 using T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Helper;
@@ -35,15 +36,11 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Steps
 
         public void TakeScreenshot(string info = "")
         {
-            if (Directory.Exists("media") == false)
-            {
-                Directory.CreateDirectory("media");
-            }
-
-            var filename = @"media\_a" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()) + "_screen.png";
+            var mediaDir = CreateDirectoryName("media");
+            var filename = Path.GetFileNameWithoutExtension(Path.GetTempFileName()) + "_screen.png";
             var img = new ScreenCapture().CaptureScreen();
-            img.Save(filename, ImageFormat.Png);
-            this.PrintReportInfo(filename, info);
+            img.Save(Path.Combine(mediaDir, filename), ImageFormat.Png);
+            this.PrintReportInfo(@"media\" + filename, info);
         }
 
         [AfterStep]
@@ -61,6 +58,18 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Steps
         public void AfterScenario()
         {
             this.TakeScreenshot();
+        }
+
+        private static string CreateDirectoryName(string name)
+        {
+            var currentDir = TestContext.CurrentContext.WorkDirectory;
+            var loggingDir = Path.Combine(currentDir, name);
+            if (Directory.Exists(loggingDir) == false)
+            {
+                Directory.CreateDirectory(loggingDir);
+            }
+
+            return loggingDir;
         }
     }
 }
