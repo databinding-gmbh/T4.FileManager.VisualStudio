@@ -26,10 +26,10 @@ Our [documentation](https://databinding-gmbh.github.io/T4.FileManager.VisualStud
 
 ### Prerequisites
 
-| Program     | Version | Link | Info | File  |
-|-------------|-------------|-----|--|-------------|
-| Visual Studio | 2022 | https://visualstudio.microsoft.com/vs/ | since Version 3.0 | T4.FileManager.VisualStudio.ttinclude |
-| Visual Studio | 2017, 2019 | https://visualstudio.microsoft.com/vs/ | since Version 3.0 | T4.FileManager.VisualStudio19.ttinclude |
+| Program     | Version     | Info | File        |
+|-------------|-------------|------|-------------|
+| [Visual Studio](https://visualstudio.microsoft.com/vs/) | 2022 |  since Version 3.0 | T4.FileManager.VisualStudio.ttinclude |
+| Visual Studio | 2017, 2019 | since Version 3.0 | T4.FileManager.VisualStudio19.ttinclude |
 
 Visual Studio 16.9.x has a bug that prevents you from debugging T4 templates. See [this post](https://improveandrepeat.com/2021/05/how-to-fix-the-t4-debugger-in-visual-studio-16-9-x/) for an explanation on how to fix it.
 
@@ -90,7 +90,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Breaking changes to old TemplateFileManager
 
-See section breaking changes of [Change log](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/10-Change-log/#breaking-changes-compared-to-templatefilemanager)
+See section breaking changes of [Change log](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/12-Change-log/#breaking-changes-compared-to-templatefilemanager)
 
 
 
