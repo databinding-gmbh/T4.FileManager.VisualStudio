@@ -19,9 +19,9 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("UT001 Generate Code", new string[] {
-            "db-6"}, Description="\tAs a developer\r\n\tI can generate code with the T4.FileManager with each class in " +
-        "its own file", SourceFile="Features\\UT001-Generate_Code.feature", SourceLine=1)]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("UT001 Generate Code")]
+    [NUnit.Framework.CategoryAttribute("db-6")]
     public partial class UT001GenerateCodeFeature
     {
         
@@ -33,7 +33,7 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features
 #line 1 "UT001-Generate_Code.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
+        [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -43,18 +43,19 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
+        [NUnit.Framework.OneTimeTearDownAttribute()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -63,6 +64,7 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -84,7 +86,8 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate two files", SourceLine=8)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate two files")]
         public virtual void GenerateTwoFiles()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -159,8 +162,9 @@ fileManager.Process();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files uses .txt as default file extension .NET Core needs explicit defin" +
-            "ition of output extension", SourceLine=46)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate files uses .txt as default file extension .NET Core needs explicit defin" +
+            "ition of output extension")]
         public virtual void GenerateFilesUses_TxtAsDefaultFileExtension_NETCoreNeedsExplicitDefinitionOfOutputExtension()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -235,10 +239,9 @@ fileManager.Process();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files ignores output extension .cs and uses .txt as default to avoid \"er" +
-            "ror generation output\" compile errors", Description="    This scenario does not work in Visual Studio 2019 with .NET Core\r\n    *Consid" +
-            "er* to use <#@ output extension=\".txt\" #> for all your T4 Scripts that you creat" +
-            "e with T4.FileManager", SourceLine=84)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate files ignores output extension .cs and uses .txt as default to avoid \"er" +
+            "ror generation output\" compile errors")]
         public virtual void GenerateFilesIgnoresOutputExtension_CsAndUses_TxtAsDefaultToAvoidErrorGenerationOutputCompileErrors()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -274,10 +277,9 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files with DisableTemplateMainOutputFile enabled prevents generation of " +
-            "the t4 main output file (Workaround invalid file extension)", Description="    This scenario does not work in Visual Studio 2019 with .NET Core\r\n    *Workar" +
-            "ound:* If you delete the main output file by hand and the generation environment" +
-            " has no content, the file will not be recreated.", SourceLine=89)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate files with DisableTemplateMainOutputFile enabled prevents generation of " +
+            "the t4 main output file (Workaround invalid file extension)")]
         public virtual void GenerateFilesWithDisableTemplateMainOutputFileEnabledPreventsGenerationOfTheT4MainOutputFileWorkaroundInvalidFileExtension()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -313,7 +315,8 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Format file content based on editor.config with EnableAutoIndent flag", SourceLine=94)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Format file content based on editor.config with EnableAutoIndent flag")]
         public virtual void FormatFileContentBasedOnEditor_ConfigWithEnableAutoIndentFlag()
         {
             string[] tagsOfScenario = ((string[])(null));

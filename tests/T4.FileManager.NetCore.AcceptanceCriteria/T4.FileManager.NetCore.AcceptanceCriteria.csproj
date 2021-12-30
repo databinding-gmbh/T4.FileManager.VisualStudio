@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -77,8 +77,8 @@
     <PackageReference Include="EnvDTE" Version="16.7.30508.193" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="microsoft.net.test.sdk" Version="16.8.3" />
+    <PackageReference Include="SpecFlow.NUnit" Version="3.9.40" />
     <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
-    <PackageReference Include="specrun.specflow" Version="3.9.7" />
     <PackageReference Include="system.drawing.common" Version="5.0.0" />
   </ItemGroup>
 

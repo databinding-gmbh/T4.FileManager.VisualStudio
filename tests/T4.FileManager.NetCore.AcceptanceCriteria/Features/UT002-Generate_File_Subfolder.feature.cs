@@ -19,9 +19,9 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("UT002 Generate File in subfolder", new string[] {
-            "db-7"}, Description="\tAs a developer\r\n\tI can generate code with the T4.FileManager with each class in " +
-        "its own file in a subfolder", SourceFile="Features\\UT002-Generate_File_Subfolder.feature", SourceLine=1)]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("UT002 Generate File in subfolder")]
+    [NUnit.Framework.CategoryAttribute("db-7")]
     public partial class UT002GenerateFileInSubfolderFeature
     {
         
@@ -33,7 +33,7 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features
 #line 1 "UT002-Generate_File_Subfolder.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
+        [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -43,18 +43,19 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
+        [NUnit.Framework.OneTimeTearDownAttribute()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -63,6 +64,7 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -114,7 +116,8 @@ fileManager.Process();
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate T4 files in existing subfolder", SourceLine=39)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate T4 files in existing subfolder")]
         public virtual void GenerateT4FilesInExistingSubfolder()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -162,7 +165,8 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Change output folder in T4 move generated files to new location", SourceLine=46)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Change output folder in T4 move generated files to new location")]
         public virtual void ChangeOutputFolderInT4MoveGeneratedFilesToNewLocation()
         {
             string[] tagsOfScenario = ((string[])(null));

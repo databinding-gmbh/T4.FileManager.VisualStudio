@@ -19,9 +19,9 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("UT009 Generate File with cleanup old File", new string[] {
-            "db-8"}, Description="\tAs a developer\r\n\tI can generate code with the T4.FileManager without taking care" +
-        " of old generated files", SourceFile="Features\\UT009_Generate_File_With_CleanUp_Of_Old_File.feature", SourceLine=1)]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("UT009 Generate File with cleanup old File")]
+    [NUnit.Framework.CategoryAttribute("db-8")]
     public partial class UT009GenerateFileWithCleanupOldFileFeature
     {
         
@@ -33,7 +33,7 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features
 #line 1 "UT009_Generate_File_With_CleanUp_Of_Old_File.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
+        [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -43,18 +43,19 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
+        [NUnit.Framework.OneTimeTearDownAttribute()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -63,6 +64,7 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -118,7 +120,8 @@ fileManager.Process();
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Generate files with clean up of old files (based on *.info.json)", SourceLine=37)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate files with clean up of old files (based on *.info.json)")]
         public virtual void GenerateFilesWithCleanUpOfOldFilesBasedOn_Info_Json()
         {
             string[] tagsOfScenario = ((string[])(null));
