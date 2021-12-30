@@ -38,6 +38,11 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
 
         public void TakeScreenshot(string info = "")
         {
+            if (Directory.Exists("media") == false)
+            {
+                Directory.CreateDirectory("media");
+            }
+
             var filename = @"media\_a" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()) + "_screen.png";
             var img = new ScreenCapture().CaptureScreen();
             img.Save(filename, ImageFormat.Png);

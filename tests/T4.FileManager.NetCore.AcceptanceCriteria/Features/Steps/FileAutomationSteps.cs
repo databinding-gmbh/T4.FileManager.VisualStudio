@@ -1,18 +1,18 @@
-﻿namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+
+using EnvDTE;
+
+using FluentAssertions;
+
+using T4.FileManager.NetCore.AcceptanceCriteria.Features.Dto;
+using T4.FileManager.NetCore.AcceptanceCriteria.Features.Helper;
+
+using TechTalk.SpecFlow;
+
+namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-
-    using EnvDTE;
-
-    using FluentAssertions;
-
-    using T4.FileManager.NetCore.AcceptanceCriteria.Features.Dto;
-    using T4.FileManager.NetCore.AcceptanceCriteria.Features.Helper;
-
-    using TechTalk.SpecFlow;
-
     [Binding]
     public class FileAutomationSteps
     {
@@ -29,7 +29,7 @@
             this.pathTestEnvironment =
                 VisualStudioHelper.GetProjectDirectory("T4.FileManager.NetCore.AcceptanceCriteria");
 
-            var outputdir = Path.Combine(this.pathTestEnvironment, "bin\\debug\\net5.0\\");
+            var outputdir = Path.Combine(this.pathTestEnvironment, "bin\\debug\\net6.0\\");
             var pathSource = Path.Combine(this.pathTestEnvironment, "..\\..\\", "src\\");
 
             var fileManagerFromSource = Path.Combine(pathSource, "T4.FileManager.VisualStudio.ttinclude");
