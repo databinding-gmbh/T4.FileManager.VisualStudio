@@ -1,16 +1,14 @@
-﻿using TechTalk.SpecFlow.Infrastructure;
+﻿using System.Drawing.Imaging;
+using System.IO;
+
+using T4.FileManager.NetCore.AcceptanceCriteria.Features.Helper;
+using T4.FileManager.NetCore.AcceptanceCriteria.Features.Helper.Capture;
+
+using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Infrastructure;
 
 namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
 {
-    using System;
-    using System.Drawing.Imaging;
-    using System.IO;
-
-    using T4.FileManager.NetCore.AcceptanceCriteria.Features.Helper;
-    using T4.FileManager.NetCore.AcceptanceCriteria.Features.Helper.Capture;
-
-    using TechTalk.SpecFlow;
-
     [Binding]
     public class TestSetup
     {
@@ -36,7 +34,6 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
         {
             this.outputHelper.AddAttachment(filename);
             this.outputHelper.WriteLine($" SCREENSHOT[ {filename} ]SCREENSHOT {info}");
-            ////Console.WriteLine($" SCREENSHOT[ {filename} ]SCREENSHOT {info}");
         }
 
         public void TakeScreenshot(string info = "")
