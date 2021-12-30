@@ -124,7 +124,7 @@ this.FeatureBackground();
 <#@ import namespace=""System.Collections.Generic"" #>
 <#@ output extension="".txt"" #>
 
-<#@ include file=""$(TargetDir)\T4.FileManager.VisualStudio.ttinclude"" #>
+<#@ include file=""$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude"" #>
 
 <#
 var files = new string[] { ""PersonDto"", ""OrderDto"" };
@@ -203,7 +203,7 @@ this.FeatureBackground();
 <#@ import namespace=""System.Collections.Generic"" #>
 <#@ output extension="".txt"" #>
 
-<#@ include file=""$(TargetDir)\T4.FileManager.VisualStudio.ttinclude"" #>
+<#@ include file=""$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude"" #>
 
 <#
 var files = new string[] { ""PersonMDto"", ""OrderMDto"" };

@@ -16,7 +16,7 @@ Scenario: Generate T4 files in existing subfolder
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".txt" #>
 
-<#@ include file="$(TargetDir)\T4.FileManager.VisualStudio.ttinclude" #>
+<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
 
 <#
 var files = new string[] { "PersonDto", "OrderDto" };
@@ -54,7 +54,7 @@ Scenario: Change output folder in T4 move generated files to new location
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".txt" #>
 
-<#@ include file="$(TargetDir)\T4.FileManager.VisualStudio.ttinclude" #>
+<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
 
 <#
 var files = new string[] { "PersonMDto", "OrderMDto" };
