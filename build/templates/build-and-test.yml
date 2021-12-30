@@ -16,6 +16,9 @@ parameters:
 - name: TestResult
   type: string
   default: 'TestExecution.json'
+- name: ReportName
+  type: string
+  default: 'report.html'
   
 steps:
 - task: NuGetCommand@2
@@ -52,9 +55,20 @@ steps:
      *.html
      *.png
     TargetFolder: '${{ parameters.StagingDir }}\documentation'
-    
+  
+- task: CopyFiles@2
+  displayName: 'Copy media folder'
+  inputs:
+    SourceFolder: '${{ parameters.OutputPath }}/media'
+    Contents: |
+     *.html
+     *.png
+    TargetFolder: '${{ parameters.StagingDir }}\documentation\media'
+  
 - script: |
-   livingdoc test-assembly ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }} -t ${{ parameters.OutputPath }}\${{ parameters.TestResult }} --output ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }}.html  
+   livingdoc test-assembly ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }} -t ${{ parameters.OutputPath }}\${{ parameters.TestResult }} --output ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }}.html 
+   livingdoc test-assembly ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }} -t ${{ parameters.OutputPath }}\${{ parameters.TestResult }} --output ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }}.json --output-type JSON 
+   livingdocreport -f ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }}.json -r ${{ parameters.ReportName }} -p 'db-'
    
   displayName: 'Build Living doc'
     
