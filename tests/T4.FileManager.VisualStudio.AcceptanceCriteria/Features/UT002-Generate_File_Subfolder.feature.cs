@@ -84,36 +84,6 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
 #line 7
  testRunner.Given("the file manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 8
- testRunner.And("the script \"TestSubfolder.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
-<#@ assembly name=""System.Core"" #>
-<#@ import namespace=""System.Linq"" #>
-<#@ import namespace=""System.Text"" #>
-<#@ import namespace=""System.Collections.Generic"" #>
-<#@ output extension="".txt"" #>
-
-<#@ include file=""$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude"" #>
-
-<#
-var files = new string[] { ""PersonDto"", ""OrderDto"" };
-var fileManager = new T4FileManager(this);
-
-foreach(var itm in files)
-{
-fileManager.CreateNewFile(itm + "".g.cs"","""",""TestSubfolder"");
-#>
-namespace Test.TestSubFolder
-{
-public class <#= itm #>
-{
-}
-}
-<#
-}
-
-fileManager.Generate();
-#>", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
@@ -123,7 +93,7 @@ fileManager.Generate();
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate T4 files in existing subfolder", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 40
+#line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -145,6 +115,36 @@ this.ScenarioInitialize(scenarioInfo);
                 this.ScenarioStart();
 #line 6
 this.FeatureBackground();
+#line hidden
+#line 10
+ testRunner.Given("the script \"TestSubfolder.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
+<#@ assembly name=""System.Core"" #>
+<#@ import namespace=""System.Linq"" #>
+<#@ import namespace=""System.Text"" #>
+<#@ import namespace=""System.Collections.Generic"" #>
+<#@ output extension="".txt"" #>
+
+<#@ include file=""$(TargetDir)\T4.FileManager.VisualStudio.ttinclude"" #>
+
+<#
+var files = new string[] { ""PersonDto"", ""OrderDto"" };
+var fileManager = new T4FileManager(this);
+
+foreach(var itm in files)
+{
+fileManager.StartNewFile(itm + "".g.cs"","""",""TestSubfolder"");
+#>
+namespace Test.TestSubFolder
+{
+public class <#= itm #>
+{
+}
+}
+<#
+}
+
+fileManager.Process();
+#>", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 41
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -172,7 +172,7 @@ this.FeatureBackground();
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Change output folder in T4 move generated files to new location", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 48
+#line 47
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -195,43 +195,73 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 49
+#line 48
+ testRunner.Given("the script \"TestSubfolderMoving.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
+<#@ assembly name=""System.Core"" #>
+<#@ import namespace=""System.Linq"" #>
+<#@ import namespace=""System.Text"" #>
+<#@ import namespace=""System.Collections.Generic"" #>
+<#@ output extension="".txt"" #>
+
+<#@ include file=""$(TargetDir)\T4.FileManager.VisualStudio.ttinclude"" #>
+
+<#
+var files = new string[] { ""PersonMDto"", ""OrderMDto"" };
+var fileManager = new T4FileManager(this);
+
+foreach(var itm in files)
+{
+fileManager.StartNewFile(itm + "".g.cs"","""",""TestSubfolder"");
+#>
+namespace Test.TestSubFolder
+{
+public class <#= itm #>
+{
+}
+}
+<#
+}
+
+fileManager.Process();
+#>", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 79
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "From",
                             "To"});
                 table8.AddRow(new string[] {
-                            "fileManager.CreateNewFile(itm + \".g.cs\",\"\",\"TestSubfolder\");",
-                            "fileManager.CreateNewFile(itm + \".g.cs\",\"\",\"TestSubfolderNew\");"});
-#line 50
+                            "fileManager.StartNewFile(itm + \".g.cs\",\"\",\"TestSubfolder\");",
+                            "fileManager.StartNewFile(itm + \".g.cs\",\"\",\"TestSubfolderNew\");"});
+#line 80
  testRunner.And("I change the line", ((string)(null)), table8, "And ");
 #line hidden
-#line 53
+#line 83
  testRunner.And("I run the script again", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "File",
                             "Folder"});
                 table9.AddRow(new string[] {
-                            "PersonDto.g.cs",
+                            "PersonMDto.g.cs",
                             "TestSubfolderNew"});
                 table9.AddRow(new string[] {
-                            "OrderDto.g.cs",
+                            "OrderMDto.g.cs",
                             "TestSubfolderNew"});
-#line 54
+#line 84
  testRunner.Then("the following files are generated:", ((string)(null)), table9, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "File",
                             "Folder"});
                 table10.AddRow(new string[] {
-                            "PersonDto.g.cs",
+                            "PersonMDto.g.cs",
                             "TestSubfolder"});
                 table10.AddRow(new string[] {
-                            "OrderDto.g.cs",
+                            "OrderMDto.g.cs",
                             "TestSubfolder"});
-#line 58
+#line 88
  testRunner.And("the following files no longer exist:", ((string)(null)), table10, "And ");
 #line hidden
             }

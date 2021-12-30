@@ -5,7 +5,9 @@ Feature: UT002 Generate File in subfolder
 
 Background: T4 File Manager
 	Given the file manager
-	And the script "TestSubfolder.tt" with the following content
+
+Scenario: Generate T4 files in existing subfolder
+	Given the script "TestSubfolder.tt" with the following content
 		"""
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
@@ -14,7 +16,7 @@ Background: T4 File Manager
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".txt" #>
 
-<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
+<#@ include file="$(TargetDir)\T4.FileManager.VisualStudio.ttinclude" #>
 
 <#
 var files = new string[] { "PersonDto", "OrderDto" };
@@ -22,7 +24,7 @@ var fileManager = new T4FileManager(this);
 
 foreach(var itm in files)
 {
-	fileManager.CreateNewFile(itm + ".g.cs","","TestSubfolder");
+	fileManager.StartNewFile(itm + ".g.cs","","TestSubfolder");
 #>
 namespace Test.TestSubFolder
 {
@@ -33,29 +35,57 @@ namespace Test.TestSubFolder
 <#
 }
 
-fileManager.Generate();
+fileManager.Process();
 #>
 		"""
-
-Scenario: Generate T4 files in existing subfolder
 	When I run the script
 	Then the following files are generated:
 		| File           | Folder        |
 		| PersonDto.g.cs | TestSubfolder |
 		| OrderDto.g.cs  | TestSubfolder |
 
-
 Scenario: Change output folder in T4 move generated files to new location
+	Given the script "TestSubfolderMoving.tt" with the following content
+		"""
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+
+<#@ include file="$(TargetDir)\T4.FileManager.VisualStudio.ttinclude" #>
+
+<#
+var files = new string[] { "PersonMDto", "OrderMDto" };
+var fileManager = new T4FileManager(this);
+
+foreach(var itm in files)
+{
+	fileManager.StartNewFile(itm + ".g.cs","","TestSubfolder");
+#>
+namespace Test.TestSubFolder
+{
+	public class <#= itm #>
+	{
+	}
+}
+<#
+}
+
+fileManager.Process();
+#>
+		"""
 	When I run the script
 	And I change the line
-	 | From                                                              | To                                                                   |
-	 | fileManager.CreateNewFile(itm + ".g.cs","","TestSubfolder"); | fileManager.CreateNewFile(itm + ".g.cs","","TestSubfolderNew"); |
+		| From                                                        | To                                                             |
+		| fileManager.StartNewFile(itm + ".g.cs","","TestSubfolder"); | fileManager.StartNewFile(itm + ".g.cs","","TestSubfolderNew"); |
 	And I run the script again
 	Then the following files are generated:
 		| File           | Folder           |
-		| PersonDto.g.cs | TestSubfolderNew |
-		| OrderDto.g.cs  | TestSubfolderNew |
+		| PersonMDto.g.cs | TestSubfolderNew |
+		| OrderMDto.g.cs  | TestSubfolderNew |
 	And the following files no longer exist:
 		| File           | Folder        |
-		| PersonDto.g.cs | TestSubfolder |
-		| OrderDto.g.cs  | TestSubfolder |
+		| PersonMDto.g.cs | TestSubfolder |
+		| OrderMDto.g.cs  | TestSubfolder |
