@@ -35,12 +35,13 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
         public void PrintReportInfo(string filename, string info)
         {
             this.outputHelper.AddAttachment(filename);
-            Console.WriteLine($" SCREENSHOT[ {filename} ]SCREENSHOT {info}");
+            this.outputHelper.WriteLine($" SCREENSHOT[ {filename} ]SCREENSHOT {info}");
+            ////Console.WriteLine($" SCREENSHOT[ {filename} ]SCREENSHOT {info}");
         }
 
         public void TakeScreenshot(string info = "")
         {
-            var filename = "_a" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()) + "_screen.png";
+            var filename = @"media\_a" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()) + "_screen.png";
             var img = new ScreenCapture().CaptureScreen();
             img.Save(filename, ImageFormat.Png);
             this.PrintReportInfo(filename, info);

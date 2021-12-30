@@ -14,6 +14,7 @@
     <Compile Remove="PersonDtoWithGlobal.g.cs" />
     <Compile Remove="PersonDtoWithSA1633.g.cs" />
     <Compile Remove="PersonTxtDto.g.cs" />
+    <Compile Remove="TestMissingFileExtension.cs" />
     <Compile Remove="TestOldFilesCleanUp.g.cs" />
     <Compile Remove="TestOldFilesCleanUpRenamed.g.cs" />
     <Compile Remove="TestOverwrite\TestDelete.g.cs" />
