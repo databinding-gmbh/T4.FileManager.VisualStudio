@@ -154,8 +154,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Features\Steps\FileAutomationSteps.cs" />
     <Compile Include="Features\Steps\TestSetup.cs" />
-    <Compile Include="TestSubfolder\OrderDto.g.cs" />
-    <Compile Include="TestSubfolder\PersonDto.g.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Features\Helper\CleanUpTestoutput.txt">
@@ -163,16 +161,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CleanUpTestoutput.tt</DependentUpon>
     </Content>
-    <Content Include="TestSubfolder.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestSubfolder.txt</LastGenOutput>
-    </Content>
-    <Content Include="TestSubfolder.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestSubfolder.tt</DependentUpon>
-    </Content>
-    <None Include="app.config" />
+     <None Include="app.config" />
     <Content Include="Features\Helper\CleanUpTestoutput19.tt">
       <LastGenOutput>CleanUpTestoutput19.txt</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
