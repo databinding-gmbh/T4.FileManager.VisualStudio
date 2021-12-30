@@ -151,16 +151,6 @@
     <Compile Include="Features\Dto\GeneratedFile.cs" />
     <Compile Include="Features\Hooks\StepTransformation.cs" />
     <Compile Include="Features\Dto\TemplateChanges.cs" />
-    <Compile Include="ProjectTestFP.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProjectTestFP.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectTestTFM.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProjectTestTFM.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Features\Steps\FileAutomationSteps.cs" />
     <Compile Include="Features\Steps\TestSetup.cs" />
@@ -201,16 +191,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CleanUpTestoutput.txt</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ProjectTestFP.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ProjectTestFP.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProjectTestTFM.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ProjectTestTFM.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
