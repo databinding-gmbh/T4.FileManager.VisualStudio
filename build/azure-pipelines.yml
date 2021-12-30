@@ -70,7 +70,7 @@ stages:
         TestDllPattern: '**\*T4.FileManager.AcceptanceCriteria.dll'
         OutputPath: '$(Build.Repository.LocalPath)/tests/T4.FileManager.VisualStudio.AcceptanceCriteria/bin/Debug'
         TestAssembly: 'T4.FileManager.AcceptanceCriteria.dll' 
-        ReportName: 'T4.FileManager.AcceptanceCriteria.html'
+        ReportName: 'T4FileManagerVisualStudio.html'
 
     - template: templates/build-and-test.yml
       parameters:
@@ -81,7 +81,7 @@ stages:
         TestDllPattern: '**\*T4.FileManager.NetCore.AcceptanceCriteria.dll'
         OutputPath: '$(Build.Repository.LocalPath)/tests/T4.FileManager.NetCore.AcceptanceCriteria/bin/Debug/net6.0'
         TestAssembly: 'T4.FileManager.NetCore.AcceptanceCriteria.dll' 
-        ReportName: 'T4.FileManager.NetCore.AcceptanceCriteria.html'
+        ReportName: 'T4FileManagerVisualStudioNETCore.html'
  
     - task: techtalk.techtalk-specflow-plus.specflow-plus.SpecFlowPlus@0
       displayName: 'SpecFlow+ Living Doc'
