@@ -11,6 +11,7 @@ Please explain what is wrong with the T4.FileManager.
 
 
 **Your environment**
+Version of T4.FileManager:
 Version of .Net: 
 Version of Visual Studio:
 Operating System: 
