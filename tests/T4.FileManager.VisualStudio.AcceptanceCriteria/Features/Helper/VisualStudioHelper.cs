@@ -83,7 +83,7 @@
                 var item = Dte.Solution.FindProjectItem(name);
                 if (item != null)
                 {
-                    customTool = item.Properties.Item("CustomTool").Value;
+                    customTool = item.Properties.Item("CustomTool").Value.ToString();
                 }
             });
 
