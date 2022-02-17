@@ -23,9 +23,6 @@ stages:
   
     - task: gitversion/execute@0
       displayName: GitVersion 
-      inputs:
-        useConfigFile: true
-        configFilePath: 'GitVersion.yml'
 
     - script: echo current version is $(SemVer)
       displayName: 'Display calculated version' 
