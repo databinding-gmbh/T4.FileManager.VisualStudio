@@ -16,21 +16,30 @@ stages:
   jobs:
   - job:
     steps:
-    - task: GitVersion@5
+    - task: gitversion/setup@0
+      displayName: Setup GitVersion
       inputs:
-        mode: Mainline
-      displayName: Run GitVersion task
+        versionSpec: '5.x'
   
+    - task: gitversion/execute@0
+      displayName: GitVersion 
+      inputs:
+        useConfigFile: true
+        configFilePath: 'GitVersion.yml'
+
+    - script: echo current version is $(SemVer)
+      displayName: 'Display calculated version' 
+
     - script: echo %Action%%BuildVersion%
-      displayName: Set build version
       env:
         Action: '##vso[build.updatebuildnumber]'
-        BuildVersion: $(GitVersion.SemVer)
+        BuildVersion: $(SemVer)
+      displayName: Set build version
 
     - powershell: |
        New-Item mkdocs.yml -Force
              Add-Content -path mkdocs.yml "
-             site_name: T4.FileManager.VisualStudio Documentation $(GitVersion.SemVer)
+             site_name: T4.FileManager.VisualStudio Documentation $(SemVer)
              site_description: 'Manager for generating multiple files with T4 text templates.'
              site_author: 'databinding gmbh'
              docs_dir: docs/
@@ -120,8 +129,8 @@ stages:
       - task: GitTag@5
         inputs:
           workingdir: '$(SYSTEM.DEFAULTWORKINGDIRECTORY)'
-          tag: '$(GitVersion.AssemblySemVer)'
-          tagMessage: '$(GitVersion.AssemblySemVer)'
+          tag: '$(AssemblySemVer)'
+          tagMessage: '$(AssemblySemVer)'
           useLightweightTags: true
      
 - stage: DEPLOY_GITHUB_PAGES
