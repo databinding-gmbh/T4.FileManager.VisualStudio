@@ -144,14 +144,15 @@ stages:
         patterns: 'documentation/**/*'
         path: 'documentation'
 
-    - task: AccidentalFish.githubpages-publish.AccidentalFish.GitHubPages-Publish.GitHubPagesPublish@1
-      displayName: 'Publishes to GitHub Pages'
+    - task: GitHubPagesPublish@1
       inputs:
         docPath: 'documentation\documentation\*'
         githubusername: '$(username)'
         githubemail: '$(email)'
         githubaccesstoken: '$(pat)'
-        repositoryname: $(repo)
+        repositoryname: '$(repo)'
+        branchname: 'gh-pages'
+        commitmessage: 'Documentation Release $(Build.Number)'
 
 - stage: DEPLOY_TEST
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
