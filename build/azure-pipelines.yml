@@ -152,7 +152,7 @@ stages:
         githubaccesstoken: '$(pat)'
         repositoryname: '$(repo)'
         branchname: 'gh-pages'
-        commitmessage: 'Documentation Release $(Build.Number)'
+        commitmessage: 'Documentation Release $(Build.BuildNumber)'
 
 - stage: DEPLOY_TEST
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
