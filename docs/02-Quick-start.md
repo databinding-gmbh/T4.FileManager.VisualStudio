@@ -31,16 +31,17 @@ Add the following code to the top of the file:
 
 With those 4 steps can you use the T4.FileManager to generate code into different files:
 
-1. [Include T4.FileManager.VisualStudio.ttinclude in your template](02-Quick-start.md#include-in-your-text-template)
-2. [Instantiate T4FileManager](04-Create-instance.md)
-3. [Start a new file with the CreateNewFile() method](05-Start-or-create-file.md)
-4. [Close the file and generate it with the Generate() method](07-Proceed-to-generate-files.md)
+1. Set hostspecific="true" in your template
+2. [Include T4.FileManager.VisualStudio.ttinclude in your template](02-Quick-start.md#include-in-your-text-template)
+3. [Instantiate T4FileManager](04-Create-instance.md)
+4. [Start a new file with the CreateNewFile() method](05-Start-or-create-file.md)
+5. [Close the file and generate it with the Generate() method](07-Proceed-to-generate-files.md)
 
 
 The 4 parts are marked in this T4 template:
 
 
-``` csharp hl_lines="8 13 17 27"
+``` csharp hl_lines="1 8 13 17 27"
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
