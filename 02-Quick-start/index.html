@@ -514,14 +514,15 @@
 <h2 id="extend-your-t4-template">Extend your T4 template</h2>
 <p>With those 4 steps can you use the T4.FileManager to generate code into different files:</p>
 <ol>
+<li>Set hostspecific="true" in your template</li>
 <li><a href="./#include-in-your-text-template">Include T4.FileManager.VisualStudio.ttinclude in your template</a></li>
 <li><a href="../04-Create-instance/">Instantiate T4FileManager</a></li>
 <li><a href="../05-Start-or-create-file/">Start a new file with the CreateNewFile() method</a></li>
 <li><a href="../07-Proceed-to-generate-files/">Close the file and generate it with the Generate() method</a></li>
 </ol>
 <p>The 4 parts are marked in this T4 template:</p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="err">#@</span> <span class="n">template</span> <span class="n">debug</span><span class="p">=</span><span class="s">&quot;false&quot;</span> <span class="n">hostspecific</span><span class="p">=</span><span class="s">&quot;true&quot;</span> <span class="n">language</span><span class="p">=</span><span class="s">&quot;C#&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="err">#@</span> <span class="n">assembly</span> <span class="n">name</span><span class="p">=</span><span class="s">&quot;System.Core&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="p">&lt;</span><span class="err">#@</span> <span class="n">template</span> <span class="n">debug</span><span class="p">=</span><span class="s">&quot;false&quot;</span> <span class="n">hostspecific</span><span class="p">=</span><span class="s">&quot;true&quot;</span> <span class="n">language</span><span class="p">=</span><span class="s">&quot;C#&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
+</span><span class="p">&lt;</span><span class="err">#@</span> <span class="n">assembly</span> <span class="n">name</span><span class="p">=</span><span class="s">&quot;System.Core&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="err">#@</span> <span class="n">import</span> <span class="n">namespace</span><span class="p">=</span><span class="s">&quot;System.Linq&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="err">#@</span> <span class="n">import</span> <span class="n">namespace</span><span class="p">=</span><span class="s">&quot;System.Text&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="err">#@</span> <span class="n">import</span> <span class="n">namespace</span><span class="p">=</span><span class="s">&quot;System.Collections.Generic&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
