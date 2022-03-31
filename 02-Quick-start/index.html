@@ -248,15 +248,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#net-core-net-standard-net-5-net-6" class="md-nav__link">
-    .NET Core, .NET Standard, NET 5, NET 6
+  <a href="#net-core-net-standard-net-5-net-6-nuget-with-packagereference" class="md-nav__link">
+    .NET Core, .NET Standard, NET 5, NET 6 (NuGet with PackageReference)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#net-framework" class="md-nav__link">
-    .NET Framework
+  <a href="#net-framework-nuget-with-packagesconfig" class="md-nav__link">
+    .NET Framework (NuGet with packages.config)
   </a>
   
 </li>
@@ -436,15 +436,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#net-core-net-standard-net-5-net-6" class="md-nav__link">
-    .NET Core, .NET Standard, NET 5, NET 6
+  <a href="#net-core-net-standard-net-5-net-6-nuget-with-packagereference" class="md-nav__link">
+    .NET Core, .NET Standard, NET 5, NET 6 (NuGet with PackageReference)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#net-framework" class="md-nav__link">
-    .NET Framework
+  <a href="#net-framework-nuget-with-packagesconfig" class="md-nav__link">
+    .NET Framework (NuGet with packages.config)
   </a>
   
 </li>
@@ -499,13 +499,13 @@
 <p>After you installed T4.FileManager into your project, you can dive right into your T4 template. A more thorough explanation follows in the next pages. </p>
 <h2 id="include-in-your-text-template">Include in your text template</h2>
 <p>Open your text template (*.tt) or create a new one.</p>
-<h3 id="net-core-net-standard-net-5-net-6">.NET Core, .NET Standard, NET 5, NET 6</h3>
+<h3 id="net-core-net-standard-net-5-net-6-nuget-with-packagereference">.NET Core, .NET Standard, NET 5, NET 6 (NuGet with PackageReference)</h3>
 <p>The File Manger will be linked to the NuGet system folder. You can compile your project and then reference it using <strong>$(TargetDir)</strong> in your template.</p>
 <p>Add the following code to the top of the file:</p>
 <div class="highlight"><pre><span></span><code>&lt;#@ include file=&quot;$(TargetDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
 </code></pre></div>
 
-<h3 id="net-framework">.NET Framework</h3>
+<h3 id="net-framework-nuget-with-packagesconfig">.NET Framework (NuGet with packages.config)</h3>
 <p>The File Manager will be copied to the Project root. You can reference it using <strong>$(ProjectDir)</strong> in your template.</p>
 <p>Add the following code to the top of the file:</p>
 <div class="highlight"><pre><span></span><code>&lt;#@ include file=&quot;$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude&quot; #&gt;
