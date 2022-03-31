@@ -56,7 +56,6 @@ These tests are located in the project  `T4.FileManager.VisualStudio.AcceptanceC
 
 - René Leupold - *initial work*
 - Johnny Graber
-- Thierry Iseli - *Consolidation of [T4.TemplateFileManager](https://github.com/renegadexx/T4.Helper)*
 
 ## How to Contribute
 
