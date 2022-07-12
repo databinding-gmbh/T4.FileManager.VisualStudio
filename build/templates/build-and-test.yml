@@ -19,6 +19,9 @@ parameters:
 - name: ReportName
   type: string
   default: 'report.html'
+- name: BuildNumber
+  type: string
+  default: '-'
   
 steps:
 - task: NuGetCommand@2
@@ -68,7 +71,7 @@ steps:
 - script: |
    livingdoc test-assembly ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }} -t ${{ parameters.OutputPath }}\${{ parameters.TestResult }} --output ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }}.html 
    livingdoc test-assembly ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }} -t ${{ parameters.OutputPath }}\${{ parameters.TestResult }} --output ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }}.json --output-type JSON 
-   livingdocreport -f ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }}.json -r ${{ parameters.OutputPath }}\${{ parameters.ReportName }} -p db- -t https://dev.azure.com/databinding/_workitems/edit/{0}/ -l en
+   livingdocreport -f ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }}.json -r ${{ parameters.OutputPath }}\${{ parameters.ReportName }} -p db- -t https://dev.azure.com/databinding/_workitems/edit/{0}/ -l en -b ${{ parameters.BuildNumber }} 
    
   displayName: 'Build Living doc'
     
