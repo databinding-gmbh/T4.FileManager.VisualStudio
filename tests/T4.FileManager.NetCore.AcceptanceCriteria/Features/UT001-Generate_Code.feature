@@ -139,3 +139,73 @@ fileManager.Process();
 		    }
 		}
 		"""
+
+
+Scenario: Generate file with default encoding
+Given the script "TestDefaultEncoding.tt" with the following content
+		"""
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+
+<#@ include file="$(TargetDir)\T4.FileManager.VisualStudio.ttinclude" #>
+
+<#
+var files = new string[] { "FileDefaultEncoding" };
+var fileManager = T4FileManager.Create(this);
+foreach(var itm in files)
+{
+	fileManager.StartNewFile(itm + ".g.cs", "","");
+#>
+namespace Test
+{
+  public partial class <#= itm #>
+  {
+     public int Id {get; set;}
+  }
+}
+<#
+}
+fileManager.Process();
+#>
+		"""
+	When I run the script
+    Then the file "FileDefaultEncoding.g.cs" is encoded in "UTF-8"
+
+
+Scenario: Generate file with Unicode encoding
+Given the script "TestUTF16Encoding.tt" with the following content
+		"""
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+
+<#@ include file="$(TargetDir)\T4.FileManager.VisualStudio.ttinclude" #>
+
+<#
+var files = new string[] { "TestUTF16Encoding" };
+var fileManager = T4FileManager.Create(this).EnableLog().SetOutputFileEncoding(Encoding.Unicode); // <=== Set encoding for output file
+foreach(var itm in files)
+{
+	fileManager.StartNewFile(itm + ".g.cs", "","");
+#>
+namespace Test
+{
+  public partial class <#= itm #>
+  {
+     public int Id {get; set;}
+  }
+}
+<#
+}
+fileManager.Process();
+#>
+		"""
+	When I run the script
+    Then the file "TestUTF16Encoding.g.cs" is encoded in "UTF-16"

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="FileDefaultEncoding.g.cs" />
     <Compile Remove="FileFormat.g.cs" />
     <Compile Remove="OrderDto.g.cs" />
     <Compile Remove="OrderDtoWithGlobal.g.cs" />
@@ -30,6 +31,7 @@
     <Compile Remove="TestSubfolder\OrderMDto.g.cs" />
     <Compile Remove="TestSubfolder\PersonDto.g.cs" />
     <Compile Remove="TestSubfolder\PersonMDto.g.cs" />
+    <Compile Remove="TestUTF16Encoding.g.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +44,9 @@
     <None Remove="TestAutoIndent.info.json" />
     <None Remove="TestAutoIndent.tt" />
     <None Remove="TestAutoIndent.txt" />
+    <None Remove="TestDefaultEncoding.info.json" />
+    <None Remove="TestDefaultEncoding.tt" />
+    <None Remove="TestDefaultEncoding.txt" />
     <None Remove="TestDelete.info.json" />
     <None Remove="TestDelete.tt" />
     <None Remove="TestDelete.txt" />
@@ -72,6 +77,9 @@
     <None Remove="TestSubfolderMoving.info.json" />
     <None Remove="TestSubfolderMoving.tt" />
     <None Remove="TestSubfolderMoving.txt" />
+    <None Remove="TestUTF16Encoding.info.json" />
+    <None Remove="TestUTF16Encoding.tt" />
+    <None Remove="TestUTF16Encoding.txt" />
     <None Remove="TestWithCustomLog.info.json" />
     <None Remove="TestWithCustomLog.tt" />
     <None Remove="TestWithCustomLog.txt" />

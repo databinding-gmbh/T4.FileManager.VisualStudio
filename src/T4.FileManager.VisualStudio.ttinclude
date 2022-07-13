@@ -86,6 +86,12 @@
         public bool IsAutoCleanUpWithResharperEnabled = false;
 
         /// <summary>
+	    /// Defines Encoding format for generated output file. (Default UTF8)
+	    /// </summary>
+	    /// <returns></returns>
+	    public System.Text.Encoding Encoding { get; set; } = System.Text.Encoding.UTF8;
+
+        /// <summary>
         /// Constructor for the instantiation of the FileManager.
         /// </summary>
         /// <param name="textTransformation">Code to generate as <see cref="GeneratedTextTransformation"/>.</param>
@@ -139,6 +145,13 @@
         {
             this.logger.Information("CanOverwriteExistingFile is disabled (false)");
             this.CanOverwriteExistingFile = false;
+            return this;
+        }
+
+        public T4FileManager SetOutputFileEncoding(System.Text.Encoding encoding)
+        {
+            this.logger.Information("Encoding is set to " + encoding.HeaderName);
+            this.Encoding = encoding;
             return this;
         }
 
@@ -410,7 +423,7 @@
 
             if ((canOverwriteExistingFile && this.CanOverwriteExistingFile) || !File.Exists(filePath))
             {
-                File.WriteAllText(Path.Combine(fileToGenerate.AbsolutePath, fileToGenerate.Filename), fileToGenerate.Content);
+                File.WriteAllText(Path.Combine(fileToGenerate.AbsolutePath, fileToGenerate.Filename), fileToGenerate.Content, this.Encoding);
             }
         }
 

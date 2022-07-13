@@ -144,5 +144,15 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
                 testee.Should().Contain(expected.Textfragment);
             }
         }
+
+        [Then(@"the file ""([^""]*)"" is encoded in ""([^""]*)""")]
+        public void ThenTheFileIsEncodedIn(string file, string expectedEncdingString)
+        {
+            var path = Path.Combine(this.targetTestPath, file);
+            var expectedEncoding = FileEncodingHelper.ConvertStringToEncoding(expectedEncdingString);
+            var actualEncoding = FileEncodingHelper.GetEncoding(path);
+
+            actualEncoding.HeaderName.Should().Be(expectedEncoding.HeaderName);
+        }
     }
 }
