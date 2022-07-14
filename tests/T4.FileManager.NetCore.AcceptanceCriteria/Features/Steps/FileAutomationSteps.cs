@@ -146,10 +146,10 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
         }
 
         [Then(@"the file ""([^""]*)"" is encoded in ""([^""]*)""")]
-        public void ThenTheFileIsEncodedIn(string file, string expectedEncdingString)
+        public void ThenTheFileIsEncodedIn(string file, string expectedEncodingString)
         {
             var path = Path.Combine(this.targetTestPath, file);
-            var expectedEncoding = FileEncodingHelper.ConvertStringToEncoding(expectedEncdingString);
+            var expectedEncoding = FileEncodingHelper.ConvertStringToEncoding(expectedEncodingString);
             var actualEncoding = FileEncodingHelper.GetEncoding(path);
 
             actualEncoding.HeaderName.Should().Be(expectedEncoding.HeaderName);

@@ -89,7 +89,7 @@
 	    /// Defines Encoding format for generated output file. (Default UTF8)
 	    /// </summary>
 	    /// <returns></returns>
-	    public System.Text.Encoding Encoding { get; set; } = System.Text.Encoding.UTF8;
+	    public System.Text.Encoding Encoding = System.Text.Encoding.UTF8;
 
         /// <summary>
         /// Constructor for the instantiation of the FileManager.
