@@ -294,6 +294,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#set-encoding-for-generated-files" class="md-nav__link">
+    Set encoding for generated files
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -393,6 +400,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#set-encoding-for-generated-files" class="md-nav__link">
+    Set encoding for generated files
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -422,6 +436,15 @@
 <p>By default T4.FileManager only overwrites files it generated before. If you want to prevent that from happening, you can set the <em>CanOverwriteExistingFile</em> property to false:</p>
 <div class="highlight"><pre><span></span><code>fileManager.CanOverwriteExistingFile = true; // default
 fileManager.CanOverwriteExistingFile = false;
+</code></pre></div>
+
+<h2 id="set-encoding-for-generated-files">Set encoding for generated files</h2>
+<p>By default file encode is UTF-8. If you want change it, you can set the <strong>Encoding</strong> property</p>
+<div class="highlight"><pre><span></span><code>fileManager.Encoding = Encoding.Unicode;
+</code></pre></div>
+
+<p>Alternatively, the setting can be made with the instantiation</p>
+<div class="highlight"><pre><span></span><code>var fileManager = T4FileManager.Create(this).SetOutputFileEncoding(Encoding.Unicode);
 </code></pre></div>
                 
               
