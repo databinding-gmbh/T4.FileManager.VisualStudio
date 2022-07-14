@@ -138,5 +138,15 @@
                 testee.Should().Contain(expected.Textfragment);
             }
         }
+
+        [Then(@"the file ""([^""]*)"" is encoded in ""([^""]*)""")]
+        public void ThenTheFileIsEncodedIn(string file, string expectedEncodingString)
+        {
+            var path = Path.Combine(this.targetTestPath, file);
+            var expectedEncoding = FileEncodingHelper.ConvertStringToEncoding(expectedEncodingString);
+            var actualEncoding = FileEncodingHelper.GetEncoding(path);
+
+            actualEncoding.HeaderName.Should().Be(expectedEncoding.HeaderName);
+        }
     }
 }

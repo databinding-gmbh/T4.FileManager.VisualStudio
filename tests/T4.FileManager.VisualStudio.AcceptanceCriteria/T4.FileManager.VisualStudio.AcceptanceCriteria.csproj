@@ -163,6 +163,7 @@
     <Compile Include="Features\Helper\Capture\GDI32.cs" />
     <Compile Include="Features\Helper\Capture\User32.cs" />
     <Compile Include="Features\Helper\DteUtil.cs" />
+    <Compile Include="Features\Helper\FileEncodingHelper.cs" />
     <Compile Include="Features\Helper\RetryUtil.cs" />
     <Compile Include="Features\Helper\Capture\ScreenCapture.cs" />
     <Compile Include="Features\Helper\VisualStudioHelper.cs" />
