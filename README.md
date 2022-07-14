@@ -50,7 +50,7 @@ The execution of the generation remains on the original [T4 Text Templates](http
 ## Testing
 
 There are some user story oriented [SpecFlow tests](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/T4FileManagerVisualStudio.html) for ensuring that the FileManager is working as expected.
-Tests for NET Framework are located in the project  `T4.FileManager.VisualStudio.AcceptanceCriteria` and for NET 5+ in the project `T4.FileManager.NetCore.AcceptanceCriteria`.
+Tests for NET Framework are located in the project **T4.FileManager.VisualStudio.AcceptanceCriteria** and for NET 5+ in **T4.FileManager.NetCore.AcceptanceCriteria**.
 
 ## Authors
 

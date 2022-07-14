@@ -15,3 +15,16 @@ fileManager.CanOverwriteExistingFile = true; // default
 fileManager.CanOverwriteExistingFile = false;
 ```
 
+## Set encoding for generated files
+
+By default file encode is UTF-8. If you want change it, you can set the **Encoding** property
+
+```
+fileManager.Encoding = Encoding.Unicode;
+```
+
+Alternatively, the setting can be made with the instantiation
+
+```
+var fileManager = T4FileManager.Create(this).SetOutputFileEncoding(Encoding.Unicode);
+```
