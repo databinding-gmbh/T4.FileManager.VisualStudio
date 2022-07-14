@@ -9,19 +9,22 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Helper
 {
     public static class FileEncodingHelper
     {
+        private static Dictionary<string, Encoding> encodingDictionary = new Dictionary<string, Encoding>
+        {
+            { "ascii", Encoding.ASCII },
+            { "utf-8", Encoding.UTF8 },
+            { "utf-16", Encoding.Unicode },
+            { "unicode", Encoding.Unicode },
+            { "utf-16be", Encoding.BigEndianUnicode }
+        };
+
         public static Encoding ConvertStringToEncoding(string encodeText)
         {
-            var dict = new Dictionary<string, Encoding>();
-            dict.Add("ascii", Encoding.ASCII);
-            dict.Add("utf-8", Encoding.UTF8);
-            dict.Add("utf-16", Encoding.Unicode);
-            dict.Add("unicode", Encoding.Unicode);
-
             var key = encodeText.ToLower();
 
-            if (dict.ContainsKey(key))
+            if (encodingDictionary.ContainsKey(key))
             {
-                return dict[key];
+                return encodingDictionary[key];
             }
 
             throw new ArgumentException("Encoding not found in dictionary");

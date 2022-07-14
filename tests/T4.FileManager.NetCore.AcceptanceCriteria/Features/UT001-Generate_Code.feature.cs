@@ -526,6 +526,69 @@ fileManager.Process();
             }
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate file with simular UCS-2 encoding")]
+        public virtual void GenerateFileWithSimularUCS_2Encoding()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate file with simular UCS-2 encoding", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 214
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 215
+    testRunner.Given("the script \"TestBigEndianEncoding.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
+<#@ assembly name=""System.Core"" #>
+<#@ import namespace=""System.Linq"" #>
+<#@ import namespace=""System.Text"" #>
+<#@ import namespace=""System.Collections.Generic"" #>
+<#@ output extension="".txt"" #>
+
+<#@ include file=""$(TargetDir)\T4.FileManager.VisualStudio.ttinclude"" #>
+
+<#
+var files = new string[] { ""TesBigEndianEncoding"" };
+var fileManager = T4FileManager.Create(this).EnableLog().SetOutputFileEncoding(Encoding.BigEndianUnicode);
+foreach(var itm in files)
+{
+fileManager.StartNewFile(itm + "".g.sql"", """","""");
+#>
+SELECT 'öäüé' <#=itm#>
+<#
+}
+fileManager.Process();
+#>", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 239
+ testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 240
+    testRunner.Then("the file \"TesBigEndianEncoding.g.sql\" is encoded in \"UTF-16BE\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

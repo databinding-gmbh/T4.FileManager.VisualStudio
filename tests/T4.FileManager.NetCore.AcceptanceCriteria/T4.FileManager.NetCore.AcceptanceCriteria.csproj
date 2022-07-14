@@ -44,6 +44,9 @@
     <None Remove="TestAutoIndent.info.json" />
     <None Remove="TestAutoIndent.tt" />
     <None Remove="TestAutoIndent.txt" />
+    <None Remove="TestBigEndianEncoding.info.json" />
+    <None Remove="TestBigEndianEncoding.tt" />
+    <None Remove="TestBigEndianEncoding.txt" />
     <None Remove="TestDefaultEncoding.info.json" />
     <None Remove="TestDefaultEncoding.tt" />
     <None Remove="TestDefaultEncoding.txt" />

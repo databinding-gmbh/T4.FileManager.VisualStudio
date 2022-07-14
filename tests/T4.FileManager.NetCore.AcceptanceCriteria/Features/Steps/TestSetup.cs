@@ -27,7 +27,7 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
         {
             VisualStudioHelper.CleanupFiles(
                 new[] { "T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject", "T4.FileManager.NetCore.AcceptanceCriteria" },
-                new[] { ".tt", ".g.cs", ".g1.cs", ".info.json", ".txt", ".ttinclude", "*.Designer.cs", "*.resx" });
+                new[] { ".tt", ".g.cs", ".g.sql", ".g1.cs", ".info.json", ".txt", ".ttinclude", "*.Designer.cs", "*.resx" });
         }
 
         public void PrintReportInfo(string filename, string info)

@@ -209,3 +209,32 @@ fileManager.Process();
 		"""
 	When I run the script
     Then the file "TestUTF16Encoding.g.cs" is encoded in "UTF-16"
+
+
+Scenario: Generate file with simular UCS-2 encoding
+    Given the script "TestBigEndianEncoding.tt" with the following content
+		"""
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+
+<#@ include file="$(TargetDir)\T4.FileManager.VisualStudio.ttinclude" #>
+
+<#
+var files = new string[] { "TesBigEndianEncoding" };
+var fileManager = T4FileManager.Create(this).EnableLog().SetOutputFileEncoding(Encoding.BigEndianUnicode);
+foreach(var itm in files)
+{
+	fileManager.StartNewFile(itm + ".g.sql", "","");
+#>
+SELECT 'öäüé' <#=itm#>
+<#
+}
+fileManager.Process();
+#>
+		"""
+	When I run the script
+    Then the file "TesBigEndianEncoding.g.sql" is encoded in "UTF-16BE"
