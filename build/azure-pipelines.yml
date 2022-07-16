@@ -105,6 +105,11 @@ stages:
         Contents: '*.ps1'
         TargetFolder: '$(Build.ArtifactStagingDirectory)/nuget'
 
+    - powershell: |
+        $readMe = 'README.md'
+        (Get-Content $readMe | Select-Object -Skip 3) | Set-Content $readMe
+      displayName: 'Remove readme.md logo to avoid nuget.org html encoding'
+
     - task: NuGetCommand@2
       displayName: 'NuGet pack'
       inputs:
