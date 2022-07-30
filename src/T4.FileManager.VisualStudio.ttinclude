@@ -673,7 +673,10 @@
 
             for (int i = 0; i < list.Count; i++)
             {
-                list.AddRange(list[i].ProjectItems.Cast<ProjectItem>().Select(x => x.SubProject).OfType<Project>());
+                if (list[i].ProjectItems != null)
+                {
+                    list.AddRange(list[i].ProjectItems.Cast<ProjectItem>().Select(x => x.SubProject).OfType<Project>());
+                }
             }
 
             foreach (Project project in list)
