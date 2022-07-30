@@ -1,26 +1,42 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30804.86
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T4.FileManager.NetCore.AcceptanceCriteria", "tests\T4.FileManager.NetCore.AcceptanceCriteria\T4.FileManager.NetCore.AcceptanceCriteria.csproj", "{0E22BA1B-118C-4FBB-86C4-9783CA09E878}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject", "tests\T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject\T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject.csproj", "{8B5F1B99-5EF2-4B7E-ACB4-344393CF6F79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject", "tests\T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject\T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject.csproj", "{8B5F1B99-5EF2-4B7E-ACB4-344393CF6F79}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "T4.FileManager.NetCore.AcceptanceCriteria.SetupProjectTest", "tests\T4.FileManager.NetCore.AcceptanceCriteria.SetupProjectTest\T4.FileManager.NetCore.AcceptanceCriteria.SetupProjectTest.vdproj", "{6B509C16-EBCD-4AFE-B723-74BF79D3B510}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0E22BA1B-118C-4FBB-86C4-9783CA09E878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0E22BA1B-118C-4FBB-86C4-9783CA09E878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E22BA1B-118C-4FBB-86C4-9783CA09E878}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0E22BA1B-118C-4FBB-86C4-9783CA09E878}.Debug|x86.Build.0 = Debug|Any CPU
 		{0E22BA1B-118C-4FBB-86C4-9783CA09E878}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E22BA1B-118C-4FBB-86C4-9783CA09E878}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E22BA1B-118C-4FBB-86C4-9783CA09E878}.Release|x86.ActiveCfg = Release|Any CPU
+		{0E22BA1B-118C-4FBB-86C4-9783CA09E878}.Release|x86.Build.0 = Release|Any CPU
 		{8B5F1B99-5EF2-4B7E-ACB4-344393CF6F79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B5F1B99-5EF2-4B7E-ACB4-344393CF6F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B5F1B99-5EF2-4B7E-ACB4-344393CF6F79}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B5F1B99-5EF2-4B7E-ACB4-344393CF6F79}.Debug|x86.Build.0 = Debug|Any CPU
 		{8B5F1B99-5EF2-4B7E-ACB4-344393CF6F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B5F1B99-5EF2-4B7E-ACB4-344393CF6F79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B5F1B99-5EF2-4B7E-ACB4-344393CF6F79}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B5F1B99-5EF2-4B7E-ACB4-344393CF6F79}.Release|x86.Build.0 = Release|Any CPU
+		{6B509C16-EBCD-4AFE-B723-74BF79D3B510}.Debug|Any CPU.ActiveCfg = Debug
+		{6B509C16-EBCD-4AFE-B723-74BF79D3B510}.Debug|x86.ActiveCfg = Debug
+		{6B509C16-EBCD-4AFE-B723-74BF79D3B510}.Release|Any CPU.ActiveCfg = Release
+		{6B509C16-EBCD-4AFE-B723-74BF79D3B510}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

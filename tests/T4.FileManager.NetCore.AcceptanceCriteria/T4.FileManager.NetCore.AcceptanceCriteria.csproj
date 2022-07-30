@@ -38,6 +38,7 @@
     <None Remove="ProjectTestFP.info.json" />
     <None Remove="ProjectTestFP.tt" />
     <None Remove="ProjectTestFP.txt" />
+    <None Remove="TesBigEndianEncoding.g.sql" />
     <None Remove="Test.info.json" />
     <None Remove="Test.tt" />
     <None Remove="Test.txt" />
