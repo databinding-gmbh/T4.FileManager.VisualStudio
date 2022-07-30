@@ -111,12 +111,12 @@ fileManager.Process();
 #line 33
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "File"});
-            table10.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "TestOldFilesCleanUp.g.cs"});
 #line 34
- testRunner.Then("the following files are generated:", ((string)(null)), table10, "Then ");
+ testRunner.Then("the following files are generated:", ((string)(null)), table11, "Then ");
 #line hidden
         }
         
@@ -150,31 +150,31 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "From",
                             "To"});
-                table11.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "fileManager.StartNewFile(\"TestOldFilesCleanUp.g.cs\",\"\",\"\");",
                             "fileManager.StartNewFile(\"TestOldFilesCleanUpRenamed.g.cs\",\"\",\"\");"});
 #line 39
- testRunner.Given("I change the line", ((string)(null)), table11, "Given ");
+ testRunner.Given("I change the line", ((string)(null)), table12, "Given ");
 #line hidden
 #line 42
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
-                            "File"});
-                table12.AddRow(new string[] {
-                            "TestOldFilesCleanUp.g.cs"});
-#line 43
- testRunner.Then("the following files are cleaned up:", ((string)(null)), table12, "Then ");
-#line hidden
                 TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
                 table13.AddRow(new string[] {
+                            "TestOldFilesCleanUp.g.cs"});
+#line 43
+ testRunner.Then("the following files are cleaned up:", ((string)(null)), table13, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                            "File"});
+                table14.AddRow(new string[] {
                             "TestOldFilesCleanUpRenamed.g.cs"});
 #line 46
- testRunner.And("the following files are generated:", ((string)(null)), table13, "And ");
+ testRunner.And("the following files are generated:", ((string)(null)), table14, "And ");
 #line hidden
             }
             this.ScenarioCleanup();

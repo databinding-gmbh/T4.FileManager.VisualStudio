@@ -145,50 +145,50 @@ this.FeatureBackground();
 #line 37
  testRunner.Given("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                             "File",
                             "Folder"});
-                table20.AddRow(new string[] {
+                table21.AddRow(new string[] {
                             "TestDelete.g.cs",
                             "TestOverwrite"});
 #line 38
- testRunner.And("the following files are generated:", ((string)(null)), table20, "And ");
+ testRunner.And("the following files are generated:", ((string)(null)), table21, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                             "From",
                             "To"});
-                table21.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "T4FileManager.Create(this).DisableOverwriteExistingFile();",
                             "T4FileManager.Create(this);"});
-                table21.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "fileManager.StartNewFile(\"TestDelete.g.cs\",\"\",\"TestOverwrite\");",
                             "fileManager.StartNewFile(\"TestNoDelete3.g.cs\",\"\",\"TestOverwrite\");"});
-                table21.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "public class TestDelete",
                             "public class NewTestDeleteModel"});
 #line 41
- testRunner.And("I change the line", ((string)(null)), table21, "And ");
+ testRunner.And("I change the line", ((string)(null)), table22, "And ");
 #line hidden
 #line 46
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-                TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
-                            "File",
-                            "Folder"});
-                table22.AddRow(new string[] {
-                            "TestNoDelete3.g.cs",
-                            "TestOverwrite"});
-#line 47
- testRunner.Then("the following files are generated:", ((string)(null)), table22, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
                             "File",
                             "Folder"});
                 table23.AddRow(new string[] {
+                            "TestNoDelete3.g.cs",
+                            "TestOverwrite"});
+#line 47
+ testRunner.Then("the following files are generated:", ((string)(null)), table23, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+                            "File",
+                            "Folder"});
+                table24.AddRow(new string[] {
                             "TestDelete.g.cs",
                             "TestOverwrite"});
 #line 50
- testRunner.And("the following files are cleaned up:", ((string)(null)), table23, "And ");
+ testRunner.And("the following files are cleaned up:", ((string)(null)), table24, "And ");
 #line hidden
             }
             this.ScenarioCleanup();

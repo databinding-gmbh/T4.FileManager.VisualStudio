@@ -15,6 +15,7 @@
     <Compile Remove="PersonDtoWithGlobal.g.cs" />
     <Compile Remove="PersonDtoWithSA1633.g.cs" />
     <Compile Remove="PersonTxtDto.g.cs" />
+    <Compile Remove="ProjectItemsPersonDto.g.cs" />
     <Compile Remove="TestMissingFileExtension.cs" />
     <Compile Remove="TestOldFilesCleanUp.g.cs" />
     <Compile Remove="TestOldFilesCleanUpRenamed.g.cs" />
@@ -35,6 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ProjectItemsTest.info.json" />
+    <None Remove="ProjectItemsTest.tt" />
+    <None Remove="ProjectItemsTest.txt" />
     <None Remove="ProjectTestFP.info.json" />
     <None Remove="ProjectTestFP.tt" />
     <None Remove="ProjectTestFP.txt" />
