@@ -167,6 +167,18 @@
             return projectItem;
         }
 
+        public static ProjectItems GetProjectItemsFromProject(string projectName)
+        {
+            ProjectItems projectItems = null;
+            RetryUtil.RetryOnException(() =>
+            {
+                var project = GetSolutionProjects().First(n => n.Name == projectName);
+                projectItems = project.ProjectItems;
+            });
+
+            return projectItems;
+        }
+
         private static IEnumerable<ProjectItem> GetAllProjectItemsRecursive(ProjectItems projectItems)
         {
             foreach (ProjectItem projectItem in projectItems)
