@@ -240,9 +240,9 @@ fileManager.Process();
     Then the file "TesBigEndianEncoding.g.sql" is encoded in "UTF-16BE"
 
 
-Scenario: Generate file if ProjectItems property is null
+Scenario: Using filemanager in solutions with setup project (vdproj)
 
-Setup project needs the extension Microsoft Visual Studio Installer Projects installed.
+Setup project needs the extension Microsoft Visual Studio Installer Projects installed. See issue #17
 
     Given a solution with setup project
 	And the script "ProjectItemsTest.tt" with the following content

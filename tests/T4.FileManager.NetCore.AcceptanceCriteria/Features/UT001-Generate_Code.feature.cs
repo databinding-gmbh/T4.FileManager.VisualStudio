@@ -591,13 +591,13 @@ fileManager.Process();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Generate file if ProjectItems property is null")]
-        public virtual void GenerateFileIfProjectItemsPropertyIsNull()
+        [NUnit.Framework.DescriptionAttribute("Using filemanager in solutions with setup project (vdproj)")]
+        public virtual void UsingFilemanagerInSolutionsWithSetupProjectVdproj()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate file if ProjectItems property is null", "Setup project needs the extension Microsoft Visual Studio Installer Projects inst" +
-                    "alled.", tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Using filemanager in solutions with setup project (vdproj)", "Setup project needs the extension Microsoft Visual Studio Installer Projects inst" +
+                    "alled. See issue #17", tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 243
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
