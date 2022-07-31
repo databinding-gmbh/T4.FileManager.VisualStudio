@@ -17,16 +17,20 @@ public class FileAutomationSteps
 {
     private string projectName = "T4.FileManager.NetCore.AcceptanceCriteria";
     private string pathTestEnvironment;
+    private string pathSetupProject;
     private ProjectItem t4Template;
     private string targetTestPath;
     private string currentTesteeFilePath;
     private string t4TemplateContent;
+    private Project testSetupProject;
 
     [Given(@"the file manager")]
     public void GivenTheFileManager()
     {
         this.pathTestEnvironment =
             VisualStudioHelper.GetProjectDirectory("T4.FileManager.NetCore.AcceptanceCriteria");
+
+        this.pathSetupProject = Path.Combine(this.pathTestEnvironment, "..\\", "T4.FileManager.NetCore.AcceptanceCriteria.SetupProjectTest", "T4.FileManager.NetCore.AcceptanceCriteria.SetupProjectTest.vdproj");
 
         var outputdir = Path.Combine(this.pathTestEnvironment, "bin\\debug\\net6.0\\");
         var pathSource = Path.Combine(this.pathTestEnvironment, "..\\..\\", "src\\");
@@ -60,6 +64,13 @@ public class FileAutomationSteps
 
         this.t4Template = VisualStudioHelper.AddFileToProject(this.projectName, this.currentTesteeFilePath);
     }
+
+    [Given(@"a solution with setup project")]
+    public void GivenASolutionWithSetupProject()
+    {
+        this.testSetupProject = VisualStudioHelper.AddProject(this.pathSetupProject);
+    }
+
 
     [Given(@"I change the line")]
     [When(@"I change the line")]
@@ -160,5 +171,7 @@ public class FileAutomationSteps
         var testee =
             VisualStudioHelper.GetProjectItemsFromProject("T4.FileManager.NetCore.AcceptanceCriteria.SetupProjectTest");
         testee.Should().BeNull();
+
+        VisualStudioHelper.RemoveProject(this.testSetupProject);
     }
 }

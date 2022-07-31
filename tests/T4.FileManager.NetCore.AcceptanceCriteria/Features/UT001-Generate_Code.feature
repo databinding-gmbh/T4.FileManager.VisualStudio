@@ -241,7 +241,11 @@ fileManager.Process();
 
 
 Scenario: Generate file if ProjectItems property is null
-	Given the script "ProjectItemsTest.tt" with the following content
+
+Setup project needs the extension Microsoft Visual Studio Installer Projects installed.
+
+    Given a solution with setup project
+	And the script "ProjectItemsTest.tt" with the following content
 		"""
 <#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>

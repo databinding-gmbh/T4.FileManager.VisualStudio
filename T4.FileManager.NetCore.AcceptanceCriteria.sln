@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T4.FileManager.NetCore.Acce
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject", "tests\T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject\T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject.csproj", "{8B5F1B99-5EF2-4B7E-ACB4-344393CF6F79}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "T4.FileManager.NetCore.AcceptanceCriteria.SetupProjectTest", "tests\T4.FileManager.NetCore.AcceptanceCriteria.SetupProjectTest\T4.FileManager.NetCore.AcceptanceCriteria.SetupProjectTest.vdproj", "{6B509C16-EBCD-4AFE-B723-74BF79D3B510}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,10 +31,6 @@ Global
 		{8B5F1B99-5EF2-4B7E-ACB4-344393CF6F79}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B5F1B99-5EF2-4B7E-ACB4-344393CF6F79}.Release|x86.ActiveCfg = Release|Any CPU
 		{8B5F1B99-5EF2-4B7E-ACB4-344393CF6F79}.Release|x86.Build.0 = Release|Any CPU
-		{6B509C16-EBCD-4AFE-B723-74BF79D3B510}.Debug|Any CPU.ActiveCfg = Debug
-		{6B509C16-EBCD-4AFE-B723-74BF79D3B510}.Debug|x86.ActiveCfg = Debug
-		{6B509C16-EBCD-4AFE-B723-74BF79D3B510}.Release|Any CPU.ActiveCfg = Release
-		{6B509C16-EBCD-4AFE-B723-74BF79D3B510}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

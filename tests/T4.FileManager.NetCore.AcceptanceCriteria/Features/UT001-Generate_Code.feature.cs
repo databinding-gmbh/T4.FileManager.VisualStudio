@@ -596,7 +596,8 @@ fileManager.Process();
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate file if ProjectItems property is null", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate file if ProjectItems property is null", "Setup project needs the extension Microsoft Visual Studio Installer Projects inst" +
+                    "alled.", tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 243
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -620,8 +621,11 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 244
- testRunner.Given("the script \"ProjectItemsTest.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
+#line 247
+    testRunner.Given("a solution with setup project", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 248
+ testRunner.And("the script \"ProjectItemsTest.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
 <#@ assembly name=""System.Core"" #>
 <#@ import namespace=""System.Linq"" #>
 <#@ import namespace=""System.Text"" #>
@@ -648,19 +652,19 @@ public class <#= itm #>
 }
 
 fileManager.Process();
-#>", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#>", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 275
+#line 279
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
                 table3.AddRow(new string[] {
                             "ProjectItemsPersonDto.g.cs"});
-#line 276
+#line 280
  testRunner.Then("the following files are generated:", ((string)(null)), table3, "Then ");
 #line hidden
-#line 279
+#line 283
  testRunner.And("the setup projects ProjectItems property is null", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }

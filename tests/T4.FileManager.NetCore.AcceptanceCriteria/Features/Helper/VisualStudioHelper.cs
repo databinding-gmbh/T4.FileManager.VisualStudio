@@ -179,6 +179,31 @@
             return projectItems;
         }
 
+        public static Project AddProject(string pathToProject)
+        {
+            Project project = null;
+
+            RetryUtil.RetryOnException(() =>
+            {
+                project = dte.Solution.AddFromFile(pathToProject, false);
+            });
+
+            return project;
+        }
+
+        public static void RemoveProject(Project project)
+        {
+            if (project == null)
+            {
+                return;
+            }
+
+            RetryUtil.RetryOnException(() =>
+            {
+                dte.Solution.Remove(project);
+            });
+        }
+
         private static IEnumerable<ProjectItem> GetAllProjectItemsRecursive(ProjectItems projectItems)
         {
             foreach (ProjectItem projectItem in projectItems)
