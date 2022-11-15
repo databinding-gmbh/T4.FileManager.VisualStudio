@@ -52,7 +52,6 @@ stages:
       displayName: 'Create mkdocs.yml'
 
     - script: |
-         pip install mkdocs
          mkdocs build 
       displayName: 'Build Documentation'
 
