@@ -32,7 +32,7 @@ public class FileAutomationSteps
 
         this.pathSetupProject = Path.Combine(this.pathTestEnvironment, "..\\", "T4.FileManager.NetCore.AcceptanceCriteria.SetupProjectTest", "T4.FileManager.NetCore.AcceptanceCriteria.SetupProjectTest.vdproj");
 
-        var outputdir = Path.Combine(this.pathTestEnvironment, "bin\\debug\\net6.0\\");
+        var outputdir = Path.Combine(this.pathTestEnvironment, "bin\\debug\\net7.0\\");
         var pathSource = Path.Combine(this.pathTestEnvironment, "..\\..\\", "src\\");
 
         var fileManagerFromSource = Path.Combine(pathSource, "T4.FileManager.VisualStudio.ttinclude");
