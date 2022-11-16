@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\NUnit.3.13.3\build\NUnit.props" Condition="Exists('..\..\packages\NUnit.3.13.3\build\NUnit.props')" />
   <Import Project="..\..\packages\Microsoft.NET.Test.Sdk.17.4.0\build\net462\Microsoft.NET.Test.Sdk.props" Condition="Exists('..\..\packages\Microsoft.NET.Test.Sdk.17.4.0\build\net462\Microsoft.NET.Test.Sdk.props')" />
   <Import Project="..\..\packages\Microsoft.CodeCoverage.17.4.0\build\netstandard2.0\Microsoft.CodeCoverage.props" Condition="Exists('..\..\packages\Microsoft.CodeCoverage.17.4.0\build\netstandard2.0\Microsoft.CodeCoverage.props')" />
   <Import Project="..\..\packages\SpecFlow.NUnit.3.9.74\build\SpecFlow.NUnit.props" Condition="Exists('..\..\packages\SpecFlow.NUnit.3.9.74\build\SpecFlow.NUnit.props')" />
   <Import Project="..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.74\build\SpecFlow.Tools.MsBuild.Generation.props" Condition="Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.74\build\SpecFlow.Tools.MsBuild.Generation.props')" />
   <Import Project="..\..\packages\NUnit3TestAdapter.4.3.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\..\packages\NUnit3TestAdapter.4.3.0\build\net35\NUnit3TestAdapter.props')" />
-  <Import Project="..\..\packages\NUnit.3.13.3\build\NUnit.props" Condition="Exists('..\..\packages\NUnit.3.13.3\build\NUnit.props')" />
   <Import Project="..\..\packages\SpecFlow.Plus.LivingDocPlugin.3.9.57\build\SpecFlow.Plus.LivingDocPlugin.props" Condition="Exists('..\..\packages\SpecFlow.Plus.LivingDocPlugin.3.9.57\build\SpecFlow.Plus.LivingDocPlugin.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -16,11 +16,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>T4.FileManager.VisualStudio.AcceptanceCriteria</RootNamespace>
     <AssemblyName>T4.FileManager.AcceptanceCriteria</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -180,6 +181,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CleanUpTestoutput.tt</DependentUpon>
     </Content>
+    <Content Include="Features\Helper\CleanUpTestoutput19.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CleanUpTestoutput19.tt</DependentUpon>
+    </Content>
     <None Include="app.config" />
     <Content Include="Features\Helper\CleanUpTestoutput19.tt">
       <LastGenOutput>CleanUpTestoutput19.txt</LastGenOutput>
@@ -218,7 +224,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\SpecFlow.Plus.LivingDocPlugin.3.9.57\build\SpecFlow.Plus.LivingDocPlugin.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecFlow.Plus.LivingDocPlugin.3.9.57\build\SpecFlow.Plus.LivingDocPlugin.props'))" />
     <Error Condition="!Exists('..\..\packages\SpecFlow.Plus.LivingDocPlugin.3.9.57\build\SpecFlow.Plus.LivingDocPlugin.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecFlow.Plus.LivingDocPlugin.3.9.57\build\SpecFlow.Plus.LivingDocPlugin.targets'))" />
-    <Error Condition="!Exists('..\..\packages\NUnit.3.13.3\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit.3.13.3\build\NUnit.props'))" />
     <Error Condition="!Exists('..\..\packages\NUnit3TestAdapter.4.3.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit3TestAdapter.4.3.0\build\net35\NUnit3TestAdapter.props'))" />
     <Error Condition="!Exists('..\..\packages\SpecFlow.3.9.74\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecFlow.3.9.74\build\SpecFlow.targets'))" />
     <Error Condition="!Exists('..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.74\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.74\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
@@ -229,6 +234,7 @@
     <Error Condition="!Exists('..\..\packages\Microsoft.CodeCoverage.17.4.0\build\netstandard2.0\Microsoft.CodeCoverage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeCoverage.17.4.0\build\netstandard2.0\Microsoft.CodeCoverage.targets'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.NET.Test.Sdk.17.4.0\build\net462\Microsoft.NET.Test.Sdk.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.NET.Test.Sdk.17.4.0\build\net462\Microsoft.NET.Test.Sdk.props'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.NET.Test.Sdk.17.4.0\build\net462\Microsoft.NET.Test.Sdk.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.NET.Test.Sdk.17.4.0\build\net462\Microsoft.NET.Test.Sdk.targets'))" />
+    <Error Condition="!Exists('..\..\packages\NUnit.3.13.3\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit.3.13.3\build\NUnit.props'))" />
   </Target>
   <Import Project="..\..\packages\SpecFlow.Plus.LivingDocPlugin.3.9.57\build\SpecFlow.Plus.LivingDocPlugin.targets" Condition="Exists('..\..\packages\SpecFlow.Plus.LivingDocPlugin.3.9.57\build\SpecFlow.Plus.LivingDocPlugin.targets')" />
   <Import Project="..\..\packages\SpecFlow.3.9.74\build\SpecFlow.targets" Condition="Exists('..\..\packages\SpecFlow.3.9.74\build\SpecFlow.targets')" />
