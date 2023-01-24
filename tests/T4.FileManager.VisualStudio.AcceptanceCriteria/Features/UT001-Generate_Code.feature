@@ -353,9 +353,9 @@ fileManager.Process();
     Then the file "TesBigEndianEncoding.g.sql" is encoded in "UTF-16BE"
 
 Scenario: Generate file with System.Xml Namespace (Bug 20)
-    Given the script "TestBigEndianEncoding.tt" with the following content
+    Given the script "TestSystemXml.tt" with the following content
 		"""
-<#@ template hostspecific="true" language="C#" #>
+<#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ assembly name="System.Xml" #>
 <#@ assembly name="System.Xml.Linq" #>
@@ -364,10 +364,10 @@ Scenario: Generate file with System.Xml Namespace (Bug 20)
 <#@ import namespace="System.Xml" #>
 <#@ import namespace="System.Xml.Linq" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ output extension=".cs" #>
+<#@ output extension=".txt" #>
 <#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
 
-<# var manager = T4FileManager.Create(this).EnableAutoIndent(); #>
+<# var fileManager = T4FileManager.Create(this).EnableAutoIndent(); #>
 <#
 fileManager.StartNewFile("text.xml", "","");
 	var doc = new XmlDocument();
@@ -375,11 +375,10 @@ fileManager.StartNewFile("text.xml", "","");
 #>
 <#=doc.InnerXml#>
 <#
-}
 fileManager.Process();
 #>
         """
     When I run the script
 	Then the following files are generated:
 		| File             |
-		| test.xml         |
+		| text.xml         |

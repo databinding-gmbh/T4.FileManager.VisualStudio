@@ -386,7 +386,7 @@
 
             this.generatedInfo.FilesToGenerate = this.filesToGenerate;
 
-            File.WriteAllText(templateFile, JsonConvert.SerializeObject(this.generatedInfo, Formatting.Indented));
+            File.WriteAllText(templateFile, JsonConvert.SerializeObject(this.generatedInfo, Newtonsoft.Json.Formatting.Indented));
             this.logger.Information("New info file {0} created", Path.GetFileName(templateFile));
             this.logger.Information("End Generate");
             
