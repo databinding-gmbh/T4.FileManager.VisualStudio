@@ -85,7 +85,7 @@ stages:
         TestResultDir: '$(Common.TestResultsDirectory)'  
         StagingDir: '$(Build.ArtifactStagingDirectory)'  
         TestDllPattern: '**\*T4.FileManager.NetCore.AcceptanceCriteria.dll'
-        OutputPath: '$(Build.Repository.LocalPath)/tests/T4.FileManager.NetCore.AcceptanceCriteria/bin/Debug/net.0'
+        OutputPath: '$(Build.Repository.LocalPath)/tests/T4.FileManager.NetCore.AcceptanceCriteria/bin/Debug/net7.0'
         TestAssembly: 'T4.FileManager.NetCore.AcceptanceCriteria.dll' 
         ReportName: 'T4FileManagerVisualStudioNETCore.html'
         BuildNumber: '$(SemVer)'
