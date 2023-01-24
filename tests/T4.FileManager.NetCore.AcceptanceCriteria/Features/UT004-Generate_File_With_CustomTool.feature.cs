@@ -171,21 +171,21 @@ this.FeatureBackground();
 #line 93
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
-                            "File"});
-                table9.AddRow(new string[] {
-                            "ProjectTestFP.resx"});
-                table9.AddRow(new string[] {
-                            "ProjectTestFP.Designer.cs"});
-#line 94
- testRunner.Then("the following files are generated:", ((string)(null)), table9, "Then ");
-#line hidden
                 TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
                 table10.AddRow(new string[] {
                             "ProjectTestFP.resx"});
+                table10.AddRow(new string[] {
+                            "ProjectTestFP.Designer.cs"});
+#line 94
+ testRunner.Then("the following files are generated:", ((string)(null)), table10, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                            "File"});
+                table11.AddRow(new string[] {
+                            "ProjectTestFP.resx"});
 #line 98
- testRunner.And("the custom tool is set to \"ResXFileCodeGenerator\" for the following files:", ((string)(null)), table10, "And ");
+ testRunner.And("the custom tool is set to \"ResXFileCodeGenerator\" for the following files:", ((string)(null)), table11, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
