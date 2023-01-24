@@ -579,6 +579,64 @@ fileManager.Process();
             }
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Generate file with System.Xml Namespace (Bug 20)")]
+        public void GenerateFileWithSystem_XmlNamespaceBug20()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate file with System.Xml Namespace (Bug 20)", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 286
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 287
+    testRunner.Given("the script \"TestSystemXml.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
+<#@ assembly name=""System.Core"" #>
+<#@ assembly name=""System.Xml"" #>
+<#@ assembly name=""System.Xml.Linq"" #>
+<#@ import namespace=""System.Linq"" #>
+<#@ import namespace=""System.Text"" #>
+<#@ import namespace=""System.Xml"" #>
+<#@ import namespace=""System.Xml.Linq"" #>
+<#@ import namespace=""System.Collections.Generic"" #>
+<#@ output extension="".txt"" #>
+<#@ include file=""$(TargetDir)\T4.FileManager.VisualStudio.ttinclude"" #>
+
+<# var fileManager = T4FileManager.Create(this).EnableAutoIndent(); #>
+<#
+fileManager.StartNewFile(""text.xml"", """","""");
+var doc = new XmlDocument();
+doc.LoadXml(""<book>Reading</book>"");
+#>
+<#=doc.InnerXml#>
+<#
+fileManager.Process();
+#>", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 312
+    testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "File"});
+                table4.AddRow(new string[] {
+                            "text.xml"});
+#line 313
+ testRunner.Then("the following files are generated:", ((string)(null)), table4, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
