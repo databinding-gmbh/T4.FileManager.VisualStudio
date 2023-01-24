@@ -138,17 +138,17 @@ fileManager.Process();
 #line 41
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "File",
                             "Folder"});
-                table7.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             "PersonDto.g.cs",
                             "TestSubfolder"});
-                table7.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             "OrderDto.g.cs",
                             "TestSubfolder"});
 #line 42
- testRunner.Then("the following files are generated:", ((string)(null)), table7, "Then ");
+ testRunner.Then("the following files are generated:", ((string)(null)), table8, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -207,41 +207,41 @@ fileManager.Process();
 #line 79
  testRunner.When("I run the script", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "From",
                             "To"});
-                table8.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "fileManager.StartNewFile(itm + \".g.cs\",\"\",\"TestSubfolder\");",
                             "fileManager.StartNewFile(itm + \".g.cs\",\"\",\"TestSubfolderNew\");"});
 #line 80
- testRunner.And("I change the line", ((string)(null)), table8, "And ");
+ testRunner.And("I change the line", ((string)(null)), table9, "And ");
 #line hidden
 #line 83
  testRunner.And("I run the script again", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
-                            "File",
-                            "Folder"});
-                table9.AddRow(new string[] {
-                            "PersonMDto.g.cs",
-                            "TestSubfolderNew"});
-                table9.AddRow(new string[] {
-                            "OrderMDto.g.cs",
-                            "TestSubfolderNew"});
-#line 84
- testRunner.Then("the following files are generated:", ((string)(null)), table9, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "File",
                             "Folder"});
                 table10.AddRow(new string[] {
                             "PersonMDto.g.cs",
-                            "TestSubfolder"});
+                            "TestSubfolderNew"});
                 table10.AddRow(new string[] {
+                            "OrderMDto.g.cs",
+                            "TestSubfolderNew"});
+#line 84
+ testRunner.Then("the following files are generated:", ((string)(null)), table10, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                            "File",
+                            "Folder"});
+                table11.AddRow(new string[] {
+                            "PersonMDto.g.cs",
+                            "TestSubfolder"});
+                table11.AddRow(new string[] {
                             "OrderMDto.g.cs",
                             "TestSubfolder"});
 #line 88
- testRunner.And("the following files no longer exist:", ((string)(null)), table10, "And ");
+ testRunner.And("the following files no longer exist:", ((string)(null)), table11, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
