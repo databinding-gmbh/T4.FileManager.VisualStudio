@@ -1017,17 +1017,20 @@
                 return;
             }
 
-            var window = dte.Windows.Item(EnvDTE.Constants.vsWindowKindOutput);
-            var outputWindow = window.Object as EnvDTE.OutputWindow;
-            if (outputWindow == null)
+            try
+            {
+                var window = dte.Windows.Item(EnvDTE.Constants.vsWindowKindOutput);
+                var outputWindow = window.Object as EnvDTE.OutputWindow;
+ 
+                outputWindow.ActivePane.Activate();
+                outputWindow.ActivePane.OutputString(output);
+                outputWindow.ActivePane.OutputString("\n");
+            }
+            catch (Exception ex)
             {
                 this.log.AppendLine("WriteToOutput | Unable to obtain OutputWindow object");
-                return;
+                this.log.AppendLine(ex.StackTrace);
             }
- 
-            outputWindow.ActivePane.Activate();
-            outputWindow.ActivePane.OutputString(output);
-            outputWindow.ActivePane.OutputString("\n");
         }
     } 
 
