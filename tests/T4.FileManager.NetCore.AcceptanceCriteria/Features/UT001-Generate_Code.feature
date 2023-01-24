@@ -300,7 +300,7 @@ Scenario: Generate file with System.Xml Namespace (Bug 20)
 
 <# var fileManager = T4FileManager.Create(this).EnableAutoIndent(); #>
 <#
-fileManager.StartNewFile("text.xml", "","");
+fileManager.StartNewFile("text.g.xml", "","");
 	var doc = new XmlDocument();
 	doc.LoadXml("<book>Reading</book>");
 #>
@@ -312,4 +312,4 @@ fileManager.Process();
     When I run the script
 	Then the following files are generated:
 		| File             |
-		| text.xml         |
+		| text.g.xml       |

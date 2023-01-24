@@ -12,7 +12,7 @@
 // Cleanup via T4 to avoid process locks of Techtalk.Specrun.Executor
 // and make it easier manually clean up testoutput
 var testoutputProjects = new string[] { "T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject", "T4.FileManager.VisualStudio.AcceptanceCriteria" };
-var extensions = new[] { ".tt", ".g.cs", ".g.sql", ".g1.cs", ".info.json", ".txt", ".ttinclude", "*.Designer.cs", "*.resx" };
+var extensions = new[] { ".tt", ".g.cs", ".g.sql", ".g1.cs", ".info.json", ".txt", ".ttinclude", "*.Designer.cs", "*.resx", "*.g.xml" };
 
 var dte = this.GetHostServiceProvider(this.Host);
 var projects = this.GetSolutionProjects(dte)
