@@ -13,7 +13,7 @@
     <owners>databindinggmbh</owners>
     <repository type="git" url="https://github.com/databinding-gmbh/T4.FileManager.VisualStudio" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright 2021 databinding GmbH</copyright>
+    <copyright>Copyright 2021-2023 databinding GmbH</copyright>
     <tags>
       t4 file manager code generation c# f# php python javascript java vb blazor razor html css 
       visual studio vs vsstudio metadata programming dsl shared structure timesaver 
