@@ -97,10 +97,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EnvDTE" Version="17.4.33103.184" />
-    <PackageReference Include="FluentAssertions" Version="6.8.0" />
-    <PackageReference Include="microsoft.net.test.sdk" Version="17.4.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.3.0" />
+    <PackageReference Include="EnvDTE" Version="17.8.37221" />
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
+    <PackageReference Include="microsoft.net.test.sdk" Version="17.8.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
     <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
     <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
     <PackageReference Include="system.drawing.common" Version="7.0.0" />

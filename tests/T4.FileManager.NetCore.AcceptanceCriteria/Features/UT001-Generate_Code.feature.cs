@@ -615,7 +615,7 @@ this.FeatureBackground();
 
 <# var fileManager = T4FileManager.Create(this).EnableAutoIndent(); #>
 <#
-fileManager.StartNewFile(""text.xml"", """","""");
+fileManager.StartNewFile(""text.g.xml"", """","""");
 var doc = new XmlDocument();
 doc.LoadXml(""<book>Reading</book>"");
 #>
@@ -630,7 +630,7 @@ fileManager.Process();
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "File"});
                 table4.AddRow(new string[] {
-                            "text.xml"});
+                            "text.g.xml"});
 #line 313
  testRunner.Then("the following files are generated:", ((string)(null)), table4, "Then ");
 #line hidden
