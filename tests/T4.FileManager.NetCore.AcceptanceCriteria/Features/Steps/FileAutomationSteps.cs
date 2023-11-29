@@ -16,6 +16,7 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps;
 public class FileAutomationSteps
 {
     private string projectName = "T4.FileManager.NetCore.AcceptanceCriteria";
+    private string outputDir = @"bin\debug\net8.0\";
     private string pathTestEnvironment;
     private string pathSetupProject;
     private ProjectItem t4Template;
@@ -32,7 +33,7 @@ public class FileAutomationSteps
 
         this.pathSetupProject = Path.Combine(this.pathTestEnvironment, "..\\", "T4.FileManager.NetCore.AcceptanceCriteria.SetupProjectTest", "T4.FileManager.NetCore.AcceptanceCriteria.SetupProjectTest.vdproj");
 
-        var outputdir = Path.Combine(this.pathTestEnvironment, "bin\\debug\\net7.0\\");
+        var outputdir = Path.Combine(this.pathTestEnvironment, this.outputDir);
         var pathSource = Path.Combine(this.pathTestEnvironment, "..\\..\\", "src\\");
 
         var fileManagerFromSource = Path.Combine(pathSource, "T4.FileManager.VisualStudio.ttinclude");
