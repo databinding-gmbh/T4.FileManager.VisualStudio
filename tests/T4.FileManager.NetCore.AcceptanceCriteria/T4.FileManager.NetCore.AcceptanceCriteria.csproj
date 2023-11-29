@@ -106,7 +106,7 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
     <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
     <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
-    <PackageReference Include="system.drawing.common" Version="7.0.0" />
+    <PackageReference Include="system.drawing.common" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
