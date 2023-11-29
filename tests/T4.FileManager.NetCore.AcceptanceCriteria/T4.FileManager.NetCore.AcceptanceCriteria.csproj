@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -85,6 +85,9 @@
     <None Remove="TestSubfolderMoving.info.json" />
     <None Remove="TestSubfolderMoving.tt" />
     <None Remove="TestSubfolderMoving.txt" />
+    <None Remove="TestSystemXml.info.json" />
+    <None Remove="TestSystemXml.tt" />
+    <None Remove="TestSystemXml.txt" />
     <None Remove="TestUTF16Encoding.info.json" />
     <None Remove="TestUTF16Encoding.tt" />
     <None Remove="TestUTF16Encoding.txt" />
