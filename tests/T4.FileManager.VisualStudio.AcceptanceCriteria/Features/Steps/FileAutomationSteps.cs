@@ -1,17 +1,15 @@
-﻿namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Steps
+﻿using System.Collections.Generic;
+using System.IO;
+
+using EnvDTE;
+
+using FluentAssertions;
+using Reqnroll;
+using T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Dto;
+using T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Helper;
+
+namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Steps
 {
-    using System.Collections.Generic;
-    using System.IO;
-
-    using EnvDTE;
-
-    using FluentAssertions;
-
-    using T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Dto;
-    using T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Helper;
-
-    using TechTalk.SpecFlow;
-
     [Binding]
     public class FileAutomationSteps
     {

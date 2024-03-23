@@ -1,11 +1,9 @@
-﻿using NUnit.Framework;
-using System;
-using System.Drawing.Imaging;
+﻿using System.Drawing.Imaging;
 using System.IO;
-using T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Helper;
 
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Infrastructure;
+using NUnit.Framework;
+using Reqnroll;
+using T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Helper;
 
 namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Steps
 {
@@ -14,9 +12,9 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Steps
     {
         private readonly ScenarioContext context;
 
-        private readonly ISpecFlowOutputHelper outputHelper;
+        private readonly IReqnrollOutputHelper outputHelper;
 
-        public TestSetup(ScenarioContext scenarioContext, ISpecFlowOutputHelper outputHelper)
+        public TestSetup(ScenarioContext scenarioContext, IReqnrollOutputHelper outputHelper)
         {
             this.context = scenarioContext;
             this.outputHelper = outputHelper;
