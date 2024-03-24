@@ -1,13 +1,12 @@
-﻿namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Hooks
+﻿using System.Collections.Generic;
+using System.Linq;
+
+using Reqnroll;
+
+using T4.FileManager.NetCore.AcceptanceCriteria.Features.Dto;
+
+namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Hooks
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using T4.FileManager.NetCore.AcceptanceCriteria.Features.Dto;
-
-    using TechTalk.SpecFlow;
-    using TechTalk.SpecFlow.Assist;
-
     [Binding]
     public class StepTransformation
     {

@@ -1,9 +1,8 @@
-﻿namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Dto
+﻿using System.IO;
+using Reqnroll.Assist.Attributes;
+
+namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Dto
 {
-    using System.IO;
-
-    using TechTalk.SpecFlow.Assist.Attributes;
-
     public class GeneratedFile
     {
         [TableAliases("File")]

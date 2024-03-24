@@ -1,11 +1,8 @@
 ﻿using System.Drawing.Imaging;
 using System.IO;
-
+using Reqnroll;
 using T4.FileManager.NetCore.AcceptanceCriteria.Features.Helper;
 using T4.FileManager.NetCore.AcceptanceCriteria.Features.Helper.Capture;
-
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Infrastructure;
 
 namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
 {
@@ -14,9 +11,9 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps
     {
         private readonly ScenarioContext context;
 
-        private readonly ISpecFlowOutputHelper outputHelper;
+        private readonly IReqnrollOutputHelper outputHelper;
 
-        public TestSetup(ScenarioContext scenarioContext, ISpecFlowOutputHelper outputHelper)
+        public TestSetup(ScenarioContext scenarioContext, IReqnrollOutputHelper outputHelper)
         {
             this.context = scenarioContext;
             this.outputHelper = outputHelper;

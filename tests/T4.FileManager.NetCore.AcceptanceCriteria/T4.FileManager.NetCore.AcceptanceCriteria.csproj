@@ -104,8 +104,7 @@
     <PackageReference Include="FluentAssertions" Version="6.12.0" />
     <PackageReference Include="microsoft.net.test.sdk" Version="17.8.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
-    <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
-    <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
+    <PackageReference Include="reqnroll.nunit" Version="1.0.1" />
     <PackageReference Include="system.drawing.common" Version="8.0.0" />
   </ItemGroup>
 
