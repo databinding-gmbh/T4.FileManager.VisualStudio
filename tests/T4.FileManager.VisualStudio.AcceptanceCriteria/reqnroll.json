@@ -2,7 +2,7 @@
   "livingDocExecutionDataCollector": {
     "enabled": true,
     "filepath": "TestExecution-reqnroll.json",
-    "projectLanguage": "de-ch",
+    "projectLanguage": "en",
     "projectName": "T4.FileManager .NET Framework",
     "workItemPrefix": "wi-",
     "workItemUrlTemplate": "https://dev.azure.com/databinding/_workitems/edit/{0}/"
