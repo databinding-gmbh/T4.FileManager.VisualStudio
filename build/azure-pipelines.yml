@@ -89,13 +89,6 @@ stages:
         TestAssembly: 'T4.FileManager.NetCore.AcceptanceCriteria.dll' 
         ReportName: 'T4FileManagerVisualStudioNETCore.html'
         BuildNumber: '$(SemVer)'
- 
-    - task: techtalk.techtalk-specflow-plus.specflow-plus.SpecFlowPlus@0
-      displayName: 'SpecFlow+ Living Doc'
-      inputs:
-        projectFilePath: tests/T4.FileManager.VisualStudio.AcceptanceCriteria/Features
-        projectName: 'T4 Filemanager for Visual Studio'
-        workItemPrefix: 'db-'
 
     - task: CopyFiles@2
       displayName: 'Copy send message script'
