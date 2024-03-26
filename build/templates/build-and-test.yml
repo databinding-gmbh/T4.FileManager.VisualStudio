@@ -69,7 +69,7 @@ steps:
     TargetFolder: '${{ parameters.StagingDir }}\documentation\media'
   
 - script: |
-   livingdocreport -f ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }}.json -r ${{ parameters.OutputPath }}\${{ {{ parameters.TestAssembly }}.html }} -p db- -t https://dev.azure.com/databinding/_workitems/edit/{0}/ -l en -b ${{ parameters.BuildNumber }} 
+   livingdocreport -f ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }}.json -r ${{ parameters.OutputPath }}\${{ parameters.TestAssembly }}.html -p db- -t https://dev.azure.com/databinding/_workitems/edit/{0}/ -l en -b ${{ parameters.BuildNumber }} 
    
   displayName: 'Build Living doc'
     
