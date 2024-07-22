@@ -455,12 +455,11 @@
         private void GenerateNewFileForSolution(FileToGenerate fileToGenerate)
         {
             this.logger.Information("Begin GenerateNewFileForSolution");
-            var exists = this.HasProjectItem(fileToGenerate.AbsolutePath, fileToGenerate.Filename);
-
-            this.AddMissingFileToProject(fileToGenerate.Project, fileToGenerate.AbsolutePath, fileToGenerate.Filename);
-
-            var fileProjectItem = this.FindProjectItem(fileToGenerate.Project, fileToGenerate.Filename);
-
+            var fileProjectItem = this.FindProjectItem(fileToGenerate.AbsolutePath, fileToGenerate.Filename);
+            var exists = fileProjectItem != null;
+            if (!exists)
+                fileProjectItem = this.AddMissingFileToProject(fileToGenerate.Project, fileToGenerate.AbsolutePath, fileToGenerate.Filename);
+ 
             var canOverwriteExistingFile = CanOverwriteExistingFileByFile(fileToGenerate);
 
             if (fileToGenerate.Properties != null && (canOverwriteExistingFile && this.CanOverwriteExistingFile) || !exists)
@@ -644,19 +643,13 @@
         /// <summary>
         /// Find the project item in the solution.
         /// </summary>
-        /// <param name="projectName">Project name without extension.</param>
-        /// <param name="filename">Filename with extension.</param>
+        /// <param name="absolutePath">Absolute path of file.</param>
+        /// <param name="fileName">Filename with extension.</param>
         /// <returns></returns>
-        private ProjectItem FindProjectItem(string projectName, string filename)
+        private ProjectItem FindProjectItem(string absolutePath, string fileName)
         {
-            if (string.IsNullOrEmpty(projectName))
-            {
-                var projItem = this.dte.Solution.FindProjectItem(this.host.TemplateFile);
-                var prj = projItem.ContainingProject;
-                projectName = prj.Name;
-            }
-            
-            return dte.Solution.FindProjectItem(filename);
+            var combinedPath = Path.Combine(absolutePath, fileName);
+            return this.dte.Solution.FindProjectItem(combinedPath);
         }
 
         /// <summary>
@@ -778,8 +771,12 @@
         /// <param name="projectName">Project name without extension.</param>
         /// <param name="absolutePath">Absolute path of file.</param>
         /// <param name="fileName">Filename with extension.</param>
-        private void AddMissingFileToProject(string projectName, string absolutePath, string fileName)
+        private ProjectItem AddMissingFileToProject(string projectName, string absolutePath, string fileName)
         {
+            var existsItem = this.FindProjectItem(absolutePath, fileName);
+            if (existsItem != null)
+                return existsItem;
+
             if (string.IsNullOrEmpty(projectName))
             {
                 var projItem = this.dte.Solution.FindProjectItem(this.host.TemplateFile);
@@ -788,15 +785,10 @@
             }
 
             var projectItems = this.FindProjectByName(projectName).ProjectItems;
-
-            var exists = this.HasProjectItem(absolutePath, fileName);
-
             var combinedPath = Path.Combine(absolutePath, fileName);
 
-            if (!exists)
-            {
-                projectItems.AddFromFile(combinedPath);
-            }
+            var newItem = projectItems.AddFromFile(combinedPath);
+            return newItem;
         }
 
         /// <summary>
@@ -807,8 +799,7 @@
         /// <returns></returns>
         private bool HasProjectItem(string absolutePath, string fileName)
         {
-            var combinedPath = Path.Combine(absolutePath, fileName);
-            var exists = this.dte.Solution.FindProjectItem(combinedPath) != null;
+            var exists = this.FindProjectItem(absolutePath, fileName) != null;
             return exists;
         }
 
