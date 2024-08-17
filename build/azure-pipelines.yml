@@ -11,7 +11,7 @@ trigger:
 
 stages:
 - stage: BUILD_AND_TEST
-  pool: databinding self hosted interactive
+  pool: db-az-iah
 
   jobs:
   - job:
@@ -131,7 +131,7 @@ stages:
      
 - stage: DEPLOY_GITHUB_PAGES
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
-  pool: databinding self hosted interactive
+  pool: db-az-iah
   variables:
     - group: github
 
@@ -155,7 +155,7 @@ stages:
 
 - stage: DEPLOY_TEST
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
-  pool: databinding self hosted interactive
+  pool: db-az-iah
   variables:
     - group: Test
 
@@ -182,7 +182,7 @@ stages:
       
 - ${{ if eq(parameters.canPublish, true) }}: 
   - stage: DEPLOY_TO_NUGET
-    pool: databinding self hosted interactive
+    pool: db-az-iah
     variables:
       - group: Prod
 
