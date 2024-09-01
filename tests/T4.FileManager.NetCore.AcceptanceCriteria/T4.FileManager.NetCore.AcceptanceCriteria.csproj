@@ -5,101 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="FileDefaultEncoding.g.cs" />
-    <Compile Remove="FileFormat.g.cs" />
-    <Compile Remove="OrderDto.g.cs" />
-    <Compile Remove="OrderDtoWithGlobal.g.cs" />
-    <Compile Remove="OrderDtoWithSA1633.g.cs" />
-    <Compile Remove="OrderTxtDto.g.cs" />
-    <Compile Remove="PersonDto.g.cs" />
-    <Compile Remove="PersonDtoWithGlobal.g.cs" />
-    <Compile Remove="PersonDtoWithSA1633.g.cs" />
-    <Compile Remove="PersonTxtDto.g.cs" />
-    <Compile Remove="ProjectItemsPersonDto.g.cs" />
-    <Compile Remove="TestMissingFileExtension.cs" />
-    <Compile Remove="TestOldFilesCleanUp.g.cs" />
-    <Compile Remove="TestOldFilesCleanUpRenamed.g.cs" />
-    <Compile Remove="TestOverwrite\TestDelete.g.cs" />
-    <Compile Remove="TestOverwrite\TestNoChange.g.cs" />
-    <Compile Remove="TestOverwrite\TestNoDelete.g.cs" />
-    <Compile Remove="TestOverwrite\TestNoDelete2.g.cs" />
-    <Compile Remove="TestOverwrite\TestNoDelete3.g.cs" />
-    <Compile Remove="TestSubfolderNew\OrderDto.g.cs" />
-    <Compile Remove="TestSubfolderNew\OrderMDto.g.cs" />
-    <Compile Remove="TestSubfolderNew\PersonDto.g.cs" />
-    <Compile Remove="TestSubfolderNew\PersonMDto.g.cs" />
-    <Compile Remove="TestSubfolder\OrderDto.g.cs" />
-    <Compile Remove="TestSubfolder\OrderMDto.g.cs" />
-    <Compile Remove="TestSubfolder\PersonDto.g.cs" />
-    <Compile Remove="TestSubfolder\PersonMDto.g.cs" />
-    <Compile Remove="TestUTF16Encoding.g.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="ProjectItemsTest.info.json" />
-    <None Remove="ProjectItemsTest.tt" />
-    <None Remove="ProjectItemsTest.txt" />
-    <None Remove="ProjectTestFP.info.json" />
-    <None Remove="ProjectTestFP.tt" />
-    <None Remove="ProjectTestFP.txt" />
-    <None Remove="TesBigEndianEncoding.g.sql" />
-    <None Remove="Test.info.json" />
-    <None Remove="Test.tt" />
-    <None Remove="Test.txt" />
-    <None Remove="TestAutoIndent.info.json" />
-    <None Remove="TestAutoIndent.tt" />
-    <None Remove="TestAutoIndent.txt" />
-    <None Remove="TestBigEndianEncoding.info.json" />
-    <None Remove="TestBigEndianEncoding.tt" />
-    <None Remove="TestBigEndianEncoding.txt" />
-    <None Remove="TestDefaultEncoding.info.json" />
-    <None Remove="TestDefaultEncoding.tt" />
-    <None Remove="TestDefaultEncoding.txt" />
-    <None Remove="TestDelete.info.json" />
-    <None Remove="TestDelete.tt" />
-    <None Remove="TestDelete.txt" />
-    <None Remove="TestGlobalHeader.info.json" />
-    <None Remove="TestGlobalHeader.tt" />
-    <None Remove="TestGlobalHeader.txt" />
-    <None Remove="TestInOtherProject.info.json" />
-    <None Remove="TestInOtherProject.tt" />
-    <None Remove="TestInOtherProject.txt" />
-    <None Remove="TestMissingFileExtension.info.json" />
-    <None Remove="TestMissingFileExtension.tt" />
-    <None Remove="TestMissingFileExtension.txt" />
-    <None Remove="TestNoChange.info.json" />
-    <None Remove="TestNoChange.tt" />
-    <None Remove="TestNoChange.txt" />
-    <None Remove="TestNoDelete.info.json" />
-    <None Remove="TestNoDelete.tt" />
-    <None Remove="TestNoDelete.txt" />
-    <None Remove="TestOldFilesCleanUp.info.json" />
-    <None Remove="TestOldFilesCleanUp.tt" />
-    <None Remove="TestOldFilesCleanUp.txt" />
-    <None Remove="TestSA1633Header.info.json" />
-    <None Remove="TestSA1633Header.tt" />
-    <None Remove="TestSA1633Header.txt" />
-    <None Remove="TestSubfolder.info.json" />
-    <None Remove="TestSubfolder.tt" />
-    <None Remove="TestSubfolder.txt" />
-    <None Remove="TestSubfolderMoving.info.json" />
-    <None Remove="TestSubfolderMoving.tt" />
-    <None Remove="TestSubfolderMoving.txt" />
-    <None Remove="TestSystemXml.info.json" />
-    <None Remove="TestSystemXml.tt" />
-    <None Remove="TestSystemXml.txt" />
-    <None Remove="TestUTF16Encoding.info.json" />
-    <None Remove="TestUTF16Encoding.tt" />
-    <None Remove="TestUTF16Encoding.txt" />
-    <None Remove="TestWithCustomLog.info.json" />
-    <None Remove="TestWithCustomLog.tt" />
-    <None Remove="TestWithCustomLog.txt" />
-    <None Remove="TestWithLogEnabled.info.json" />
-    <None Remove="TestWithLogEnabled.tt" />
-    <None Remove="TestWithLogEnabled.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="databinding.LivingDoc.ExecutionDataCollector" Version="5.4.4" />
     <PackageReference Include="EnvDTE" Version="17.11.40262" />
     <PackageReference Include="FluentAssertions" Version="6.12.0" />
@@ -111,21 +16,6 @@
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="ProjectTestFP.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ProjectTestFP.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="ProjectTestFP.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ProjectTestFP.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
