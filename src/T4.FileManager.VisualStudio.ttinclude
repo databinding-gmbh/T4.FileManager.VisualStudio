@@ -690,7 +690,7 @@
 
             if (foundProject == null)
             {
-                throw new InvalidOperationException($"Project {projectName} not exists in the solution.");
+                throw new InvalidOperationException(string.Format("Project {0} not exists in the solution.", projectName));
             }
 
             return foundProject;
