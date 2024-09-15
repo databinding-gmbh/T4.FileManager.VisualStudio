@@ -1,11 +1,10 @@
-﻿<#@ assembly name="Newtonsoft.Json" #>
-<#@ assembly name="System.Core" #>
+﻿<#@ assembly name="System.Core" #>
 <#@ assembly name="System.Reflection" #>
 <#@ assembly name="System.Linq" #>
 <#@ import namespace="EnvDTE" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
-<#@ import namespace="Newtonsoft.Json" #>
 <#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Diagnostics" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Linq" #>
@@ -369,7 +368,7 @@
             if (File.Exists(templateFile))
             {
                 var content = File.ReadAllText(templateFile);
-                filesInfoFromPreviousRun = JsonConvert.DeserializeObject<GeneratedInfo>(content);
+                filesInfoFromPreviousRun = TemplateInfoSerializer.Deserialize(content);
                 this.logger.Information("Infos loaded from last run {0}", Path.GetFileName(templateFile));
             }
 
@@ -386,7 +385,7 @@
 
             this.generatedInfo.FilesToGenerate = this.filesToGenerate;
 
-            File.WriteAllText(templateFile, JsonConvert.SerializeObject(this.generatedInfo, Newtonsoft.Json.Formatting.Indented));
+            File.WriteAllText(templateFile, TemplateInfoSerializer.Serialize(this.generatedInfo));
             this.logger.Information("New info file {0} created", Path.GetFileName(templateFile));
             this.logger.Information("End Generate");
             
@@ -965,10 +964,10 @@
 
         public Dictionary<string, object> Properties { get; set; }
 
-        [JsonIgnore]
+        /*[JsonIgnore]*/
         public string Content { get; set; }
 
-        [JsonIgnore]
+        /*[JsonIgnore]*/
         public string AbsolutePath { get; set; }
     }
 
@@ -1045,4 +1044,323 @@
         public TemplateFileManager(StringBuilder textTransformation, ITextTemplatingEngineHost host)
         : base (textTransformation, host) {}
     }
+
+/// <summary>
+/// Replaces Newtonsoft.Json for better functionality
+/// with VS 17.11+ (Dependency issues with fresh installations of Visual Studio)
+/// </summary>
+public static class TemplateInfoSerializer
+{
+	public static string Serialize(GeneratedInfo info)
+	{
+		var sb = new StringBuilder();
+		sb.Append("{\"FilesToGenerate\":[");
+
+		for (int i = 0; i < info.FilesToGenerate.Count; i++)
+		{
+			if (i > 0) sb.Append(",");
+			SerializeFileToGenerate(info.FilesToGenerate[i], sb);
+		}
+
+		sb.Append("]}");
+		return sb.ToString();
+	}
+
+	private static void SerializeFileToGenerate(FileToGenerate file, StringBuilder sb)
+	{
+		sb.Append("{");
+		sb.AppendFormat("\"Filename\":\"{0}\",", EscapeJsonString(file.Filename));
+		sb.AppendFormat("\"Project\":\"{0}\",", EscapeJsonString(file.Project));
+		sb.AppendFormat("\"Path\":\"{0}\",", EscapeJsonString(file.Path));
+		sb.Append("\"Properties\":{");
+
+		var propKeys = new List<string>(file.Properties.Keys);
+		for (int i = 0; i < propKeys.Count; i++)
+		{
+			if (i > 0) sb.Append(",");
+			var key = propKeys[i];
+			var value = file.Properties[key];
+			sb.AppendFormat("\"{0}\":{1}", EscapeJsonString(key), SerializeValue(value));
+		}
+
+		sb.Append("}}");
+	}
+
+	private static string SerializeValue(object value)
+	{
+		if (value == null) return "null";
+
+		if (value is string)
+			return string.Format("\"{0}\"", EscapeJsonString((string)value));
+
+		if (value is bool)
+			return ((bool)value).ToString().ToLowerInvariant();
+
+		if (value is int || value is long || value is float || value is double)
+			return Convert.ToString(value);
+
+		return string.Format("\"{0}\"", EscapeJsonString(value.ToString()));
+	}
+
+	private static string EscapeJsonString(string str)
+	{
+		if (string.IsNullOrEmpty(str)) return string.Empty;
+
+		StringBuilder sb = new StringBuilder();
+		foreach (char c in str)
+		{
+			switch (c)
+			{
+				case '\"': sb.Append("\\\""); break;
+				case '\\': sb.Append("\\\\"); break;
+				case '\b': sb.Append("\\b"); break;
+				case '\f': sb.Append("\\f"); break;
+				case '\n': sb.Append("\\n"); break;
+				case '\r': sb.Append("\\r"); break;
+				case '\t': sb.Append("\\t"); break;
+				default:
+					if (c < 32)
+					{
+						// Verwende String.Format anstelle von String-Interpolation
+						sb.AppendFormat("\\u{0:X4}", (int)c);
+					}
+					else
+					{
+						sb.Append(c);
+					}
+					break;
+			}
+		}
+
+		return sb.ToString();
+	}
+
+	public static GeneratedInfo Deserialize(string json)
+	{
+		var info = new GeneratedInfo { FilesToGenerate = new List<FileToGenerate>() };
+		int index = 0;
+
+		index = json.IndexOf('[', json.IndexOf("FilesToGenerate")) + 1;
+
+		while (index < json.Length && json[index] != ']')
+		{
+			index = SkipWhitespace(json, index);
+			if (json[index] == '{')
+			{
+				var file = DeserializeFileToGenerate(json, ref index);
+				info.FilesToGenerate.Add(file);
+			}
+			else if (json[index] == ',')
+			{
+				index++;
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		return info;
+	}
+
+	private static FileToGenerate DeserializeFileToGenerate(string json, ref int index)
+	{
+		var file = new FileToGenerate { Properties = new Dictionary<string, object>() };
+
+		index++;
+		while (index < json.Length && json[index] != '}')
+		{
+			index = SkipWhitespace(json, index);
+			if (json[index] == '"')
+			{
+				// Statt Tuple-Deconstruction verwenden wir eine Hilfsmethode, die key und value als separate Ausgaben liefert
+				string key;
+				object value;
+				ReadKeyValue(json, ref index, out key, out value); // Verwende out-Parameter
+
+				switch (key)
+				{
+					case "Filename":
+						file.Filename = value as string;
+						break;
+					case "Project":
+						file.Project = value as string;
+						break;
+					case "Path":
+						file.Path = value as string;
+						break;
+					case "Properties":
+						if (value is Dictionary<string, object>)
+						{
+							file.Properties = (Dictionary<string, object>)value;
+						}
+						break;
+				}
+			}
+			else if (json[index] == ',')
+			{
+				index++;
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		index++;
+		return file;
+	}
+
+	private static void ReadKeyValue(string json, ref int index, out string key, out object value)
+	{
+		key = ReadString(json, ref index); // Liest den Schlüssel
+		index = json.IndexOf(':', index) + 1;
+		index = SkipWhitespace(json, index);
+		value = ReadValue(json, ref index); // Liest den Wert
+	}
+
+	private static string ReadString(string json, ref int index)
+	{
+		StringBuilder sb = new StringBuilder();
+		index++; // Skip opening quote
+		while (index < json.Length)
+		{
+			char c = json[index++];
+			if (c == '"')
+			{
+				break; // End of string
+			}
+			if (c == '\\' && index < json.Length)
+			{
+				char next = json[index++];
+				switch (next)
+				{
+					case '"': sb.Append('"'); break;
+					case '\\': sb.Append('\\'); break;
+					case '/': sb.Append('/'); break;
+					case 'b': sb.Append('\b'); break;
+					case 'f': sb.Append('\f'); break;
+					case 'n': sb.Append('\n'); break;
+					case 'r': sb.Append('\r'); break;
+					case 't': sb.Append('\t'); break;
+					case 'u':
+						if (index + 3 < json.Length)
+						{
+							string hex = json.Substring(index, 4);
+							sb.Append((char)Convert.ToUInt16(hex, 16));
+							index += 4;
+						}
+						break;
+					default:
+						sb.Append(next);
+						break;
+				}
+			}
+			else
+			{
+				sb.Append(c);
+			}
+		}
+		return sb.ToString();
+	}
+
+	private static object ReadValue(string json, ref int index)
+	{
+		index = SkipWhitespace(json, index);
+		if (index >= json.Length) return null;
+
+		switch (json[index])
+		{
+			case '"': return ReadString(json, ref index);
+			case '{': return ReadObject(json, ref index);
+			case '[': return ReadArray(json, ref index);
+			case 't':
+				if (json.Substring(index, 4) == "true") { index += 4; return true; }
+				break;
+			case 'f':
+				if (json.Substring(index, 5) == "false") { index += 5; return false; }
+				break;
+			case 'n':
+				if (json.Substring(index, 4) == "null") { index += 4; return null; }
+				break;
+			default:
+				if (char.IsDigit(json[index]) || json[index] == '-')
+					return ReadNumber(json, ref index);
+				break;
+		}
+
+		throw new FormatException(string.Format("Unexpected character in JSON at position {0}", index));
+	}
+
+	private static Dictionary<string, object> ReadObject(string json, ref int index)
+	{
+		var result = new Dictionary<string, object>();
+		index++;
+
+		while (index < json.Length && json[index] != '}')
+		{
+			index = SkipWhitespace(json, index);
+			if (json[index] == '"')
+			{
+				string key;
+				object value;
+				ReadKeyValue(json, ref index, out key, out value);
+				result[key] = value;
+			}
+			else if (json[index] == ',')
+			{
+				index++;
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		index++;
+		return result;
+	}
+
+	private static List<object> ReadArray(string json, ref int index)
+	{
+		var result = new List<object>();
+		index++;
+
+		while (index < json.Length && json[index] != ']')
+		{
+			index = SkipWhitespace(json, index);
+			if (json[index] != ']')
+			{
+				var value = ReadValue(json, ref index);
+				result.Add(value);
+			}
+			if (json[index] == ',')
+			{
+				index++;
+			}
+		}
+
+		index++;
+		return result;
+	}
+
+	private static double ReadNumber(string json, ref int index)
+	{
+		int startIndex = index;
+		while (index < json.Length && "0123456789+-.eE".IndexOf(json[index]) != -1)
+		{
+			index++;
+		}
+		return double.Parse(json.Substring(startIndex, index - startIndex));
+	}
+
+	private static int SkipWhitespace(string str, int startIndex)
+	{
+		while (startIndex < str.Length && char.IsWhiteSpace(str[startIndex]))
+		{
+			startIndex++;
+		}
+		return startIndex;
+	}
+}
 #>
