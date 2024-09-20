@@ -134,6 +134,27 @@ public class FileAutomationSteps
         }
     }
 
+    [Then("the following files with BuildAction exists:")]
+    public void ThenTheFollowingFilesWithBuildActionExists(IList<GeneratedFile> files)
+    {
+        var buildActionMap = new Dictionary<string, string>()
+        {
+            { "0", "None" },
+            { "1", "Compile" },
+            { "2", "Content" },
+            { "3", "EmbeddedResource" }
+        };
+
+        foreach (var file in files)
+        {
+            var projectName = file.Folder;
+            var buildAction = VisualStudioHelper.GetBuildActionByFileName(file.Name, projectName);
+            var actualBuildAction = buildActionMap[buildAction];
+
+            actualBuildAction.Should().Be(file.BuildAction);
+        }
+    }
+
     [Then(@"the file ""(.*)"" has following format:")]
     [Then(@"the file ""(.*)"" starts with header:")]
     public void ThenTheFileStartsWithFollowingContent(string file, string expectedContent)

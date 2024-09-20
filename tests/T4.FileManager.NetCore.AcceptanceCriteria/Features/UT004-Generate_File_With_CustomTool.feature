@@ -98,3 +98,38 @@ fileManager.Process();
 	And the custom tool is set to "ResXFileCodeGenerator" for the following files:
 		| File               |
 		| ProjectTestFP.resx |
+
+
+Scenario: Set build action only to generated file
+    Given the script "GenerateEmbeddedResource.tt" with the following content
+        """
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
+<#@ output extension=".txt" #>
+
+
+<#
+		var outputContent = @"[""generated1"",""generated2""]";
+	    var fileName = "data.json";
+		var project = "T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject";
+		var projectPath = "Data";
+    	var manager = T4FileManager.Create(this);
+		manager.EnableLog();
+		var embeddedProperties = new FileProperties(){BuildAction = BuildAction.EmbeddedResource};
+		manager.CreateNewFile(fileName, project, projectPath, embeddedProperties);
+#>
+		<#= outputContent #>
+<#
+		manager.FinishFile();
+		manager.Process();
+		
+#>
+        """
+	Then the following files with BuildAction exists:
+		| File      | Project                                                           | BuildAction      |
+		| data.json | T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject | EmbeddedResource |
+        | data.json | T4.FileManager.VisualStudio.AcceptanceCriteria                    | None             |

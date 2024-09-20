@@ -92,7 +92,7 @@
 
             RetryUtil.RetryOnException(() =>
             {
-                var project = Dte.Solution.Cast<Project>().First(p => p.Name == projectName);
+                var project = dte.Solution.Cast<Project>().First(p => p.Name == projectName);
                 var item = GetAllProjectItemsRecursive(project.ProjectItems)
                     .FirstOrDefault(p => p.Name.Contains(fileName));
 
