@@ -217,14 +217,14 @@ await this.FeatureBackgroundAsync();
 <#@ import namespace=""System.Linq"" #>
 <#@ import namespace=""System.Text"" #>
 <#@ import namespace=""System.Collections.Generic"" #>
-<#@ include file=""$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude"" #>
+<#@ include file=""$(TargetDir)\T4.FileManager.VisualStudio.ttinclude"" #>
 <#@ output extension="".txt"" #>
 
 
 <#
 var outputContent = @""[""""generated1"""",""""generated2""""]"";
 var fileName = ""data.json"";
-var project = ""T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject"";
+var project = ""T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject"";
 var projectPath = ""Data"";
 var manager = T4FileManager.Create(this);
 manager.EnableLog();
@@ -244,11 +244,11 @@ manager.Process();
                             "BuildAction"});
                 table12.AddRow(new string[] {
                             "data.json",
-                            "T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject",
+                            "T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject",
                             "EmbeddedResource"});
                 table12.AddRow(new string[] {
                             "data.json",
-                            "T4.FileManager.VisualStudio.AcceptanceCriteria",
+                            "T4.FileManager.NetCore.AcceptanceCriteria",
                             "None"});
 #line 132
  await testRunner.ThenAsync("the following files with BuildAction exists:", ((string)(null)), table12, "Then ");

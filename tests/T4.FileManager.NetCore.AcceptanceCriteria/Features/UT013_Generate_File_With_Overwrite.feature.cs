@@ -134,50 +134,50 @@ await this.FeatureBackgroundAsync();
 #line 37
  await testRunner.GivenAsync("I run the script", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table22 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table23 = new global::Reqnroll.Table(new string[] {
                             "File",
                             "Folder"});
-                table22.AddRow(new string[] {
+                table23.AddRow(new string[] {
                             "TestDelete.g.cs",
                             "TestOverwrite"});
 #line 38
- await testRunner.AndAsync("the following files are generated:", ((string)(null)), table22, "And ");
+ await testRunner.AndAsync("the following files are generated:", ((string)(null)), table23, "And ");
 #line hidden
-                global::Reqnroll.Table table23 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table24 = new global::Reqnroll.Table(new string[] {
                             "From",
                             "To"});
-                table23.AddRow(new string[] {
+                table24.AddRow(new string[] {
                             "T4FileManager.Create(this).DisableOverwriteExistingFile();",
                             "T4FileManager.Create(this);"});
-                table23.AddRow(new string[] {
+                table24.AddRow(new string[] {
                             "fileManager.StartNewFile(\"TestDelete.g.cs\",\"\",\"TestOverwrite\");",
                             "fileManager.StartNewFile(\"TestNoDelete3.g.cs\",\"\",\"TestOverwrite\");"});
-                table23.AddRow(new string[] {
+                table24.AddRow(new string[] {
                             "public class TestDelete",
                             "public class NewTestDeleteModel"});
 #line 41
- await testRunner.AndAsync("I change the line", ((string)(null)), table23, "And ");
+ await testRunner.AndAsync("I change the line", ((string)(null)), table24, "And ");
 #line hidden
 #line 46
  await testRunner.WhenAsync("I run the script", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-                global::Reqnroll.Table table24 = new global::Reqnroll.Table(new string[] {
-                            "File",
-                            "Folder"});
-                table24.AddRow(new string[] {
-                            "TestNoDelete3.g.cs",
-                            "TestOverwrite"});
-#line 47
- await testRunner.ThenAsync("the following files are generated:", ((string)(null)), table24, "Then ");
 #line hidden
                 global::Reqnroll.Table table25 = new global::Reqnroll.Table(new string[] {
                             "File",
                             "Folder"});
                 table25.AddRow(new string[] {
+                            "TestNoDelete3.g.cs",
+                            "TestOverwrite"});
+#line 47
+ await testRunner.ThenAsync("the following files are generated:", ((string)(null)), table25, "Then ");
+#line hidden
+                global::Reqnroll.Table table26 = new global::Reqnroll.Table(new string[] {
+                            "File",
+                            "Folder"});
+                table26.AddRow(new string[] {
                             "TestDelete.g.cs",
                             "TestOverwrite"});
 #line 50
- await testRunner.AndAsync("the following files are cleaned up:", ((string)(null)), table25, "And ");
+ await testRunner.AndAsync("the following files are cleaned up:", ((string)(null)), table26, "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

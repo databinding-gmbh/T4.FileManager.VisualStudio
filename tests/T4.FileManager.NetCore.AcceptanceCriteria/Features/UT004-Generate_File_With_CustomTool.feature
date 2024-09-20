@@ -108,14 +108,14 @@ Scenario: Set build action only to generated file
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
+<#@ include file="$(TargetDir)\T4.FileManager.VisualStudio.ttinclude" #>
 <#@ output extension=".txt" #>
 
 
 <#
 		var outputContent = @"[""generated1"",""generated2""]";
 	    var fileName = "data.json";
-		var project = "T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject";
+		var project = "T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject";
 		var projectPath = "Data";
     	var manager = T4FileManager.Create(this);
 		manager.EnableLog();
@@ -130,6 +130,6 @@ Scenario: Set build action only to generated file
 #>
         """
 	Then the following files with BuildAction exists:
-		| File      | Project                                                           | BuildAction      |
-		| data.json | T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject | EmbeddedResource |
-        | data.json | T4.FileManager.VisualStudio.AcceptanceCriteria                    | None             |
+		| File      | Project                                                      | BuildAction      |
+		| data.json | T4.FileManager.NetCore.AcceptanceCriteria.ExampleTestProject | EmbeddedResource |
+        | data.json | T4.FileManager.NetCore.AcceptanceCriteria                    | None             |
