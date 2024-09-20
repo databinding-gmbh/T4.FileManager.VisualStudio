@@ -1,5 +1,8 @@
 # Change log
 
+## 4.0.1
+- Newtonsoft.Json replaced by TemplateInfoSerializer due to dependency conflicts as of Visual Studio 17.11+
+
 ## 3.1.0
 
 - Define Encoding for generated output files with .SetOutputFileEncoding(Encoding.Unicode). [Scenario: Generate file with Unicode encoding](https://github.com/databinding-gmbh/T4.FileManager.VisualStudio/blob/master/tests/T4.FileManager.NetCore.AcceptanceCriteria/Features/UT001-Generate_Code.feature) 
