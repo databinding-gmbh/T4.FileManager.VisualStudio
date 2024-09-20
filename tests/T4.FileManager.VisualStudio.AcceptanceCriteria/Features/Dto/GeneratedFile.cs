@@ -8,7 +8,10 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features.Dto
         [TableAliases("File")]
         public string Name { get; set; }
 
+        [TableAliases("Folder", "Project")]
         public string Folder { get; set; }
+
+        public string BuildAction { get; set; }
 
         [TableAliases("Enthält", "Contains")]
         public string ContainsContent { get; set; }

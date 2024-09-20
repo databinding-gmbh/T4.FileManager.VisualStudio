@@ -74,20 +74,35 @@
             });
         }
 
+        public static string GetBuildActionByFileName(string name, string projectName)
+        {
+            var buildAction = GetPropertySettingByFileName(name, projectName, "BuildAction");
+            return buildAction;
+        }
+
         public static string GetCustomToolByFileName(string name, string projectName)
         {
-            string customTool = null;
+            var customTool = GetPropertySettingByFileName(name, projectName, "CustomTool");
+            return customTool;
+        }
+
+        public static string GetPropertySettingByFileName(string fileName, string projectName, string propertyName)
+        {
+            string propertyValue = null;
 
             RetryUtil.RetryOnException(() =>
             {
-                var item = dte.Solution.FindProjectItem(name);
+                var project = Dte.Solution.Cast<Project>().First(p => p.Name == projectName);
+                var item = GetAllProjectItemsRecursive(project.ProjectItems)
+                    .FirstOrDefault(p => p.Name.Contains(fileName));
+
                 if (item != null)
                 {
-                    customTool = item.Properties.Item("CustomTool").Value?.ToString();
+                    propertyValue = item.Properties.Item(propertyName).Value.ToString();
                 }
             });
 
-            return customTool;
+            return propertyValue;
         }
 
         public static string GetProjectDirectory(string projectName)

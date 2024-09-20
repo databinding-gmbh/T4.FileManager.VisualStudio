@@ -39,6 +39,6 @@ fileManager.Generate();
 	And I select the target project "T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject"
 	When I run the script
 	Then the following files are generated:
-		| File           |
-		| PersonDto.g.cs |
+		| File           | 
+		| PersonDto.g.cs |  
 		| OrderDto.g.cs  |

@@ -207,6 +207,7 @@
       <LastGenOutput>CleanUpTestoutput19.txt</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
     </Content>
+    <None Include="Data\data.json" />
     <None Include="Features\UT016_Log_Activities.feature" />
     <None Include="Features\UT013_Generate_File_With_Overwrite.feature" />
     <None Include="Features\UT013_Generate_File_Without_Modifications.feature" />
@@ -233,6 +234,7 @@
       <LastGenOutput>CleanUpTestoutput.txt</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

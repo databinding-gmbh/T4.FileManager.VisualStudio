@@ -138,18 +138,18 @@ fileManager.Generate();
 #line 42
  await testRunner.WhenAsync("I run the script", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table31 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table32 = new global::Reqnroll.Table(new string[] {
                             "Textfragment"});
-                table31.AddRow(new string[] {
+                table32.AddRow(new string[] {
                             "Log to main output file enabled"});
-                table31.AddRow(new string[] {
+                table32.AddRow(new string[] {
                             "Begin CreateNewFile PersonDto.g.cs"});
-                table31.AddRow(new string[] {
+                table32.AddRow(new string[] {
                             "Start DeleteExistingFiles"});
-                table31.AddRow(new string[] {
+                table32.AddRow(new string[] {
                             "2 files generated"});
 #line 43
- await testRunner.ThenAsync("the file \"TestWithLogEnabled.txt\" contains following log fragments", ((string)(null)), table31, "Then ");
+ await testRunner.ThenAsync("the file \"TestWithLogEnabled.txt\" contains following log fragments", ((string)(null)), table32, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -209,14 +209,14 @@ fileManager.Generate();
 #line 83
  await testRunner.WhenAsync("I run the script", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table32 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table33 = new global::Reqnroll.Table(new string[] {
                             "Textfragment"});
-                table32.AddRow(new string[] {
+                table33.AddRow(new string[] {
                             "My custom log info for OrderDto"});
-                table32.AddRow(new string[] {
+                table33.AddRow(new string[] {
                             "My custom log info for PersonDto"});
 #line 84
- await testRunner.ThenAsync("the file \"TestWithCustomLog.txt\" contains following log fragments", ((string)(null)), table32, "Then ");
+ await testRunner.ThenAsync("the file \"TestWithCustomLog.txt\" contains following log fragments", ((string)(null)), table33, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

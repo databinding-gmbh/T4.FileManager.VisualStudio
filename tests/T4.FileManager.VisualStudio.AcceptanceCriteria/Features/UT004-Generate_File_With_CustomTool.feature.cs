@@ -276,6 +276,72 @@ await this.FeatureBackgroundAsync();
             }
             await this.ScenarioCleanupAsync();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Set build action only to generated file")]
+        public async System.Threading.Tasks.Task SetBuildActionOnlyToGeneratedFile()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Set build action only to generated file", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 194
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 6
+await this.FeatureBackgroundAsync();
+#line hidden
+#line 195
+    await testRunner.GivenAsync("the script \"GenerateEmbeddedResource.tt\" with the following content", @"<#@ template debug=""false"" hostspecific=""true"" language=""C#"" #>
+<#@ assembly name=""System.Core"" #>
+<#@ import namespace=""System.Linq"" #>
+<#@ import namespace=""System.Text"" #>
+<#@ import namespace=""System.Collections.Generic"" #>
+<#@ include file=""$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude"" #>
+<#@ output extension="".txt"" #>
+
+
+<#
+var outputContent = @""[""""generated1"""",""""generated2""""]"";
+var fileName = ""data.json"";
+var project = ""T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject"";
+var projectPath = ""Data"";
+var manager = T4FileManager.Create(this);
+manager.EnableLog();
+var embeddedProperties = new FileProperties(){BuildAction = BuildAction.EmbeddedResource};
+manager.CreateNewFile(fileName, project, projectPath, embeddedProperties);
+#>
+<#= outputContent #>
+<#
+manager.FinishFile();
+manager.Process();
+
+#>", ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+                global::Reqnroll.Table table17 = new global::Reqnroll.Table(new string[] {
+                            "File",
+                            "Project",
+                            "BuildAction"});
+                table17.AddRow(new string[] {
+                            "data.json",
+                            "T4.FileManager.VisualStudio.AcceptanceCriteria.ExampleTestProject",
+                            "EmbeddedResource"});
+                table17.AddRow(new string[] {
+                            "data.json",
+                            "T4.FileManager.VisualStudio.AcceptanceCriteria",
+                            "None"});
+#line 223
+ await testRunner.ThenAsync("the following files with BuildAction exists:", ((string)(null)), table17, "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
     }
 }
 #pragma warning restore

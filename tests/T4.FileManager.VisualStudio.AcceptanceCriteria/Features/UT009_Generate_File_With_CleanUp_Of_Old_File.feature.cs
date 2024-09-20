@@ -110,12 +110,12 @@ fileManager.Generate();
 #line 33
  await testRunner.WhenAsync("I run the script", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-            global::Reqnroll.Table table17 = new global::Reqnroll.Table(new string[] {
+            global::Reqnroll.Table table18 = new global::Reqnroll.Table(new string[] {
                         "File"});
-            table17.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "TestOldFilesCleanUp.g.cs"});
 #line 34
- await testRunner.ThenAsync("the following files are generated:", ((string)(null)), table17, "Then ");
+ await testRunner.ThenAsync("the following files are generated:", ((string)(null)), table18, "Then ");
 #line hidden
         }
         
@@ -139,31 +139,31 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 await this.FeatureBackgroundAsync();
 #line hidden
-                global::Reqnroll.Table table18 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table19 = new global::Reqnroll.Table(new string[] {
                             "From",
                             "To"});
-                table18.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "fileManager.CreateNewFile(\"TestOldFilesCleanUp.g.cs\",\"\",\"\")",
                             "fileManager.CreateNewFile(\"TestOldFilesCleanUpRenamed.g.cs\",\"\",\"\")"});
 #line 39
- await testRunner.GivenAsync("I change the line", ((string)(null)), table18, "Given ");
+ await testRunner.GivenAsync("I change the line", ((string)(null)), table19, "Given ");
 #line hidden
 #line 42
  await testRunner.WhenAsync("I run the script", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table19 = new global::Reqnroll.Table(new string[] {
-                            "File"});
-                table19.AddRow(new string[] {
-                            "TestOldFilesCleanUp.g.cs"});
-#line 43
- await testRunner.ThenAsync("the following files are cleaned up:", ((string)(null)), table19, "Then ");
-#line hidden
                 global::Reqnroll.Table table20 = new global::Reqnroll.Table(new string[] {
                             "File"});
                 table20.AddRow(new string[] {
+                            "TestOldFilesCleanUp.g.cs"});
+#line 43
+ await testRunner.ThenAsync("the following files are cleaned up:", ((string)(null)), table20, "Then ");
+#line hidden
+                global::Reqnroll.Table table21 = new global::Reqnroll.Table(new string[] {
+                            "File"});
+                table21.AddRow(new string[] {
                             "TestOldFilesCleanUpRenamed.g.cs"});
 #line 46
- await testRunner.AndAsync("the following files are generated:", ((string)(null)), table20, "And ");
+ await testRunner.AndAsync("the following files are generated:", ((string)(null)), table21, "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
