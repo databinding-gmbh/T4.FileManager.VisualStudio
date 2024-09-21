@@ -646,16 +646,37 @@
         /// <param name="projectName">Project name without extension.</param>
         /// <param name="filename">Filename with extension.</param>
         /// <returns></returns>
-        private ProjectItem FindProjectItem(string projectName, string filename)
+        private ProjectItem FindProjectItem(string projectName, string fileName)
         {
             if (string.IsNullOrEmpty(projectName))
             {
-                var projItem = this.dte.Solution.FindProjectItem(this.host.TemplateFile);
-                var prj = projItem.ContainingProject;
-                projectName = prj.Name;
+                return dte.Solution.FindProjectItem(fileName);
             }
-            
-            return dte.Solution.FindProjectItem(filename);
+            else 
+            {
+                var project = FindProjectByName(projectName);
+                var item = GetAllProjectItemsRecursive(project.ProjectItems)
+                    .FirstOrDefault(p => p.Name.Contains(fileName));
+                return item;
+            }
+        }
+
+        /// <summary>
+        /// Find all project items within a project.
+        /// </summary>
+        /// <param name="projectItems"><see cref="ProjectItems"/>The ProjectItems of the project.</param>
+        /// <returns><see cref="IEnumerable{ProjectItem}"/>The ProjectItem if found.</returns>
+        private IEnumerable<ProjectItem> GetAllProjectItemsRecursive(ProjectItems projectItems)
+        {
+            foreach (ProjectItem projectItem in projectItems)
+            {
+                foreach (var subItem in GetAllProjectItemsRecursive(projectItem.ProjectItems))
+                {
+                    yield return subItem;
+                }
+
+                yield return projectItem;
+            }
         }
 
         /// <summary>
