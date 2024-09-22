@@ -1,6 +1,6 @@
 # Change log
 
-## 4.0.3
+## 4.0.2
 - Bug Fix BuildAction #22 BUG: Wrong file property value set
 
 ## 4.0.1
