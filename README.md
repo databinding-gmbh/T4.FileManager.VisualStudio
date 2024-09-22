@@ -49,12 +49,12 @@ The execution of the generation remains on the original [T4 Text Templates](http
 
 ## Testing
 
-There are some user story oriented [Reqnroll tests](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/T4FileManagerVisualStudio.html) for ensuring that the FileManager is working as expected.
+There are some user story oriented [Reqnroll tests](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/T4.FileManager.NetCore.AcceptanceCriteria.dll.html) for ensuring that the FileManager is working as expected.
 Tests for NET Framework are located in the project **T4.FileManager.VisualStudio.AcceptanceCriteria** and for NET 5+ in **T4.FileManager.NetCore.AcceptanceCriteria**.
 
 ## Authors
 
-- René Leupold - *initial work*
+- René Leupold
 - Johnny Graber
 
 ## How to Contribute
@@ -65,7 +65,7 @@ Pull-requests are welcome! Please follow these rules so that we can integrate yo
 *	Reference the issue in your commits / pull-request
 *	Document the new behavior (in the docs folder)
 *	Create tests to verify the new behavior
-*	[All existing tests must still pass](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/T4FileManagerVisualStudio.html), including the acceptance tests (in the tests folder)
+*	[All existing tests must still pass](https://databinding-gmbh.github.io/T4.FileManager.VisualStudio/T4.FileManager.NetCore.AcceptanceCriteria.dll.html), including the acceptance tests (in the tests folder)
 *	Clean-up the commit history 
     *	No fix commits
     *	Changes that belong together are in the same commit
@@ -85,7 +85,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Built With
 
 - [T4 Text Templates](https://docs.microsoft.com/en-us/visualstudio/modeling/)
-- [Json.NET](https://www.newtonsoft.com/json)
+- [Json.NET](https://www.newtonsoft.com/json) (until version 4.0.0)
 
 ## Breaking changes to old [T4.TemplateFileManager](https://www.nuget.org/packages/T4.TemplateFileManager)
 
