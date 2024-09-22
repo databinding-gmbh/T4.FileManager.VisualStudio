@@ -1,5 +1,8 @@
 # Change log
 
+## 4.0.3
+- Bug Fix BuildAction #22 BUG: Wrong file property value set
+
 ## 4.0.1
 - Newtonsoft.Json replaced by TemplateInfoSerializer due to dependency conflicts as of Visual Studio 17.11+
 
