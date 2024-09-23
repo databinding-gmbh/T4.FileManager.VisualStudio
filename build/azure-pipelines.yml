@@ -1,17 +1,12 @@
-parameters:
-- name: canPublish
-  displayName: Deploy to nuget
-  type: boolean
-  default: false
-
 trigger:
     branches:
         include:
          - 'master'
 
+pool: db-az-iah
+
 stages:
 - stage: BUILD_AND_TEST
-  pool: db-az-iah
 
   jobs:
   - job:
@@ -131,7 +126,6 @@ stages:
      
 - stage: DEPLOY_GITHUB_PAGES
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
-  pool: db-az-iah
   variables:
     - group: github
 
@@ -180,29 +174,34 @@ stages:
         publishVstsFeed: '$(NuGetFeed)'
         allowPackageConflicts: true
       
-- ${{ if eq(parameters.canPublish, true) }}: 
+
   - stage: DEPLOY_TO_NUGET
-    pool: db-az-iah
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
     variables:
       - group: Prod
 
     jobs:
-    - job:
-      steps:
-      - task: DownloadPipelineArtifact@2
-        inputs:
-          patterns: 'drop/**/*'
-          path: 'drop'
+      - deployment:
+        displayName: 'Publish to Nuget' 
+        environment: databinding-Nuget
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - task: DownloadPipelineArtifact@2
+                inputs:
+                  patterns: 'drop/**/*'
+                  path: 'drop'
 
-      - task: NuGetToolInstaller@1
-        displayName: 'Use NuGet'
-        inputs:
-          checkLatest: true
+              - task: NuGetToolInstaller@1
+                displayName: 'Use NuGet'
+                inputs:
+                  checkLatest: true
 
-      - task: NuGetCommand@2
-        displayName: 'NuGet push'
-        inputs:
-          command: push
-          nuGetFeedType: external
-          packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
-          publishFeedCredentials: 'NuGetFeed'
+              - task: NuGetCommand@2
+                displayName: 'NuGet push'
+                inputs:
+                  command: push
+                  nuGetFeedType: external
+                  packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
+                  publishFeedCredentials: 'NuGetFeed'
