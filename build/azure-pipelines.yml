@@ -116,13 +116,6 @@ stages:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/documentation'
         ArtifactName: documentation
 
-    - ${{ if eq(parameters.canPublish, true) }}: 
-      - task: GitTag@5
-        inputs:
-          workingdir: '$(SYSTEM.DEFAULTWORKINGDIRECTORY)'
-          tag: '$(AssemblySemVer)'
-          tagMessage: '$(AssemblySemVer)'
-          useLightweightTags: true
      
 - stage: DEPLOY_GITHUB_PAGES
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
@@ -175,33 +168,40 @@ stages:
         allowPackageConflicts: true
       
 
-  - stage: DEPLOY_TO_NUGET
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
-    variables:
-      - group: Prod
+- stage: DEPLOY_TO_NUGET
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
+  variables:
+    - group: Prod
 
-    jobs:
-      - deployment:
-        displayName: 'Publish to Nuget' 
-        environment: databinding-Nuget
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-              - task: DownloadPipelineArtifact@2
-                inputs:
-                  patterns: 'drop/**/*'
-                  path: 'drop'
+  jobs:
+    - deployment:
+      displayName: 'Publish to Nuget' 
+      environment: databinding-Nuget
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - task: DownloadPipelineArtifact@2
+              inputs:
+                patterns: 'drop/**/*'
+                path: 'drop'
 
-              - task: NuGetToolInstaller@1
-                displayName: 'Use NuGet'
-                inputs:
-                  checkLatest: true
+            - task: NuGetToolInstaller@1
+              displayName: 'Use NuGet'
+              inputs:
+                checkLatest: true
 
-              - task: NuGetCommand@2
-                displayName: 'NuGet push'
-                inputs:
-                  command: push
-                  nuGetFeedType: external
-                  packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
-                  publishFeedCredentials: 'NuGetFeed'
+            - task: NuGetCommand@2
+              displayName: 'NuGet push'
+              inputs:
+                command: push
+                nuGetFeedType: external
+                packagesToPush: 'drop/**/*.nupkg;!drop/**/*.symbols.nupkg'
+                publishFeedCredentials: 'NuGetFeed'
+
+            - task: GitTag@5
+              inputs:
+                workingdir: '$(SYSTEM.DEFAULTWORKINGDIRECTORY)'
+                tag: '$(AssemblySemVer)'
+                tagMessage: '$(AssemblySemVer)'
+                useLightweightTags: true        
