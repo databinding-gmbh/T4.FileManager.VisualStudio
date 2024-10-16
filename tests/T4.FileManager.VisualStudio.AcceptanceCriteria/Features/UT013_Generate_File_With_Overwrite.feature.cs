@@ -36,7 +36,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual async System.Threading.Tasks.Task FeatureSetupAsync()
         {
-            testRunner = global::Reqnroll.TestRunnerManager.GetTestRunnerForAssembly(null, NUnit.Framework.TestContext.CurrentContext.WorkerId);
+            testRunner = global::Reqnroll.TestRunnerManager.GetTestRunnerForAssembly();
             global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UT013 Generate File with overwrite", "\tAs a developer\r\n\tI can change the behaviour of supress changes to overwrite exis" +
                     "ting files", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
             await testRunner.OnFeatureStartAsync(featureInfo);
@@ -46,6 +46,7 @@ namespace T4.FileManager.VisualStudio.AcceptanceCriteria.Features
         public virtual async System.Threading.Tasks.Task FeatureTearDownAsync()
         {
             await testRunner.OnFeatureEndAsync();
+            global::Reqnroll.TestRunnerManager.ReleaseTestRunner(testRunner);
             testRunner = null;
         }
         
