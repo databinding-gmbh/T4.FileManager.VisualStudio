@@ -14,7 +14,7 @@ namespace T4.FileManager.NetCore.AcceptanceCriteria.Features.Steps;
 public class FileAutomationSteps
 {
     private string projectName = "T4.FileManager.NetCore.AcceptanceCriteria";
-    private string outputDir = @"bin\debug\net8.0\";
+    private string outputDir = @"bin\debug\net9.0\";
     private string pathTestEnvironment;
     private string pathSetupProject;
     private ProjectItem t4Template;
