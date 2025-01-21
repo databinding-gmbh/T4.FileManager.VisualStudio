@@ -170,8 +170,6 @@ stages:
 
 - stage: DEPLOY_TO_NUGET
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) 
-  variables:
-    - group: Prod
 
   jobs:
     - deployment:
