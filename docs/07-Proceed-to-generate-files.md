@@ -2,7 +2,7 @@
 
 Finally, the files can be generated with the following code:
 
-```
+``` csharp
 fileManager.Process();
 ```
 
@@ -10,7 +10,7 @@ fileManager.Process();
 
 By default T4.FileManager only overwrites files it generated before. If you want to prevent that from happening, you can set the *CanOverwriteExistingFile* property to false:
 
-```
+``` csharp
 fileManager.CanOverwriteExistingFile = true; // default
 fileManager.CanOverwriteExistingFile = false;
 ```
@@ -19,12 +19,12 @@ fileManager.CanOverwriteExistingFile = false;
 
 By default file encode is UTF-8. If you want change it, you can set the **Encoding** property
 
-```
+``` csharp
 fileManager.Encoding = Encoding.Unicode;
 ```
 
 Alternatively, the setting can be made with the instantiation
 
-```
+``` csharp
 var fileManager = T4FileManager.Create(this).SetOutputFileEncoding(Encoding.Unicode);
 ```

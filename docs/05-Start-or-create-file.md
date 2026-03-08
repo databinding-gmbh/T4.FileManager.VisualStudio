@@ -23,7 +23,7 @@ All the content that follows in your template will go into that file (until you 
 
 Values for **CopyToOutputDirectory**:
 
-```
+``` text
 CopyToOutputDirectory.DoNotCopy
 CopyToOutputDirectory.CopyAlways
 CopyToOutputDirectory.CopyIfNewer
@@ -31,7 +31,7 @@ CopyToOutputDirectory.CopyIfNewer
 
 Values for **BuildAction**:
 
-```
+``` text
 BuildAction.None
 BuildAction.CSharpCompiler
 BuildAction.Content
@@ -40,7 +40,7 @@ BuildAction.EmbeddedResource
 
 #### *Example* 
 
-```
+``` csharp
 var settings = new FileProperties();
 settings.CustomTool = "";
 settings.BuildAction = BuildAction.EmbeddedResource;
@@ -49,7 +49,7 @@ settings.CopyToOutputDirectory = CopyToOutputDirectory.DoNotCopy;
 
 ## *Compatibility to old TemplateFileManager*
 
-```
+``` csharp
 fileManager.StartNewFile(filename, projectname, subfolders, propertiesFromOldFileManager);
 ```
 

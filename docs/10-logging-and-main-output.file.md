@@ -10,7 +10,9 @@ To turn on logging you need to create your T4.FileManager instance with this com
 
 
 
-`var fileManager = new T4FileManager(this).EnableLog();`
+``` csharp
+var fileManager = new T4FileManager(this).EnableLog();
+```
 
 
 
@@ -20,8 +22,9 @@ You now get a log with all important steps of the file generation in the output 
 
 You can write your own log messages with the *Log()* method:
 
-`<# fileManager.Log("My custom log info for {0}", itm); #>`
-
+``` csharp
+<# fileManager.Log("My custom log info for {0}", itm); #>
+```
 
 
 
@@ -31,8 +34,9 @@ You can write your own log messages with the *Log()* method:
 By default T4.FileManager creates a template main output file *YourTemplateName.txt*. If you want to disable it, you need to create your T4.FileManager instance with this command:
 
 
-
-`var fileManager = T4FileManager.Create(this).DisableTemplateMainOutputFile();`
+``` csharp
+var fileManager = T4FileManager.Create(this).DisableTemplateMainOutputFile();
+```
 
  
 

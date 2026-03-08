@@ -12,7 +12,7 @@ The File Manger will be linked to the NuGet system folder. You can compile your 
 
 Add the following code to the top of the file:
 
-```
+``` csharp
 <#@ include file="$(TargetDir)\T4.FileManager.VisualStudio.ttinclude" #>
 ```
 
@@ -23,7 +23,7 @@ The File Manager will be copied to the Project root. You can reference it using 
 
 Add the following code to the top of the file:
 
-```
+``` csharp
 <#@ include file="$(ProjectDir)\T4.FileManager.VisualStudio.ttinclude" #>
 ```
 

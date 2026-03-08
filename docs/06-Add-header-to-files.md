@@ -2,7 +2,7 @@
 
 You can specify a header that is written to your files. Everything that is between *StartHeader()* and *FinishHeader()* will go to the top of your file:
 
-```csharp hl_lines="1 7"
+``` csharp hl_lines="1 7"
 fileManager.StartHeader();
 #>
 // -------------------------
@@ -17,7 +17,7 @@ fileManager.StartNewFile("PersonDtoWithGlobal.g.cs","","");
 
 The generated files all get the same header:
 
-```csharp
+``` csharp
 // -------------------------
 // databinding - T4
 // -------------------------
@@ -52,7 +52,7 @@ fileManager.StartNewFile("PersonDtoWithSA1633.g.cs","","");
 
 In the generated file $filename$ is replaced with the name of the file:
 
-```c#
+``` csharp
 // <copyright file="OrderDtoWithSA1633.g.cs" company="databinding.gmbh">
 //     databinding.gmbh - All rights reserved.
 // </copyright>
@@ -74,7 +74,7 @@ namespace Test
 
 You can clear a defined header at any time with this method:
 
-```
+``` csharp
 fileManager.ClearHeader();
 ```
 
@@ -86,7 +86,7 @@ StartHeader is equivalent to old file manager.
 
 Instead of FinishHeader use old EndBlock.
 
-```
+``` csharp
 fileManager.EndBlock();
 ```
 
